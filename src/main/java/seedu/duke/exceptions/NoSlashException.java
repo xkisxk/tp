@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class NoSlashException extends CardLIException{
+public class NoSlashException extends CardLIException {
 }
