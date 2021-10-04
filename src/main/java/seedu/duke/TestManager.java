@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.FieldEmptyException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,12 +24,30 @@ public class TestManager {
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
             String userResponse = getInput();
-            //stores responses to answersResponse ArrayList
+            try {
+                parseUserResponse(userResponse);
+            } catch (FieldEmptyException e) {
+                userResponse = "NO ANSWER GIVEN :(";
+                printAnswerEmptyError();
+            }
             addAnswer(userResponse, questionNumber);
         }
         System.out.println("--------------------------------------------------");
         //let user know testing is over
         System.out.println("Test Over");
+    }
+
+    //may seem useless right now but will be needed in the future
+    public static String parseUserResponse(String userResponse) throws FieldEmptyException{
+        String input = userResponse;
+        if(userResponse.isEmpty()) {
+            throw new FieldEmptyException();
+        }
+        return input;
+    }
+
+    public static void printAnswerEmptyError() {
+        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 
     //getter for index of an answer
@@ -42,7 +62,7 @@ public class TestManager {
         return input;
     }
 
-    public static void addAnswer(String answer, int questionIndex) {
+    public static void addAnswer(String answer, int questionIndex){
         answersResponse.add(new Answer(answer, questionIndex));
         answerCount += 1;
     }

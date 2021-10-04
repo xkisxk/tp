@@ -33,5 +33,4 @@ class FlashCardManagerTest {
         String input = "add good morning /def";
         assertThrows(FieldEmptyException.class, ()-> FlashCardManager.trimStrings(input));
     }
-
 }
