@@ -22,6 +22,5 @@ public class Parser {
             line = in.nextLine();
             command = line.split(" ")[0];
         }
-
     }
 }
