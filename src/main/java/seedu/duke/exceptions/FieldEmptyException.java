@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class FieldEmptyException extends CardLIException {
+public class FieldEmptyException extends CardLiException {
 }

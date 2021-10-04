@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.CardLIException;
+import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
@@ -68,17 +68,31 @@ public class FlashCardManager {
         }
     }
 
+    /**
+     * Deletes the flash card given by the user's input.
+     * The card will only be deleted if the input matches
+     * exactly with FlashCard.front.
+     *
+     * @param input user's input in its entirety
+     */
     public static void prepareToDeleteFlashCard(String input) {
         try {
             String description = getDescription(input);
             deleteFlashCard(description);
         } catch (FieldEmptyException e) {
             printEmptyDescriptionError();
-        } catch (CardLIException e) {
+        } catch (CardLiException e) {
             printDoesNotExistError();
         }
     }
 
+    /**
+     * Returns the description, which is anything after the command word.
+     *
+     * @param input                user's input
+     * @return                     description of card
+     * @throws FieldEmptyException if description is empty
+     */
     private static String getDescription(String input) throws FieldEmptyException {
         String[] line = input.split(" ");
         if (line.length < 2) {
@@ -87,10 +101,15 @@ public class FlashCardManager {
         return line[1];
     }
 
-    // Deletes the first card with the exact same description
-    private static void deleteFlashCard(String description) throws CardLIException {
+    /**
+     * Deletes the flashcard with the given description.
+     *
+     * @param description       description of the card to delete
+     * @throws CardLiException  if card does not exist
+     */
+    public static void deleteFlashCard(String description) throws CardLiException {
         if (cards.size() == 0) {
-            throw new CardLIException();
+            throw new CardLiException();
         }
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
@@ -101,7 +120,7 @@ public class FlashCardManager {
                 return;
             }
         }
-        throw new CardLIException();
+        throw new CardLiException();
     }
 
     private static boolean hasExactCard(String query, FlashCard card) {

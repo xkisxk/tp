@@ -9,7 +9,7 @@ public class Parser {
         String line = in.nextLine();
         String command = line.split(" ")[0];
         while (!command.equals("bye")) {
-            switch(command) {
+            switch (command) {
             case "add":
                 FlashCardManager.prepareToAddFlashCard(line);
                 break;
