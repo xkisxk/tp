@@ -13,13 +13,17 @@ public class Parser {
             case "add":
                 FlashCardManager.prepareToAddFlashCard(line);
                 break;
+            case "test":
+                TestManager.testAllCardsInOrder();
+                break;
+            case "answers":
+                TestManager.viewAllAnswers();
+                break;
             default:
                 System.out.println("\tThat's not a command.");
             }
             line = in.nextLine();
             word = line.split(" ")[0];
         }
-
-
     }
 }

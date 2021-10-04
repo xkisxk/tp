@@ -6,7 +6,7 @@ import seedu.duke.exceptions.NoSlashException;
 import java.util.ArrayList;
 
 public class FlashCardManager {
-    private static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private static int cardCount = 0;
 
     public static void printNoSlashFoundError() {
@@ -65,6 +65,16 @@ public class FlashCardManager {
         } else {
             System.out.println("\tYou have " + cardCount + " cards in your card deck.");
         }
+    }
+
+    //getter for index of a flashcard
+    public static int getCardIndex(FlashCard card) {
+        return cards.indexOf(card);
+    }
+
+    //lets user see the flashcard
+    public static void viewFlashCard(int cardIndex) {
+        System.out.println(cards.get(cardIndex).getFront());
     }
 
 }
