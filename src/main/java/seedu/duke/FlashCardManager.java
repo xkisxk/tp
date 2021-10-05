@@ -37,10 +37,10 @@ public class FlashCardManager {
         }
     }
 
-    public static String[] trimStrings (String input) throws FieldEmptyException, NoSlashException {
+    public static String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/def");
         String[] flashCardWords = new String[2];
-        if (slashIndex < 3 ) {
+        if (slashIndex < 3) {
             throw new NoSlashException();
         }
         flashCardWords[0] = input.substring(3, slashIndex - 1).trim();

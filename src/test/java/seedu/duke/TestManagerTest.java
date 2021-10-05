@@ -10,6 +10,6 @@ public class TestManagerTest {
     @Test
     public void parseUserResponse_noInput_expectFieldEmptyException() {
         String input = "";
-        assertThrows(FieldEmptyException.class, ()-> TestManager.parseUserResponse(input));
+        assertThrows(FieldEmptyException.class, () -> TestManager.parseUserResponse(input));
     }
 }

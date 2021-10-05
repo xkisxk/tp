@@ -14,7 +14,7 @@ public class TestManager {
 
     //goes through all the cards and stores the response by the user into answersResponse arraylist
     public static void testAllCardsInOrder() {
-        for(FlashCard question : cards) {
+        for (FlashCard question : cards) {
             int questionNumber = FlashCardManager.getCardIndex(question);
             System.out.println("--------------------------------------------------");
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
@@ -38,9 +38,9 @@ public class TestManager {
     }
 
     //may seem useless right now but will be needed in the future
-    public static String parseUserResponse(String userResponse) throws FieldEmptyException{
+    public static String parseUserResponse(String userResponse) throws FieldEmptyException {
         String input = userResponse;
-        if(userResponse.isEmpty()) {
+        if (userResponse.isEmpty()) {
             throw new FieldEmptyException();
         }
         return input;
@@ -62,7 +62,7 @@ public class TestManager {
         return input;
     }
 
-    public static void addAnswer(String answer, int questionIndex){
+    public static void addAnswer(String answer, int questionIndex) {
         answersResponse.add(new Answer(answer, questionIndex));
         answerCount += 1;
     }
@@ -74,7 +74,7 @@ public class TestManager {
 
 
     public static void viewAllAnswers() {
-        for(Answer response : answersResponse) {
+        for (Answer response : answersResponse) {
             int responseNumber = getAnswerIndex(response);
             //display front of card so that user can understand question
             System.out.println("--------------------------------------------------");
