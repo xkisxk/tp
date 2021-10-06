@@ -15,7 +15,9 @@ public class TestManager {
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
     private static int answerCount = 0;
 
-    //goes through all the cards and stores the response by the user into answersResponse arraylist
+    /**
+     * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
+     */
     public static void testAllCardsInOrder() {
         for (FlashCard question : cards) {
             int questionNumber = FlashCardManager.getCardIndex(question);
@@ -42,7 +44,6 @@ public class TestManager {
         viewTestResult();
     }
 
-    //may seem useless right now but will be needed in the future
     public static String parseUserResponse(String userResponse) throws FieldEmptyException {
         String input = userResponse;
         if (userResponse.isEmpty()) {
@@ -55,7 +56,6 @@ public class TestManager {
         System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 
-    //getter for index of an answer
     public static int getAnswerIndex(Answer answer) {
         return answersResponse.indexOf(answer);
     }

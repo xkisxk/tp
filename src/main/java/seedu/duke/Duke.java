@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Represents CardLI application.
+ */
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.

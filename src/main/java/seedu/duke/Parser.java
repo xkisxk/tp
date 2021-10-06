@@ -7,6 +7,9 @@ import java.util.Scanner;
  */
 public class Parser {
 
+    /**
+     * Parses user input at the command line and invokes the necessary follow up actions.
+     */
     static void programLogic() {
         Scanner in = new Scanner(System.in);
         String line = in.nextLine();
