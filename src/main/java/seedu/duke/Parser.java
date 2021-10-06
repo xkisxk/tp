@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * Deals with the parsing of user input at the command line.
+ */
 public class Parser {
 
     static void programLogic() {
@@ -15,9 +18,6 @@ public class Parser {
                 break;
             case "test":
                 TestManager.testAllCardsInOrder();
-                break;
-            case "answers":
-                TestManager.viewAllAnswers();
                 break;
             default:
                 System.out.println("\tThat's not a command.");
