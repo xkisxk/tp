@@ -9,9 +9,15 @@ public class Parser {
         String line = in.nextLine();
         String word = line.split(" ")[0];
         while (!word.equals("bye")) {
-            switch(word) {
+            switch (word) {
             case "add":
                 FlashCardManager.prepareToAddFlashCard(line);
+                break;
+            case "test":
+                TestManager.testAllCardsInOrder();
+                break;
+            case "answers":
+                TestManager.viewAllAnswers();
                 break;
             default:
                 System.out.println("\tThat's not a command.");
@@ -19,7 +25,5 @@ public class Parser {
             line = in.nextLine();
             word = line.split(" ")[0];
         }
-
-
     }
 }

@@ -9,5 +9,8 @@ public class FlashCard {
         this.back = back;
     }
 
-
+    //getter for front
+    public String getFront() {
+        return this.front;
+    }
 }

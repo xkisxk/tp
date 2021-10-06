@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FlashCardManagerTest {
 
@@ -19,19 +18,18 @@ class FlashCardManagerTest {
     @Test
     public void trimStrings_hasNoSlash_expectNoSlashException() {
         String input = "add good morning ohayou";
-        assertThrows(NoSlashException.class, ()-> FlashCardManager.trimStrings(input));
+        assertThrows(NoSlashException.class, () -> FlashCardManager.trimStrings(input));
     }
 
     @Test
     public void trimStrings_emptyFront_expectFieldEmptyException() {
         String input = "add /def ohayou";
-        assertThrows(FieldEmptyException.class, ()-> FlashCardManager.trimStrings(input));
+        assertThrows(FieldEmptyException.class, () -> FlashCardManager.trimStrings(input));
     }
 
     @Test
     public void trimStrings_emptyBack_expectFieldEmptyException() {
         String input = "add good morning /def";
-        assertThrows(FieldEmptyException.class, ()-> FlashCardManager.trimStrings(input));
+        assertThrows(FieldEmptyException.class, () -> FlashCardManager.trimStrings(input));
     }
-
 }
