@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class FlashCardManager {
     public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
-    private static int cardCount = 0;
 
     public static void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/def\"!");
@@ -37,24 +36,22 @@ public class FlashCardManager {
 
     private static void printNewFlashCard(String front, String back) {
         System.out.println("\tAdded card:");
+        printCardInfo(front, back);
+    }
+
+    private static void printCardInfo(String front, String back) {
         System.out.println("\tFront: " + front);
         System.out.println("\tBack: " + back);
-        if (cardCount == 1) {
-            System.out.println("\tYou have " + cardCount + " card in your card deck.");
+        if (cards.size() == 1) {
+            System.out.println("\tYou have " + cards.size() + " card in your card deck.");
         } else {
-            System.out.println("\tYou have " + cardCount + " cards in your card deck.");
+            System.out.println("\tYou have " + cards.size() + " cards in your card deck.");
         }
     }
 
     private static void printDeletedFlashCardMessage(String front, String back) {
         System.out.println("\tDeleted card:");
-        System.out.println("\tFront: " + front);
-        System.out.println("\tBack: " + back);
-        if (cardCount == 1) {
-            System.out.println("\tYou have " + cardCount + " card in your card deck.");
-        } else {
-            System.out.println("\tYou have " + cardCount + " cards in your card deck.");
-        }
+        printCardInfo(front, back);
     }
 
     public static void prepareToAddFlashCard(String input) {
@@ -89,11 +86,13 @@ public class FlashCardManager {
         }
     }
 
+    // TODO find elegant implementation of delete using index
+
     /**
      * Returns the description, which is anything after the command word.
      *
-     * @param input                user's input
-     * @return                     description of card
+     * @param input user's input
+     * @return description of card
      * @throws FieldEmptyException if description is empty
      */
     private static String getDescription(String input) throws FieldEmptyException {
@@ -107,8 +106,8 @@ public class FlashCardManager {
     /**
      * Deletes the flashcard with the given description.
      *
-     * @param description       description of the card to delete
-     * @throws CardLiException  if card does not exist
+     * @param description description of the card to delete
+     * @throws CardLiException if card does not exist
      */
     public static void deleteFlashCard(String description) throws CardLiException {
         if (cards.size() == 0) {
@@ -118,7 +117,6 @@ public class FlashCardManager {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
                 cards.remove(card);
-                cardCount--;
                 printDeletedFlashCardMessage(card.getFront(), card.getBack());
                 return;
             }
@@ -129,7 +127,7 @@ public class FlashCardManager {
     private static boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
     }
-  
+
     public static String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/def");
         String[] flashCardWords = new String[2];
@@ -146,55 +144,11 @@ public class FlashCardManager {
 
     public static void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));
-        cardCount += 1;
-    }
-
-    private static void printNewFlashCard(String front, String back) {
-        System.out.println("\tAdded card:");
-        System.out.println("\tFront: " + front);
-        System.out.println("\tBack: " + back);
-        if (cardCount == 1) {
-            System.out.println("\tYou have " + cardCount + " card in your card deck.");
-        } else {
-            System.out.println("\tYou have " + cardCount + " cards in your card deck.");
-        }
     }
 
     //getter for index of a flashcard
     public static int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
-    }
-
-    //lets user see the front of flashcard
-    public static void viewFlashCardFront(int cardIndex) {
-        String front = cards.get(cardIndex).getFront();
-        System.out.println("*================FRONT================*");
-        System.out.println();
-        String spaces = "";
-        // TODO: add the separator as a constant
-        //  and replace the 39 below with the constant's length
-        for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            spaces += " ";
-        }
-        System.out.println(spaces + front);
-        System.out.println();
-        System.out.println("*=====================================*");
-    }
-
-    //lets user see the back of flashcard
-    public static void viewFlashCardBack(int cardIndex) {
-        String back = cards.get(cardIndex).getBack();
-        System.out.println("*===============BACK==================*");
-        System.out.println();
-        String spaces = "";
-        // TODO: add the separator as a constant
-        //  and replace the 39 below with the constant's length
-        for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            spaces += " ";
-        }
-        System.out.println(spaces + back);
-        System.out.println();
-        System.out.println("*=====================================*");
     }
 
     public static void viewAFlashCard(int cardIndex) {
@@ -226,16 +180,16 @@ public class FlashCardManager {
             viewAFlashCard(i);
         }
     }
-  
+
     /**
-     * Returns the String on the front of the flashCard
+     * Returns the String on the front of the flashCard.
      */
     public static String getFrontOfCard(int cardIndex) {
         return cards.get(cardIndex).getFront();
     }
 
     /**
-     * Returns the String on the back of the flashCard
+     * Returns the String on the back of the flashCard.
      */
     public static String getBackOfCard(int cardIndex) {
         return cards.get(cardIndex).getBack();

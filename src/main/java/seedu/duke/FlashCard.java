@@ -1,7 +1,7 @@
 package seedu.duke;
 
 /**
- * Represents information within a single flashcard
+ * Represents information within a single flashcard.
  */
 public class FlashCard {
     private String front;
