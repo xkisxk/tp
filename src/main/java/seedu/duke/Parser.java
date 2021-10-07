@@ -2,8 +2,14 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * Deals with the parsing of user input at the command line.
+ */
 public class Parser {
 
+    /**
+     * Parses user input at the command line and invokes the necessary follow up actions.
+     */
     static void programLogic() {
         Scanner in = new Scanner(System.in);
         String line = in.nextLine();
@@ -18,9 +24,6 @@ public class Parser {
                 break;
             case "test":
                 TestManager.testAllCardsInOrder();
-                break;
-            case "answers":
-                TestManager.viewAllAnswers();
                 break;
             default:
                 System.out.println("\tThat's not a command.");

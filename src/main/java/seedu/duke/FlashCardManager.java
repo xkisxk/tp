@@ -5,6 +5,9 @@ import seedu.duke.exceptions.NoSlashException;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the list of added flashcards.
+ */
 public class FlashCardManager {
     public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private static int cardCount = 0;
@@ -132,6 +135,20 @@ public class FlashCardManager {
             System.out.println("Card " + (i + 1) + ":");
             viewAFlashCard(i);
         }
+    }
+  
+    /**
+     * Returns the String on the front of the flashCard
+     */
+    public static String getFrontOfCard(int cardIndex) {
+        return cards.get(cardIndex).getFront();
+    }
+
+    /**
+     * Returns the String on the back of the flashCard
+     */
+    public static String getBackOfCard(int cardIndex) {
+        return cards.get(cardIndex).getBack();
     }
 
 }
