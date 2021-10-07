@@ -5,7 +5,10 @@ import seedu.duke.exceptions.FieldEmptyException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.FlashCardManager.*;
+import static seedu.duke.FlashCardManager.cards;
+import static seedu.duke.FlashCardManager.getFrontOfCard;
+import static seedu.duke.FlashCardManager.getBackOfCard;
+
 
 /**
  * Implements the test function.
@@ -87,7 +90,7 @@ public class TestManager {
     }
 
     /**
-     * Prints results of test to system output
+     * Prints results of test to system output.
      */
     private static void viewTestResult() {
         int score = 0;

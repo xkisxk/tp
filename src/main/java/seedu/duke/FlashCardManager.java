@@ -151,37 +151,6 @@ public class FlashCardManager {
         return cards.indexOf(card);
     }
 
-//    //lets user see the front of flashcard
-//    public static void viewFlashCardFront(int cardIndex) {
-//        String front = cards.get(cardIndex).getFront();
-//        System.out.println("*================FRONT================*");
-//        System.out.println();
-//        String spaces = "";
-//        // TODO: add the separator as a constant
-//        //  and replace the 39 below with the constant's length
-//        for (int i = 0; i < (39 - front.length()) / 2; i++) {
-//            spaces += " ";
-//        }
-//        System.out.println(spaces + front);
-//        System.out.println();
-//        System.out.println("*=====================================*");
-//    }
-//
-//    //lets user see the back of flashcard
-//    public static void viewFlashCardBack(int cardIndex) {
-//        String back = cards.get(cardIndex).getBack();
-//        System.out.println("*===============BACK==================*\n");
-//        String spaces = "";
-//        // TODO: add the separator as a constant
-//        //  and replace the 39 below with the constant's length
-//        for (int i = 0; i < (39 - back.length()) / 2; i++) {
-//            spaces += " ";
-//        }
-//        System.out.println(spaces + back);
-//        System.out.println();
-//        System.out.println("*=====================================*");
-//    }
-
     public static void viewAFlashCard(int cardIndex) {
         System.out.println("*================FRONT================* "
                 + "*===============BACK==================*");
@@ -213,14 +182,14 @@ public class FlashCardManager {
     }
 
     /**
-     * Returns the String on the front of the flashCard
+     * Returns the String on the front of the flashCard.
      */
     public static String getFrontOfCard(int cardIndex) {
         return cards.get(cardIndex).getFront();
     }
 
     /**
-     * Returns the String on the back of the flashCard
+     * Returns the String on the back of the flashCard.
      */
     public static String getBackOfCard(int cardIndex) {
         return cards.get(cardIndex).getBack();
