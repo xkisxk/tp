@@ -5,8 +5,8 @@ import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FlashCardManagerTest {
 
@@ -39,5 +39,4 @@ class FlashCardManagerTest {
         String input = "delete abcdef";
         assertThrows(CardLiException.class, () -> FlashCardManager.deleteFlashCard(input));
     }
-
 }

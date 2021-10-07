@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Represents CardLI application.
+ */
 public class Duke {
     private static final CardLiUi ui = new CardLiUi();
 

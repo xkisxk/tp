@@ -1,4 +1,8 @@
 package seedu.duke.exceptions;
 
-public class FieldEmptyException extends CardLiException {
+
+/**
+ * Represents exception thrown when a field that is expected to be filled is empty.
+ */
+public class FieldEmptyException extends CardLIException {
 }
