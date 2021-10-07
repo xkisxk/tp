@@ -27,6 +27,6 @@ public class FlashCard {
      * @return String on back of flashcard
      */
     public String getBack() {
-        return back;
+        return this.back;
     }
 }

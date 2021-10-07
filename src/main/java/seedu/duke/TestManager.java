@@ -1,11 +1,14 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.FieldEmptyException;
+import static seedu.duke.FlashCardManager.cards;
+import static seedu.duke.FlashCardManager.viewFlashCardFront;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.FlashCardManager.*;
+
+
 
 /**
  * Implements the test function.
@@ -25,7 +28,6 @@ public class TestManager {
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
             //display front of card so that user can understand question
             System.out.println(getFrontOfCard(questionNumber));
-            ;
             System.out.println("Your answer?");
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
