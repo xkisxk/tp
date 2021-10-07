@@ -5,21 +5,27 @@ import seedu.duke.exceptions.FieldEmptyException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.FlashCardManager.cards;
-import static seedu.duke.FlashCardManager.viewFlashCard;
+import static seedu.duke.FlashCardManager.*;
 
+/**
+ * Implements the test function.
+ */
 public class TestManager {
+
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
     private static int answerCount = 0;
 
-    //goes through all the cards and stores the response by the user into answersResponse arraylist
+    /**
+     * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
+     */
     public static void testAllCardsInOrder() {
         for (FlashCard question : cards) {
             int questionNumber = FlashCardManager.getCardIndex(question);
-            System.out.println("--------------------------------------------------");
+            printDividerLine();
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
             //display front of card so that user can understand question
-            viewFlashCard(questionNumber);
+            System.out.println(getFrontOfCard(questionNumber));
+            ;
             System.out.println("Your answer?");
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
@@ -32,12 +38,12 @@ public class TestManager {
             }
             addAnswer(userResponse, questionNumber);
         }
-        System.out.println("--------------------------------------------------");
+        printDividerLine();
         //let user know testing is over
         System.out.println("Test Over");
+        viewTestResult();
     }
 
-    //may seem useless right now but will be needed in the future
     public static String parseUserResponse(String userResponse) throws FieldEmptyException {
         String input = userResponse;
         if (userResponse.isEmpty()) {
@@ -50,7 +56,6 @@ public class TestManager {
         System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 
-    //getter for index of an answer
     public static int getAnswerIndex(Answer answer) {
         return answersResponse.indexOf(answer);
     }
@@ -62,27 +67,63 @@ public class TestManager {
         return input;
     }
 
+    /**
+     * Saves a new user answer to the current list of user answers.
+     *
+     * @param answer            String representation of user's answer
+     * @param questionIndex     Question number for the question that the answer answers
+     */
     public static void addAnswer(String answer, int questionIndex) {
         answersResponse.add(new Answer(answer, questionIndex));
         answerCount += 1;
     }
 
-    //lets user see the answer
+    /**
+     * Prints user's answer for a specified question to the system output.
+     *
+     * @param answerIndex   Specified question number
+     */
     public static void viewAnswer(int answerIndex) {
         System.out.println(answersResponse.get(answerIndex).getAnswer());
     }
 
+    /**
+     * Prints results of test to system output
+     */
+    private static void viewTestResult() {
+        int score = 0;
 
-    public static void viewAllAnswers() {
         for (Answer response : answersResponse) {
             int responseNumber = getAnswerIndex(response);
             //display front of card so that user can understand question
-            System.out.println("--------------------------------------------------");
-            System.out.println("Question " + String.valueOf(responseNumber + 1) + ":");
-            viewFlashCard(responseNumber);
-            System.out.println("Your answer:");
+            printDividerLine();
+            System.out.println("Question "
+                    + String.valueOf(responseNumber + 1)
+                    + ": " + getFrontOfCard(responseNumber));
+            System.out.println("Correct answer: " + getBackOfCard(responseNumber));
+            System.out.print("Your answer: ");
             viewAnswer(responseNumber);
+
+            if (getBackOfCard(responseNumber).equals(answersResponse.get(responseNumber).getAnswer())) {
+                score++;
+                printCorrectAnsMessage();
+            } else {
+                printWrongAnsMessage();
+            }
         }
+        printDividerLine();
+        System.out.println("Your scored " + score + " out of " + answerCount + " for this test");
+    }
+
+    private static void printDividerLine() {
         System.out.println("--------------------------------------------------");
+    }
+
+    private static void printCorrectAnsMessage() {
+        System.out.println("Well done! You got this question correct");
+    }
+
+    private static void printWrongAnsMessage() {
+        System.out.println("You got this question wrong! Take note of the correct answer!");
     }
 }
