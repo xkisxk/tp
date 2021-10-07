@@ -1,14 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.FieldEmptyException;
-import static seedu.duke.FlashCardManager.cards;
-import static seedu.duke.FlashCardManager.viewFlashCardFront;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
+import static seedu.duke.FlashCardManager.*;
 
 /**
  * Implements the test function.
