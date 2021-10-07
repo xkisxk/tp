@@ -72,9 +72,66 @@ public class FlashCardManager {
         return cards.indexOf(card);
     }
 
-    //lets user see the flashcard
-    public static void viewFlashCard(int cardIndex) {
-        System.out.println(cards.get(cardIndex).getFront());
+    //lets user see the front of flashcard
+    public static void viewFlashCardFront(int cardIndex) {
+        String front = cards.get(cardIndex).getFront();
+        System.out.println("*================FRONT================*");
+        System.out.println();
+        String spaces = "";
+        // TODO: add the separator as a constant
+        //  and replace the 39 below with the constant's length
+        for (int i = 0; i < (39 - front.length()) / 2; i++) {
+            spaces += " ";
+        }
+        System.out.println(spaces + front);
+        System.out.println();
+        System.out.println("*=====================================*");
+    }
+
+    //lets user see the back of flashcard
+    public static void viewFlashCardBack(int cardIndex) {
+        String back = cards.get(cardIndex).getBack();
+        System.out.println("*===============BACK==================*");
+        System.out.println();
+        String spaces = "";
+        // TODO: add the separator as a constant
+        //  and replace the 39 below with the constant's length
+        for (int i = 0; i < (39 - back.length()) / 2; i++) {
+            spaces += " ";
+        }
+        System.out.println(spaces + back);
+        System.out.println();
+        System.out.println("*=====================================*");
+    }
+
+    public static void viewAFlashCard(int cardIndex) {
+        System.out.println("*================FRONT================* "
+                + "*===============BACK==================*");
+        System.out.println();
+
+        String front = cards.get(cardIndex).getFront();
+        String frontSpaces = "";
+        for (int i = 0; i < (39 - front.length()) / 2; i++) {
+            frontSpaces += " ";
+        }
+
+        String back = cards.get(cardIndex).getBack();
+        String backSpaces = "";
+        for (int i = 0; i < (39 - back.length()) / 2; i++) {
+            backSpaces += " ";
+        }
+
+        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
+        System.out.println();
+        System.out.println("*=====================================* "
+                + "*=====================================*");
+    }
+
+    public static void viewAllFlashCards() {
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.println("Card " + (i + 1) + ":");
+            viewAFlashCard(i);
+        }
     }
 
 }

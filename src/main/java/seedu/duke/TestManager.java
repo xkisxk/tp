@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.FlashCardManager.cards;
-import static seedu.duke.FlashCardManager.viewFlashCard;
+import static seedu.duke.FlashCardManager.viewFlashCardFront;
 
 public class TestManager {
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
@@ -19,7 +19,7 @@ public class TestManager {
             System.out.println("--------------------------------------------------");
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
             //display front of card so that user can understand question
-            viewFlashCard(questionNumber);
+            viewFlashCardFront(questionNumber);
             System.out.println("Your answer?");
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
@@ -79,7 +79,7 @@ public class TestManager {
             //display front of card so that user can understand question
             System.out.println("--------------------------------------------------");
             System.out.println("Question " + String.valueOf(responseNumber + 1) + ":");
-            viewFlashCard(responseNumber);
+            viewFlashCardFront(responseNumber);
             System.out.println("Your answer:");
             viewAnswer(responseNumber);
         }

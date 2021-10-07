@@ -13,4 +13,8 @@ public class FlashCard {
     public String getFront() {
         return this.front;
     }
+
+    public String getBack() {
+        return this.back;
+    }
 }

@@ -13,6 +13,9 @@ public class Parser {
             case "add":
                 FlashCardManager.prepareToAddFlashCard(line);
                 break;
+            case "view":
+                FlashCardManager.viewAllFlashCards();
+                break;
             case "test":
                 TestManager.testAllCardsInOrder();
                 break;
