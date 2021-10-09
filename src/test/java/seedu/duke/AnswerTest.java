@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AnswerTest {
 
     @Test
-    public void testGetAnswer(){
+    public void testGetAnswer() {
         assertEquals("testAnswer",
                 new Answer("testAnswer", 1).getAnswer());
     }

@@ -9,12 +9,12 @@ public class FlashCardTest {
     private FlashCard flashCard = new FlashCard("testFront", "testBack");
 
     @Test
-    public void testGetFront(){
+    public void testGetFront() {
         assertEquals("testFront", flashCard.getFront());
     }
 
     @Test
-    public void testGetBack(){
+    public void testGetBack() {
         assertEquals("testBack", flashCard.getBack());
     }
 }
