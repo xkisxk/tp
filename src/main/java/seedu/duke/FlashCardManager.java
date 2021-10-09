@@ -97,11 +97,11 @@ public class FlashCardManager {
      * @throws FieldEmptyException if description is empty
      */
     public static String getDescription(String input) throws FieldEmptyException {
-        String[] line = input.split(" ");
-        if (line.length < 2) {
+        String line = input.substring(6).trim();
+        if (line.isEmpty()) {
             throw new FieldEmptyException();
         }
-        return line[1];
+        return line;
     }
 
     /**
