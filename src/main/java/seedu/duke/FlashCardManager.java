@@ -87,7 +87,6 @@ public class FlashCardManager {
     }
 
 
-
     // TODO find elegant implementation of delete using index
 
     /**
@@ -169,7 +168,7 @@ public class FlashCardManager {
      */
     private static boolean isInteger(String input) {
         for (int i = 0; i < input.length(); i += 1) {
-            if(!Character.isDigit(input.charAt(i))){
+            if (!Character.isDigit(input.charAt(i))) {
                 return false;
             }
         }
