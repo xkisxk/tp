@@ -36,7 +36,7 @@ class FlashCardManagerTest {
 
     @Test
     public void getDescription_noDescription_FieldEmptyException() {
-        String input = "add";
+        String input = "delete";
         assertThrows(FieldEmptyException.class, () -> FlashCardManager.getDescription(input));
     }
 
@@ -55,6 +55,7 @@ class FlashCardManagerTest {
         FlashCardManager.deleteFlashCard("illness");
         FlashCardManager.viewAllFlashCards();
         assertEquals(1, FlashCardManager.cards.size());
+        FlashCardManager.deleteFlashCard("to lose");
     }
 
     @Test
@@ -66,15 +67,18 @@ class FlashCardManagerTest {
         FlashCardManager.deleteFlashCard("1");
         FlashCardManager.viewAllFlashCards();
         assertEquals(1, FlashCardManager.cards.size());
+        FlashCardManager.deleteFlashCard("1");
     }
 
     @Test
-    public void deleteFlashCard_provideInvalidIndex_expectCardLiException() {
+    public void deleteFlashCard_provideInvalidIndex_expectCardLiException() throws CardLiException {
         String firstCard = "add illness /def byouki";
         String secondCard = "add to lose /def nakushimasu";
         FlashCardManager.prepareToAddFlashCard(firstCard);
         FlashCardManager.prepareToAddFlashCard(secondCard);
         FlashCardManager.viewAllFlashCards();
         assertThrows(CardLiException.class, () -> FlashCardManager.deleteFlashCard("6"));
+        FlashCardManager.deleteFlashCard("1");
+        FlashCardManager.deleteFlashCard("1");
     }
 }
