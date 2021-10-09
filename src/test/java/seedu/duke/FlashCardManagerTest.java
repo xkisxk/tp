@@ -35,6 +35,12 @@ class FlashCardManagerTest {
     }
 
     @Test
+    public void getDescription_noDescription_FieldEmptyException() {
+        String input = "add";
+        assertThrows(FieldEmptyException.class, () -> FlashCardManager.getDescription(input));
+    }
+
+    @Test
     public void deleteFlashCard_cardNotExist_expectCardLiException() {
         String input = "delete abcdef";
         assertThrows(CardLiException.class, () -> FlashCardManager.deleteFlashCard(input));
