@@ -86,10 +86,11 @@ public class FlashCardManager {
         }
     }
 
+
     // TODO find elegant implementation of delete using index
 
     /**
-     * Returns the description, which is anything after the command word.
+     * Returns all contents of the input after the command word.
      *
      * @param input user's input
      * @return description of card
@@ -104,15 +105,46 @@ public class FlashCardManager {
     }
 
     /**
-     * Deletes the flashcard with the given description.
+     * Deletes the flashcard with the given input.
      *
-     * @param description description of the card to delete
+     * @param input description of the card to delete
      * @throws CardLiException if card does not exist
      */
-    public static void deleteFlashCard(String description) throws CardLiException {
+    public static void deleteFlashCard(String input) throws CardLiException {
         if (cards.size() == 0) {
             throw new CardLiException();
         }
+        if (!isInteger(input)) {
+            deleteFlashCardByDescription(input);
+        } else {
+            deleteFlashCardByIndex(input);
+        }
+    }
+
+    /**
+     * Deletes the flashcard with the given index.
+     *
+     * @param index user's input (index of the card to be deleted)
+     * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
+     */
+    private static void deleteFlashCardByIndex(String index) throws CardLiException {
+        int indexToBeRemoved = Integer.parseInt(index) - 1;
+        if (indexToBeRemoved < cards.size()) {
+            FlashCard card = cards.get(indexToBeRemoved);
+            cards.remove(card);
+            printDeletedFlashCardMessage(card.getFront(), card.getBack());
+        } else {
+            throw new CardLiException();
+        }
+    }
+
+    /**
+     * Deletes the flashcard with the given description.
+     *
+     * @param description user's input (front of the card to be deleted)
+     * @throws CardLiException if none of the front of the cards match the description input by user
+     */
+    private static void deleteFlashCardByDescription(String description) throws CardLiException {
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
@@ -126,6 +158,21 @@ public class FlashCardManager {
 
     private static boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
+    }
+
+    /**
+     * Checks if the given input is an integer or not.
+     *
+     * @param input input given by user
+     * @return true if input is an integer, false otherwise
+     */
+    private static boolean isInteger(String input) {
+        for (int i = 0; i < input.length(); i += 1) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
