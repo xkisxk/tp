@@ -96,7 +96,7 @@ public class FlashCardManager {
      * @return description of card
      * @throws FieldEmptyException if description is empty
      */
-    private static String getDescription(String input) throws FieldEmptyException {
+    public static String getDescription(String input) throws FieldEmptyException {
         String[] line = input.split(" ");
         if (line.length < 2) {
             throw new FieldEmptyException();
