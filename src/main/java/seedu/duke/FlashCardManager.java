@@ -79,7 +79,7 @@ public class FlashCardManager {
         try {
             String description = getDescription(input);
             deleteFlashCard(description);
-        } catch (FieldEmptyException e) {
+        } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
         } catch (CardLiException e) {
             printDoesNotExistError();
@@ -94,14 +94,10 @@ public class FlashCardManager {
      *
      * @param input user's input
      * @return description of card
-     * @throws FieldEmptyException if description is empty
+     * @throws ArrayIndexOutOfBoundsException if description is empty
      */
-    public static String getDescription(String input) throws FieldEmptyException {
-        String line = input.substring(6).trim();
-        if (line.isEmpty()) {
-            throw new FieldEmptyException();
-        }
-        return line;
+    public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
+        return input.split(" ", 2)[1];
     }
 
     /**
@@ -145,6 +141,7 @@ public class FlashCardManager {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private static void deleteFlashCardByDescription(String description) throws CardLiException {
+        assert cards.size() > 0;
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
