@@ -127,7 +127,7 @@ public class FlashCardManager {
      *
      * @param index user's input (index of the card to be deleted)
      * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
-     * or index of card is less than 1
+     *              or index of card is less than 1
      */
     private static void deleteFlashCardByIndex(String index) throws CardLiException {
         int indexToBeRemoved = Integer.parseInt(index) - 1;

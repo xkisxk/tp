@@ -4,7 +4,8 @@ import seedu.duke.exceptions.FieldEmptyException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static seedu.duke.FlashCardManager.cards;
 import static seedu.duke.FlashCardManager.getFrontOfCard;
