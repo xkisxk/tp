@@ -125,6 +125,7 @@ public class TestManager {
             }
         }
         printDividerLine();
+        assert score <= answerCount;
         System.out.println("Your scored " + score + " out of " + answerCount + " for this test");
     }
 

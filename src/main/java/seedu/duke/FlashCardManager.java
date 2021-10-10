@@ -40,7 +40,6 @@ public class FlashCardManager {
     }
 
     private static void printCardInfo(String front, String back) {
-        assert cards.size() > 0;
         System.out.println("\tFront: " + front);
         System.out.println("\tBack: " + back);
         if (cards.size() == 1) {
