@@ -35,9 +35,9 @@ class FlashCardManagerTest {
     }
 
     @Test
-    public void getDescription_noDescription_FieldEmptyException() {
+    public void getDescription_noDescription_ArrayIndexOutOfBoundsException() {
         String input = "delete";
-        assertThrows(FieldEmptyException.class, () -> FlashCardManager.getDescription(input));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> FlashCardManager.getDescription(input));
     }
 
     @Test
