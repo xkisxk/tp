@@ -129,7 +129,7 @@ public class FlashCardManager {
      */
     private static void deleteFlashCardByIndex(String index) throws CardLiException {
         int indexToBeRemoved = Integer.parseInt(index) - 1;
-        if (indexToBeRemoved < cards.size()) {
+        if ((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0)) {
             FlashCard card = cards.get(indexToBeRemoved);
             cards.remove(card);
             printDeletedFlashCardMessage(card.getFront(), card.getBack());

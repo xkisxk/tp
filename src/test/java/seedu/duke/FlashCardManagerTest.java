@@ -81,4 +81,16 @@ class FlashCardManagerTest {
         FlashCardManager.deleteFlashCard("1");
         FlashCardManager.deleteFlashCard("1");
     }
+
+    @Test
+    public void deleteFlashCard_provideNegativeIndex_expectCardLiException() throws CardLiException {
+        String firstCard = "add illness /def byouki";
+        String secondCard = "add to lose /def nakushimasu";
+        FlashCardManager.prepareToAddFlashCard(firstCard);
+        FlashCardManager.prepareToAddFlashCard(secondCard);
+        FlashCardManager.viewAllFlashCards();
+        assertThrows(CardLiException.class, () -> FlashCardManager.deleteFlashCard("0"));
+        FlashCardManager.deleteFlashCard("1");
+        FlashCardManager.deleteFlashCard("1");
+    }
 }
