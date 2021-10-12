@@ -5,12 +5,15 @@ import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implements the list of added flashcards.
  */
 public class FlashCardManager {
     public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    private static final Logger logger = Logger.getLogger(FlashCardManager.class.getName());
 
     public static void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/def\"!");
@@ -76,14 +79,20 @@ public class FlashCardManager {
      * @param input user's input in its entirety
      */
     public static void prepareToDeleteFlashCard(String input) {
+        logger.entering(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
+        logger.log(Level.INFO, "Starting delete process");
         try {
             String description = getDescription(input);
             deleteFlashCard(description);
-        } catch (FieldEmptyException e) {
+        } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
+            logger.log(Level.SEVERE, "Empty field error, no description found after command term");
         } catch (CardLiException e) {
             printDoesNotExistError();
+            logger.log(Level.SEVERE, "CardLi error, query card does not exist");
         }
+        logger.log(Level.INFO, "End of delete process");
+        logger.exiting(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
     }
 
 
@@ -94,14 +103,10 @@ public class FlashCardManager {
      *
      * @param input user's input
      * @return description of card
-     * @throws FieldEmptyException if description is empty
+     * @throws ArrayIndexOutOfBoundsException if description is empty
      */
-    public static String getDescription(String input) throws FieldEmptyException {
-        String line = input.substring(6).trim();
-        if (line.isEmpty()) {
-            throw new FieldEmptyException();
-        }
-        return line;
+    public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
+        return input.split(" ", 2)[1];
     }
 
     /**
@@ -114,6 +119,7 @@ public class FlashCardManager {
         if (cards.size() == 0) {
             throw new CardLiException();
         }
+        logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
         if (!isInteger(input)) {
             deleteFlashCardByDescription(input);
         } else {
@@ -145,6 +151,7 @@ public class FlashCardManager {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private static void deleteFlashCardByDescription(String description) throws CardLiException {
+        assert cards.size() > 0;
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
