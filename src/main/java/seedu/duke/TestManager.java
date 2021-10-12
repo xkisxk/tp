@@ -4,6 +4,8 @@ import seedu.duke.exceptions.FieldEmptyException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static seedu.duke.FlashCardManager.cards;
 import static seedu.duke.FlashCardManager.getFrontOfCard;
@@ -17,12 +19,15 @@ public class TestManager {
 
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
     private static int answerCount = 0;
+    private static Logger logger = Logger.getLogger(TestManager.class.getName());
 
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
     public static void testAllCardsInOrder() {
+        logger.log(Level.INFO, "starting test");
         for (FlashCard question : cards) {
+            logger.log(Level.INFO, "starting to test a new card");
             int questionNumber = FlashCardManager.getCardIndex(question);
             printDividerLine();
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
@@ -31,18 +36,24 @@ public class TestManager {
             System.out.println("Your answer?");
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
+            logger.log(Level.INFO, "getting user's answer to the question");
             String userResponse = getInput();
             try {
                 parseUserResponse(userResponse);
             } catch (FieldEmptyException e) {
+                logger.log(Level.WARNING, "No user input");
                 userResponse = "NO ANSWER GIVEN :(";
                 printAnswerEmptyError();
             }
+            logger.log(Level.INFO, "Saving answer");
             addAnswer(userResponse, questionNumber);
+            logger.log(Level.INFO, "Finished this card's testing");
         }
         printDividerLine();
+        logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         System.out.println("Test Over");
+        logger.log(Level.INFO, "view results");
         viewTestResult();
     }
 
@@ -114,6 +125,7 @@ public class TestManager {
             }
         }
         printDividerLine();
+        assert score <= answerCount;
         System.out.println("Your scored " + score + " out of " + answerCount + " for this test");
     }
 
