@@ -107,6 +107,7 @@ public class FlashCardManager {
      * @throws ArrayIndexOutOfBoundsException if description is empty
      */
     public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
+        assert input.length() > 0 : "input string should not be empty, at least have command word";
         return input.split(" ", 2)[1];
     }
 
