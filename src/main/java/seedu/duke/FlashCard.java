@@ -13,6 +13,7 @@ public class FlashCard {
     private String back;
 
     public FlashCard(String front, String back) {
+        logger.setLevel(Level.WARNING);
         assert front != null;
         assert back != null;
         this.front = front;
@@ -27,6 +28,7 @@ public class FlashCard {
      * @return String on front of flashcard
      */
     public String getFront() {
+        logger.setLevel(Level.WARNING);
         assert this.front != null;
         logger.log(Level.INFO, "Getting card front: " + front);
         return this.front;
@@ -38,6 +40,7 @@ public class FlashCard {
      * @return String on back of flashcard
      */
     public String getBack() {
+        logger.setLevel(Level.WARNING);
         assert this.back != null;
         logger.log(Level.INFO, "Getting card back: " + back);
         return this.back;

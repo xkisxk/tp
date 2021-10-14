@@ -15,6 +15,7 @@ public class Parser {
      * Parses user input at the command line and invokes the necessary follow up actions.
      */
     static void programLogic() {
+        logger.setLevel(Level.WARNING);
         Scanner in = new Scanner(System.in);
         boolean exitProgram = false;
 
