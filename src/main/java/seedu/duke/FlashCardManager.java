@@ -12,6 +12,7 @@ import java.util.logging.Logger;
  * Implements the list of added flashcards.
  */
 public class FlashCardManager {
+
     public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private static final Logger logger = Logger.getLogger(FlashCardManager.class.getName());
 
