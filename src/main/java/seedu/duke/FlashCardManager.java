@@ -83,7 +83,7 @@ public class FlashCardManager {
         logger.entering(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
         logger.log(Level.INFO, "Starting delete process");
         try {
-            String description = getDescription(input);
+            String description = Parser.getDescription(input);
             deleteFlashCard(description);
         } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
@@ -98,17 +98,6 @@ public class FlashCardManager {
 
 
     // TODO find elegant implementation of delete using index
-
-    /**
-     * Returns all contents of the input after the command word.
-     *
-     * @param input user's input
-     * @return description of card
-     * @throws ArrayIndexOutOfBoundsException if description is empty
-     */
-    public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
-        return input.split(" ", 2)[1];
-    }
 
     /**
      * Deletes the flashcard with the given input.
