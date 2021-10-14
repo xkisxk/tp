@@ -25,6 +25,7 @@ public class TestManager {
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
     public static void testAllCardsInOrder() {
+        logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
 
         for (FlashCard question : cards) {
@@ -103,6 +104,7 @@ public class TestManager {
      * Prints results of test to system output.
      */
     private static void viewTestResult() {
+        logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");
 

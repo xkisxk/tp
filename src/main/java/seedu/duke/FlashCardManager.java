@@ -81,6 +81,7 @@ public class FlashCardManager {
      */
     public static void prepareToDeleteFlashCard(String input) {
         logger.entering(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
+        logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Starting delete process");
         try {
             String description = getDescription(input);
@@ -118,6 +119,7 @@ public class FlashCardManager {
      * @throws CardLiException if card does not exist
      */
     public static void deleteFlashCard(String input) throws CardLiException {
+        logger.setLevel(Level.WARNING);
         if (cards.size() == 0) {
             throw new CardLiException();
         }
@@ -138,6 +140,7 @@ public class FlashCardManager {
      *              or index of card is less than 1
      */
     private static void deleteFlashCardByIndex(String index) throws CardLiException {
+        logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
         if (!((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0))) {
             throw new CardLiException();
