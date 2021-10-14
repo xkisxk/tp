@@ -44,6 +44,7 @@ public class Parser {
             case "bye":
                 exitProgram = true;
                 logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
+                break;
             default:
                 System.out.println("\tThat's not a command.");
                 logger.log(Level.INFO, "command was unrecognised and could not be parsed");
