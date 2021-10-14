@@ -108,6 +108,8 @@ public class TestManager {
         int score = 0;
         logger.log(Level.INFO, "starting test check");
 
+        //there must be at least one response to start a test
+        assert answersResponse.size() > 0;
         for (Answer response : answersResponse) {
             int responseNumber = getAnswerIndex(response);
             //display front of card so that user can understand question
