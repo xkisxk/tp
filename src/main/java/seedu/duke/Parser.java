@@ -20,7 +20,7 @@ public class Parser {
 
         while (!exitProgram) {
             String line = in.nextLine();
-            String command = line.split(" ")[0];
+            String command = line.trim().split(" ")[0];
 
             logger.log(Level.INFO, "new user input detected");
 
