@@ -120,6 +120,7 @@ public class FlashCardManager {
         if (cards.size() == 0) {
             throw new CardLiException();
         }
+        assert cards.size() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
         if (!isInteger(input)) {
             deleteFlashCardByDescription(input);
@@ -137,13 +138,15 @@ public class FlashCardManager {
      */
     private static void deleteFlashCardByIndex(String index) throws CardLiException {
         int indexToBeRemoved = Integer.parseInt(index) - 1;
-        if ((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0)) {
-            FlashCard card = cards.get(indexToBeRemoved);
-            cards.remove(card);
-            printDeletedFlashCardMessage(card.getFront(), card.getBack());
-        } else {
+        if (!((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0))) {
             throw new CardLiException();
         }
+        assert cards.size() > 0 : "cards.size() should be greater than 0";
+        logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
+
+        FlashCard card = cards.get(indexToBeRemoved);
+        cards.remove(card);
+        printDeletedFlashCardMessage(card.getFront(), card.getBack());
     }
 
     /**
@@ -153,7 +156,7 @@ public class FlashCardManager {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private static void deleteFlashCardByDescription(String description) throws CardLiException {
-        assert cards.size() > 0;
+        assert cards.size() > 0 : "cards.size() should be greater than 0";
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
