@@ -18,7 +18,7 @@ import static seedu.duke.FlashCardManager.getBackOfCard;
 public class TestManager {
 
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
-    private static int answerCount = 0;
+    private static int answersCount = 0;
     private static Logger logger = Logger.getLogger(TestManager.class.getName());
 
     /**
@@ -26,6 +26,7 @@ public class TestManager {
      */
     public static void testAllCardsInOrder() {
         logger.log(Level.INFO, "starting test");
+
         for (FlashCard question : cards) {
             logger.log(Level.INFO, "starting to test a new card");
             int questionNumber = FlashCardManager.getCardIndex(question);
@@ -47,13 +48,15 @@ public class TestManager {
             }
             logger.log(Level.INFO, "Saving answer");
             addAnswer(userResponse, questionNumber);
+            assert !answersResponse.isEmpty();
+            assert answersCount > 0;
             logger.log(Level.INFO, "Finished this card's testing");
         }
+
         printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         System.out.println("Test Over");
-        logger.log(Level.INFO, "view results");
         viewTestResult();
     }
 
@@ -63,10 +66,6 @@ public class TestManager {
             throw new FieldEmptyException();
         }
         return input;
-    }
-
-    public static void printAnswerEmptyError() {
-        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 
     public static int getAnswerIndex(Answer answer) {
@@ -88,7 +87,7 @@ public class TestManager {
      */
     public static void addAnswer(String answer, int questionIndex) {
         answersResponse.add(new Answer(answer, questionIndex));
-        answerCount += 1;
+        answersCount += 1;
     }
 
     /**
@@ -105,6 +104,7 @@ public class TestManager {
      */
     private static void viewTestResult() {
         int score = 0;
+        logger.log(Level.INFO, "starting test check");
 
         for (Answer response : answersResponse) {
             int responseNumber = getAnswerIndex(response);
@@ -120,13 +120,16 @@ public class TestManager {
             if (getBackOfCard(responseNumber).equals(answersResponse.get(responseNumber).getAnswer())) {
                 score++;
                 printCorrectAnsMessage();
+                logger.log(Level.INFO, "user answer is correct");
             } else {
                 printWrongAnsMessage();
+                logger.log(Level.INFO, "user answer is wrong");
             }
         }
         printDividerLine();
-        assert score <= answerCount;
-        System.out.println("Your scored " + score + " out of " + answerCount + " for this test");
+        assert score <= answersCount;
+        System.out.println("Your scored " + score + " out of " + answersCount + " for this test");
+        logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 
     private static void printDividerLine() {
@@ -139,5 +142,9 @@ public class TestManager {
 
     private static void printWrongAnsMessage() {
         System.out.println("You got this question wrong! Take note of the correct answer!");
+    }
+
+    private static void printAnswerEmptyError() {
+        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 }
