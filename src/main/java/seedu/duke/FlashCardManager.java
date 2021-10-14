@@ -156,7 +156,7 @@ public class FlashCardManager {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private static void deleteFlashCardByDescription(String description) throws CardLiException {
-        assert cards.size() > 0: "cards.size() should be greater than 0";
+        assert cards.size() > 0 : "cards.size() should be greater than 0";
         for (int i = 0; i < cards.size(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
