@@ -1,4 +1,7 @@
-package seedu.duke;
+package seedu.duke.parser;
+
+import seedu.duke.FlashCardManager;
+import seedu.duke.TestManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +15,7 @@ public class Parser {
     /**
      * Parses user input at the command line and invokes the necessary follow up actions.
      */
-    static void parseCommand(String line) {
+    public static void parseCommand(String line) {
         logger.log(Level.INFO, "new user input detected");
         String command = getCommand(line);
         switch (command) {

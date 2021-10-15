@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
