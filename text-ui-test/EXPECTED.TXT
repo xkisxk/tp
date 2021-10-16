@@ -13,12 +13,4 @@ Welcome to
  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
 
 Let's get started!
-	Added card:
-	Front: apple
-	Back: the round fruit of a tree of the rose family, which typically has thin green or red skin and crisp flesh.
-	You have 1 card in your card deck.
-	Deleted card:
-	Front: apple
-	Back: the round fruit of a tree of the rose family, which typically has thin green or red skin and crisp flesh.
-	You have 0 cards in your card deck.
 	You did well today! Goodbye!
