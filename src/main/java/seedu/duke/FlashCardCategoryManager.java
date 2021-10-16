@@ -44,18 +44,41 @@ public class FlashCardCategoryManager {
     }
 
     public static void viewOneCategory(String input) {
-        int deckIndex = Integer.parseInt(input) - 1;
-        System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-        decks.get(deckIndex).getManager().viewAllFlashCards();
+        try {
+            int deckIndex = Integer.parseInt(input) - 1;
+            if (deckIndex < decks.size() && deckIndex >= 0) {
+                System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
+                decks.get(deckIndex).getManager().viewAllFlashCards();
+            } else {
+                throw new DeckNotExistException();
+            }
+        } catch (DeckNotExistException e) {
+            System.out.println("This deck doesn't exist.");
+        }
+    }
+
+    public static void testCategory(String input) {
+        try {
+            int deckIndex = Integer.parseInt(input) - 1;
+            if (deckIndex < decks.size() && deckIndex >= 0) {
+                System.out.println("Testing deck " + decks.get(deckIndex).getName() + " :");
+                TestManager.testAllCardsInOrder(decks.get(deckIndex).getManager());
+            } else {
+                throw new DeckNotExistException();
+            }
+        } catch (DeckNotExistException e) {
+            System.out.println("This deck doesn't exist.");
+        }
     }
 
     public static void prepareToAddCardToDeck(String input) {
         try {
-            int deckNumber = findDeckIndex(input, "/car");
-            if (deckNumber < decks.size() && deckNumber >= 0) {
+            int deckIndex = findDeckIndex(input, "/car");
+            if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input);
-                System.out.println("Added to deck " + decks.get(deckNumber).getName() + " :");
-                decks.get(deckNumber).getManager().prepareToAddFlashCard(addInput);
+                System.out.println("Added to deck " + decks.get(deckIndex).getName() + " :");
+                FlashCardManager fcmToAdd = decks.get(deckIndex).getManager();
+                fcmToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }
@@ -67,6 +90,27 @@ public class FlashCardCategoryManager {
             System.out.println("Add command needs to contain the index of the deck you wish to "
                     + "add the card to, followed by \"/car\".");
         }
+    }
+
+    public static void prepareToDeleteCardFromDeck(String input) {
+        try {
+            int deckIndex = findDeckIndex(input, "/car");
+            if (deckIndex < decks.size() && deckIndex >= 0) {
+                String addInput = trimToPass(input);
+                System.out.println("Added to deck " + decks.get(deckIndex).getName() + " :");
+                decks.get(deckIndex).getManager().prepareToDeleteFlashCard(addInput);
+            } else {
+                throw new DeckNotExistException();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("That's not a number.");
+        } catch (DeckNotExistException e) {
+            System.out.println("That deck doesn't exist.");
+        } catch (NoSlashException e) {
+            System.out.println("Add command needs to contain the index of the deck you wish to "
+                    + "add the card to, followed by \"/car\".");
+        }
+
     }
 
     public static String trimToPass(String input) {

@@ -40,7 +40,7 @@ public class Parser {
                 break;
             case "delete":
                 String deleteInput = removeCommandWord(line, 6);
-                FlashCardManager.prepareToDeleteFlashCard(deleteInput);
+                FlashCardCategoryManager.prepareToDeleteCardFromDeck(deleteInput);
                 logger.log(Level.INFO, "delete command parsed and executed");
                 break;
             case "view":
@@ -49,7 +49,8 @@ public class Parser {
                 logger.log(Level.INFO, "view command parsed and executed");
                 break;
             case "test":
-                TestManager.testAllCardsInOrder();
+                String testInput = removeCommandWord(line, 4);
+                FlashCardCategoryManager.testCategory(testInput);
                 logger.log(Level.INFO, "test command parsed and executed");
                 break;
             case "bye":
