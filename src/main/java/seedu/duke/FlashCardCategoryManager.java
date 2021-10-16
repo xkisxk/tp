@@ -120,7 +120,6 @@ public class FlashCardCategoryManager {
             System.out.println("Wrong format. The correct format is:");
             System.out.println("delete <deckIndex> /car <indexOfCard/frontOfCard>");
         }
-
     }
 
     public static String trimToPass(String input, String toSplit) {

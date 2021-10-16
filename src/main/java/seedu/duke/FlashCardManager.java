@@ -96,21 +96,6 @@ public class FlashCardManager {
         logger.exiting(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
     }
 
-
-    // TODO find elegant implementation of delete using index
-
-    /**
-     * Returns all contents of the input after the command word.
-     *
-     * @param input user's input
-     * @return description of card
-     * @throws ArrayIndexOutOfBoundsException if description is empty
-     */
-    public String getDescription(String input) throws ArrayIndexOutOfBoundsException {
-        assert input.length() > 0 : "input string should not be empty, at least have command word";
-        return input.split(" ", 2)[1];
-    }
-
     /**
      * Deletes the flashcard with the given input.
      *

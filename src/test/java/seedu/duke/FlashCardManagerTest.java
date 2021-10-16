@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,9 +41,8 @@ class FlashCardManagerTest {
 
     @Test
     public void getDescription_noDescription_ArrayIndexOutOfBoundsException() {
-        FlashCardManager fcm = new FlashCardManager();
         String input = "delete";
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> fcm.getDescription(input));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> Parser.getDescription(input));
     }
 
     @Test
