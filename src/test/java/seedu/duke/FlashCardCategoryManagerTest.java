@@ -9,8 +9,8 @@ class FlashCardCategoryManagerTest {
 
     @Test
     public void trimToPass_enterValidAddLine_success() {
-        String input = "1 /car good morning /def ohayo";
-        assertEquals("good morning /def ohayo", FlashCardCategoryManager.trimToPass(input, "/def"));
+        String input = "1 /fro good morning /bac ohayo";
+        assertEquals("good morning /bac ohayo", FlashCardCategoryManager.trimToPass(input, "/fro"));
 
     }
 }
