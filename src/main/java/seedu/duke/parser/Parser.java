@@ -24,29 +24,29 @@ public class Parser {
 
         switch (command) {
         case "add":
-            String addInput = removeCommandWord(input, 3);
+            String addInput = removeCommandWord(input, command.length());
             CategoryList.prepareToAddCardToDeck(addInput);
             logger.log(Level.INFO, "add command parsed and executed");
             break;
         case "addcat":
-            String addcatInput = removeCommandWord(input, 6);
+            String addcatInput = removeCommandWord(input, command.length());
             CategoryList.prepareToAddCategory(addcatInput);
             break;
         case "viewcat":
             CategoryList.viewCategories();
             break;
         case "delete":
-            String deleteInput = removeCommandWord(input, 6);
+            String deleteInput = removeCommandWord(input, command.length());
             CategoryList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "view":
-            String viewInput = removeCommandWord(input, 4);
+            String viewInput = removeCommandWord(input, command.length());
             CategoryList.viewOneCategory(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
-            String testInput = removeCommandWord(input, 4);
+            String testInput = removeCommandWord(input, command.length());
             CategoryList.testCategory(testInput);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
@@ -68,14 +68,9 @@ public class Parser {
      *
      * @param input user's input
      * @return description of card
-     * @throws ArrayIndexOutOfBoundsException if description is empty
      */
-    public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
-        assert input.length() > 0 : "input string should not be empty, at least have command word";
-        return input.split(" ", 2)[1];
-    }
-
     public static String removeCommandWord(String input, int index) {
+        assert input.length() > 0 : "input string should not be empty, at least have command word";
         return input.substring(index).trim();
     }
 }
