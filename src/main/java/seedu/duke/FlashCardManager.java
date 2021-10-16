@@ -197,7 +197,7 @@ public class FlashCardManager {
         if (slashIndex < 3) {
             throw new NoSlashException();
         }
-        flashCardWords[0] = input.substring(3, slashIndex - 1).trim();
+        flashCardWords[0] = input.substring(0, slashIndex - 1).trim();
         flashCardWords[1] = input.substring(slashIndex + 4).trim();
         if (flashCardWords[0].isEmpty() || flashCardWords[1].isEmpty()) {
             throw new FieldEmptyException();
