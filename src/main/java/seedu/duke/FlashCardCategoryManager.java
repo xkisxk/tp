@@ -48,7 +48,8 @@ public class FlashCardCategoryManager {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                decks.get(deckIndex).getManager().viewAllFlashCards();
+                FlashCardManager fcmToView = decks.get(deckIndex).getManager();
+                fcmToView.viewAllFlashCards();
             } else {
                 throw new DeckNotExistException();
             }
