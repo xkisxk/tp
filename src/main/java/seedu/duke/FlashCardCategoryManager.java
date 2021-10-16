@@ -35,11 +35,15 @@ public class FlashCardCategoryManager {
     }
 
     public static void viewCategories() {
-        int i = 1;
-        System.out.println("These are your decks: ");
-        for (FlashCardCategory fcc : decks) {
-            System.out.println(i + ". " + fcc.getName());
-            i += 1;
+        if (decks.size() > 0) {
+            int i = 1;
+            System.out.println("These are your decks: ");
+            for (FlashCardCategory fcc : decks) {
+                System.out.println(i + ". " + fcc.getName());
+                i += 1;
+            }
+        } else {
+            System.out.println("You have no decks.");
         }
     }
 
@@ -62,8 +66,13 @@ public class FlashCardCategoryManager {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                System.out.println("Testing deck " + decks.get(deckIndex).getName() + " :");
-                TestManager.testAllCardsInOrder(decks.get(deckIndex).getManager());
+                FlashCardManager fcm = decks.get(deckIndex).getManager();
+                if (fcm.cards.size() > 0) {
+                    System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
+                    TestManager.testAllCardsInOrder(fcm);
+                } else {
+                    System.out.println("This deck has no cards and cannot be tested.");
+                }
             } else {
                 throw new DeckNotExistException();
             }
@@ -74,10 +83,10 @@ public class FlashCardCategoryManager {
 
     public static void prepareToAddCardToDeck(String input) {
         try {
-            int deckIndex = findDeckIndex(input, "/car");
+            int deckIndex = findDeckIndex(input, "/fro");
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                String addInput = trimToPass(input);
-                System.out.println("Added to deck " + decks.get(deckIndex).getName() + " :");
+                String addInput = trimToPass(input, "/fro");
+                System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
                 FlashCardManager fcmToAdd = decks.get(deckIndex).getManager();
                 fcmToAdd.prepareToAddFlashCard(addInput);
             } else {
@@ -88,8 +97,8 @@ public class FlashCardCategoryManager {
         } catch (DeckNotExistException e) {
             System.out.println("That deck doesn't exist.");
         } catch (NoSlashException e) {
-            System.out.println("Add command needs to contain the index of the deck you wish to "
-                    + "add the card to, followed by \"/car\".");
+            System.out.println("Incorrect format. The correct format is:");
+            System.out.println("add <deckIndex> /fro <frontOfCard> /bac <backOfCard>");
         }
     }
 
@@ -97,8 +106,8 @@ public class FlashCardCategoryManager {
         try {
             int deckIndex = findDeckIndex(input, "/car");
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                String addInput = trimToPass(input);
-                System.out.println("Added to deck " + decks.get(deckIndex).getName() + " :");
+                String addInput = trimToPass(input, "/car");
+                System.out.println("Deleted from deck " + decks.get(deckIndex).getName() + " :");
                 decks.get(deckIndex).getManager().prepareToDeleteFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
@@ -108,14 +117,14 @@ public class FlashCardCategoryManager {
         } catch (DeckNotExistException e) {
             System.out.println("That deck doesn't exist.");
         } catch (NoSlashException e) {
-            System.out.println("Add command needs to contain the index of the deck you wish to "
-                    + "add the card to, followed by \"/car\".");
+            System.out.println("Wrong format. The correct format is:");
+            System.out.println("delete <deckIndex> /car <indexOfCard/frontOfCard>");
         }
 
     }
 
-    public static String trimToPass(String input) {
-        int splitIndex = input.indexOf("/car");
+    public static String trimToPass(String input, String toSplit) {
+        int splitIndex = input.indexOf(toSplit);
         return input.substring(splitIndex + 4).trim();
     }
 
@@ -128,5 +137,4 @@ public class FlashCardCategoryManager {
             throw new NoSlashException();
         }
     }
-
 }

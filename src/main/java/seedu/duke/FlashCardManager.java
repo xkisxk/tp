@@ -13,11 +13,11 @@ import java.util.logging.Logger;
  */
 public class FlashCardManager {
 
-    public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private static final Logger logger = Logger.getLogger(FlashCardManager.class.getName());
 
     public void printNoSlashFoundError() {
-        System.out.println("\tRemember that a command must contain \"/def\"!");
+        System.out.println("\tRemember that a command must contain \"/bac\"!");
     }
 
     public void printFieldEmptyError() {
@@ -27,7 +27,7 @@ public class FlashCardManager {
     private void printInvalidAddFormat() {
         System.out.println("\tHey, the command you printed is invalid.");
         System.out.println("\tThe correct command format to add a flash card is as follows:");
-        System.out.println("\tadd <word on front> /def <word on back>");
+        System.out.println("\tadd <deck index> /fro <word on front> /bac <word on back>");
     }
 
     private void printDoesNotExistError() {
@@ -39,7 +39,7 @@ public class FlashCardManager {
     }
 
     private void printNewFlashCard(String front, String back) {
-        System.out.println("\tAdded card:");
+        //System.out.println("\tAdded card:");
         printCardInfo(front, back);
     }
 
@@ -54,7 +54,7 @@ public class FlashCardManager {
     }
 
     private void printDeletedFlashCardMessage(String front, String back) {
-        System.out.println("\tDeleted card:");
+        //System.out.println("\tDeleted card:");
         printCardInfo(front, back);
     }
 
@@ -84,8 +84,7 @@ public class FlashCardManager {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Starting delete process");
         try {
-            String description = getDescription(input);
-            deleteFlashCard(description);
+            deleteFlashCard(input);
         } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
             logger.log(Level.SEVERE, "Empty field error, no description found after command term");
@@ -192,7 +191,7 @@ public class FlashCardManager {
     }
 
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
-        int slashIndex = input.indexOf("/def");
+        int slashIndex = input.indexOf("/bac");
         String[] flashCardWords = new String[2];
         if (slashIndex < 3) {
             throw new NoSlashException();
@@ -238,23 +237,27 @@ public class FlashCardManager {
     }
 
     public void viewAllFlashCards() {
-        for (int i = 0; i < cards.size(); i++) {
-            System.out.println("Card " + (i + 1) + ":");
-            viewAFlashCard(i);
+        if (cards.size() > 0) {
+            for (int i = 0; i < cards.size(); i++) {
+                System.out.println("Card " + (i + 1) + ":");
+                viewAFlashCard(i);
+            }
+        } else {
+            System.out.println("This deck has no cards.");
         }
     }
 
     /**
      * Returns the String on the front of the flashCard.
      */
-    public static String getFrontOfCard(int cardIndex) {
+    public String getFrontOfCard(int cardIndex) {
         return cards.get(cardIndex).getFront();
     }
 
     /**
      * Returns the String on the back of the flashCard.
      */
-    public static String getBackOfCard(int cardIndex) {
+    public String getBackOfCard(int cardIndex) {
         return cards.get(cardIndex).getBack();
     }
 }

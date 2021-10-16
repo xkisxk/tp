@@ -35,7 +35,7 @@ class FlashCardManagerTest {
     public void trimStrings_emptyBack_expectFieldEmptyException() {
         FlashCardManager fcm = new FlashCardManager();
         String input = "add good morning /def";
-        assertThrows(FieldEmptyException.class, () ->fcm.trimStrings(input));
+        assertThrows(FieldEmptyException.class, () -> fcm.trimStrings(input));
     }
 
     @Test
