@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -84,7 +85,7 @@ public class FlashCardManager {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Starting delete process");
         try {
-            String description = getDescription(input);
+            String description = Parser.getDescription(input);
             deleteFlashCard(description);
         } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
@@ -99,18 +100,6 @@ public class FlashCardManager {
 
 
     // TODO find elegant implementation of delete using index
-
-    /**
-     * Returns all contents of the input after the command word.
-     *
-     * @param input user's input
-     * @return description of card
-     * @throws ArrayIndexOutOfBoundsException if description is empty
-     */
-    public static String getDescription(String input) throws ArrayIndexOutOfBoundsException {
-        assert input.length() > 0 : "input string should not be empty, at least have command word";
-        return input.split(" ", 2)[1];
-    }
 
     /**
      * Deletes the flashcard with the given input.
