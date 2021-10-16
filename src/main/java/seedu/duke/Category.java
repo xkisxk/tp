@@ -1,10 +1,10 @@
 package seedu.duke;
 
-public class FlashCardCategory {
+public class Category {
     private String name;
-    private FlashCardManager manager;
+    private Deck manager;
 
-    public FlashCardCategory(String name, FlashCardManager manager) {
+    public Category(String name, Deck manager) {
         this.name = name;
         this.manager = manager;
     }
@@ -13,7 +13,7 @@ public class FlashCardCategory {
         return name;
     }
 
-    public FlashCardManager getManager() {
+    public Deck getManager() {
         return manager;
     }
 }

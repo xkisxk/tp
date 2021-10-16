@@ -5,8 +5,8 @@ import seedu.duke.exceptions.NoSlashException;
 
 import java.util.ArrayList;
 
-public class FlashCardCategoryManager {
-    private static ArrayList<FlashCardCategory> decks = new ArrayList<>();
+public class CategoryList {
+    private static ArrayList<Category> decks = new ArrayList<>();
 
     public static void prepareToAddCategory(String categoryName) {
         if (!categoryExists(categoryName)) {
@@ -22,7 +22,7 @@ public class FlashCardCategoryManager {
     }
 
     private static boolean categoryExists(String categoryName) {
-        for (FlashCardCategory fcc : decks) {
+        for (Category fcc : decks) {
             if (fcc.getName().trim().equals(categoryName.trim())) {
                 return true;
             }
@@ -31,14 +31,14 @@ public class FlashCardCategoryManager {
     }
 
     private static void addCategory(String categoryName) {
-        decks.add(new FlashCardCategory(categoryName, new FlashCardManager()));
+        decks.add(new Category(categoryName, new Deck()));
     }
 
     public static void viewCategories() {
         if (decks.size() > 0) {
             int i = 1;
             System.out.println("These are your decks: ");
-            for (FlashCardCategory fcc : decks) {
+            for (Category fcc : decks) {
                 System.out.println(i + ". " + fcc.getName());
                 i += 1;
             }
@@ -52,7 +52,7 @@ public class FlashCardCategoryManager {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                FlashCardManager fcmToView = decks.get(deckIndex).getManager();
+                Deck fcmToView = decks.get(deckIndex).getManager();
                 fcmToView.viewAllFlashCards();
             } else {
                 throw new DeckNotExistException();
@@ -66,7 +66,7 @@ public class FlashCardCategoryManager {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                FlashCardManager fcm = decks.get(deckIndex).getManager();
+                Deck fcm = decks.get(deckIndex).getManager();
                 if (fcm.cards.size() > 0) {
                     System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
                     TestManager.testAllCardsInOrder(fcm);
@@ -87,7 +87,7 @@ public class FlashCardCategoryManager {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
-                FlashCardManager fcmToAdd = decks.get(deckIndex).getManager();
+                Deck fcmToAdd = decks.get(deckIndex).getManager();
                 fcmToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();

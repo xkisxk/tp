@@ -7,8 +7,6 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-
-
 /**
  * Implements the test function.
  */
@@ -21,7 +19,7 @@ public class TestManager {
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsInOrder(FlashCardManager fcm) {
+    public static void testAllCardsInOrder(Deck fcm) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
 
@@ -100,7 +98,7 @@ public class TestManager {
     /**
      * Prints results of test to system output.
      */
-    private static void viewTestResult(FlashCardManager fcm) {
+    private static void viewTestResult(Deck fcm) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");

@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 /**
  * Implements the list of added flashcards.
  */
-public class FlashCardManager {
+public class Deck {
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
-    private static final Logger logger = Logger.getLogger(FlashCardManager.class.getName());
+    private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     public void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/bac\"!");
@@ -80,12 +80,12 @@ public class FlashCardManager {
      * @param input user's input in its entirety
      */
     public void prepareToDeleteFlashCard(String input) {
-        logger.entering(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
+        logger.entering(Deck.class.getName(), "prepareToDeleteFlashCard");
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Starting delete process");
         try {
             deleteFlashCard(input);
-        } catch (FieldEmptyException | ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             printEmptyDescriptionError();
             logger.log(Level.SEVERE, "Empty field error, no description found after command term");
         } catch (CardLiException e) {
@@ -93,7 +93,7 @@ public class FlashCardManager {
             logger.log(Level.SEVERE, "CardLi error, query card does not exist");
         }
         logger.log(Level.INFO, "End of delete process");
-        logger.exiting(FlashCardManager.class.getName(), "prepareToDeleteFlashCard");
+        logger.exiting(Deck.class.getName(), "prepareToDeleteFlashCard");
     }
 
     /**
@@ -104,7 +104,7 @@ public class FlashCardManager {
      */
     public void deleteFlashCard(String input) throws CardLiException {
         logger.setLevel(Level.WARNING);
-        if (cards.size() == 0) {
+        if (cards.isEmpty()) {
             throw new CardLiException();
         }
         assert cards.size() > 0 : "cards.size() should be greater than 0";

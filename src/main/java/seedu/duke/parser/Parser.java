@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.FlashCardCategoryManager;
+import seedu.duke.CategoryList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,29 +25,29 @@ public class Parser {
         switch (command) {
         case "add":
             String addInput = removeCommandWord(input, 3);
-            FlashCardCategoryManager.prepareToAddCardToDeck(addInput);
+            CategoryList.prepareToAddCardToDeck(addInput);
             logger.log(Level.INFO, "add command parsed and executed");
             break;
         case "addcat":
             String addcatInput = removeCommandWord(input, 6);
-            FlashCardCategoryManager.prepareToAddCategory(addcatInput);
+            CategoryList.prepareToAddCategory(addcatInput);
             break;
         case "viewcat":
-            FlashCardCategoryManager.viewCategories();
+            CategoryList.viewCategories();
             break;
         case "delete":
             String deleteInput = removeCommandWord(input, 6);
-            FlashCardCategoryManager.prepareToDeleteCardFromDeck(deleteInput);
+            CategoryList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "view":
             String viewInput = removeCommandWord(input, 4);
-            FlashCardCategoryManager.viewOneCategory(viewInput);
+            CategoryList.viewOneCategory(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
             String testInput = removeCommandWord(input, 4);
-            FlashCardCategoryManager.testCategory(testInput);
+            CategoryList.testCategory(testInput);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "bye":

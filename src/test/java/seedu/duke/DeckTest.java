@@ -9,32 +9,32 @@ import seedu.duke.parser.Parser;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FlashCardManagerTest {
+class DeckTest {
 
     @Test
     public void trimStrings_hasFrontHasBack_expectTwoParts() throws NoSlashException, FieldEmptyException {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String input = "add good morning /bac ohayou";
         assertEquals(2, fcm.trimStrings(input).length);
     }
 
     @Test
     public void trimStrings_hasNoSlash_expectNoSlashException() {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String input = "add good morning ohayou";
         assertThrows(NoSlashException.class, () -> fcm.trimStrings(input));
     }
 
     @Test
     public void trimStrings_emptyFront_expectNoSlashException()  {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String input = "/bac ohayou";
         assertThrows(NoSlashException.class, () -> fcm.trimStrings(input));
     }
 
     @Test
     public void trimStrings_emptyBack_expectFieldEmptyException() {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String input = "good morning /bac";
         assertThrows(FieldEmptyException.class, () -> fcm.trimStrings(input));
     }
@@ -47,14 +47,14 @@ class FlashCardManagerTest {
 
     @Test
     public void deleteFlashCard_cardNotExist_expectCardLiException() {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String input = "abcdef";
         assertThrows(CardLiException.class, () -> fcm.deleteFlashCard(input));
     }
 
     @Test
     public void deleteFlashCard_provideDescription_expectDelete() throws CardLiException {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String firstCard = "illness /bac byouki";
         String secondCard = "to lose /bac nakushimasu";
         fcm.prepareToAddFlashCard(firstCard);
@@ -67,7 +67,7 @@ class FlashCardManagerTest {
 
     @Test
     public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String firstCard = "illness /bac byouki";
         String secondCard = "to lose /bac nakushimasu";
         fcm.prepareToAddFlashCard(firstCard);
@@ -80,7 +80,7 @@ class FlashCardManagerTest {
 
     @Test
     public void deleteFlashCard_provideInvalidIndex_expectCardLiException() throws CardLiException {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String firstCard = "illness /bac byouki";
         String secondCard = "to lose /bac nakushimasu";
         fcm.prepareToAddFlashCard(firstCard);
@@ -93,7 +93,7 @@ class FlashCardManagerTest {
 
     @Test
     public void deleteFlashCard_provideNegativeIndex_expectCardLiException() throws CardLiException {
-        FlashCardManager fcm = new FlashCardManager();
+        Deck fcm = new Deck();
         String firstCard = "illness /bac byouki";
         String secondCard = "to lose /bac nakushimasu";
         fcm.prepareToAddFlashCard(firstCard);
