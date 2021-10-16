@@ -25,6 +25,9 @@ test {
         showCauses true
         showStackTraces true
         showStandardStreams = false
+
+        systemProperty("junit.platform.output.capture.stdout", true);
+        systemProperty("junit.platform.output.capture.stderr", true);
     }
 }
 
