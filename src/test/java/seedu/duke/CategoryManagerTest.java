@@ -10,7 +10,7 @@ class CategoryManagerTest {
     @Test
     public void trimToPass_enterValidAddLine_success() {
         String input = "1 /fro good morning /bac ohayo";
-        assertEquals("good morning /bac ohayo", CategoryList.trimToPass(input, "/fro"));
+        assertEquals("good morning /bac ohayo", DeckList.trimToPass(input, "/fro"));
 
     }
 }
