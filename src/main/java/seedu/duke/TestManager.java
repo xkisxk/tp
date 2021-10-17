@@ -4,6 +4,8 @@ import seedu.duke.exceptions.FieldEmptyException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static seedu.duke.FlashCardManager.cards;
 import static seedu.duke.FlashCardManager.getFrontOfCard;
@@ -16,13 +18,18 @@ import static seedu.duke.FlashCardManager.getBackOfCard;
 public class TestManager {
 
     public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
-    private static int answerCount = 0;
+    private static int answersCount = 0;
+    private static Logger logger = Logger.getLogger(TestManager.class.getName());
 
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
     public static void testAllCardsInOrder() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "starting test");
+
         for (FlashCard question : cards) {
+            logger.log(Level.INFO, "starting to test a new card");
             int questionNumber = FlashCardManager.getCardIndex(question);
             printDividerLine();
             System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
@@ -31,16 +38,24 @@ public class TestManager {
             System.out.println("Your answer?");
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
+            logger.log(Level.INFO, "getting user's answer to the question");
             String userResponse = getInput();
             try {
                 parseUserResponse(userResponse);
             } catch (FieldEmptyException e) {
+                logger.log(Level.WARNING, "No user input");
                 userResponse = "NO ANSWER GIVEN :(";
                 printAnswerEmptyError();
             }
+            logger.log(Level.INFO, "Saving answer");
             addAnswer(userResponse, questionNumber);
+            assert !answersResponse.isEmpty();
+            assert answersCount > 0;
+            logger.log(Level.INFO, "Finished this card's testing");
         }
+
         printDividerLine();
+        logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         System.out.println("Test Over");
         viewTestResult();
@@ -52,10 +67,6 @@ public class TestManager {
             throw new FieldEmptyException();
         }
         return input;
-    }
-
-    public static void printAnswerEmptyError() {
-        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 
     public static int getAnswerIndex(Answer answer) {
@@ -77,7 +88,7 @@ public class TestManager {
      */
     public static void addAnswer(String answer, int questionIndex) {
         answersResponse.add(new Answer(answer, questionIndex));
-        answerCount += 1;
+        answersCount += 1;
     }
 
     /**
@@ -93,8 +104,12 @@ public class TestManager {
      * Prints results of test to system output.
      */
     private static void viewTestResult() {
+        logger.setLevel(Level.WARNING);
         int score = 0;
+        logger.log(Level.INFO, "starting test check");
 
+        //there must be at least one response to start a test
+        assert answersResponse.size() > 0;
         for (Answer response : answersResponse) {
             int responseNumber = getAnswerIndex(response);
             //display front of card so that user can understand question
@@ -109,12 +124,16 @@ public class TestManager {
             if (getBackOfCard(responseNumber).equals(answersResponse.get(responseNumber).getAnswer())) {
                 score++;
                 printCorrectAnsMessage();
+                logger.log(Level.INFO, "user answer is correct");
             } else {
                 printWrongAnsMessage();
+                logger.log(Level.INFO, "user answer is wrong");
             }
         }
         printDividerLine();
-        System.out.println("Your scored " + score + " out of " + answerCount + " for this test");
+        assert score <= answersCount;
+        System.out.println("Your scored " + score + " out of " + answersCount + " for this test");
+        logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 
     private static void printDividerLine() {
@@ -127,5 +146,9 @@ public class TestManager {
 
     private static void printWrongAnsMessage() {
         System.out.println("You got this question wrong! Take note of the correct answer!");
+    }
+
+    private static void printAnswerEmptyError() {
+        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 }
