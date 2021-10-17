@@ -21,18 +21,25 @@ public class TestManager {
      * Enters test mode and requires user to input the index of the deck that they want to be tested.
      */
     public static void startTest() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "starting test");
         ui.printStartTest();
         String input = ui.getUserMessage();
         try {
+            logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
+
             Deck deck = DeckList.getDeckList().get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
+
             testAllCardsInOrder(answersResponse, deck);
             viewTestResult(answersResponse, deck);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
+            logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("This deck doesn't exist.");
+            logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
         }
     }
 
@@ -41,7 +48,6 @@ public class TestManager {
      */
     public static void testAllCardsInOrder(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "starting test");
 
         for (FlashCard question : deck.cards) {
             logger.log(Level.INFO, "starting to test a new card");
