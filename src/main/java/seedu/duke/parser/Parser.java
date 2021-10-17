@@ -5,6 +5,7 @@ import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.InvalidCommandFormatException;
 import seedu.duke.flashcard.DeckList;
+import seedu.duke.ui.CardLiUi;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +65,10 @@ public class Parser {
             String editCatInput = removeCommandWord(input, command.length());
             String[] parsedEditCatArgs = parseEditDeckCommand(editCatInput);
             DeckList.editCat(parsedEditCatArgs);
+            logger.log(Level.INFO, "editdeck command parsed and executed");
+            break;
+        case "help":
+            CardLiUi.helpMessage();
             logger.log(Level.INFO, "editdeck command parsed and executed");
             break;
         case "bye":
