@@ -15,29 +15,18 @@ public class Deck {
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
-    private int userScore;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     public Deck(String name) {
         this.name = name;
-        this.userScore = 0;
     }
 
     public Deck() {
         this.name = "Untitled";
-        this.userScore = 0;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getUserScore() {
-        return userScore;
-    }
-
-    public void incrementUserScore() {
-        userScore++;
     }
 
     public int getTotalScore() {

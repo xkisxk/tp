@@ -26,6 +26,10 @@ public class AnswerList {
         return answerList.isEmpty();
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
     public int getSize() {
         return answerList.size();
     }
@@ -46,11 +50,10 @@ public class AnswerList {
             int responseNumber = getAnswerIndex(response);
             FlashCard question = deck.getCard(responseNumber);
             String userAnswer = response.getAnswer();
+            
             if (response.isCorrect(userAnswer, question)) {
                 score++;
-                question.incrementUserScore();
             }
-            question.incrementTotalScore();
         }
         return score;
     }

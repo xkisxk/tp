@@ -61,13 +61,13 @@ public class FlashCard {
     public void incrementUserScore() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Incrementing flashcard user score");
-        this.userScore++;
+        userScore++;
     }
 
     public void incrementTotalScore() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Incrementing flashcard total score");
-        this.totalScore++;
+        totalScore++;
     }
 
     public void viewFlashCard() {

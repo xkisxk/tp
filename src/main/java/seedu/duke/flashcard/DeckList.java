@@ -64,6 +64,8 @@ public class DeckList {
             }
         } catch (DeckNotExistException e) {
             System.out.println("This deck doesn't exist.");
+        } catch (NumberFormatException e) {
+            System.out.println("That's not a number.");
         }
     }
 

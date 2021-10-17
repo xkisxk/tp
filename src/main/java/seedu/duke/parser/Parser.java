@@ -1,7 +1,7 @@
 package seedu.duke.parser;
 
-import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckList;
+import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
 
 import java.util.logging.Level;
@@ -50,6 +50,19 @@ public class Parser {
         case "test":
             TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
+            break;
+        case "stats":
+            String statsInput = removeCommandWord(input, command.length());
+            TestHistory.prepareToViewTest(statsInput);
+            logger.log(Level.INFO, "stats command parsed and executed");
+            break;
+        case "viewtests":
+            TestHistory.viewTests();
+            logger.log(Level.INFO, "viewtests command parsed and executed");
+            break;
+        case "viewfc":
+            TestHistory.viewOverallFlashcardStats();
+            logger.log(Level.INFO, "viewfc command parsed and executed");
             break;
         case "bye":
             logger.log(Level.INFO, "bye command parsed and executed, program will terminate");

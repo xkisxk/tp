@@ -57,7 +57,7 @@ public class TestManager {
             } catch (FieldEmptyException e) {
                 logger.log(Level.WARNING, "No user input");
                 userResponse = "NO ANSWER GIVEN :(";
-                printAnswerEmptyError();
+                ui.printAnswerEmptyError();
             }
             logger.log(Level.INFO, "Saving answer");
             answersResponse.addAnswer(userResponse, questionNumber);
@@ -96,10 +96,11 @@ public class TestManager {
             if (response.isCorrect(userAnswer, question)) {
                 score++;
                 question.incrementUserScore();
-                printCorrectAnsMessage();
+                System.out.println(question.getUserScore());
+                ui.printCorrectAnsMessage();
                 logger.log(Level.INFO, "user answer is correct");
             } else {
-                printWrongAnsMessage();
+                ui.printWrongAnsMessage();
                 logger.log(Level.INFO, "user answer is wrong");
             }
             question.incrementTotalScore();
@@ -110,17 +111,5 @@ public class TestManager {
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
         System.out.println("That is " + score / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
-    }
-
-    private static void printCorrectAnsMessage() {
-        System.out.println("Well done! You got this question correct");
-    }
-
-    private static void printWrongAnsMessage() {
-        System.out.println("You got this question wrong! Take note of the correct answer!");
-    }
-
-    private static void printAnswerEmptyError() {
-        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 }

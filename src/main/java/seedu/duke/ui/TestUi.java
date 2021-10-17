@@ -57,6 +57,18 @@ public class TestUi {
     public void printStartTest() {
         System.out.println("Starting test...");
         System.out.println("Which deck do you want to test?");
-        System.out.print("Input an integer:");
+        System.out.print("Input an integer: ");
+    }
+
+    public void printCorrectAnsMessage() {
+        System.out.println("Well done! You got this question correct");
+    }
+
+    public void printWrongAnsMessage() {
+        System.out.println("You got this question wrong! Take note of the correct answer!");
+    }
+
+    public void printAnswerEmptyError() {
+        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 }
