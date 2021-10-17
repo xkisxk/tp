@@ -21,6 +21,10 @@ public class CardLiUi {
         return in.nextLine();
     }
 
+    public void showMessage(String input) {
+        System.out.println(input);
+    }
+
     public void printByeMessage() {
         System.out.println("\tYou did well today! Goodbye!");
     }
