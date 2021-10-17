@@ -1,14 +1,17 @@
 package seedu.duke.testing;
 
+import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
 import java.util.ArrayList;
 
 public class AnswerList {
     private ArrayList<Answer> answerList;
+    private Deck deck;
 
-    public AnswerList() {
+    public AnswerList(Deck deck) {
         this.answerList = new ArrayList<>();
+        this.deck = deck;
     }
 
     public int getAnswerIndex(Answer answer) {
@@ -37,11 +40,18 @@ public class AnswerList {
         answerList.add(new Answer(answer, questionIndex));
     }
 
-    public String getUserAnswer(int responseNumber) {
-        return answerList.get(responseNumber).getAnswer();
-    }
-
-    public boolean isUserAnswerCorrect(String userAnswer, FlashCard question) {
-        return question.getBack().equals(userAnswer);
+    public int getScore() {
+        int score = 0;
+        for (Answer response : answerList) {
+            int responseNumber = getAnswerIndex(response);
+            FlashCard question = deck.getCard(responseNumber);
+            String userAnswer = response.getAnswer();
+            if (response.isCorrect(userAnswer, question)) {
+                score++;
+                question.incrementUserScore();
+            }
+            question.incrementTotalScore();
+        }
+        return score;
     }
 }

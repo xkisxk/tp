@@ -1,5 +1,7 @@
 package seedu.duke.testing;
 
+import seedu.duke.flashcard.FlashCard;
+
 /**
  * Represents information about a single user answer when test function is invoked.
  */
@@ -19,5 +21,11 @@ public class Answer {
 
     public int getQuestionIndex() {
         return this.questionIndex;
+    }
+
+    public boolean isCorrect(String userAnswer, FlashCard question) {
+        String lowerCaseUserAnswer = userAnswer.toLowerCase();
+        String lowerCaseAnswer = question.getBack().toLowerCase();
+        return lowerCaseAnswer.equals(lowerCaseUserAnswer);
     }
 }

@@ -14,7 +14,6 @@ import java.util.logging.Level;
  * Implements the test function.
  */
 public class TestManager {
-    public static AnswerList answersResponse = new AnswerList();
     private static final TestUi ui = new TestUi();
     private static final Logger logger = Logger.getLogger(TestManager.class.getName());
 
@@ -27,7 +26,9 @@ public class TestManager {
         try {
             int deckIndex = TestParser.toInt(input);
             Deck deck = DeckList.getDeckList().get(deckIndex);
-            testAllCardsInOrder(deck);
+            AnswerList answersResponse = new AnswerList(deck);
+            testAllCardsInOrder(answersResponse, deck);
+            viewTestResult(answersResponse, deck);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
         } catch (IndexOutOfBoundsException e) {
@@ -38,7 +39,7 @@ public class TestManager {
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsInOrder(Deck deck) {
+    public static void testAllCardsInOrder(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
 
@@ -69,13 +70,13 @@ public class TestManager {
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         ui.printTestOver();
-        viewTestResult(deck);
+        TestHistory.addAnswerList(answersResponse);
     }
 
     /**
      * Prints results of test to system output.
      */
-    private static void viewTestResult(Deck deck) {
+    public static void viewTestResult(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");
@@ -85,14 +86,14 @@ public class TestManager {
         for (Answer response : answersResponse.getAnswerList()) {
             int responseNumber = answersResponse.getAnswerIndex(response);
             FlashCard question = deck.getCard(responseNumber);
-            String userAnswer = answersResponse.getUserAnswer(responseNumber);
+            String userAnswer = response.getAnswer();
             ui.printDividerLine();
             //display front of card so that user can understand question
             ui.printQuestion(question, responseNumber);
             ui.printCorrectAnswer(question);
             ui.printUserAnswer(userAnswer);
 
-            if (answersResponse.isUserAnswerCorrect(userAnswer, question)) {
+            if (response.isCorrect(userAnswer, question)) {
                 score++;
                 question.incrementUserScore();
                 printCorrectAnsMessage();
@@ -106,25 +107,9 @@ public class TestManager {
         ui.printDividerLine();
         int answersCount = answersResponse.getSize();
         assert score <= answersCount;
-        System.out.println("Your scored " + score + " out of " + answersCount + " for this test.");
+        System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
         System.out.println("That is " + score / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
-    }
-
-    /**
-     * View overall result statistics of all tests and individual flashcards.
-     * Invoked by the user command "stats".
-     */
-    public static void viewTestStatistics() {
-        assert DeckList.getDeckList().size() > 0 : "deckList must not be empty";
-        System.out.println("Listing total scores of flashcards for all tests");
-        for (Deck deck : DeckList.getDeckList()) {
-            for (FlashCard card : deck.cards) {
-                card.viewFlashCard();
-                System.out.println("Score: " + card.getUserScore() + "out of " + card.getTotalScore());
-            }
-            ui.printDividerLine();
-        }
     }
 
     private static void printCorrectAnsMessage() {
