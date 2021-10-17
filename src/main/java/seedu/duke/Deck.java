@@ -14,7 +14,17 @@ import java.util.logging.Logger;
 public class Deck {
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    private int userScore;
+    private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
+
+    public int getUserScore() {
+        return userScore;
+    }
+
+    public int getTotalScore() {
+        return cards.size();
+    }
 
     public void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/bac\"!");
@@ -198,6 +208,14 @@ public class Deck {
         return cards.indexOf(card);
     }
 
+    public FlashCard getCard(int index) {
+        return cards.get(index);
+    }
+
+    public int getSize() {
+        return cards.size();
+    }
+
     public void viewAFlashCard(int cardIndex) {
         System.out.println("*================FRONT================* "
                 + "*===============BACK==================*");
@@ -230,19 +248,5 @@ public class Deck {
         } else {
             System.out.println("This deck has no cards.");
         }
-    }
-
-    /**
-     * Returns the String on the front of the flashCard.
-     */
-    public String getFrontOfCard(int cardIndex) {
-        return cards.get(cardIndex).getFront();
-    }
-
-    /**
-     * Returns the String on the back of the flashCard.
-     */
-    public String getBackOfCard(int cardIndex) {
-        return cards.get(cardIndex).getBack();
     }
 }

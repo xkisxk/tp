@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class CategoryList {
     private static ArrayList<Category> decks = new ArrayList<>();
 
+    public ArrayList<Category> getCategories() {
+        return decks;
+    }
+
     public static void prepareToAddCategory(String categoryName) {
         if (!categoryExists(categoryName)) {
             addCategory(categoryName);
@@ -31,7 +35,7 @@ public class CategoryList {
     }
 
     private static void addCategory(String categoryName) {
-        decks.add(new Category(categoryName, new Deck()));
+        decks.add(new Category(categoryName, new ArrayList<Deck>()));
     }
 
     public static void viewCategories() {
@@ -52,7 +56,7 @@ public class CategoryList {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                Deck fcmToView = decks.get(deckIndex).getManager();
+                Deck fcmToView = decks.get(deckIndex).getDeck();
                 fcmToView.viewAllFlashCards();
             } else {
                 throw new DeckNotExistException();
@@ -66,7 +70,7 @@ public class CategoryList {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                Deck fcm = decks.get(deckIndex).getManager();
+                Deck fcm = decks.get(deckIndex).getDeck();
                 if (fcm.cards.size() > 0) {
                     System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
                     TestManager.testAllCardsInOrder(fcm);
@@ -87,7 +91,7 @@ public class CategoryList {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
-                Deck fcmToAdd = decks.get(deckIndex).getManager();
+                Deck fcmToAdd = decks.get(deckIndex).getDeck();
                 fcmToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
@@ -108,7 +112,7 @@ public class CategoryList {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/car");
                 System.out.println("Deleted from deck " + decks.get(deckIndex).getName() + " :");
-                decks.get(deckIndex).getManager().prepareToDeleteFlashCard(addInput);
+                decks.get(deckIndex).getDeck().prepareToDeleteFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }

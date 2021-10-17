@@ -1,19 +1,21 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 public class Category {
     private String name;
-    private Deck manager;
+    private ArrayList<Deck> decks;
 
-    public Category(String name, Deck manager) {
+    public Category(String name, ArrayList<Deck> decks) {
         this.name = name;
-        this.manager = manager;
+        this.decks = decks;
     }
 
     public String getName() {
         return name;
     }
 
-    public Deck getManager() {
-        return manager;
+    public Deck getDeck() {
+        return decks;
     }
 }
