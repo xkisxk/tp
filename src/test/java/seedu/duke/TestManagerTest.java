@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.FieldEmptyException;
+import seedu.duke.testing.TestManager;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

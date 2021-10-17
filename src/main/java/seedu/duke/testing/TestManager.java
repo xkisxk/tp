@@ -1,6 +1,8 @@
-package seedu.duke;
+package seedu.duke.testing;
 
 import seedu.duke.exceptions.FieldEmptyException;
+import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.FlashCard;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,6 +1,8 @@
-package seedu.duke;
+package seedu.duke.flashcard;
 
+import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
+import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
@@ -14,7 +16,20 @@ import java.util.logging.Logger;
 public class Deck {
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
+
+    public Deck(String name) {
+        this.name = name;
+    }
+
+    public Deck() {
+        this.name = "Untitled";
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/bac\"!");
