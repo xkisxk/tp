@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
-import seedu.duke.CategoryList;
+import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.DeckList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,29 +26,29 @@ public class Parser {
         switch (command) {
         case "add":
             String addInput = removeCommandWord(input, command.length());
-            CategoryList.prepareToAddCardToDeck(addInput);
+            DeckList.prepareToAddCardToDeck(addInput);
             logger.log(Level.INFO, "add command parsed and executed");
             break;
-        case "addcat":
-            String addcatInput = removeCommandWord(input, command.length());
-            CategoryList.prepareToAddCategory(addcatInput);
+        case "adddeck":
+            String addDeckInput = removeCommandWord(input, command.length());
+            DeckList.prepareToAddDeck(addDeckInput);
             break;
-        case "viewcat":
-            CategoryList.viewCategories();
+        case "viewdeck":
+            DeckList.viewDecks();
             break;
         case "delete":
             String deleteInput = removeCommandWord(input, command.length());
-            CategoryList.prepareToDeleteCardFromDeck(deleteInput);
+            DeckList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "view":
             String viewInput = removeCommandWord(input, command.length());
-            CategoryList.viewOneCategory(viewInput);
+            DeckList.viewOneDeck(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
             String testInput = removeCommandWord(input, command.length());
-            CategoryList.testCategory(testInput);
+            DeckList.testDeck(testInput);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "bye":
@@ -60,7 +61,7 @@ public class Parser {
     }
 
     public static String getCommand(String line) {
-        return line.trim().split(" ")[0];
+        return line.trim().split(" ")[0].toLowerCase();
     }
 
     /**
