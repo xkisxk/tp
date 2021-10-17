@@ -22,7 +22,7 @@ public class TestHistory {
 
     /**
      * View overall result statistics of all tests and individual flashcards.
-     * Invoked by the user command "stats".
+     * Invoked by the user command "viewtests".
      */
     public static void viewOverallFlashcardStats() {
         logger.setLevel(Level.WARNING);

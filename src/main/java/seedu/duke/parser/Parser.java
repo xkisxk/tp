@@ -51,10 +51,10 @@ public class Parser {
             TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
             break;
-        case "stats":
-            String statsInput = removeCommandWord(input, command.length());
-            TestHistory.prepareToViewTest(statsInput);
-            logger.log(Level.INFO, "stats command parsed and executed");
+        case "viewtest":
+            String viewTestInput = removeCommandWord(input, command.length());
+            TestHistory.prepareToViewTest(viewTestInput);
+            logger.log(Level.INFO, "viewtest command parsed and executed");
             break;
         case "viewtests":
             TestHistory.viewTests();
