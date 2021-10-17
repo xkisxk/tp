@@ -1,8 +1,11 @@
-package seedu.duke;
+package seedu.duke.testing;
 
 import seedu.duke.exceptions.FieldEmptyException;
+import seedu.duke.flashcard.DeckList;
 import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;
+import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.FlashCard;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -118,12 +121,11 @@ public class TestManager {
      * View overall result statistics of all tests and individual flashcards
      * Invoked by the user command "stats"
      */
-    public static void viewTestStatistics(CategoryList categories) {
-        for (Category category : categories.getCategories()) {
-
-            int userScore  = category.getUserScore();
-            int totalScore = category.getTotalScore();
-            System.out.println("Your score for " + category.getName() + " is " +
+    public static void viewTestStatistics(DeckList deckList) {
+        for (Deck deck : deckList.getDeckList()) {
+            int userScore = deck.getUserScore();
+            int totalScore = deck.getTotalScore();
+            System.out.println("Your score for " + deck.getName() + " is " +
                     userScore + " out of " + totalScore);
             System.out.println("That is " + userScore / totalScore * 100 + "%!");
             ui.printDividerLine();

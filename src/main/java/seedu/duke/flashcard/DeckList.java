@@ -1,49 +1,50 @@
-package seedu.duke;
+package seedu.duke.flashcard;
 
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.testing.TestManager;
 
 import java.util.ArrayList;
 
-public class CategoryList {
-    private static ArrayList<Category> decks = new ArrayList<>();
+public class DeckList {
+    private static ArrayList<Deck> decks = new ArrayList<>();
 
-    public ArrayList<Category> getCategories() {
-        return decks;
-    }
-
-    public static void prepareToAddCategory(String categoryName) {
-        if (!categoryExists(categoryName)) {
-            addCategory(categoryName);
-            printNewCategory(categoryName);
+    public static void prepareToAddDeck(String deckName) {
+        if (!hasDeck(deckName)) {
+            addDeck(deckName);
+            printNewDeck(deckName);
         } else {
             System.out.println("The category you are trying to create already exists.");
         }
     }
 
-    private static void printNewCategory(String categoryName) {
-        System.out.println("You have just made the category <<" + categoryName + ">>.");
+    private static void printNewDeck(String deckName) {
+        System.out.println("You have just made the deck <<" + deckName + ">>.");
     }
 
-    private static boolean categoryExists(String categoryName) {
-        for (Category fcc : decks) {
-            if (fcc.getName().trim().equals(categoryName.trim())) {
+    private static boolean hasDeck(String categoryName) {
+        for (Deck deck : decks) {
+            if (deck.getName().trim().equals(categoryName.trim())) {
                 return true;
             }
         }
         return false;
     }
 
-    private static void addCategory(String categoryName) {
-        decks.add(new Category(categoryName, new ArrayList<Deck>()));
+    private static void addDeck(String deckName) {
+        decks.add(new Deck(deckName));
     }
 
-    public static void viewCategories() {
+    public ArrayList<Deck> getDeckList() {
+        return decks;
+    }
+
+    public static void viewDecks() {
         if (decks.size() > 0) {
             int i = 1;
             System.out.println("These are your decks: ");
-            for (Category fcc : decks) {
-                System.out.println(i + ". " + fcc.getName());
+            for (Deck deck : decks) {
+                System.out.println(i + ". " + deck.getName());
                 i += 1;
             }
         } else {
@@ -51,13 +52,13 @@ public class CategoryList {
         }
     }
 
-    public static void viewOneCategory(String input) {
+    public static void viewOneDeck(String input) {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                Deck fcmToView = decks.get(deckIndex).getDeck();
-                fcmToView.viewAllFlashCards();
+                Deck deckToView = decks.get(deckIndex);
+                deckToView.viewAllFlashCards();
             } else {
                 throw new DeckNotExistException();
             }
@@ -66,14 +67,14 @@ public class CategoryList {
         }
     }
 
-    public static void testCategory(String input) {
+    public static void testDeck(String input) {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
-                Deck fcm = decks.get(deckIndex).getDeck();
-                if (fcm.cards.size() > 0) {
+                Deck deck = decks.get(deckIndex);
+                if (deck.cards.size() > 0) {
                     System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
-                    TestManager.testAllCardsInOrder(fcm);
+                    TestManager.testAllCardsInOrder(deck);
                 } else {
                     System.out.println("This deck has no cards and cannot be tested.");
                 }
@@ -91,8 +92,8 @@ public class CategoryList {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
-                Deck fcmToAdd = decks.get(deckIndex).getDeck();
-                fcmToAdd.prepareToAddFlashCard(addInput);
+                Deck deckToAdd = decks.get(deckIndex);
+                deckToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }
@@ -112,7 +113,7 @@ public class CategoryList {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/car");
                 System.out.println("Deleted from deck " + decks.get(deckIndex).getName() + " :");
-                decks.get(deckIndex).getDeck().prepareToDeleteFlashCard(addInput);
+                decks.get(deckIndex).prepareToDeleteFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }

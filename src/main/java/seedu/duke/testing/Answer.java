@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.testing;
 
 /**
  * Represents information about a single user answer when test function is invoked.

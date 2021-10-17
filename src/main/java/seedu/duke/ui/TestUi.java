@@ -1,12 +1,9 @@
 package seedu.duke.ui;
 
-import seedu.duke.Answer;
-import seedu.duke.Deck;
-import seedu.duke.FlashCard;
+import seedu.duke.flashcard.FlashCard;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

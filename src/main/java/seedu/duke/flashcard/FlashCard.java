@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.flashcard;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
