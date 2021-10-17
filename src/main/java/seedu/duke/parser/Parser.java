@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.DeckList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,29 +26,29 @@ public class Parser {
         switch (command) {
         case "add":
             String addInput = removeCommandWord(input, command.length());
-            Deck.DeckList.prepareToAddCardToDeck(addInput);
+            DeckList.prepareToAddCardToDeck(addInput);
             logger.log(Level.INFO, "add command parsed and executed");
             break;
         case "adddeck":
             String addDeckInput = removeCommandWord(input, command.length());
-            Deck.DeckList.prepareToAddDeck(addDeckInput);
+            DeckList.prepareToAddDeck(addDeckInput);
             break;
         case "viewdeck":
-            Deck.DeckList.viewDecks();
+            DeckList.viewDecks();
             break;
         case "delete":
             String deleteInput = removeCommandWord(input, command.length());
-            Deck.DeckList.prepareToDeleteCardFromDeck(deleteInput);
+            DeckList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "view":
             String viewInput = removeCommandWord(input, command.length());
-            Deck.DeckList.viewOneDeck(viewInput);
+            DeckList.viewOneDeck(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
             String testInput = removeCommandWord(input, command.length());
-            Deck.DeckList.testDeck(testInput);
+            DeckList.testDeck(testInput);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "bye":
