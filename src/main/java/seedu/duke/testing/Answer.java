@@ -17,5 +17,7 @@ public class Answer {
         return this.answer;
     }
 
-
+    public int getQuestionIndex() {
+        return this.questionIndex;
+    }
 }

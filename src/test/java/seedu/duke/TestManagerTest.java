@@ -14,4 +14,10 @@ public class TestManagerTest {
         String input = "";
         assertThrows(FieldEmptyException.class, () -> TestParser.parseUserResponse(input));
     }
+
+    @Test
+    public void toInt_invalidInput_expectNumberFormatException() {
+        String input = "a";
+        assertThrows(NumberFormatException.class, () -> TestParser.toInt(input));
+    }
 }

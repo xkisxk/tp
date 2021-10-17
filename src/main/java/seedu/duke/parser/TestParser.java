@@ -14,4 +14,8 @@ public class TestParser {
         return userResponse;
     }
 
+    public static int toInt(String input) throws NumberFormatException {
+        return Integer.parseInt(input) - 1;
+    }
+
 }

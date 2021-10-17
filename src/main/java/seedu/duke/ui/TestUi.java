@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * TestUi class handles the input and output during a test or a review
+ * TestUi class handles the input and output during a test or a review.
  */
 public class TestUi {
     private final Scanner in;
@@ -52,5 +52,11 @@ public class TestUi {
 
     public void printTestOver() {
         System.out.println("Test Over");
+    }
+
+    public void printStartTest() {
+        System.out.println("Starting test...");
+        System.out.println("Which deck do you want to test?");
+        System.out.print("Input an integer:");
     }
 }

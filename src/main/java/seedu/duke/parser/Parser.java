@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckList;
+import seedu.duke.testing.TestManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,8 +48,7 @@ public class Parser {
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
-            String testInput = removeCommandWord(input, command.length());
-            DeckList.testDeck(testInput);
+            TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "bye":

@@ -35,7 +35,7 @@ public class DeckList {
         decks.add(new Deck(deckName));
     }
 
-    public ArrayList<Deck> getDeckList() {
+    public static ArrayList<Deck> getDeckList() {
         return decks;
     }
 
@@ -59,25 +59,6 @@ public class DeckList {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
                 Deck deckToView = decks.get(deckIndex);
                 deckToView.viewAllFlashCards();
-            } else {
-                throw new DeckNotExistException();
-            }
-        } catch (DeckNotExistException e) {
-            System.out.println("This deck doesn't exist.");
-        }
-    }
-
-    public static void testDeck(String input) {
-        try {
-            int deckIndex = Integer.parseInt(input) - 1;
-            if (deckIndex < decks.size() && deckIndex >= 0) {
-                Deck deck = decks.get(deckIndex);
-                if (deck.cards.size() > 0) {
-                    System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
-                    TestManager.testAllCardsInOrder(deck);
-                } else {
-                    System.out.println("This deck has no cards and cannot be tested.");
-                }
             } else {
                 throw new DeckNotExistException();
             }

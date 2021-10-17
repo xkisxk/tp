@@ -1,8 +1,6 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
-import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
@@ -16,16 +14,18 @@ import java.util.logging.Logger;
 public class Deck {
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
-    private int userScore;
     private String name;
+    private int userScore;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     public Deck(String name) {
         this.name = name;
+        this.userScore = 0;
     }
 
     public Deck() {
         this.name = "Untitled";
+        this.userScore = 0;
     }
 
     public String getName() {
@@ -34,6 +34,10 @@ public class Deck {
 
     public int getUserScore() {
         return userScore;
+    }
+
+    public void incrementUserScore() {
+        userScore++;
     }
 
     public int getTotalScore() {
@@ -226,38 +230,12 @@ public class Deck {
         return cards.get(index);
     }
 
-    public int getSize() {
-        return cards.size();
-    }
-
-    public void viewAFlashCard(int cardIndex) {
-        System.out.println("*================FRONT================* "
-                + "*===============BACK==================*");
-        System.out.println();
-
-        String front = cards.get(cardIndex).getFront();
-        String frontSpaces = "";
-        for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces += " ";
-        }
-
-        String back = cards.get(cardIndex).getBack();
-        String backSpaces = "";
-        for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces += " ";
-        }
-
-        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
-        System.out.println();
-        System.out.println("*=====================================* "
-                + "*=====================================*");
-    }
-
     public void viewAllFlashCards() {
         if (cards.size() > 0) {
             for (int i = 0; i < cards.size(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
-                viewAFlashCard(i);
+                FlashCard card = cards.get(i);
+                card.viewFlashCard();
             }
         } else {
             System.out.println("This deck has no cards.");

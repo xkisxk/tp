@@ -7,7 +7,6 @@ import seedu.duke.ui.TestUi;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -15,11 +14,26 @@ import java.util.logging.Level;
  * Implements the test function.
  */
 public class TestManager {
-
-    public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
-    private static int answersCount = 0;
+    public static AnswerList answersResponse = new AnswerList();
     private static final TestUi ui = new TestUi();
     private static final Logger logger = Logger.getLogger(TestManager.class.getName());
+
+    /**
+     * Enters test mode and requires user to input the index of the deck that they want to be tested.
+     */
+    public static void startTest() {
+        ui.printStartTest();
+        String input = ui.getUserMessage();
+        try {
+            int deckIndex = TestParser.toInt(input);
+            Deck deck = DeckList.getDeckList().get(deckIndex);
+            testAllCardsInOrder(deck);
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect input format, make sure the description is a numeric.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("This deck doesn't exist.");
+        }
+    }
 
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
@@ -45,9 +59,9 @@ public class TestManager {
                 printAnswerEmptyError();
             }
             logger.log(Level.INFO, "Saving answer");
-            addAnswer(userResponse, questionNumber);
+            answersResponse.addAnswer(userResponse, questionNumber);
             assert !answersResponse.isEmpty();
-            assert answersCount > 0;
+            assert answersResponse.getSize() > 0;
             logger.log(Level.INFO, "Finished this card's testing");
         }
 
@@ -56,21 +70,6 @@ public class TestManager {
         //let user know testing is over
         ui.printTestOver();
         viewTestResult(deck);
-    }
-
-    public static int getAnswerIndex(Answer answer) {
-        return answersResponse.indexOf(answer);
-    }
-
-    /**
-     * Saves a new user answer to the current list of user answers.
-     *
-     * @param answer        String representation of user's answer
-     * @param questionIndex Question number for the question that the answer answers
-     */
-    public static void addAnswer(String answer, int questionIndex) {
-        answersResponse.add(new Answer(answer, questionIndex));
-        answersCount += 1;
     }
 
     /**
@@ -82,52 +81,48 @@ public class TestManager {
         logger.log(Level.INFO, "starting test check");
 
         //there must be at least one response to start a test
-        assert answersResponse.size() > 0;
-        for (Answer response : answersResponse) {
-            int responseNumber = getAnswerIndex(response);
+        assert answersResponse.getSize() > 0;
+        for (Answer response : answersResponse.getAnswerList()) {
+            int responseNumber = answersResponse.getAnswerIndex(response);
             FlashCard question = deck.getCard(responseNumber);
-            String userAnswer = getUserAnswer(responseNumber);
+            String userAnswer = answersResponse.getUserAnswer(responseNumber);
             ui.printDividerLine();
             //display front of card so that user can understand question
             ui.printQuestion(question, responseNumber);
             ui.printCorrectAnswer(question);
             ui.printUserAnswer(userAnswer);
 
-            if (isUserAnswerCorrect(userAnswer, question)) {
+            if (answersResponse.isUserAnswerCorrect(userAnswer, question)) {
                 score++;
+                question.incrementUserScore();
                 printCorrectAnsMessage();
                 logger.log(Level.INFO, "user answer is correct");
             } else {
                 printWrongAnsMessage();
                 logger.log(Level.INFO, "user answer is wrong");
             }
+            question.incrementTotalScore();
         }
         ui.printDividerLine();
+        int answersCount = answersResponse.getSize();
         assert score <= answersCount;
-        System.out.println("Your scored " + score + " out of " + answersCount + " for this test.\n" +
-                "That is " + score / answersCount * 100 + "%!");
+        System.out.println("Your scored " + score + " out of " + answersCount + " for this test.");
+        System.out.println("That is " + score / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 
-    private static String getUserAnswer(int responseNumber) {
-        return answersResponse.get(responseNumber).getAnswer();
-    }
-
-    private static boolean isUserAnswerCorrect(String userAnswer, FlashCard question) {
-        return question.getBack().equals(userAnswer);
-    }
-
     /**
-     * View overall result statistics of all tests and individual flashcards
-     * Invoked by the user command "stats"
+     * View overall result statistics of all tests and individual flashcards.
+     * Invoked by the user command "stats".
      */
-    public static void viewTestStatistics(DeckList deckList) {
-        for (Deck deck : deckList.getDeckList()) {
-            int userScore = deck.getUserScore();
-            int totalScore = deck.getTotalScore();
-            System.out.println("Your score for " + deck.getName() + " is " +
-                    userScore + " out of " + totalScore);
-            System.out.println("That is " + userScore / totalScore * 100 + "%!");
+    public static void viewTestStatistics() {
+        assert DeckList.getDeckList().size() > 0 : "deckList must not be empty";
+        System.out.println("Listing total scores of flashcards for all tests");
+        for (Deck deck : DeckList.getDeckList()) {
+            for (FlashCard card : deck.cards) {
+                card.viewFlashCard();
+                System.out.println("Score: " + card.getUserScore() + "out of " + card.getTotalScore());
+            }
             ui.printDividerLine();
         }
     }
