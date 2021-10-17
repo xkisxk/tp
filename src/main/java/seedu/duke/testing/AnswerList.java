@@ -4,16 +4,25 @@ import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AnswerList {
     private ArrayList<Answer> answerList;
     private Deck deck;
+    private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     public AnswerList(Deck deck) {
         this.answerList = new ArrayList<>();
         this.deck = deck;
     }
 
+    /**
+     * Gets the index of the answer in the list.
+     *
+     * @param answer answer query
+     * @return       index of the answer
+     */
     public int getAnswerIndex(Answer answer) {
         return answerList.indexOf(answer);
     }
@@ -44,14 +53,22 @@ public class AnswerList {
         answerList.add(new Answer(answer, questionIndex));
     }
 
+    /**
+     * Gets the score of the particular test.
+     *
+     * @return score of the test
+     */
     public int getScore() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Starting getScore process");
         int score = 0;
         for (Answer response : answerList) {
             int responseNumber = getAnswerIndex(response);
             FlashCard question = deck.getCard(responseNumber);
             String userAnswer = response.getAnswer();
-            
+
             if (response.isCorrect(userAnswer, question)) {
+                logger.log(Level.INFO, "Answer is correct");
                 score++;
             }
         }
