@@ -148,7 +148,7 @@ public class Deck {
      *
      * @param index user's input (index of the card to be deleted)
      * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
-     *              or index of card is less than 1
+     *                         or index of card is less than 1
      */
     private void deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
@@ -242,11 +242,11 @@ public class Deck {
     }
 
     @Override
-    public String toString(){
-        String cardsString =  "";
+    public String toString() {
+        String cardsString = "";
         int cardsCount = getDeckSize();
 
-        for (int i = 0; i < cardsCount; i++){
+        for (int i = 0; i < cardsCount; i++) {
             cardsString += cards.get(i);
         }
 

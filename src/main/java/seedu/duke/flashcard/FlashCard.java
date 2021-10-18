@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  */
 public class FlashCard {
 
-    final String SEPARATOR = " | ";
+    static final String SEPARATOR = " | ";
 
     private static final Logger logger = Logger.getLogger("Card");
     private String front;
@@ -106,7 +106,7 @@ public class FlashCard {
         System.out.println("*=====================================* "
                 + "*=====================================*");
     }
-      
+
     public void setBack(String input) {
         logger.setLevel(Level.WARNING);
         assert this.back != null;
@@ -123,7 +123,7 @@ public class FlashCard {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return getFront() + SEPARATOR
                 + getBack() + SEPARATOR
                 + getUserScore() + SEPARATOR
