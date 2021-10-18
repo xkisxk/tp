@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 import seedu.duke.flashcard.FlashCard;
+import seedu.duke.testing.AnswerList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -66,6 +67,25 @@ public class TestUi {
 
     public void printReviewCard() {
         System.out.println("Reviewing all low scoring cards");
+    }
+
+    public void printTest(int index, AnswerList answerList) {
+        int score = answerList.getScore();
+        int totalScore = answerList.getSize();
+        System.out.println(
+                "Score for " + index + " " + answerList.getDeck().getName()
+                        + " " + score + "/" + totalScore
+                        + " " + score / totalScore * 100 + "%");
+    }
+
+    public void printScore(int index, int score, int totalScore) {
+        System.out.println("You scored " + score + " out of " + totalScore + " for test " + (index + 1));
+        System.out.println("That is " + score / totalScore * 100 + "%!");
+    }
+
+    public void printScoreWithCard(FlashCard card) {
+        card.viewFlashCard();
+        System.out.println("Score: " + card.getUserScore() + " out of " + card.getTotalScore());
     }
 
     public void printCorrectAnsMessage() {
