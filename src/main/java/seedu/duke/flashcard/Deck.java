@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Deck {
 
-    public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -33,13 +33,13 @@ public class Deck {
         this.name = input;
     }
 
-    public static FlashCard getCard(int index) {
+    public FlashCard getCard(int index) {
         assert getCardsSize() > 0;
         assert (index >= 0 && index < getCardsSize());
         return cards.get(index);
     }
 
-    public static int getCardsSize() {
+    public int getCardsSize() {
         return cards.size();
     }
 
