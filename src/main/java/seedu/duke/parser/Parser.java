@@ -24,8 +24,8 @@ public class Parser {
      * Parses user input at the command line and invokes the necessary follow up actions.
      */
     public static void parseCommand(String input) throws CardLiException {
-        logger.log(Level.INFO, "new user input detected");
         logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "new user input detected");
         String command = getCommand(input);
 
         logger.log(Level.INFO, "new user input detected");
@@ -40,7 +40,7 @@ public class Parser {
             String addDeckInput = removeCommandWord(input, command.length());
             DeckList.prepareToAddDeck(addDeckInput);
             break;
-        case "viewdeck":
+        case "viewdecks":
             DeckList.viewDecks();
             break;
         case "delete":
@@ -48,7 +48,7 @@ public class Parser {
             DeckList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
-        case "view":
+        case "viewdeck":
             String viewInput = removeCommandWord(input, command.length());
             DeckList.viewOneDeck(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
@@ -69,6 +69,7 @@ public class Parser {
         case "viewfc":
             TestHistory.viewOverallFlashcardStats();
             logger.log(Level.INFO, "viewfc command parsed and executed");
+            break;
         case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);

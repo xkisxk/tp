@@ -23,14 +23,14 @@ public class DeckList {
         System.out.println("Changed deck " + args[0] + " to " + args[1]);
     }
 
-    public static int getDecksSize() {
-        return decks.size();
+    public static Deck getDeck(int index) {
+        assert getDecksSize() > 0;
+        assert (index >= 0 && index < getDecksSize());
+        return decks.get(index);
     }
 
-    public static Deck getDeck(int index) {
-        assert decks.size() > 0;
-        assert (index >= 0 && index < decks.size());
-        return decks.get(index);
+    public static int getDecksSize() {
+        return decks.size();
     }
 
     public static void prepareToAddDeck(String deckName) {
@@ -64,7 +64,7 @@ public class DeckList {
     }
 
     public static void viewDecks() {
-        if (decks.size() > 0) {
+        if (getDecksSize() > 0) {
             int i = 1;
             System.out.println("These are your decks: ");
             for (Deck deck : decks) {
@@ -79,7 +79,7 @@ public class DeckList {
     public static void viewOneDeck(String input) {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
                 Deck deckToView = decks.get(deckIndex);
                 deckToView.viewAllFlashCards();
@@ -96,7 +96,7 @@ public class DeckList {
     public static void prepareToAddCardToDeck(String input) {
         try {
             int deckIndex = findDeckIndex(input, "/fro");
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
                 Deck deckToAdd = decks.get(deckIndex);
@@ -117,7 +117,7 @@ public class DeckList {
     public static void prepareToDeleteCardFromDeck(String input) {
         try {
             int deckIndex = findDeckIndex(input, "/car");
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/car");
                 System.out.println("Deleted from deck " + decks.get(deckIndex).getName() + " :");
                 decks.get(deckIndex).prepareToDeleteFlashCard(addInput);
