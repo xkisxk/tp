@@ -32,8 +32,9 @@ public class TestManager {
             Deck deck = DeckList.getDeckList().get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
 
-            testAllCardsInOrder(answersResponse, deck);
-            viewTestResult(answersResponse, deck);
+            testAllCardsInOrder(answersResponse);
+            TestHistory.addAnswerList(answersResponse);
+            viewTestResult(answersResponse);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -44,14 +45,41 @@ public class TestManager {
     }
 
     /**
+     * Enters review mode.
+     */
+    public static void startReview() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "starting review");
+        ui.printStartReview();
+        reviewCards();
+    }
+
+    /**
+     * Reviews the lowest scoring deck of all tests.
+     */
+    private static void reviewCards() {
+        logger.log(Level.INFO, "Reviewing low scoring cards");
+        ui.printReviewCard();
+        Deck deckToReview = TestHistory.getLowScoringCards();
+        AnswerList answerList = new AnswerList(deckToReview);
+        testAllCardsInOrder(answerList);
+        if (!answerList.isEmpty()) {
+            TestHistory.addAnswerList(answerList);
+            viewTestResult(answerList);
+        } else {
+            System.out.println("Congratulations you don't have any low scoring cards!");
+        }
+    }
+
+    /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsInOrder(AnswerList answersResponse, Deck deck) {
+    public static void testAllCardsInOrder(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
 
-        for (FlashCard question : deck.cards) {
+        for (FlashCard question : answersResponse.getDeck().cards) {
             logger.log(Level.INFO, "starting to test a new card");
-            int questionNumber = deck.getCardIndex(question);
+            int questionNumber = answersResponse.getDeck().getCardIndex(question);
             ui.printDividerLine();
             ui.printQuestion(question, questionNumber);
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
@@ -76,13 +104,12 @@ public class TestManager {
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         ui.printTestOver();
-        TestHistory.addAnswerList(answersResponse);
     }
 
     /**
      * Prints results of test to system output.
      */
-    public static void viewTestResult(AnswerList answersResponse, Deck deck) {
+    public static void viewTestResult(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");
@@ -91,8 +118,9 @@ public class TestManager {
         assert answersResponse.getSize() > 0;
         for (Answer response : answersResponse.getAnswerList()) {
             int responseNumber = answersResponse.getAnswerIndex(response);
-            FlashCard question = deck.getCard(responseNumber);
+            FlashCard question = answersResponse.getDeck().getCard(responseNumber);
             String userAnswer = response.getAnswer();
+
             ui.printDividerLine();
             //display front of card so that user can understand question
             ui.printQuestion(question, responseNumber);
@@ -102,7 +130,6 @@ public class TestManager {
             if (response.isCorrect(userAnswer, question)) {
                 score++;
                 question.incrementUserScore();
-                System.out.println(question.getUserScore());
                 ui.printCorrectAnsMessage();
                 logger.log(Level.INFO, "user answer is correct");
             } else {
@@ -115,7 +142,7 @@ public class TestManager {
         int answersCount = answersResponse.getSize();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + score / answersCount * 100 + "%!");
+        System.out.println("That is " + (double) score / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 }

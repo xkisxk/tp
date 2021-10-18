@@ -68,4 +68,30 @@ public class TestHistory {
         }
     }
 
+    /**
+     * Gets all the low scoring cards and put them into a deck.
+     *
+     * @return deck of low scoring cards
+     */
+    public static Deck getLowScoringCards() {
+        Deck reviewDeck = new Deck("Review");
+        for (Deck deck : DeckList.getDeckList()) {
+            for (FlashCard card : deck.cards) {
+                if (isLowScoring(card)) {
+                    reviewDeck.addFlashCard(card.getFront(), card.getBack());
+                }
+            }
+        }
+        return reviewDeck;
+    }
+
+    /**
+     * A card is low scoring if its accumulated user score is less than 50% of
+     * the total score.
+     *
+     * @return true if card is low scoring, false otherwise
+     */
+    private static boolean isLowScoring(FlashCard card) {
+        return (double) card.getUserScore() * 100 / card.getTotalScore() < 50;
+    }
 }

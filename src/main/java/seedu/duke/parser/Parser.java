@@ -64,6 +64,10 @@ public class Parser {
             TestHistory.viewOverallFlashcardStats();
             logger.log(Level.INFO, "viewfc command parsed and executed");
             break;
+        case "review":
+            TestManager.startReview();
+            logger.log(Level.INFO, "review command parsed and executed");
+            break;
         case "bye":
             logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
             break;

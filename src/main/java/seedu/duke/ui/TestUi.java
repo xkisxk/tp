@@ -60,6 +60,14 @@ public class TestUi {
         System.out.print("Input an integer: ");
     }
 
+    public void printStartReview() {
+        System.out.println("Starting review...");
+    }
+
+    public void printReviewCard() {
+        System.out.println("Reviewing all low scoring cards");
+    }
+
     public void printCorrectAnsMessage() {
         System.out.println("Well done! You got this question correct");
     }
