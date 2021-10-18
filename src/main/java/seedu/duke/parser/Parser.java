@@ -40,7 +40,7 @@ public class Parser {
             String addDeckInput = removeCommandWord(input, command.length());
             DeckList.prepareToAddDeck(addDeckInput);
             break;
-        case "viewdeck":
+        case "viewdecks":
             DeckList.viewDecks();
             break;
         case "delete":
@@ -48,7 +48,7 @@ public class Parser {
             DeckList.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
-        case "view":
+        case "viewdeck":
             String viewInput = removeCommandWord(input, command.length());
             DeckList.viewOneDeck(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
