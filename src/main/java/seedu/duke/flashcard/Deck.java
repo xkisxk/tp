@@ -29,6 +29,10 @@ public class Deck {
         return name;
     }
 
+    public ArrayList<FlashCard> getCards() {
+        return cards;
+    }
+
     public void setDeckName(String input) {
         this.name = input;
     }

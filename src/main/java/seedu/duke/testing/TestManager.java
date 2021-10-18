@@ -7,6 +7,8 @@ import seedu.duke.ui.TestUi;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -48,6 +50,9 @@ public class TestManager {
      */
     public static void testAllCardsInOrder(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
+
+        ArrayList<FlashCard> deckReplicate = deck.getCards();
+        Collections.shuffle(deckReplicate);
 
         for (FlashCard question : deck.cards) {
             logger.log(Level.INFO, "starting to test a new card");
