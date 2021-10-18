@@ -24,8 +24,8 @@ public class Parser {
      * Parses user input at the command line and invokes the necessary follow up actions.
      */
     public static void parseCommand(String input) throws CardLiException {
-        logger.log(Level.INFO, "new user input detected");
         logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "new user input detected");
         String command = getCommand(input);
 
         logger.log(Level.INFO, "new user input detected");
