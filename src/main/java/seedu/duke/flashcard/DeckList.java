@@ -9,6 +9,30 @@ import java.util.ArrayList;
 public class DeckList {
     private static ArrayList<Deck> decks = new ArrayList<>();
 
+    public static void editCard(String[] args) {
+        if (args[2].equalsIgnoreCase("front")) {
+            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
+        } else {
+            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
+        }
+        System.out.println("Changed " + args[2] +  " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+    }
+
+    public static void editCat(String[] args) {
+        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
+        System.out.println("Changed deck " + args[0] + " to " + args[1]);
+    }
+
+    public static Deck getDeck(int index) {
+        assert getDecksSize() > 0;
+        assert (index >= 0 && index < getDecksSize());
+        return decks.get(index);
+    }
+
+    public static int getDecksSize() {
+        return decks.size();
+    }
+
     public static void prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
             addDeck(deckName);
@@ -40,7 +64,7 @@ public class DeckList {
     }
 
     public static void viewDecks() {
-        if (decks.size() > 0) {
+        if (getDecksSize() > 0) {
             int i = 1;
             System.out.println("These are your decks: ");
             for (Deck deck : decks) {
@@ -55,7 +79,7 @@ public class DeckList {
     public static void viewOneDeck(String input) {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
                 Deck deckToView = decks.get(deckIndex);
                 deckToView.viewAllFlashCards();
@@ -72,7 +96,7 @@ public class DeckList {
     public static void prepareToAddCardToDeck(String input) {
         try {
             int deckIndex = findDeckIndex(input, "/fro");
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
                 Deck deckToAdd = decks.get(deckIndex);
@@ -93,7 +117,7 @@ public class DeckList {
     public static void prepareToDeleteCardFromDeck(String input) {
         try {
             int deckIndex = findDeckIndex(input, "/car");
-            if (deckIndex < decks.size() && deckIndex >= 0) {
+            if (deckIndex < getDecksSize() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/car");
                 System.out.println("Deleted from deck " + decks.get(deckIndex).getName() + " :");
                 decks.get(deckIndex).prepareToDeleteFlashCard(addInput);

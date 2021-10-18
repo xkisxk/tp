@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.CardLiException;
 import seedu.duke.parser.Parser;
 import seedu.duke.ui.CardLiUi;
 
@@ -17,11 +18,14 @@ public class Duke {
         boolean exitProgram = false;
 
         while (!exitProgram) {
-            String input = ui.getUserMessage();
-            Parser.parseCommand(input);
-
-            if (Parser.getCommand(input).equals("bye")) {
-                exitProgram = true;
+            try {
+                String input = ui.getUserMessage();
+                Parser.parseCommand(input);
+                if (Parser.getCommand(input).equals("bye")) {
+                    exitProgram = true;
+                }
+            } catch (CardLiException e) {
+                ui.showMessage(e.getMessage());
             }
         }
         ui.printByeMessage();
