@@ -121,7 +121,7 @@ public class TestManager {
         int answersCount = answersResponse.getSize();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + score / answersCount * 100 + "%!");
+        System.out.println("That is " + Double.valueOf(score) / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 }
