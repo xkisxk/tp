@@ -87,6 +87,7 @@ public class Parser {
             break;
         case "bye":
             DeckManager.saveToFile();
+            logger.log(Level.INFO, "current list of decks and flashcards saved to text file");
             logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
             break;
         default:
