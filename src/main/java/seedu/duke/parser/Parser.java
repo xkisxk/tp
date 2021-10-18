@@ -1,5 +1,8 @@
 package seedu.duke.parser;
 
+import seedu.duke.flashcard.DeckList;
+import seedu.duke.testing.TestHistory;
+import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
@@ -51,10 +54,21 @@ public class Parser {
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
-            String testInput = removeCommandWord(input, command.length());
-            DeckList.testDeck(testInput);
+            TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
             break;
+        case "viewtest":
+            String viewTestInput = removeCommandWord(input, command.length());
+            TestHistory.prepareToViewTest(viewTestInput);
+            logger.log(Level.INFO, "viewtest command parsed and executed");
+            break;
+        case "viewtests":
+            TestHistory.viewTests();
+            logger.log(Level.INFO, "viewtests command parsed and executed");
+            break;
+        case "viewfc":
+            TestHistory.viewOverallFlashcardStats();
+            logger.log(Level.INFO, "viewfc command parsed and executed");
         case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);

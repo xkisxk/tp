@@ -1,8 +1,6 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
-import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
 
@@ -227,51 +225,19 @@ public class Deck {
         return cards.indexOf(card);
     }
 
-    public void viewAFlashCard(int cardIndex) {
-        System.out.println("*================FRONT================* "
-                + "*===============BACK==================*");
-        System.out.println();
-
-        String front = cards.get(cardIndex).getFront();
-        String frontSpaces = "";
-        for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces += " ";
-        }
-
-        String back = cards.get(cardIndex).getBack();
-        String backSpaces = "";
-        for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces += " ";
-        }
-
-        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
-        System.out.println();
-        System.out.println("*=====================================* "
-                + "*=====================================*");
+    public FlashCard getCard(int index) {
+        return cards.get(index);
     }
 
     public void viewAllFlashCards() {
         if (cards.size() > 0) {
             for (int i = 0; i < cards.size(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
-                viewAFlashCard(i);
+                FlashCard card = cards.get(i);
+                card.viewFlashCard();
             }
         } else {
             System.out.println("This deck has no cards.");
         }
-    }
-
-    /**
-     * Returns the String on the front of the flashCard.
-     */
-    public String getFrontOfCard(int cardIndex) {
-        return cards.get(cardIndex).getFront();
-    }
-
-    /**
-     * Returns the String on the back of the flashCard.
-     */
-    public String getBackOfCard(int cardIndex) {
-        return cards.get(cardIndex).getBack();
     }
 }

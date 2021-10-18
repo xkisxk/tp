@@ -1,11 +1,12 @@
 package seedu.duke.testing;
 
 import seedu.duke.exceptions.FieldEmptyException;
+import seedu.duke.flashcard.DeckList;
+import seedu.duke.parser.TestParser;
+import seedu.duke.ui.TestUi;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -13,139 +14,108 @@ import java.util.logging.Level;
  * Implements the test function.
  */
 public class TestManager {
+    private static final TestUi ui = new TestUi();
+    private static final Logger logger = Logger.getLogger(TestManager.class.getName());
 
-    public static ArrayList<Answer> answersResponse = new ArrayList<Answer>();
-    private static int answersCount = 0;
-    private static Logger logger = Logger.getLogger(TestManager.class.getName());
+    /**
+     * Enters test mode and requires user to input the index of the deck that they want to be tested.
+     */
+    public static void startTest() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "starting test");
+        ui.printStartTest();
+        String input = ui.getUserMessage();
+        try {
+            logger.log(Level.INFO, "choosing deck to test");
+            int deckIndex = TestParser.toInt(input);
+
+            Deck deck = DeckList.getDeckList().get(deckIndex);
+            AnswerList answersResponse = new AnswerList(deck);
+
+            testAllCardsInOrder(answersResponse, deck);
+            viewTestResult(answersResponse, deck);
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("This deck doesn't exist.");
+            logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
+        }
+    }
 
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsInOrder(Deck fcm) {
+    public static void testAllCardsInOrder(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "starting test");
 
-        for (FlashCard question : fcm.cards) {
+        for (FlashCard question : deck.cards) {
             logger.log(Level.INFO, "starting to test a new card");
-            int questionNumber = fcm.getCardIndex(question);
-            printDividerLine();
-            System.out.println("Question " + String.valueOf(questionNumber + 1) + ":");
-            //display front of card so that user can understand question
-            System.out.println(fcm.getFrontOfCard(questionNumber));
-            System.out.println("Your answer?");
+            int questionNumber = deck.getCardIndex(question);
+            ui.printDividerLine();
+            ui.printQuestion(question, questionNumber);
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
             //later version to include question number and parsing to allow for randomised testing
             logger.log(Level.INFO, "getting user's answer to the question");
-            String userResponse = getInput();
+            String userResponse = ui.getUserMessage();
             try {
-                parseUserResponse(userResponse);
+                userResponse = TestParser.parseUserResponse(userResponse);
             } catch (FieldEmptyException e) {
                 logger.log(Level.WARNING, "No user input");
                 userResponse = "NO ANSWER GIVEN :(";
-                printAnswerEmptyError();
+                ui.printAnswerEmptyError();
             }
             logger.log(Level.INFO, "Saving answer");
-            addAnswer(userResponse, questionNumber);
+            answersResponse.addAnswer(userResponse, questionNumber);
             assert !answersResponse.isEmpty();
-            assert answersCount > 0;
+            assert answersResponse.getSize() > 0;
             logger.log(Level.INFO, "Finished this card's testing");
         }
 
-        printDividerLine();
+        ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
-        System.out.println("Test Over");
-        viewTestResult(fcm);
-    }
-
-    public static String parseUserResponse(String userResponse) throws FieldEmptyException {
-        String input = userResponse;
-        if (userResponse.isEmpty()) {
-            throw new FieldEmptyException();
-        }
-        return input;
-    }
-
-    public static int getAnswerIndex(Answer answer) {
-        return answersResponse.indexOf(answer);
-    }
-
-    //hopefully there is a ui class which i can put this in and access from this class
-    public static String getInput() {
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        return input;
-    }
-
-    /**
-     * Saves a new user answer to the current list of user answers.
-     *
-     * @param answer            String representation of user's answer
-     * @param questionIndex     Question number for the question that the answer answers
-     */
-    public static void addAnswer(String answer, int questionIndex) {
-        answersResponse.add(new Answer(answer, questionIndex));
-        answersCount += 1;
-    }
-
-    /**
-     * Prints user's answer for a specified question to the system output.
-     *
-     * @param answerIndex   Specified question number
-     */
-    public static void viewAnswer(int answerIndex) {
-        System.out.println(answersResponse.get(answerIndex).getAnswer());
+        ui.printTestOver();
+        TestHistory.addAnswerList(answersResponse);
     }
 
     /**
      * Prints results of test to system output.
      */
-    private static void viewTestResult(Deck fcm) {
+    public static void viewTestResult(AnswerList answersResponse, Deck deck) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");
 
         //there must be at least one response to start a test
-        assert answersResponse.size() > 0;
-        for (Answer response : answersResponse) {
-            int responseNumber = getAnswerIndex(response);
+        assert answersResponse.getSize() > 0;
+        for (Answer response : answersResponse.getAnswerList()) {
+            int responseNumber = answersResponse.getAnswerIndex(response);
+            FlashCard question = deck.getCard(responseNumber);
+            String userAnswer = response.getAnswer();
+            ui.printDividerLine();
             //display front of card so that user can understand question
-            printDividerLine();
-            System.out.println("Question "
-                    + String.valueOf(responseNumber + 1)
-                    + ": " + fcm.getFrontOfCard(responseNumber));
-            System.out.println("Correct answer: " + fcm.getBackOfCard(responseNumber));
-            System.out.print("Your answer: ");
-            viewAnswer(responseNumber);
+            ui.printQuestion(question, responseNumber);
+            ui.printCorrectAnswer(question);
+            ui.printUserAnswer(userAnswer);
 
-            if (fcm.getBackOfCard(responseNumber).equals(answersResponse.get(responseNumber).getAnswer())) {
+            if (response.isCorrect(userAnswer, question)) {
                 score++;
-                printCorrectAnsMessage();
+                question.incrementUserScore();
+                System.out.println(question.getUserScore());
+                ui.printCorrectAnsMessage();
                 logger.log(Level.INFO, "user answer is correct");
             } else {
-                printWrongAnsMessage();
+                ui.printWrongAnsMessage();
                 logger.log(Level.INFO, "user answer is wrong");
             }
+            question.incrementTotalScore();
         }
-        printDividerLine();
+        ui.printDividerLine();
+        int answersCount = answersResponse.getSize();
         assert score <= answersCount;
-        System.out.println("Your scored " + score + " out of " + answersCount + " for this test");
+        System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
+        System.out.println("That is " + score / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
-    }
-
-    private static void printDividerLine() {
-        System.out.println("--------------------------------------------------");
-    }
-
-    private static void printCorrectAnsMessage() {
-        System.out.println("Well done! You got this question correct");
-    }
-
-    private static void printWrongAnsMessage() {
-        System.out.println("You got this question wrong! Take note of the correct answer!");
-    }
-
-    private static void printAnswerEmptyError() {
-        System.out.println("Remember to provide an answer next time! Don't give up!");
     }
 }

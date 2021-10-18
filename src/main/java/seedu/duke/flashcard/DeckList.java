@@ -59,6 +59,10 @@ public class DeckList {
         decks.add(new Deck(deckName));
     }
 
+    public static ArrayList<Deck> getDeckList() {
+        return decks;
+    }
+
     public static void viewDecks() {
         if (decks.size() > 0) {
             int i = 1;
@@ -77,32 +81,15 @@ public class DeckList {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                Deck fcmToView = decks.get(deckIndex);
-                fcmToView.viewAllFlashCards();
+                Deck deckToView = decks.get(deckIndex);
+                deckToView.viewAllFlashCards();
             } else {
                 throw new DeckNotExistException();
             }
         } catch (DeckNotExistException e) {
             System.out.println("This deck doesn't exist.");
-        }
-    }
-
-    public static void testDeck(String input) {
-        try {
-            int deckIndex = Integer.parseInt(input) - 1;
-            if (deckIndex < decks.size() && deckIndex >= 0) {
-                Deck fcm = decks.get(deckIndex);
-                if (fcm.cards.size() > 0) {
-                    System.out.println("Testing deck " + decks.get(deckIndex).getName() + ":");
-                    TestManager.testAllCardsInOrder(fcm);
-                } else {
-                    System.out.println("This deck has no cards and cannot be tested.");
-                }
-            } else {
-                throw new DeckNotExistException();
-            }
-        } catch (DeckNotExistException e) {
-            System.out.println("This deck doesn't exist.");
+        } catch (NumberFormatException e) {
+            System.out.println("That's not a number.");
         }
     }
 
@@ -112,8 +99,8 @@ public class DeckList {
             if (deckIndex < decks.size() && deckIndex >= 0) {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
-                Deck fcmToAdd = decks.get(deckIndex);
-                fcmToAdd.prepareToAddFlashCard(addInput);
+                Deck deckToAdd = decks.get(deckIndex);
+                deckToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }
