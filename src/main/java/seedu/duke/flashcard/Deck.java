@@ -34,12 +34,12 @@ public class Deck {
     }
 
     public FlashCard getCard(int index) {
-        assert getCardsSize() > 0;
-        assert (index >= 0 && index < getCardsSize());
+        assert getDeckSize() > 0;
+        assert (index >= 0 && index < getDeckSize());
         return cards.get(index);
     }
 
-    public int getCardsSize() {
+    public int getDeckSize() {
         return cards.size();
     }
 
@@ -73,10 +73,10 @@ public class Deck {
     private void printCardInfo(String front, String back) {
         System.out.println("\tFront: " + front);
         System.out.println("\tBack: " + back);
-        if (getCardsSize() == 1) {
-            System.out.println("\tYou have " + getCardsSize() + " card in your card deck.");
+        if (getDeckSize() == 1) {
+            System.out.println("\tYou have " + getDeckSize() + " card in your card deck.");
         } else {
-            System.out.println("\tYou have " + getCardsSize() + " cards in your card deck.");
+            System.out.println("\tYou have " + getDeckSize() + " cards in your card deck.");
         }
     }
 
@@ -134,7 +134,7 @@ public class Deck {
         if (cards.isEmpty()) {
             throw new CardLiException();
         }
-        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
         if (!isInteger(input)) {
             deleteFlashCardByDescription(input);
@@ -153,10 +153,10 @@ public class Deck {
     private void deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
-        if (!((indexToBeRemoved < getCardsSize()) && (indexToBeRemoved >= 0))) {
+        if (!((indexToBeRemoved < getDeckSize()) && (indexToBeRemoved >= 0))) {
             throw new CardLiException();
         }
-        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
 
         FlashCard card = cards.get(indexToBeRemoved);
@@ -171,8 +171,8 @@ public class Deck {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private void deleteFlashCardByDescription(String description) throws CardLiException {
-        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
-        for (int i = 0; i < getCardsSize(); i++) {
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
+        for (int i = 0; i < getDeckSize(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
                 cards.remove(card);
@@ -220,14 +220,18 @@ public class Deck {
         cards.add(new FlashCard(front, back));
     }
 
+    public void addFlashCard(String front, String back, int userScore, int totalScore) {
+        cards.add(new FlashCard(front, back, userScore, totalScore));
+    }
+
     //getter for index of a flashcard
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
     }
 
     public void viewAllFlashCards() {
-        if (getCardsSize() > 0) {
-            for (int i = 0; i < getCardsSize(); i++) {
+        if (getDeckSize() > 0) {
+            for (int i = 0; i < getDeckSize(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
                 FlashCard card = cards.get(i);
                 card.viewFlashCard();
@@ -235,5 +239,19 @@ public class Deck {
         } else {
             System.out.println("This deck has no cards.");
         }
+    }
+
+    @Override
+    public String toString(){
+        String cardsString =  "";
+        int cardsCount = getDeckSize();
+
+        for (int i = 0; i < cardsCount; i++){
+            cardsString += cards.get(i);
+        }
+
+        return getName() + '\n'
+                + getDeckSize() + '\n'
+                + cardsString + '\n';
     }
 }

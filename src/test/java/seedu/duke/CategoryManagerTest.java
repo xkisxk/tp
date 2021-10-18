@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.flashcard.DeckList;
+import seedu.duke.flashcard.DeckManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +10,7 @@ class CategoryManagerTest {
     @Test
     public void trimToPass_enterValidAddLine_success() {
         String input = "1 /fro good morning /bac ohayo";
-        assertEquals("good morning /bac ohayo", DeckList.trimToPass(input, "/fro"));
+        assertEquals("good morning /bac ohayo", DeckManager.trimToPass(input, "/fro"));
 
     }
 }

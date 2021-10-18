@@ -1,13 +1,12 @@
 package seedu.duke.parser;
 
-import seedu.duke.flashcard.DeckList;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.InvalidCommandFormatException;
-import seedu.duke.flashcard.DeckList;
 import seedu.duke.ui.CardLiUi;
 
 import java.util.logging.Level;
@@ -33,24 +32,24 @@ public class Parser {
         switch (command) {
         case "add":
             String addInput = removeCommandWord(input, command.length());
-            DeckList.prepareToAddCardToDeck(addInput);
+            DeckManager.prepareToAddCardToDeck(addInput);
             logger.log(Level.INFO, "add command parsed and executed");
             break;
         case "adddeck":
             String addDeckInput = removeCommandWord(input, command.length());
-            DeckList.prepareToAddDeck(addDeckInput);
+            DeckManager.prepareToAddDeck(addDeckInput);
             break;
         case "viewdecks":
-            DeckList.viewDecks();
+            DeckManager.viewDecks();
             break;
         case "delete":
             String deleteInput = removeCommandWord(input, command.length());
-            DeckList.prepareToDeleteCardFromDeck(deleteInput);
+            DeckManager.prepareToDeleteCardFromDeck(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "viewdeck":
             String viewInput = removeCommandWord(input, command.length());
-            DeckList.viewOneDeck(viewInput);
+            DeckManager.viewOneDeck(viewInput);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test":
@@ -73,13 +72,13 @@ public class Parser {
         case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
-            DeckList.editCard(parsedEditCardArgs);
+            DeckManager.editCard(parsedEditCardArgs);
             logger.log(Level.INFO, "editcard command parsed and executed");
             break;
         case "editdeck": //editdeck /deck <cat index> /input <input>
             String editCatInput = removeCommandWord(input, command.length());
             String[] parsedEditCatArgs = parseEditDeckCommand(editCatInput);
-            DeckList.editCat(parsedEditCatArgs);
+            DeckManager.editCat(parsedEditCatArgs);
             logger.log(Level.INFO, "editdeck command parsed and executed");
             break;
         case "help":
@@ -87,6 +86,7 @@ public class Parser {
             logger.log(Level.INFO, "editdeck command parsed and executed");
             break;
         case "bye":
+            DeckManager.saveToFile();
             logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
             break;
         default:
@@ -141,10 +141,10 @@ public class Parser {
         int catIndex = Integer.parseInt(args[1]);
         int cardIndex = Integer.parseInt(args[3]);
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
-        if (!(catIndex > 0 && catIndex <= DeckList.getDecksSize())) {
+        if (!(catIndex > 0 && catIndex <= DeckManager.getDecksSize())) {
             throw new DeckNotExistException("Incorrect index for Deck!");
         }
-        if (!(cardIndex > 0 && cardIndex <= DeckList.getDeck(catIndex - 1).getCardsSize())) {
+        if (!(cardIndex > 0 && cardIndex <= DeckManager.getDeck(catIndex - 1).getDeckSize())) {
             throw new CardLiException("Incorrect index for Card!");
         }
         logger.log(Level.INFO, "checking if user inputted a correct side");
@@ -182,7 +182,7 @@ public class Parser {
         }
         int catIndex = Integer.parseInt(args[1]);
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
-        if (!(catIndex > 0 && catIndex <= DeckList.getDecksSize())) {
+        if (!(catIndex > 0 && catIndex <= DeckManager.getDecksSize())) {
             throw new DeckNotExistException("Incorrect index for Deck!");
         }
         String[] editArgs = {args[1], args[3]};
