@@ -53,8 +53,9 @@ public class TestManager {
 
         ArrayList<FlashCard> deckReplicate = deck.getCards();
         Collections.shuffle(deckReplicate);
+        logger.log(Level.INFO, "replicated and shuffled flashcard list");
 
-        for (FlashCard question : deck.cards) {
+        for (FlashCard question : deckReplicate) {
             logger.log(Level.INFO, "starting to test a new card");
             int questionNumber = deck.getCardIndex(question);
             ui.printDividerLine();
