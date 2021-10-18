@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class Deck {
 
-    public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    public static ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -29,6 +29,20 @@ public class Deck {
 
     public String getName() {
         return name;
+    }
+
+    public void setDeckName(String input) {
+        this.name = input;
+    }
+
+    public static FlashCard getCard(int index) {
+        assert cards.size() > 0;
+        assert (index >= 0 && index < cards.size());
+        return cards.get(index);
+    }
+
+    public static int getCardsSize() {
+        return cards.size();
     }
 
     public void printNoSlashFoundError() {

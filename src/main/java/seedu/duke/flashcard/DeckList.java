@@ -9,6 +9,30 @@ import java.util.ArrayList;
 public class DeckList {
     private static ArrayList<Deck> decks = new ArrayList<>();
 
+    public static void editCard(String[] args) {
+        if (args[2].equalsIgnoreCase("front")) {
+            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
+        } else {
+            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
+        }
+        System.out.println("Changed " + args[2] +  " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+    }
+
+    public static void editCat(String[] args) {
+        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
+        System.out.println("Changed deck " + args[0] + " to " + args[1]);
+    }
+
+    public static int getDecksSize() {
+        return decks.size();
+    }
+
+    public static Deck getDeck(int index) {
+        assert decks.size() > 0;
+        assert (index >= 0 && index < decks.size());
+        return decks.get(index);
+    }
+
     public static void prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
             addDeck(deckName);
