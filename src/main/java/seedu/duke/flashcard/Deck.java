@@ -34,8 +34,8 @@ public class Deck {
     }
 
     public static FlashCard getCard(int index) {
-        assert cards.size() > 0;
-        assert (index >= 0 && index < cards.size());
+        assert getCardsSize() > 0;
+        assert (index >= 0 && index < getCardsSize());
         return cards.get(index);
     }
 
@@ -73,10 +73,10 @@ public class Deck {
     private void printCardInfo(String front, String back) {
         System.out.println("\tFront: " + front);
         System.out.println("\tBack: " + back);
-        if (cards.size() == 1) {
-            System.out.println("\tYou have " + cards.size() + " card in your card deck.");
+        if (getCardsSize() == 1) {
+            System.out.println("\tYou have " + getCardsSize() + " card in your card deck.");
         } else {
-            System.out.println("\tYou have " + cards.size() + " cards in your card deck.");
+            System.out.println("\tYou have " + getCardsSize() + " cards in your card deck.");
         }
     }
 
@@ -134,7 +134,7 @@ public class Deck {
         if (cards.isEmpty()) {
             throw new CardLiException();
         }
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
+        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
         if (!isInteger(input)) {
             deleteFlashCardByDescription(input);
@@ -153,10 +153,10 @@ public class Deck {
     private void deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
-        if (!((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0))) {
+        if (!((indexToBeRemoved < getCardsSize()) && (indexToBeRemoved >= 0))) {
             throw new CardLiException();
         }
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
+        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
 
         FlashCard card = cards.get(indexToBeRemoved);
@@ -171,8 +171,8 @@ public class Deck {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private void deleteFlashCardByDescription(String description) throws CardLiException {
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
-        for (int i = 0; i < cards.size(); i++) {
+        assert getCardsSize() > 0 : "cards.size() should be greater than 0";
+        for (int i = 0; i < getCardsSize(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
                 cards.remove(card);
@@ -225,13 +225,9 @@ public class Deck {
         return cards.indexOf(card);
     }
 
-    public FlashCard getCard(int index) {
-        return cards.get(index);
-    }
-
     public void viewAllFlashCards() {
-        if (cards.size() > 0) {
-            for (int i = 0; i < cards.size(); i++) {
+        if (getCardsSize() > 0) {
+            for (int i = 0; i < getCardsSize(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
                 FlashCard card = cards.get(i);
                 card.viewFlashCard();

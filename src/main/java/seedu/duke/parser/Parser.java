@@ -69,6 +69,7 @@ public class Parser {
         case "viewfc":
             TestHistory.viewOverallFlashcardStats();
             logger.log(Level.INFO, "viewfc command parsed and executed");
+            break;
         case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
