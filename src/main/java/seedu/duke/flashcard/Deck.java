@@ -42,7 +42,7 @@ public class Deck {
     public int getCardsSize() {
         return cards.size();
     }
-    
+
     public void printNoSlashFoundError() {
         System.out.println("\tRemember that a command must contain \"/bac\"!");
     }
@@ -218,6 +218,10 @@ public class Deck {
 
     public void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));
+    }
+
+    public void addFlashCard(FlashCard card) {
+        cards.add(card);
     }
 
     //getter for index of a flashcard

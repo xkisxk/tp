@@ -51,16 +51,16 @@ public class TestManager {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
-        reviewCards();
+        Deck deckToReview = TestHistory.getLowScoringCards();
+        reviewCards(deckToReview);
     }
 
     /**
      * Reviews the lowest scoring deck of all tests.
      */
-    private static void reviewCards() {
+    public static void reviewCards(Deck deckToReview) {
         logger.log(Level.INFO, "Reviewing low scoring cards");
         ui.printReviewCard();
-        Deck deckToReview = TestHistory.getLowScoringCards();
         AnswerList answerList = new AnswerList(deckToReview);
         testAllCardsInOrder(answerList);
         if (!answerList.isEmpty()) {

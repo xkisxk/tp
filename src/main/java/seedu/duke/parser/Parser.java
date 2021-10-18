@@ -73,6 +73,7 @@ public class Parser {
         case "review":
             TestManager.startReview();
             logger.log(Level.INFO, "review command parsed and executed");
+            break;
         case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);

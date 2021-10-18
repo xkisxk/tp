@@ -78,7 +78,7 @@ public class TestHistory {
         for (Deck deck : DeckList.getDeckList()) {
             for (FlashCard card : deck.cards) {
                 if (isLowScoring(card)) {
-                    reviewDeck.addFlashCard(card.getFront(), card.getBack());
+                    reviewDeck.addFlashCard(card);
                 }
             }
         }
