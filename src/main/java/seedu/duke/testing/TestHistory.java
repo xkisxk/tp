@@ -50,8 +50,8 @@ public class TestHistory {
     }
 
     /**
-     * Views the results of a test given the index
-     * Gives the raw score, followed by the percentage
+     * Views the results of a test given the index.
+     * Gives the raw score, followed by the percentage.
      * 
      * @param index index of the test
      */
@@ -64,7 +64,7 @@ public class TestHistory {
 
     /**
      * Views the results of the tests in order of all the tests taken.
-     * Gives the raw score, followed by the percentage
+     * Gives the raw score, followed by the percentage.
      *
      */
     public static void viewTests() {

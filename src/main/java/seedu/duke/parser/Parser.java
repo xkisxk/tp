@@ -7,7 +7,6 @@ import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.InvalidCommandFormatException;
-import seedu.duke.flashcard.DeckList;
 import seedu.duke.ui.CardLiUi;
 
 import java.util.logging.Level;
