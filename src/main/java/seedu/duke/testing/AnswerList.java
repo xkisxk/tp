@@ -7,11 +7,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Contains all the user's answers to the tested deck.
+ */
 public class AnswerList {
     private ArrayList<Answer> answerList;
     private Deck deck;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
+    /**
+     * AnswerList contains the list of answers from a test and the deck
+     * the questions came from.
+     *
+     * @param deck tested deck
+     */
     public AnswerList(Deck deck) {
         this.answerList = new ArrayList<>();
         this.deck = deck;
