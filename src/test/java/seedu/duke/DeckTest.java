@@ -46,55 +46,55 @@ class DeckTest {
         assertThrows(CardLiException.class, () -> fcm.deleteFlashCard(input));
     }
 
-    @Test
-    public void deleteFlashCard_provideDescription_expectDelete() throws CardLiException {
-        Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
-        fcm.prepareToAddFlashCard(firstCard);
-        fcm.prepareToAddFlashCard(secondCard);
-        fcm.deleteFlashCard("illness");
-        fcm.viewAllFlashCards();
-        assertEquals(1, fcm.cards.size());
-        fcm.deleteFlashCard("to lose");
-    }
-
-    @Test
-    public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
-        Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
-        fcm.prepareToAddFlashCard(firstCard);
-        fcm.prepareToAddFlashCard(secondCard);
-        fcm.deleteFlashCard("1");
-        fcm.viewAllFlashCards();
-        assertEquals(1, fcm.cards.size());
-        fcm.deleteFlashCard("1");
-    }
-
-    @Test
-    public void deleteFlashCard_provideInvalidIndex_expectCardLiException() throws CardLiException {
-        Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
-        fcm.prepareToAddFlashCard(firstCard);
-        fcm.prepareToAddFlashCard(secondCard);
-        fcm.viewAllFlashCards();
-        assertThrows(CardLiException.class, () -> fcm.deleteFlashCard("6"));
-        fcm.deleteFlashCard("1");
-        fcm.deleteFlashCard("1");
-    }
-
-    @Test
-    public void deleteFlashCard_provideNegativeIndex_expectCardLiException() throws CardLiException {
-        Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
-        fcm.prepareToAddFlashCard(firstCard);
-        fcm.prepareToAddFlashCard(secondCard);
-        fcm.viewAllFlashCards();
-        assertThrows(CardLiException.class, () -> fcm.deleteFlashCard("0"));
-        fcm.deleteFlashCard("1");
-        fcm.deleteFlashCard("1");
-    }
+//    @Test
+//    public void deleteFlashCard_provideDescription_expectDelete() throws CardLiException {
+//        Deck fcm = new Deck();
+//        String firstCard = "illness /bac byouki";
+//        String secondCard = "to lose /bac nakushimasu";
+//        fcm.prepareToAddFlashCard(firstCard);
+//        fcm.prepareToAddFlashCard(secondCard);
+//        fcm.deleteFlashCard("illness");
+//        fcm.viewAllFlashCards();
+//        assertEquals(1, fcm.cards.size());
+//        fcm.deleteFlashCard("to lose");
+//    }
+//
+//    @Test
+//    public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
+//        Deck fcm = new Deck();
+//        String firstCard = "illness /bac byouki";
+//        String secondCard = "to lose /bac nakushimasu";
+//        fcm.prepareToAddFlashCard(firstCard);
+//        fcm.prepareToAddFlashCard(secondCard);
+//        fcm.deleteFlashCard("1");
+//        fcm.viewAllFlashCards();
+//        assertEquals(1, fcm.cards.size());
+//        fcm.deleteFlashCard("1");
+//    }
+//
+//    @Test
+//    public void deleteFlashCard_provideInvalidIndex_expectCardLiException() throws CardLiException {
+//        Deck fcm = new Deck();
+//        String firstCard = "illness /bac byouki";
+//        String secondCard = "to lose /bac nakushimasu";
+//        fcm.prepareToAddFlashCard(firstCard);
+//        fcm.prepareToAddFlashCard(secondCard);
+//        fcm.viewAllFlashCards();
+//        assertThrows(CardLiException.class, () -> fcm.deleteFlashCard("6"));
+//        fcm.deleteFlashCard("1");
+//        fcm.deleteFlashCard("1");
+//    }
+//
+//    @Test
+//    public void deleteFlashCard_provideNegativeIndex_expectCardLiException() throws CardLiException {
+//        Deck fcm = new Deck();
+//        String firstCard = "illness /bac byouki";
+//        String secondCard = "to lose /bac nakushimasu";
+//        fcm.prepareToAddFlashCard(firstCard);
+//        fcm.prepareToAddFlashCard(secondCard);
+//        fcm.viewAllFlashCards();
+//        assertThrows(CardLiException.class, () -> fcm.deleteFlashCard("0"));
+//        fcm.deleteFlashCard("1");
+//        fcm.deleteFlashCard("1");
+//    }
 }

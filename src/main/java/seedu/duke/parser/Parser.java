@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import seedu.duke.Duke;
 import seedu.duke.flashcard.DeckList;
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public class Parser {
 
     private static final Logger logger = Logger.getLogger(Parser.class.getName());
+    private static int currDeck;
 
     /**
      * Parses user input at the command line and invokes the necessary follow up actions.
@@ -27,14 +29,13 @@ public class Parser {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "new user input detected");
         String command = getCommand(input);
-
         logger.log(Level.INFO, "new user input detected");
 
         switch (command) {
-        case "add":
-            String addInput = removeCommandWord(input, command.length());
-            DeckList.prepareToAddCardToDeck(addInput);
-            logger.log(Level.INFO, "add command parsed and executed");
+        case "enter":
+            String enterInput = removeCommandWord(input, command.length());
+            setCurrentDeck(enterInput);
+            System.out.println("You are now in deck " + enterInput);
             break;
         case "adddeck":
             String addDeckInput = removeCommandWord(input, command.length());
@@ -42,11 +43,6 @@ public class Parser {
             break;
         case "viewdecks":
             DeckList.viewDecks();
-            break;
-        case "delete":
-            String deleteInput = removeCommandWord(input, command.length());
-            DeckList.prepareToDeleteCardFromDeck(deleteInput);
-            logger.log(Level.INFO, "delete command parsed and executed");
             break;
         case "viewdeck":
             String viewInput = removeCommandWord(input, command.length());
@@ -70,12 +66,6 @@ public class Parser {
             TestHistory.viewOverallFlashcardStats();
             logger.log(Level.INFO, "viewfc command parsed and executed");
             break;
-        case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
-            String editCardInput = removeCommandWord(input, command.length());
-            String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
-            DeckList.editCard(parsedEditCardArgs);
-            logger.log(Level.INFO, "editcard command parsed and executed");
-            break;
         case "editdeck": //editdeck /deck <cat index> /input <input>
             String editCatInput = removeCommandWord(input, command.length());
             String[] parsedEditCatArgs = parseEditDeckCommand(editCatInput);
@@ -95,6 +85,47 @@ public class Parser {
         }
     }
 
+    public static void setCurrentDeck(String input) {
+        try {
+            int inputString = Integer.parseInt(input) - 1;
+            if (inputString >= 0 && inputString < DeckList.decks.size()) {
+                currDeck = inputString;
+            } else {
+                throw new DeckNotExistException();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("The deck index has to be an integer");
+        } catch (DeckNotExistException e) {
+            System.out.println("That deck doesn't exist.");
+        }
+    }
+
+    public static void parseCommandWithinDeck(String input) throws CardLiException {
+        String command = getCommand(input);
+        switch (command) {
+        case "add": //add /fro <front> /bac <back>
+            String addInput = removeCommandWord(input, command.length());
+            String[] frontAndBack = parseAddCardCommand(addInput);
+            DeckList.decks.get(currDeck).prepareToAddFlashCard(frontAndBack);
+            logger.log(Level.INFO, "add command parsed and executed");
+            break;
+        case "delete": //delete <index/front>
+            String deleteInput = removeCommandWord(input, command.length());
+            DeckList.prepareToDeleteCardFromDeck(deleteInput);
+            logger.log(Level.INFO, "delete command parsed and executed");
+            break;
+        case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
+            String editCardInput = removeCommandWord(input, command.length());
+            String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
+            DeckList.editCard(parsedEditCardArgs);
+            logger.log(Level.INFO, "editcard command parsed and executed");
+            break;
+        case "exit":
+
+        }
+
+    }
+
     public static String getCommand(String line) {
         return line.trim().split(" ")[0].toLowerCase();
     }
@@ -111,7 +142,7 @@ public class Parser {
     }
 
     /**
-     * Returns the parsed contents after the command word.
+     * Returns the parsed contents after the command word for the edit function.
      *
      * @param input user's input
      * @throw FieldEmptyException, InvalidCommandFormatException, DeckNotExistException, CardLiException
@@ -155,6 +186,31 @@ public class Parser {
         return editArgs;
     }
 
+    public static String[] parseAddCardCommand(String input) throws CardLiException {
+        logger.setLevel(Level.WARNING);
+        if (input.isEmpty()) {
+            throw new FieldEmptyException("You cannot leave any field empty! Format should be\n"
+                    + "add /fro <words on front> /bac <words on back>");
+        }
+        logger.log(Level.INFO, "splitting input");
+
+        int froIndex = input.indexOf("/fro");
+        int bacIndex = input.indexOf("/bac");
+        if (bacIndex - froIndex < 5) {
+            throw new FieldEmptyException("You cannot leave the entire field empty! Format should be\n"
+                    + "add /fro <words on front> /bac <words on back>");
+        }
+        String[] args = new String[2];
+        args[0] = input.substring(froIndex + 4, bacIndex).trim();
+        args[1] = input.substring(bacIndex + 4).trim();
+        logger.log(Level.INFO, "checking if there are enough arguments");
+        if (args[0].isEmpty() || args[1].isEmpty()) {
+            throw new FieldEmptyException("You cannot leave the entire field empty! Format should be\n"
+                    + "add /fro <words on front> /bac <words on back>");
+        }
+        return args;
+    }
+
     /**
      * Returns the parsed contents after the command word.
      *
@@ -187,5 +243,20 @@ public class Parser {
         }
         String[] editArgs = {args[1], args[3]};
         return editArgs;
+    }
+
+    /**
+     * Checks if the given input is an integer or not.
+     *
+     * @param input input given by user
+     * @return true if input is an integer, false otherwise
+     */
+    public static boolean isInteger(String input) {
+        for (int i = 0; i < input.length(); i += 1) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -3,6 +3,7 @@ package seedu.duke.flashcard;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -85,18 +86,10 @@ public class Deck {
         printCardInfo(front, back);
     }
 
-    public void prepareToAddFlashCard(String input) {
-        try {
-            String[] flashCardWords = trimStrings(input);
-            addFlashCard(flashCardWords[0], flashCardWords[1]);
-            printNewFlashCard(flashCardWords[0], flashCardWords[1]);
-        } catch (NoSlashException e) {
-            printInvalidAddFormat();
-            printNoSlashFoundError();
-        } catch (FieldEmptyException e) {
-            printInvalidAddFormat();
-            printFieldEmptyError();
-        }
+    public void prepareToAddFlashCard(String[] input) {
+        //String[] flashCardWords = trimStrings(input);
+        addFlashCard(input[0], input[1]);
+        printNewFlashCard(input[0], input[1]);
     }
 
     /**
@@ -136,7 +129,7 @@ public class Deck {
         }
         assert getCardsSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
-        if (!isInteger(input)) {
+        if (!Parser.isInteger(input)) {
             deleteFlashCardByDescription(input);
         } else {
             deleteFlashCardByIndex(input);
@@ -185,21 +178,6 @@ public class Deck {
 
     private boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
-    }
-
-    /**
-     * Checks if the given input is an integer or not.
-     *
-     * @param input input given by user
-     * @return true if input is an integer, false otherwise
-     */
-    private boolean isInteger(String input) {
-        for (int i = 0; i < input.length(); i += 1) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {

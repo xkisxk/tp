@@ -7,7 +7,7 @@ import seedu.duke.testing.TestManager;
 import java.util.ArrayList;
 
 public class DeckList {
-    private static ArrayList<Deck> decks = new ArrayList<>();
+    public static ArrayList<Deck> decks = new ArrayList<>();
 
     public static void editCard(String[] args) {
         if (args[2].equalsIgnoreCase("front")) {
@@ -100,7 +100,7 @@ public class DeckList {
                 String addInput = trimToPass(input, "/fro");
                 System.out.println("Added to deck " + decks.get(deckIndex).getName() + ":");
                 Deck deckToAdd = decks.get(deckIndex);
-                deckToAdd.prepareToAddFlashCard(addInput);
+                //deckToAdd.prepareToAddFlashCard(addInput);
             } else {
                 throw new DeckNotExistException();
             }

@@ -16,11 +16,25 @@ public class Duke {
     public static void main(String[] args) {
         ui.printGreetingMessage();
         boolean exitProgram = false;
+        boolean inDeck = false;
 
         while (!exitProgram) {
             try {
                 String input = ui.getUserMessage();
-                Parser.parseCommand(input);
+                    Parser.parseCommand(input);
+                    if (Parser.getCommand(input).equals("enter")) {
+                        if (Parser.isInteger(input.substring(5).trim())) {
+                            inDeck = true;
+                        }
+                    }
+                    while (inDeck) {
+                        input = ui.getUserMessage();
+                        Parser.parseCommandWithinDeck(input);
+                        if (Parser.getCommand(input).equals("exit")) {
+                            inDeck = false;
+                        }
+                    }
+
                 if (Parser.getCommand(input).equals("bye")) {
                     exitProgram = true;
                 }
