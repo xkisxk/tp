@@ -32,7 +32,7 @@ public class Deck {
         } else {
             cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
         }
-        System.out.println("Changed " + args[1] +  " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
+        System.out.println("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
                 + args[2]);
 
     }
@@ -218,15 +218,13 @@ public class Deck {
     public void addFlashCard(FlashCard card) {
         cards.add(card);
     }
-//TODO: fix this
+
+    //TODO: fix this
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
 
     }
 
-
-  
-  
 
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
