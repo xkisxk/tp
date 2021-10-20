@@ -255,6 +255,6 @@ public class Deck {
 
         return getName() + '\n'
                 + getDeckSize() + '\n'
-                + cardsString + '\n';
+                + cardsString;
     }
 }
