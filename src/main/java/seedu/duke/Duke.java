@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.CardLiException;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.Parser;
 import seedu.duke.ui.CardLiUi;
 
@@ -15,6 +16,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         ui.printGreetingMessage();
+        DeckManager.readFromFile();
         boolean exitProgram = false;
 
         while (!exitProgram) {

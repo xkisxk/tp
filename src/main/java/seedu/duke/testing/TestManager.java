@@ -1,7 +1,7 @@
 package seedu.duke.testing;
 
 import seedu.duke.exceptions.FieldEmptyException;
-import seedu.duke.flashcard.DeckList;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;
 import seedu.duke.flashcard.Deck;
@@ -29,7 +29,7 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckList.getDeckList().get(deckIndex);
+            Deck deck = DeckManager.getDeckList().get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
 
             testAllCardsInOrder(answersResponse, deck);

@@ -2,11 +2,21 @@ package seedu.duke.flashcard;
 
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.NoSlashException;
-import seedu.duke.testing.TestManager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class DeckList {
+public class DeckManager {
+
+    /**
+     * Specified file path to save task list.
+     */
+    static final String FILEPATH = "data/CardLI.txt";
+
     private static ArrayList<Deck> decks = new ArrayList<>();
 
     public static void editCard(String[] args) {
@@ -15,7 +25,7 @@ public class DeckList {
         } else {
             decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
         }
-        System.out.println("Changed " + args[2] +  " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+        System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
     }
 
     public static void editCat(String[] args) {
@@ -146,6 +156,62 @@ public class DeckList {
             return Integer.parseInt(intAsString) - 1;
         } else {
             throw new NoSlashException();
+        }
+    }
+
+    public static void saveToFile() {
+        try {
+            File file = new File(FILEPATH);
+
+            // create new directory and file if they do not exist
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
+            // instantiate FileWriter object to overwrite specified text file
+            FileWriter fileWriter = new FileWriter(FILEPATH, false);
+
+            int decksCount = decks.size();
+            fileWriter.write(Integer.toString(decksCount) + '\n');
+
+            for (int i = 0; i < decksCount; i++) {
+                fileWriter.write(decks.get(i).toString());
+            }
+
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong while saving the flashcards to file...");
+        }
+    }
+
+    public static void readFromFile() {
+        try {
+            File file = new File(FILEPATH);
+
+            // instantiate scanner to read file contents
+            Scanner s = new Scanner(file);
+
+            int decksCount = Integer.parseInt(s.nextLine());
+
+            for (int i = 0; i < decksCount; i++) {
+                String deckName = s.nextLine();
+                Deck newDeck = new Deck(deckName);
+
+                int cardsCount = Integer.parseInt(s.nextLine());
+
+                for (int j = 0; j < cardsCount; j++) {
+                    String newLine = s.nextLine();
+                    String[] newLineArgs = newLine.split(" \\| ");
+                    newDeck.addFlashCard(newLineArgs[0], newLineArgs[1],
+                            Integer.parseInt(newLineArgs[2]),
+                            Integer.parseInt(newLineArgs[3]));
+                }
+
+                decks.add(newDeck);
+            }
+        } catch (FileNotFoundException e) { // file does not exist on first boot
+            return;
         }
     }
 }

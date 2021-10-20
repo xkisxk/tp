@@ -8,6 +8,8 @@ import java.util.logging.Logger;
  */
 public class FlashCard {
 
+    static final String SEPARATOR = " | ";
+
     private static final Logger logger = Logger.getLogger("Card");
     private String front;
     private String back;
@@ -22,6 +24,18 @@ public class FlashCard {
         this.back = back;
         this.userScore = 0;
         this.totalScore = 0;
+        logger.log(Level.INFO, "Card front: " + front);
+        logger.log(Level.INFO, "Card back: " + back);
+    }
+
+    public FlashCard(String front, String back, int userScore, int totalScore) {
+        logger.setLevel(Level.WARNING);
+        assert front != null;
+        assert back != null;
+        this.front = front;
+        this.back = back;
+        this.userScore = userScore;
+        this.totalScore = totalScore;
         logger.log(Level.INFO, "Card front: " + front);
         logger.log(Level.INFO, "Card back: " + back);
     }
@@ -92,7 +106,7 @@ public class FlashCard {
         System.out.println("*=====================================* "
                 + "*=====================================*");
     }
-      
+
     public void setBack(String input) {
         logger.setLevel(Level.WARNING);
         assert this.back != null;
@@ -106,5 +120,13 @@ public class FlashCard {
         logger.log(Level.INFO, "Getting card front: " + front);
         this.front = input;
 
+    }
+
+    @Override
+    public String toString() {
+        return getFront() + SEPARATOR
+                + getBack() + SEPARATOR
+                + getUserScore() + SEPARATOR
+                + getTotalScore() + '\n';
     }
 }
