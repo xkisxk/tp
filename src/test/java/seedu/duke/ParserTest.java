@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.parser.Parser;
-import seedu.duke.testing.TestManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -220,15 +220,26 @@ public class Deck {
         return flashCardWords;
     }
 
+
     public void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));
     }
 
-    public void addFlashCard(String front, String back, int userScore, int totalScore) {
+
+    public void addFlashCard(FlashCard card) {
+        cards.add(card);
+    }
+//TODO: fix this
+    public void duplicateFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
+
     }
 
-    //getter for index of a flashcard
+    //
+  
+  
+  
+  ter for index of a flashcard
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
     }
