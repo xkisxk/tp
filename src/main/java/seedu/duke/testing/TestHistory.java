@@ -1,7 +1,7 @@
 package seedu.duke.testing;
 
 import seedu.duke.flashcard.Deck;
-import seedu.duke.flashcard.DeckList;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.flashcard.FlashCard;
 import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;
@@ -30,9 +30,9 @@ public class TestHistory {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "listing all flashcard stats");
 
-        assert DeckList.getDeckList().size() > 0 : "deckList must not be empty";
+        assert DeckManager.getDeckList().size() > 0 : "deckList must not be empty";
         System.out.println("Listing total scores of flashcards for all tests");
-        for (Deck deck : DeckList.getDeckList()) {
+        for (Deck deck : DeckManager.getDeckList()) {
             for (FlashCard card : deck.cards) {
                 ui.printScoreWithCard(card);
             }

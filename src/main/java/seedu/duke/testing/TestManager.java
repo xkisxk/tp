@@ -1,12 +1,14 @@
 package seedu.duke.testing;
 
 import seedu.duke.exceptions.FieldEmptyException;
-import seedu.duke.flashcard.DeckList;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.FlashCard;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -29,7 +31,7 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckList.getDeckList().get(deckIndex);
+            Deck deck = DeckManager.getDeckList().get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
 
             testAllCardsInOrder(answersResponse);
@@ -77,7 +79,13 @@ public class TestManager {
     public static void testAllCardsInOrder(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
 
-        for (FlashCard question : answersResponse.getDeck().cards) {
+
+        ArrayList<FlashCard> deckReplicate = deck.getCards();
+        Collections.shuffle(deckReplicate);
+        logger.log(Level.INFO, "replicated and shuffled flashcard list");
+
+        for (FlashCard question : deckReplicate) {
+
             logger.log(Level.INFO, "starting to test a new card");
             int questionNumber = answersResponse.getDeck().getCardIndex(question);
             ui.printDividerLine();
@@ -142,7 +150,7 @@ public class TestManager {
         int answersCount = answersResponse.getSize();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + (double) score / answersCount * 100 + "%!");
+        System.out.println("That is " + Double.valueOf(score) / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 }
