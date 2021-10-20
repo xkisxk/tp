@@ -22,7 +22,7 @@ public class TestManager {
     /**
      * Enters test mode and requires user to input the index of the deck that they want to be tested.
      */
-    public static void startTest() {
+    public static void startTest() { //TODO: handle case where there are no cards in the deck
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
@@ -31,10 +31,10 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckManager.getDeckList().get(deckIndex);
+            Deck deck = DeckManager.getDecks().get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
 
-            testAllCardsInOrder(answersResponse);
+            testAllCardsShuffled(answersResponse);
             TestHistory.addAnswerList(answersResponse);
             viewTestResult(answersResponse);
         } catch (NumberFormatException e) {
@@ -64,7 +64,7 @@ public class TestManager {
         logger.log(Level.INFO, "Reviewing low scoring cards");
         ui.printReviewCard();
         AnswerList answerList = new AnswerList(deckToReview);
-        testAllCardsInOrder(answerList);
+        testAllCardsShuffled(answerList);
         if (!answerList.isEmpty()) {
             TestHistory.addAnswerList(answerList);
             viewTestResult(answerList);
@@ -76,11 +76,11 @@ public class TestManager {
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsInOrder(AnswerList answersResponse) {
+    public static void testAllCardsShuffled(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
 
 
-        ArrayList<FlashCard> deckReplicate = deck.getCards();
+        ArrayList<FlashCard> deckReplicate = answersResponse.getDeck().getCards();
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
 

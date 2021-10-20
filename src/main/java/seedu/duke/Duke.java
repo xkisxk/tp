@@ -18,18 +18,47 @@ public class Duke {
         ui.printGreetingMessage();
         DeckManager.readFromFile();
         boolean exitProgram = false;
+        boolean inDeck;
 
         while (!exitProgram) {
             try {
                 String input = ui.getUserMessage();
                 Parser.parseCommand(input);
-                if (Parser.getCommand(input).equals("bye")) {
-                    exitProgram = true;
+                inDeck = checkEnter(input);
+                while (inDeck) {
+                    input = ui.getUserMessage();
+                    Parser.parseCommandWithinDeck(input);
+                    inDeck = checkExit(input);
                 }
+
+                exitProgram = checkBye(input);
             } catch (CardLiException e) {
                 ui.showMessage(e.getMessage());
             }
         }
         ui.printByeMessage();
+    }
+
+    private static boolean checkBye(String input) {
+        if (Parser.getCommand(input).equals("bye")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean checkExit(String input) {
+        if (Parser.getCommand(input).equals("exit")) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean checkEnter(String input) {
+        if (Parser.getCommand(input).equals("enter")) {
+            if (Parser.isInteger(input.substring(5).trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

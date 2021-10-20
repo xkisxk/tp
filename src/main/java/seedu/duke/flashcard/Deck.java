@@ -3,6 +3,7 @@ package seedu.duke.flashcard;
 import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,6 +24,17 @@ public class Deck {
 
     public Deck() {
         this.name = "Untitled";
+    }
+
+    public void editCard(String[] args) {
+        if (args[1].equalsIgnoreCase("front")) {
+            cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
+        } else {
+            cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
+        }
+        System.out.println("Changed " + args[1] +  " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
+                + args[2]);
+
     }
 
     public String getName() {
@@ -89,18 +101,10 @@ public class Deck {
         printCardInfo(front, back);
     }
 
-    public void prepareToAddFlashCard(String input) {
-        try {
-            String[] flashCardWords = trimStrings(input);
-            addFlashCard(flashCardWords[0], flashCardWords[1]);
-            printNewFlashCard(flashCardWords[0], flashCardWords[1]);
-        } catch (NoSlashException e) {
-            printInvalidAddFormat();
-            printNoSlashFoundError();
-        } catch (FieldEmptyException e) {
-            printInvalidAddFormat();
-            printFieldEmptyError();
-        }
+    public void prepareToAddFlashCard(String[] input) {
+        //String[] flashCardWords = trimStrings(input);
+        addFlashCard(input[0], input[1]);
+        printNewFlashCard(input[0], input[1]);
     }
 
     /**
@@ -140,7 +144,7 @@ public class Deck {
         }
         assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
-        if (!isInteger(input)) {
+        if (!Parser.isInteger(input)) {
             deleteFlashCardByDescription(input);
         } else {
             deleteFlashCardByIndex(input);
@@ -191,21 +195,6 @@ public class Deck {
         return card.getFront().equalsIgnoreCase(query);
     }
 
-    /**
-     * Checks if the given input is an integer or not.
-     *
-     * @param input input given by user
-     * @return true if input is an integer, false otherwise
-     */
-    private boolean isInteger(String input) {
-        for (int i = 0; i < input.length(); i += 1) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/bac");
         String[] flashCardWords = new String[2];
@@ -230,16 +219,15 @@ public class Deck {
         cards.add(card);
     }
 //TODO: fix this
-    public void duplicateFlashCard(String front, String back, int userScore, int totalScore) {
+    public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
 
     }
 
-    //
+
   
   
-  
-  ter for index of a flashcard
+
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
     }
