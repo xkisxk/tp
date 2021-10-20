@@ -52,4 +52,5 @@ public class ParserTest {
         String input = "delete 1";
         assertEquals("1", Parser.removeCommandWord(input, 6));
     }
+
 }
