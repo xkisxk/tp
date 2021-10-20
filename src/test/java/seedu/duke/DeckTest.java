@@ -49,8 +49,8 @@ class DeckTest {
     @Test
     public void deleteFlashCard_provideDescription_expectDelete() throws CardLiException {
         Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
+        String[] firstCard = {"illness", "byouki"};
+        String[] secondCard = {"to lose", "nakushimasu"};
         fcm.prepareToAddFlashCard(firstCard);
         fcm.prepareToAddFlashCard(secondCard);
         fcm.deleteFlashCard("illness");
@@ -62,8 +62,8 @@ class DeckTest {
     @Test
     public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
         Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
+        String[] firstCard = {"illness", "byouki"};
+        String[] secondCard = {"to lose", "nakushimasu"};
         fcm.prepareToAddFlashCard(firstCard);
         fcm.prepareToAddFlashCard(secondCard);
         fcm.deleteFlashCard("1");
@@ -75,8 +75,8 @@ class DeckTest {
     @Test
     public void deleteFlashCard_provideInvalidIndex_expectCardLiException() throws CardLiException {
         Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
+        String[] firstCard = {"illness", "byouki"};
+        String[] secondCard = {"to lose", "nakushimasu"};
         fcm.prepareToAddFlashCard(firstCard);
         fcm.prepareToAddFlashCard(secondCard);
         fcm.viewAllFlashCards();
@@ -88,8 +88,8 @@ class DeckTest {
     @Test
     public void deleteFlashCard_provideNegativeIndex_expectCardLiException() throws CardLiException {
         Deck fcm = new Deck();
-        String firstCard = "illness /bac byouki";
-        String secondCard = "to lose /bac nakushimasu";
+        String[] firstCard = {"illness", "byouki"};
+        String[] secondCard = {"to lose", "nakushimasu"};
         fcm.prepareToAddFlashCard(firstCard);
         fcm.prepareToAddFlashCard(secondCard);
         fcm.viewAllFlashCards();
