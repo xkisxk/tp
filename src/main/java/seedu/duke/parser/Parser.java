@@ -38,7 +38,7 @@ public class Parser {
         logger.log(Level.INFO, "new user input detected");
 
         switch (command) {
-            case "enter":
+        case "enter":
             String enterInput = removeCommandWord(input, command.length());
             setCurrentDeck(enterInput);
             System.out.println("You are now in deck " + enterInput + ". Type \"help\"for more commands.");
@@ -197,7 +197,7 @@ public class Parser {
         }
         int cardIndex = Integer.parseInt(args[1]) - 1;
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
-//TODO: make sure this works
+        //TODO: make sure this works
         if (!(cardIndex >= 0 && cardIndex <= DeckManager.getDeck(currDeck).cards.size())) {
 
             throw new CardLiException("Incorrect index for Card!");
