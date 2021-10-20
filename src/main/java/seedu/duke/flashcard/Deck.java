@@ -26,6 +26,17 @@ public class Deck {
         this.name = "Untitled";
     }
 
+    public void editCard(String[] args) {
+        if (args[1].equalsIgnoreCase("front")) {
+            cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
+        } else {
+            cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
+        }
+        System.out.println("Changed " + args[1] +  " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
+                + args[2]);
+
+    }
+
     public String getName() {
         return name;
     }

@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.Duke;
+import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckList;
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
@@ -8,7 +8,6 @@ import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.InvalidCommandFormatException;
-import seedu.duke.flashcard.DeckList;
 import seedu.duke.ui.CardLiUi;
 
 import java.util.logging.Level;
@@ -20,6 +19,11 @@ import java.util.logging.Logger;
 public class Parser {
 
     private static final Logger logger = Logger.getLogger(Parser.class.getName());
+
+    public static int getCurrDeck() {
+        return currDeck;
+    }
+
     private static int currDeck;
 
     /**
@@ -35,7 +39,7 @@ public class Parser {
         case "enter":
             String enterInput = removeCommandWord(input, command.length());
             setCurrentDeck(enterInput);
-            System.out.println("You are now in deck " + enterInput);
+            System.out.println("You are now in deck " + enterInput + ". Type \"help\"for more commands.");
             break;
         case "adddeck":
             String addDeckInput = removeCommandWord(input, command.length());
@@ -100,6 +104,7 @@ public class Parser {
         }
     }
 
+    //TODO: make the rest of the functions work
     public static void parseCommandWithinDeck(String input) throws CardLiException {
         String command = getCommand(input);
         switch (command) {
@@ -111,17 +116,28 @@ public class Parser {
             break;
         case "delete": //delete <index/front>
             String deleteInput = removeCommandWord(input, command.length());
-            DeckList.prepareToDeleteCardFromDeck(deleteInput);
+            DeckList.decks.get(currDeck).prepareToDeleteFlashCard(deleteInput);
             logger.log(Level.INFO, "delete command parsed and executed");
             break;
-        case "editcard": //editcard /deck <cat index> /card <card index> /side <side> /input <input>
+        case "edit": //edit /card <card index> /side <side> /input <input>
             String editCardInput = removeCommandWord(input, command.length());
             String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
-            DeckList.editCard(parsedEditCardArgs);
+            DeckList.decks.get(currDeck).editCard(parsedEditCardArgs);
             logger.log(Level.INFO, "editcard command parsed and executed");
             break;
+        case "view": //view
+            DeckList.decks.get(currDeck).viewAllFlashCards();
+            break;
+        case "help": //help
+            CardLiUi.helpInDeck();
+            break;
         case "exit":
-
+            System.out.println("Exiting to main menu.");
+            break;
+        default:
+            System.out.println("\tThat's not a command.");
+            logger.log(Level.INFO, "command was unrecognised and could not be parsed");
+            break;
         }
 
     }
@@ -145,44 +161,39 @@ public class Parser {
      * Returns the parsed contents after the command word for the edit function.
      *
      * @param input user's input
+     * @return a String array containing the most important information (Card index, side to change, what to change)
      * @throw FieldEmptyException, InvalidCommandFormatException, DeckNotExistException, CardLiException
-     * @return a String array containing the most important information (Deck index, Card index, side to change
-     *      and what to change)
      */
     public static String[] parseEditCardCommand(String input) throws CardLiException {
         logger.setLevel(Level.WARNING);
         if (input.isEmpty()) {
             throw new FieldEmptyException("You cannot leave any field empty! Format should be\n"
-                    + "editcard /deck <deck index> /card <card index> /side <side> /input <input>");
+                    + "editcard /card <card index> /side <side> /input <input>");
         }
         logger.log(Level.INFO, "splitting input");
         String trimmedInput = input.trim();
-        String[] args = trimmedInput.split(" ",8);
+        String[] args = trimmedInput.split(" ", 6);
         logger.log(Level.INFO, "checking if there are enough arguments");
-        if (args.length != 8) {
+        if (args.length != 6) {
             throw new FieldEmptyException("You cannot leave the entire field empty! Format should be\n"
-                    + "editcard /deck <deck index> /card <card index> /side <side> /input <input>");
+                    + "editcard /card <card index> /side <side> /input <input>");
         }
         logger.log(Level.INFO, "checking if command keywords used are correct");
-        if (!args[0].equalsIgnoreCase("/deck") | !args[2].equalsIgnoreCase("/card")
-                | !args[4].equalsIgnoreCase("/side") | ! args[6].equalsIgnoreCase("/input")) {
+        if (!args[0].equalsIgnoreCase("/card")
+                | !args[2].equalsIgnoreCase("/side") | !args[4].equalsIgnoreCase("/input")) {
             throw new InvalidCommandFormatException("Incorrect editcard command! Format should be\n"
-                    + "editcard /deck <deck index> /card <card index> /side <side> /input <input>");
+                    + "editcard /card <card index> /side <side> /input <input>");
         }
-        int catIndex = Integer.parseInt(args[1]);
-        int cardIndex = Integer.parseInt(args[3]);
+        int cardIndex = Integer.parseInt(args[1]) - 1;
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
-        if (!(catIndex > 0 && catIndex <= DeckList.getDecksSize())) {
-            throw new DeckNotExistException("Incorrect index for Deck!");
-        }
-        if (!(cardIndex > 0 && cardIndex <= DeckList.getDeck(catIndex - 1).getCardsSize())) {
+        if (!(cardIndex >= 0 && cardIndex <= DeckList.getDeck(currDeck).cards.size())) {
             throw new CardLiException("Incorrect index for Card!");
         }
         logger.log(Level.INFO, "checking if user inputted a correct side");
-        if (!(args[5].equalsIgnoreCase("front") | args[5].equalsIgnoreCase("back"))) {
+        if (!(args[3].equalsIgnoreCase("front") | args[3].equalsIgnoreCase("back"))) {
             throw new CardLiException("What side is this? Its only either front or back");
         }
-        String[] editArgs = { args[1], args[3], args[5], args[7]};
+        String[] editArgs = {args[1], args[3], args[5]};
         return editArgs;
     }
 
@@ -215,8 +226,8 @@ public class Parser {
      * Returns the parsed contents after the command word.
      *
      * @param input user's input
-     * @throw FieldEmptyException, InvalidCommandFormatException, DeckNotExistException
      * @return a String array containing the most important information (Deck index, what to change)
+     * @throw FieldEmptyException, InvalidCommandFormatException, DeckNotExistException
      */
     public static String[] parseEditDeckCommand(String input) throws CardLiException {
         logger.setLevel(Level.WARNING);
@@ -225,7 +236,7 @@ public class Parser {
                     + "editdeck /deck <deck index> /input <input>");
         }
         String trimmedInput = input.trim();
-        String[] args = trimmedInput.split(" ",4);
+        String[] args = trimmedInput.split(" ", 4);
         logger.log(Level.INFO, "checking if there are enough arguments");
         if (args.length != 4) {
             throw new FieldEmptyException("You cannot leave any field empty! Format should be\n"
