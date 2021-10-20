@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Deck {
 
-    public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    private ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -57,20 +57,6 @@ public class Deck {
 
     public int getDeckSize() {
         return cards.size();
-    }
-
-    public void printNoSlashFoundError() {
-        System.out.println("\tRemember that a command must contain \"/bac\"!");
-    }
-
-    public void printFieldEmptyError() {
-        System.out.println("\tRemember that both sides of the flashcard must be filled in!");
-    }
-
-    private void printInvalidAddFormat() {
-        System.out.println("\tHey, the command you printed is invalid.");
-        System.out.println("\tThe correct command format to add a flash card is as follows:");
-        System.out.println("\tadd <deck index> /fro <word on front> /bac <word on back>");
     }
 
     private void printDoesNotExistError() {
@@ -218,15 +204,11 @@ public class Deck {
     public void addFlashCard(FlashCard card) {
         cards.add(card);
     }
-//TODO: fix this
+
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
 
     }
-
-
-  
-  
 
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);

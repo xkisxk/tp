@@ -53,8 +53,20 @@ public class TestManager {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
-        Deck deckToReview = TestHistory.getLowScoringCards();
-        reviewCards(deckToReview);
+        String input = ui.getUserMessage();
+        try {
+            logger.log(Level.INFO, "choosing deck to test");
+            int deckIndex = TestParser.toInt(input);
+            Deck deckToReview = TestHistory.getLowScoringCards(deckIndex);
+            reviewCards(deckToReview);
+            DeckManager.deleteDeck(deckToReview);
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("This deck doesn't exist.");
+            logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
+        }
     }
 
     /**

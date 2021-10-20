@@ -11,8 +11,8 @@ import java.util.logging.Logger;
  * Contains all the user's answers to the tested deck.
  */
 public class AnswerList {
-    private ArrayList<Answer> answerList;
-    private Deck deck;
+    private final ArrayList<Answer> answerList;
+    private final Deck deck;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     /**
@@ -63,7 +63,7 @@ public class AnswerList {
     }
 
     /**
-     * Gets the score of the particular test.
+     * Gets the score of a particular test.
      *
      * @return score of the test
      */

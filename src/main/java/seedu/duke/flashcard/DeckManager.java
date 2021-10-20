@@ -72,6 +72,10 @@ public class DeckManager {
         decks.add(new Deck(deckName));
     }
 
+    public static void deleteDeck(Deck deck) {
+        decks.remove(deck);
+    }
+
     public static ArrayList<Deck> getDecks() {
         return decks;
     }

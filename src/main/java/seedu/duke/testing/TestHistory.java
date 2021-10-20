@@ -33,12 +33,11 @@ public class TestHistory {
         assert DeckManager.getDecks().size() > 0 : "deckList must not be empty";
         System.out.println("Listing total scores of flashcards for all tests");
         for (Deck deck : DeckManager.getDecks()) {
-            for (FlashCard card : deck.cards) {
+            for (FlashCard card : deck.getCards()) {
                 ui.printScoreWithCard(card);
             }
         }
     }
-
 
     public static void prepareToViewTest(String input) {
         try {
@@ -77,17 +76,15 @@ public class TestHistory {
 
     /**
      * Gets all the low scoring cards and put them into a deck.
-     * The cards that are put into the deck are the same cards objects, in other
-     * words they are not new FlashCard objects.
      *
      * @return deck of low scoring cards
      */
-    public static Deck getLowScoringCards() {
+    private static Deck getLowScoringCardsFromAllDecks() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Collecting low scoring cards");
         Deck reviewDeck = new Deck("Review");
         for (Deck deck : DeckManager.getDecks()) {
-            for (FlashCard card : deck.cards) {
+            for (FlashCard card : deck.getCards()) {
                 if (isLowScoring(card)) {
                     reviewDeck.addFlashCard(card);
                     logger.log(Level.INFO, "Added a low scoring card");
@@ -95,6 +92,43 @@ public class TestHistory {
             }
         }
         return reviewDeck;
+    }
+
+    /**
+     * Gets all the low scoring cards from a deck and put them into a deck.
+     *
+     * @return deck of low scoring cards
+     */
+    private static Deck getLowScoringCardsFromADeck(Deck deck) {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Collecting low scoring cards");
+        Deck reviewDeck = new Deck("Review");
+        for (FlashCard card : deck.getCards()) {
+            if (isLowScoring(card)) {
+                reviewDeck.addFlashCard(card);
+                logger.log(Level.INFO, "Added a low scoring card");
+            }
+        }
+        return reviewDeck;
+    }
+
+    /**
+     * Gets all the low scoring cards and put them into a deck.
+     * If index is -1, get low scaring cards from all decks.
+     * Else get low scoring cards from the deck from that index.
+     * The cards that are put into the deck are the same cards objects, in other
+     * words they are not new FlashCard objects.
+     *
+     * @return deck of low scoring cards
+     */
+    public static Deck getLowScoringCards(int index) {
+        if (index == -1) {
+            return getLowScoringCardsFromAllDecks();
+        } else if (index  >= 0) {
+            return getLowScoringCardsFromADeck(DeckManager.getDeck(index));
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**

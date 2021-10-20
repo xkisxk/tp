@@ -63,6 +63,8 @@ public class TestUi {
 
     public void printStartReview() {
         System.out.println("Starting review...");
+        System.out.println("Which deck do you want to review?");
+        System.out.print("Input an integer (-1 to review all decks): ");
     }
 
     public void printReviewCard() {
@@ -73,14 +75,14 @@ public class TestUi {
         int score = answerList.getScore();
         int totalScore = answerList.getSize();
         System.out.println(
-                "Score for " + index + " " + answerList.getDeck().getName()
+                "Score for test " + index + " " + answerList.getDeck().getName()
                         + " " + score + "/" + totalScore
-                        + " " + score / totalScore * 100 + "%");
+                        + " " + (double) score / totalScore * 100 + "%");
     }
 
     public void printScore(int index, int score, int totalScore) {
         System.out.println("You scored " + score + " out of " + totalScore + " for test " + (index + 1));
-        System.out.println("That is " + score / totalScore * 100 + "%!");
+        System.out.println("That is " + (double) score / totalScore * 100 + "%!");
     }
 
     public void printScoreWithCard(FlashCard card) {
