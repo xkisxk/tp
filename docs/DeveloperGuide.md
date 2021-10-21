@@ -11,8 +11,43 @@ single platform.
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
 original source as well}
 
-## Design & implementation
+## Design
+CardLi has one main component, ```Duke```, which is the entry point to the App.
 
+The rest of the App consists of the following components:
+* ```Parser```: Interfaces with the user by reading and interpreting input
+* ```UI```: The UI of the App
+* ```Logic```: The command executor
+* ```Storage```: Reads and writes data from and to an external file(s)
+
+Each component is explained in the sections below.
+
+
+### Parser Component
+The Parser component consists of two classes, ```Parser``` and ```TestParser```. Parser deals with input relating to adding, deleting, editing and viewing flashcards and decks, while ```TestParser``` deals with input relating to testing.
+
+How the Parser component works:
+* Identifies the command input by the user
+* Parses command arguments
+* Executes commands using the Logic component
+* Handles exceptions relating to invalid arguments
+
+### UI Component
+The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
+
+### Logic Component
+The Logic component consists of the classes ```DeckManager```, ```Deck```, ```Flashcard```, ```TestManager```, ```AnswerList``` and ```Answer```. It executes user commands by calling on methods in its classes when appropriate with the appropriate arguments as given by the Parser component.
+
+CardLi’s user commands operate on a 2-tier structure: a Systemwide level and a Deck level. The Systemwide level commands execute commands related to the management of decks, while the Deck level commands execute commands related to flashcards in a specific deck. The specific implementations are elaborated on in the *Implementation* section.
+
+### Storage Component
+The Storage component:
+* Saves all the decks
+* Saves all the flashcards
+* Remembers which deck each flashcard belongs to
+* Saves the results of each test
+
+## Implementation
 ### Editing a Deck
 
 This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
