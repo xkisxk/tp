@@ -197,8 +197,8 @@ public class Parser {
         int cardIndex = Integer.parseInt(args[1]) - 1;
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
         //TODO: make sure this works
-        if (!(cardIndex >= 0 && cardIndex <= DeckManager.getDeck(currDeck).getCards().size())) {
 
+        if (!(cardIndex >= 0 && cardIndex <= DeckManager.getDeck(currDeck).getCards().size())) {
             throw new CardLiException("Incorrect index for Card!");
         }
         logger.log(Level.INFO, "checking if user inputted a correct side");
