@@ -1,10 +1,9 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.testing.TestManager;
 import seedu.duke.exceptions.CardLiException;
-import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.NoSlashException;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,8 +26,37 @@ public class Deck {
         this.name = "Untitled";
     }
 
+    public void editCard(String[] args) {
+        if (args[1].equalsIgnoreCase("front")) {
+            cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
+        } else {
+            cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
+        }
+        System.out.println("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
+                + args[2]);
+
+    }
+
     public String getName() {
         return name;
+    }
+
+    public ArrayList<FlashCard> getCards() {
+        return cards;
+    }
+
+    public void setDeckName(String input) {
+        this.name = input;
+    }
+
+    public FlashCard getCard(int index) {
+        assert getDeckSize() > 0;
+        assert (index >= 0 && index < getDeckSize());
+        return cards.get(index);
+    }
+
+    public int getDeckSize() {
+        return cards.size();
     }
 
     public void printNoSlashFoundError() {
@@ -61,10 +89,10 @@ public class Deck {
     private void printCardInfo(String front, String back) {
         System.out.println("\tFront: " + front);
         System.out.println("\tBack: " + back);
-        if (cards.size() == 1) {
-            System.out.println("\tYou have " + cards.size() + " card in your card deck.");
+        if (getDeckSize() == 1) {
+            System.out.println("\tYou have " + getDeckSize() + " card in your card deck.");
         } else {
-            System.out.println("\tYou have " + cards.size() + " cards in your card deck.");
+            System.out.println("\tYou have " + getDeckSize() + " cards in your card deck.");
         }
     }
 
@@ -73,18 +101,10 @@ public class Deck {
         printCardInfo(front, back);
     }
 
-    public void prepareToAddFlashCard(String input) {
-        try {
-            String[] flashCardWords = trimStrings(input);
-            addFlashCard(flashCardWords[0], flashCardWords[1]);
-            printNewFlashCard(flashCardWords[0], flashCardWords[1]);
-        } catch (NoSlashException e) {
-            printInvalidAddFormat();
-            printNoSlashFoundError();
-        } catch (FieldEmptyException e) {
-            printInvalidAddFormat();
-            printFieldEmptyError();
-        }
+    public void prepareToAddFlashCard(String[] input) {
+        //String[] flashCardWords = trimStrings(input);
+        addFlashCard(input[0], input[1]);
+        printNewFlashCard(input[0], input[1]);
     }
 
     /**
@@ -122,9 +142,9 @@ public class Deck {
         if (cards.isEmpty()) {
             throw new CardLiException();
         }
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
-        if (!isInteger(input)) {
+        if (!Parser.isInteger(input)) {
             deleteFlashCardByDescription(input);
         } else {
             deleteFlashCardByIndex(input);
@@ -136,15 +156,15 @@ public class Deck {
      *
      * @param index user's input (index of the card to be deleted)
      * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
-     *              or index of card is less than 1
+     *                         or index of card is less than 1
      */
     private void deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
-        if (!((indexToBeRemoved < cards.size()) && (indexToBeRemoved >= 0))) {
+        if (!((indexToBeRemoved < getDeckSize()) && (indexToBeRemoved >= 0))) {
             throw new CardLiException();
         }
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
 
         FlashCard card = cards.get(indexToBeRemoved);
@@ -159,8 +179,8 @@ public class Deck {
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
     private void deleteFlashCardByDescription(String description) throws CardLiException {
-        assert cards.size() > 0 : "cards.size() should be greater than 0";
-        for (int i = 0; i < cards.size(); i++) {
+        assert getDeckSize() > 0 : "cards.size() should be greater than 0";
+        for (int i = 0; i < getDeckSize(); i++) {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
                 cards.remove(card);
@@ -173,21 +193,6 @@ public class Deck {
 
     private boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
-    }
-
-    /**
-     * Checks if the given input is an integer or not.
-     *
-     * @param input input given by user
-     * @return true if input is an integer, false otherwise
-     */
-    private boolean isInteger(String input) {
-        for (int i = 0; i < input.length(); i += 1) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
@@ -204,60 +209,50 @@ public class Deck {
         return flashCardWords;
     }
 
+
     public void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));
     }
 
-    //getter for index of a flashcard
+
+    public void addFlashCard(FlashCard card) {
+        cards.add(card);
+    }
+
+    //TODO: fix this
+    public void addFlashCard(String front, String back, int userScore, int totalScore) {
+        cards.add(new FlashCard(front, back, userScore, totalScore));
+
+    }
+
+
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
     }
 
-    public void viewAFlashCard(int cardIndex) {
-        System.out.println("*================FRONT================* "
-                + "*===============BACK==================*");
-        System.out.println();
-
-        String front = cards.get(cardIndex).getFront();
-        String frontSpaces = "";
-        for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces += " ";
-        }
-
-        String back = cards.get(cardIndex).getBack();
-        String backSpaces = "";
-        for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces += " ";
-        }
-
-        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
-        System.out.println();
-        System.out.println("*=====================================* "
-                + "*=====================================*");
-    }
-
     public void viewAllFlashCards() {
-        if (cards.size() > 0) {
-            for (int i = 0; i < cards.size(); i++) {
+        if (getDeckSize() > 0) {
+            for (int i = 0; i < getDeckSize(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
-                viewAFlashCard(i);
+                FlashCard card = cards.get(i);
+                card.viewFlashCard();
             }
         } else {
             System.out.println("This deck has no cards.");
         }
     }
 
-    /**
-     * Returns the String on the front of the flashCard.
-     */
-    public String getFrontOfCard(int cardIndex) {
-        return cards.get(cardIndex).getFront();
-    }
+    @Override
+    public String toString() {
+        String cardsString = "";
+        int cardsCount = getDeckSize();
 
-    /**
-     * Returns the String on the back of the flashCard.
-     */
-    public String getBackOfCard(int cardIndex) {
-        return cards.get(cardIndex).getBack();
+        for (int i = 0; i < cardsCount; i++) {
+            cardsString += cards.get(i);
+        }
+
+        return getName() + '\n'
+                + getDeckSize() + '\n'
+                + cardsString;
     }
 }
