@@ -8,7 +8,7 @@ import seedu.duke.parser.deck.DeleteCardParser;
 
 public class DeleteCardCommand extends Command {
 
-    private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
+    private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty!";
 
     private DeleteCardParser parser;
     private Deck deck;
