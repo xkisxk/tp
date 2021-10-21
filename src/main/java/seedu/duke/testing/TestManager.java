@@ -38,8 +38,8 @@ public class TestManager {
             AnswerList userAnswers = new AnswerList(deckToTest);
 
             testAllCardsShuffled(userAnswers);
-            TestHistory.addAnswerList(userAnswers);
             markTest(userAnswers);
+            TestHistory.addAnswerList(userAnswers);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -143,7 +143,7 @@ public class TestManager {
         //there must be at least one response to start a test
         assert userAnswers.getSize() > 0;
         for (Answer response : userAnswers.getAnswerList()) {
-            markAnswer(userAnswers, response);
+            markQuestion(userAnswers, response);
         }
         ui.printDividerLine();
         int answersCount = userAnswers.getSize();
@@ -155,7 +155,7 @@ public class TestManager {
     }
 
     // Marks the user's answer
-    private static void markAnswer(AnswerList userAnswers, Answer response) {
+    private static void markQuestion(AnswerList userAnswers, Answer response) {
         int responseNumber = userAnswers.getAnswerIndex(response);
         FlashCard question = userAnswers.getDeck().getCard(responseNumber);
         String userAnswer = response.getAnswer();

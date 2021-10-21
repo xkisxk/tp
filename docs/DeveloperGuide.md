@@ -16,8 +16,8 @@ Currently, test feature is implemented on a systemwide level and is handled by `
 `TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
 and the parsing respectively during the test.
 
-At the start of the test, the user will choose to test themselves with a single deck of their choosing 
-or all decks at once. This is dependent on the integer the user inputs.
+At the start of the test, the user will choose to test themselves with a single deck or all decks at once.
+This is dependent on the integer the user inputs.
 
 In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
 `DeckManager` depending on the condition which is shown by the sequence diagram below. The `AnswerList`
@@ -26,7 +26,17 @@ diagram above.
 
 ![sequence diagram](../docs/assets/getTestDeckSequenceDiagram.png)
 
+After initializing the `AnswerList`, the testing begins. The `Deck` gets shuffled, then
+the user will answer the question one at a time. This process is repeated for the entire `Deck` that
+is being tested which is shown below by the sequence diagram.
 
+![sequence diagram](../docs/assets/testAllCardsShuffledSequenceDiagram.png)
+
+After all cards have been tested, the marking process begins as shown by the sequence diagram below.
+For every correct answer, the user's score increments and `TestUi` will print a correct answer message.
+After marking all the questions, the user's results will be printed and saved in `TestHistory`.
+
+![sequence diagram](../docs/assets/markTestSequenceDiagram.png)
 ## Product scope
 
 ### Target user profile

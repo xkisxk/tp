@@ -4,6 +4,8 @@ participant ":AnswerList" as AnswerList
 participant ":DeckManager" as DeckManager
 participant ":Deck" as Deck
 
+activate TestManager
+
 TestManager -> DeckManager : getTestDeck(deckIndex:int)
 activate DeckManager
 
@@ -25,4 +27,8 @@ end
 
 TestManager -> AnswerList : AnswerList(deckToTest)
 activate AnswerList
+
+TestManager <-- AnswerList : userAnswers
+deactivate AnswerList
+
 @enduml
