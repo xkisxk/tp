@@ -42,6 +42,23 @@ public class DeckManager {
         return decks.get(index);
     }
 
+
+    public static Deck getTestDeck(int index) {
+        if (index == -1) {
+            Deck deckToTest = new Deck("Test");
+            for (Deck deck : DeckManager.getDecks()) {
+                for (FlashCard card : deck.getCards()) {
+                    deckToTest.addFlashCard(card);
+                }
+            }
+            return deckToTest;
+        }
+        if (hasDeck(index)) {
+            return decks.get(index);
+        }
+        throw new IndexOutOfBoundsException("This deck does not exist.");
+    }
+
     public static int getDecksSize() {
         return decks.size();
     }
@@ -68,8 +85,16 @@ public class DeckManager {
         return false;
     }
 
+    public static boolean hasDeck(int deckIndex) {
+        return deckIndex >= 0 && deckIndex < DeckManager.getDecksSize();
+    }
+
     private static void addDeck(String deckName) {
         decks.add(new Deck(deckName));
+    }
+
+    public static void deleteDeck(Deck deck) {
+        decks.remove(deck);
     }
 
     public static ArrayList<Deck> getDecks() {

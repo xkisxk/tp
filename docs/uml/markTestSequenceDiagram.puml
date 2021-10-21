@@ -1,0 +1,52 @@
+@startuml
+participant "TestManager" as TestManager << class >>
+participant ":AnswerList" as AnswerList
+participant ":Answer" as Answer
+participant ":TestHistory" as TestHistory
+
+activate TestManager
+
+TestManager -> TestManager : markTest(userAnswers)
+activate TestManager
+
+loop every answer in (userAnswers)
+
+TestManager -> TestManager : markQuestion(userAnswers, answer)
+activate TestManager
+
+alt answer is correct
+TestManager -> AnswerList : incrementUserScore()
+activate AnswerList
+AnswerList --> TestManager
+deactivate AnswerList
+
+TestManager -> TestUi : printCorrectAnsMessage()
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
+else
+TestManager -> TestUi : printIncorrectAnsMessage()
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
+end
+
+TestManager --> TestManager
+deactivate TestManager
+end
+
+TestManager -> TestUi : printResult(score, totalScore)
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
+
+TestManager --> TestManager
+deactivate TestManager
+
+TestManager -> TestHistory : addAnswerList(userAnswers)
+activate TestHistory
+TestHistory --> TestManager
+deactivate TestHistory
+deactivate TestManager
+
+@enduml
