@@ -54,17 +54,17 @@ public class DeckManager {
         return decks.size();
     }
 
-    public void prepareToAddDeck(String deckName) {
+    public String prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
             addDeck(deckName);
-            printNewDeck(deckName);
+            return printNewDeck(deckName);
         } else {
-            System.out.println("The category you are trying to create already exists.");
+            return ("The category you are trying to create already exists.");
         }
     }
 
-    private void printNewDeck(String deckName) {
-        System.out.println("You have just made the deck <<" + deckName + ">>.");
+    private String printNewDeck(String deckName) {
+        return ("You have just made the deck <<" + deckName + ">>.");
     }
 
     private boolean hasDeck(String categoryName) {
