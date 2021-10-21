@@ -1,0 +1,34 @@
+@startuml
+participant ":User" as User
+participant ":Parser" as Parser
+participant ":EditDeckCommand" as EditDeckCommand
+participant ":DeckManager" as DeckManager
+participant ":Deck" as Deck
+
+[-> Parser : parse("test")
+activate Parser
+
+ref over Parser, EditDeckCommand : parseEditDeckCommand(input)
+
+[<-- Parser : EditDeckCommand(args)
+deactivate Parser
+
+[->EditDeckCommand : execute()
+activate EditDeckCommand
+
+EditDeckCommand -> DeckManager : get(deckIndex)
+activate DeckManager
+
+DeckManager --> EditDeckCommand : deck
+deactivate DeckManager
+
+EditDeckCommand -> Deck : setDeckName(newContent)
+activate Deck
+
+Deck --> EditDeckCommand
+deactivate Deck
+
+[<-- EditDeckCommand
+deactivate EditDeckCommand
+
+@enduml

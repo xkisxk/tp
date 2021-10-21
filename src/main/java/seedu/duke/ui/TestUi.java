@@ -23,6 +23,10 @@ public class TestUi {
         this.out = out;
     }
 
+    public void showMessage(String input) {
+        System.out.println(input);
+    }
+
     public String getUserMessage() {
         return in.nextLine();
     }

@@ -124,11 +124,11 @@ public class TestHistory {
     public static Deck getLowScoringCards(int index) {
         if (index == -1) {
             return getLowScoringCardsFromAllDecks();
-        } else if (index  >= 0) {
-            return getLowScoringCardsFromADeck(DeckManager.getDeck(index));
-        } else {
-            throw new IndexOutOfBoundsException();
         }
+        if (DeckManager.hasDeck(index)) {
+            return getLowScoringCardsFromADeck(DeckManager.getDeck(index));
+        }
+        throw new IndexOutOfBoundsException("This deck does not exist.");
     }
 
     /**

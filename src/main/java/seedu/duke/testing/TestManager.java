@@ -1,5 +1,6 @@
 package seedu.duke.testing;
 
+import seedu.duke.exceptions.EmptyDeckException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.TestParser;
@@ -21,6 +22,8 @@ public class TestManager {
 
     /**
      * Enters test mode and requires user to input the index of the deck that they want to be tested.
+     * If the input is "all", all decks will be tested. If the input is an integer, the deck at
+     * that index will be tested.
      */
     public static void startTest() { //TODO: handle case where there are no cards in the deck
         logger.setLevel(Level.WARNING);
@@ -31,18 +34,21 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckManager.getDecks().get(deckIndex);
-            AnswerList answersResponse = new AnswerList(deck);
+            Deck deck = DeckManager.getTestDeck(deckIndex);
+            AnswerList userAnswers = new AnswerList(deck);
 
-            testAllCardsShuffled(answersResponse);
-            TestHistory.addAnswerList(answersResponse);
-            viewTestResult(answersResponse);
+            testAllCardsShuffled(userAnswers);
+            TestHistory.addAnswerList(userAnswers);
+            viewTestResult(userAnswers);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("This deck doesn't exist.");
+            ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
+        } catch (EmptyDeckException e) {
+            ui.showMessage(e.getMessage());
+            logger.log(Level.WARNING, "Empty deck");
         }
     }
 
@@ -64,42 +70,43 @@ public class TestManager {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("This deck doesn't exist.");
+            ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
+        } catch (EmptyDeckException e) {
+            ui.showMessage("Congratulations you don't have any low scoring cards!");
         }
     }
 
     /**
      * Reviews the lowest scoring deck of all tests.
      */
-    public static void reviewCards(Deck deckToReview) {
+    public static void reviewCards(Deck deckToReview) throws EmptyDeckException {
         logger.log(Level.INFO, "Reviewing low scoring cards");
         ui.printReviewCard();
         AnswerList answerList = new AnswerList(deckToReview);
         testAllCardsShuffled(answerList);
-        if (!answerList.isEmpty()) {
-            TestHistory.addAnswerList(answerList);
-            viewTestResult(answerList);
-        } else {
-            System.out.println("Congratulations you don't have any low scoring cards!");
-        }
+        TestHistory.addAnswerList(answerList);
+        viewTestResult(answerList);
     }
 
     /**
-     * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
+     * Goes through all the flashcards and stores the user's responses into userAnswer ArrayList.
      */
-    public static void testAllCardsShuffled(AnswerList answersResponse) {
+    public static void testAllCardsShuffled(AnswerList userAnswer) throws EmptyDeckException {
         logger.setLevel(Level.WARNING);
 
+        ArrayList<FlashCard> deckReplicate = userAnswer.getDeck().getCards();
 
-        ArrayList<FlashCard> deckReplicate = answersResponse.getDeck().getCards();
+        if (deckReplicate.isEmpty()) {
+            throw new EmptyDeckException("There are no cards to test.");
+        }
+
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
 
         for (FlashCard question : deckReplicate) {
-
             logger.log(Level.INFO, "starting to test a new card");
-            int questionNumber = answersResponse.getDeck().getCardIndex(question);
+            int questionNumber = userAnswer.getDeck().getCardIndex(question);
             ui.printDividerLine();
             ui.printQuestion(question, questionNumber);
             //get user's answer to the card shown(currently assume user inputs only his/her answer)
@@ -114,9 +121,9 @@ public class TestManager {
                 ui.printAnswerEmptyError();
             }
             logger.log(Level.INFO, "Saving answer");
-            answersResponse.addAnswer(userResponse, questionNumber);
-            assert !answersResponse.isEmpty();
-            assert answersResponse.getSize() > 0;
+            userAnswer.addAnswer(userResponse, questionNumber);
+            assert !userAnswer.isEmpty();
+            assert userAnswer.getSize() > 0;
             logger.log(Level.INFO, "Finished this card's testing");
         }
 
@@ -129,16 +136,16 @@ public class TestManager {
     /**
      * Prints results of test to system output.
      */
-    public static void viewTestResult(AnswerList answersResponse) {
+    public static void viewTestResult(AnswerList userAnswers) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");
 
         //there must be at least one response to start a test
-        assert answersResponse.getSize() > 0;
-        for (Answer response : answersResponse.getAnswerList()) {
-            int responseNumber = answersResponse.getAnswerIndex(response);
-            FlashCard question = answersResponse.getDeck().getCard(responseNumber);
+        assert userAnswers.getSize() > 0;
+        for (Answer response : userAnswers.getAnswerList()) {
+            int responseNumber = userAnswers.getAnswerIndex(response);
+            FlashCard question = userAnswers.getDeck().getCard(responseNumber);
             String userAnswer = response.getAnswer();
 
             ui.printDividerLine();
@@ -159,7 +166,7 @@ public class TestManager {
             question.incrementTotalScore();
         }
         ui.printDividerLine();
-        int answersCount = answersResponse.getSize();
+        int answersCount = userAnswers.getSize();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
         System.out.println("That is " + Double.valueOf(score) / answersCount * 100 + "%!");
