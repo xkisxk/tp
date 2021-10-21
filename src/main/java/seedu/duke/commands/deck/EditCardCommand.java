@@ -12,8 +12,8 @@ public class EditCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
             + "Format should be\n edit /card <card index> /side <side> /input <input>";
-    private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect editcard command! Format should be\n"
-            + "editcard /card <card index> /side <side> /input <input>";
+    private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! Format should be\n"
+            + "edit /card <card index> /side <side> /input <input>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for Card!";
     private static final String INVALID_SIDE_ERROR_MESSAGE = "What side is this? It's only either front or back.";
 

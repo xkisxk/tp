@@ -15,4 +15,9 @@ public abstract class Command {
     }
 
     public abstract CommandResult execute();
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

@@ -55,7 +55,7 @@ public class InnerParser {
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "help":
-            command = new HelpCommand();
+            command = new HelpInDeckCommand();
             logger.log(Level.INFO, "help command parsed and executed");
             break;
         case "exit":

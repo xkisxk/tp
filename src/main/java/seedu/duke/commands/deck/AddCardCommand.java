@@ -3,6 +3,7 @@ package seedu.duke.commands.deck;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.FieldEmptyException;
+import seedu.duke.exceptions.InvalidCommandFormatException;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.parser.deck.AddCardParser;
 
@@ -11,7 +12,9 @@ import java.util.Locale;
 public class AddCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n add /fro <words on front> /bac <words on back>";
+            + "Format should be\n add /f <words on front> /b <words on back>";
+    private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect add command! Format should be\n"
+            + "add /f <front> /b <back>";
 
     private AddCardParser parser;
     private Deck deck;
@@ -30,13 +33,17 @@ public class AddCardCommand extends Command {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
             String[] parameters = parser.parseArguments(super.arguments);
+
+            if (!parameters[0].equalsIgnoreCase("/f") || !parameters[2].equalsIgnoreCase("/b")) {
+                throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
+            }
             String front = parameters[0];
             String back = parameters[1];
             if (front.isEmpty() || back.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
             result = new CommandResult(deck.prepareToAddFlashCard(parameters));
-        } catch (FieldEmptyException e) {
+        } catch (FieldEmptyException | InvalidCommandFormatException e) {
             result = new CommandResult(e.getMessage());
         }
         return result;

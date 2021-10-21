@@ -51,15 +51,15 @@ public class Duke {
             Command command = outerParser.parseCommand(input);
             CommandResult result = command.execute();
             ui.printResult(result);
+            exitProgram = result.isExit();
             inDeck = result.isEnter();
             while (inDeck) {
                 input = ui.getUserMessage();
                 command = innerParser.parseCommand(input);
                 result = command.execute();
                 ui.printResult(result);
-                inDeck = result.isExit();
+                inDeck = !result.isExit();
             }
-            exitProgram = result.isExit();
         }
         ui.printByeMessage();
 

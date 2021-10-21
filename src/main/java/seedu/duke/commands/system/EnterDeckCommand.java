@@ -34,15 +34,16 @@ public class EnterDeckCommand extends Command {
             if (!Parser.isInteger(enterInput)) {
                 throw new NumberFormatException("That is not a number.");
             }
+
             int deckIndex = Integer.parseInt(enterInput) - 1;
-            Deck currDeck;
             if (!(deckIndex >= 0 && deckIndex < deckManager.getDecks().size())) {
                 throw new DeckNotExistException("That deck doesn't exist.");
             }
-            currDeck = deckManager.getDeck(deckIndex);
+
+            Deck currDeck = deckManager.getDeck(deckIndex);
             this.innerParser.setCurrDeck(currDeck);
-            result = new CommandResult("You are now in deck " + enterInput + ". Type \"help\"for more commands.",
-                    false, true);
+            result = new CommandResult("You are now in deck " + enterInput
+                    + ". Type \"help\" for more commands.", false, true);
         } catch (NumberFormatException | DeckNotExistException e) {
             result = new CommandResult(e.getMessage());
         }
