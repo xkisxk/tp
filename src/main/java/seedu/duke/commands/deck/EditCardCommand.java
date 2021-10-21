@@ -42,7 +42,7 @@ public class EditCardCommand extends Command {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
 
-            String card = parameters[1;
+            String card = parameters[1];
             String side = parameters[3];
             String input = parameters[5];
             if (card.isEmpty() || side.isEmpty() || input.isEmpty()) {
