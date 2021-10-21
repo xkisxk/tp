@@ -2,10 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.system.AddDeckCommand;
-import seedu.duke.commands.system.EnterDeckCommand;
-import seedu.duke.commands.system.ExitProgrammeCommand;
-import seedu.duke.commands.system.HelpCommand;
+import seedu.duke.commands.system.*;
 import seedu.duke.flashcard.DeckManager;
 
 import java.util.logging.Level;
@@ -45,7 +42,8 @@ public class OuterParser {
             logger.log(Level.INFO, "add (deck) command parsed and executed");
             break;
         case "edit": //edit /deck <cat index> /input <input>
-            // TODO
+            arguments = getCommandArguments(commandType, input);
+            command = new EditDeckCommand(arguments, this.deckManager)
             logger.log(Level.INFO, "edit (deck) command parsed and executed");
             break;
         case "delete":

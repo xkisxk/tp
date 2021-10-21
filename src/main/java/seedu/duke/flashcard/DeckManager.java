@@ -39,9 +39,9 @@ public class DeckManager {
     }
 
 
-    public void editCat(String[] args) {
+    public String editCat(String[] args) {
         decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
-        System.out.println("Changed deck " + args[0] + " to " + args[1]);
+        return ("Changed deck " + args[0] + " to " + args[1]);
     }
 
     public Deck getDeck(int index) {

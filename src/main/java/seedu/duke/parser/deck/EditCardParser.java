@@ -13,8 +13,7 @@ public class EditCardParser implements CommandArgumentParser {
 
     @Override
     public String[] parseArguments(String arguments) { //edit /card <card index> /side <side> /input <input>
-        String[] rawParameters = arguments.trim().split(" ", 6);
-        String[] parameters = {rawParameters[1], rawParameters[3], rawParameters[5]};
+        String[] parameters = arguments.trim().split(" ", 6);
         return parameters;
     }
 }
