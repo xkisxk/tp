@@ -43,7 +43,7 @@ public class OuterParser {
             break;
         case "edit": //edit /deck <cat index> /input <input>
             arguments = getCommandArguments(commandType, input);
-            command = new EditDeckCommand(arguments, this.deckManager)
+            command = new EditDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "edit (deck) command parsed and executed");
             break;
         case "delete":
