@@ -2,10 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.deck.AddCardCommand;
-import seedu.duke.commands.deck.DeleteCardCommand;
-import seedu.duke.commands.deck.ExitDeckCommand;
-import seedu.duke.commands.deck.ViewCardsCommand;
+import seedu.duke.commands.deck.*;
 import seedu.duke.commands.system.ExitProgrammeCommand;
 import seedu.duke.commands.system.HelpCommand;
 import seedu.duke.exceptions.CardLiException;
@@ -44,13 +41,8 @@ public class InnerParser {
             logger.log(Level.INFO, "add (card) command parsed and executed");
             break;
         case "edit": //edit /card <card index> /side <side> /input <input>
-            // TODO
-            /*
-            String editCardInput = removeCommandWord(input, command.length());
-            String[] parsedEditCardArgs = parseEditCardCommand(editCardInput);
-            deckManager.getDecks().get(currDeck).editCard(parsedEditCardArgs);
-
-             */
+            arguments = getCommandArguments(commandType, input);
+            command = new EditCardCommand(arguments, this.currDeck);
             logger.log(Level.INFO, "edit (card) command parsed and executed");
             break;
         case "delete":

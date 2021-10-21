@@ -15,8 +15,8 @@ public class EditCardCommand extends Command {
     private EditCardParser parser;
     private Deck deck;
 
-    public EditCardCommand(Deck deck) {
-        super("EditCardCommand");
+    public EditCardCommand(String arguments, Deck deck) {
+        super("EditCardCommand", arguments);
         this.deck = deck;
         this.parser = new EditCardParser();
     }
