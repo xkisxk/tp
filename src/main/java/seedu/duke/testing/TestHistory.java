@@ -56,7 +56,7 @@ public class TestHistory {
      */
     public static void viewTestByIndex(int index) {
         AnswerList answerList = testHistory.get(index);
-        int score = answerList.getScore();
+        int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
         ui.printScore(index, score, totalScore);
     }

@@ -25,7 +25,7 @@ public class TestManager {
      * If the input is "all", all decks will be tested. If the input is an integer, the deck at
      * that index will be tested.
      */
-    public static void startTest() { //TODO: handle case where there are no cards in the deck
+    public static void startTest() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
@@ -53,7 +53,9 @@ public class TestManager {
     }
 
     /**
-     * Enters review mode.
+     * Enters review mode and requires user to input the index of the deck that they want to be reviewed.
+     * If the input is "all", the cards will come from all decks. If the input is an integer, only cards from
+     * the deck at that index will be tested.
      */
     public static void startReview() {
         logger.setLevel(Level.WARNING);
@@ -94,82 +96,86 @@ public class TestManager {
      */
     public static void testAllCardsShuffled(AnswerList userAnswer) throws EmptyDeckException {
         logger.setLevel(Level.WARNING);
-
         ArrayList<FlashCard> deckReplicate = userAnswer.getDeck().getCards();
-
         if (deckReplicate.isEmpty()) {
             throw new EmptyDeckException("There are no cards to test.");
         }
-
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
-
         for (FlashCard question : deckReplicate) {
-            logger.log(Level.INFO, "starting to test a new card");
-            int questionNumber = userAnswer.getDeck().getCardIndex(question);
-            ui.printDividerLine();
-            ui.printQuestion(question, questionNumber);
-            //get user's answer to the card shown(currently assume user inputs only his/her answer)
-            //later version to include question number and parsing to allow for randomised testing
-            logger.log(Level.INFO, "getting user's answer to the question");
-            String userResponse = ui.getUserMessage();
-            try {
-                userResponse = TestParser.parseUserResponse(userResponse);
-            } catch (FieldEmptyException e) {
-                logger.log(Level.WARNING, "No user input");
-                userResponse = "NO ANSWER GIVEN :(";
-                ui.printAnswerEmptyError();
-            }
-            logger.log(Level.INFO, "Saving answer");
-            userAnswer.addAnswer(userResponse, questionNumber);
-            assert !userAnswer.isEmpty();
-            assert userAnswer.getSize() > 0;
-            logger.log(Level.INFO, "Finished this card's testing");
+            testCard(userAnswer, question);
         }
-
         ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         ui.printTestOver();
     }
 
+    private static void testCard(AnswerList userAnswer, FlashCard question) {
+        logger.log(Level.INFO, "starting to test a new card");
+        int questionNumber = userAnswer.getDeck().getCardIndex(question);
+        ui.printDividerLine();
+        ui.printQuestion(question, questionNumber);
+        //get user's answer to the card shown(currently assume user inputs only his/her answer)
+        //later version to include question number and parsing to allow for randomised testing
+        logger.log(Level.INFO, "getting user's answer to the question");
+        String userResponse = ui.getUserMessage();
+        try {
+            userResponse = TestParser.parseUserResponse(userResponse);
+        } catch (FieldEmptyException e) {
+            logger.log(Level.WARNING, "No user input");
+            userResponse = "NO ANSWER GIVEN :(";
+            ui.printAnswerEmptyError();
+        }
+        logger.log(Level.INFO, "Saving answer");
+        userAnswer.addAnswer(userResponse, questionNumber);
+        assert !userAnswer.isEmpty();
+        assert userAnswer.getSize() > 0;
+        logger.log(Level.INFO, "Finished this card's testing");
+    }
+
     /**
-     * Prints results of test to system output.
+     * Marks the user's answers then print their results of test to system output.
      */
     public static void viewTestResult(AnswerList userAnswers) {
         logger.setLevel(Level.WARNING);
-        int score = 0;
         logger.log(Level.INFO, "starting test check");
 
         //there must be at least one response to start a test
         assert userAnswers.getSize() > 0;
         for (Answer response : userAnswers.getAnswerList()) {
-            int responseNumber = userAnswers.getAnswerIndex(response);
-            FlashCard question = userAnswers.getDeck().getCard(responseNumber);
-            String userAnswer = response.getAnswer();
-
-            ui.printDividerLine();
-            //display front of card so that user can understand question
-            ui.printQuestion(question, responseNumber);
-            ui.printCorrectAnswer(question);
-            ui.printUserAnswer(userAnswer);
-
-            if (response.isCorrect(userAnswer, question)) {
-                score++;
-                question.incrementUserScore();
-                ui.printCorrectAnsMessage();
-                logger.log(Level.INFO, "user answer is correct");
-            } else {
-                ui.printWrongAnsMessage();
-                logger.log(Level.INFO, "user answer is wrong");
-            }
-            question.incrementTotalScore();
+            markAnswer(userAnswers, response);
         }
         ui.printDividerLine();
         int answersCount = userAnswers.getSize();
+        int score = userAnswers.getUserScore();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
         System.out.println("That is " + Double.valueOf(score) / answersCount * 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
+    }
+
+    // Marks the user's answer
+    private static void markAnswer(AnswerList userAnswers, Answer response) {
+        int responseNumber = userAnswers.getAnswerIndex(response);
+        FlashCard question = userAnswers.getDeck().getCard(responseNumber);
+        String userAnswer = response.getAnswer();
+
+        ui.printDividerLine();
+        //display front of card so that user can understand question
+        ui.printQuestion(question, responseNumber);
+        ui.printCorrectAnswer(question);
+        ui.printUserAnswer(userAnswer);
+
+        if (response.isCorrect(userAnswer, question)) {
+            userAnswers.incrementUserScore();
+            question.incrementUserScore();
+            ui.printCorrectAnsMessage();
+            logger.log(Level.INFO, "user answer is correct");
+        } else {
+            ui.printWrongAnsMessage();
+            logger.log(Level.INFO, "user answer is wrong");
+        }
+        question.incrementTotalScore();
     }
 }

@@ -8,11 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Contains all the user's answers to the tested deck.
+ * Contains all the user's answers to the tested deck and his score.
  */
 public class AnswerList {
     private final ArrayList<Answer> answerList;
     private final Deck deck;
+    private int userScore;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     /**
@@ -24,6 +25,7 @@ public class AnswerList {
     public AnswerList(Deck deck) {
         this.answerList = new ArrayList<>();
         this.deck = deck;
+        this.userScore = 0;
     }
 
     /**
@@ -38,6 +40,14 @@ public class AnswerList {
 
     public ArrayList<Answer> getAnswerList() {
         return answerList;
+    }
+
+    public int getUserScore() {
+        return userScore;
+    }
+
+    public void incrementUserScore() {
+        userScore++;
     }
 
     public Boolean isEmpty() {
@@ -60,27 +70,5 @@ public class AnswerList {
      */
     public void addAnswer(String answer, int questionIndex) {
         answerList.add(new Answer(answer, questionIndex));
-    }
-
-    /**
-     * Gets the score of a particular test.
-     *
-     * @return score of the test
-     */
-    public int getScore() {
-        logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "Starting getScore process");
-        int score = 0;
-        for (Answer response : answerList) {
-            int responseNumber = getAnswerIndex(response);
-            FlashCard question = deck.getCard(responseNumber);
-            String userAnswer = response.getAnswer();
-
-            if (response.isCorrect(userAnswer, question)) {
-                logger.log(Level.INFO, "Answer is correct");
-                score++;
-            }
-        }
-        return score;
     }
 }

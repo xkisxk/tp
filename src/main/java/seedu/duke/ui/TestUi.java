@@ -76,7 +76,7 @@ public class TestUi {
     }
 
     public void printTest(int index, AnswerList answerList) {
-        int score = answerList.getScore();
+        int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
         System.out.println(
                 "Score for test " + index + " " + answerList.getDeck().getName()
