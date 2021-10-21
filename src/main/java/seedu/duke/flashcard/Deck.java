@@ -14,6 +14,9 @@ import java.util.logging.Logger;
  */
 public class Deck {
 
+    private final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "\tCan't delete a card with no description!";
+    private final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE = "\tThe card you are trying to delete does not exist.";
+
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
@@ -74,11 +77,11 @@ public class Deck {
     }
 
     private void printDoesNotExistError() {
-        System.out.println("\tThe card you are trying to delete does not exist.");
+        System.out.println(CARD_DOES_NOT_EXIST_ERROR_MESSAGE);
     }
 
     private void printEmptyDescriptionError() {
-        System.out.println("\tCan't delete a card with no description!");
+        System.out.println(EMPTY_DESCRIPTION_ERROR_MESSAGE);
     }
 
     private String returnNewFlashCard(String front, String back) {
@@ -117,21 +120,23 @@ public class Deck {
      *
      * @param input user's input in its entirety
      */
-    public void prepareToDeleteFlashCard(String input) {
+    public String prepareToDeleteFlashCard(String input) {
         logger.entering(Deck.class.getName(), "prepareToDeleteFlashCard");
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Starting delete process");
+        String result = "";
         try {
-            deleteFlashCard(input);
+            result = deleteFlashCard(input);
         } catch (ArrayIndexOutOfBoundsException e) {
-            printEmptyDescriptionError();
+            result = EMPTY_DESCRIPTION_ERROR_MESSAGE;
             logger.log(Level.SEVERE, "Empty field error, no description found after command term");
         } catch (CardLiException e) {
-            printDoesNotExistError();
+            result = "\tThe card you are trying to delete does not exist.";
             logger.log(Level.SEVERE, "CardLi error, query card does not exist");
         }
         logger.log(Level.INFO, "End of delete process");
         logger.exiting(Deck.class.getName(), "prepareToDeleteFlashCard");
+        return result;
     }
 
     /**
@@ -140,7 +145,7 @@ public class Deck {
      * @param input description of the card to delete
      * @throws CardLiException if card does not exist
      */
-    public void deleteFlashCard(String input) throws CardLiException {
+    public String deleteFlashCard(String input) throws CardLiException {
         logger.setLevel(Level.WARNING);
         if (cards.isEmpty()) {
             throw new CardLiException();
@@ -148,9 +153,9 @@ public class Deck {
         assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
         if (!Parser.isInteger(input)) {
-            deleteFlashCardByDescription(input);
+            return deleteFlashCardByDescription(input);
         } else {
-            deleteFlashCardByIndex(input);
+            return deleteFlashCardByIndex(input);
         }
     }
 
@@ -161,7 +166,7 @@ public class Deck {
      * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
      *                         or index of card is less than 1
      */
-    private void deleteFlashCardByIndex(String index) throws CardLiException {
+    private String deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
         if (!((indexToBeRemoved < getDeckSize()) && (indexToBeRemoved >= 0))) {
@@ -181,7 +186,7 @@ public class Deck {
      * @param description user's input (front of the card to be deleted)
      * @throws CardLiException if none of the front of the cards match the description input by user
      */
-    private void deleteFlashCardByDescription(String description) throws CardLiException {
+    private String deleteFlashCardByDescription(String description) throws CardLiException {
         assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         for (int i = 0; i < getDeckSize(); i++) {
             FlashCard card = cards.get(i);
@@ -233,16 +238,22 @@ public class Deck {
         return cards.indexOf(card);
     }
 
-    public void viewAllFlashCards() {
+    public String returnAllFlashCards() { // TODO: throw exception if no cards
+        String result = "";
         if (getDeckSize() > 0) {
             for (int i = 0; i < getDeckSize(); i++) {
                 System.out.println("Card " + (i + 1) + ":");
                 FlashCard card = cards.get(i);
-                card.viewFlashCard();
+                result.concat(card.returnFlashCard());
             }
         } else {
-            System.out.println("This deck has no cards.");
+            result = "This deck has no cards.";
         }
+    }
+
+    public void viewAllFlashCards() {
+        String result = returnAllFlashCards();
+        System.out.println(result);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package seedu.duke.parser.deck;
 
-import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.parser.CommandArgumentParser;
 import seedu.duke.parser.Parser;
 
@@ -8,8 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddCardParser implements CommandArgumentParser {
-
-
 
     private Logger logger;
 

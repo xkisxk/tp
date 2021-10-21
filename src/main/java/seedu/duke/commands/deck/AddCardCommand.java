@@ -39,6 +39,6 @@ public class AddCardCommand extends Command {
         } catch (FieldEmptyException e) {
             result = new CommandResult(e.getMessage());
         }
-        return null;
+        return result;
     }
 }

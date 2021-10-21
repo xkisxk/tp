@@ -19,6 +19,7 @@ public class OuterParser {
     private InnerParser innerParser;
 
     public OuterParser(DeckManager deckManager, InnerParser innerParser) {
+        logger.setLevel(Level.WARNING);
         this.deckManager = deckManager;
         this.innerParser = innerParser;
     }
@@ -37,22 +38,32 @@ public class OuterParser {
         case "enter":
             arguments = getCommandArguments(commandType, input);
             command = new EnterDeckCommand(arguments, this.deckManager, this.innerParser);
+            logger.log(Level.INFO, "enter (deck) command parsed and executed");
         case "add":
             arguments = getCommandArguments(commandType, input);
             command = new AddDeckCommand(arguments, this.deckManager);
+            logger.log(Level.INFO, "add (deck) command parsed and executed");
             break;
         case "edit": //edit /deck <cat index> /input <input>
+            // TODO
+            logger.log(Level.INFO, "edit (deck) command parsed and executed");
             break;
         case "delete":
+            // TODO
+            logger.log(Level.INFO, "delete (deck) command parsed and executed");
             break;
         case "help":
             command = new HelpCommand();
+            logger.log(Level.INFO, "help (deck) command parsed and executed");
             break;
         case "bye":
             command = new ExitProgrammeCommand();
+            logger.log(Level.INFO, "current list of decks and flashcards saved to text file");
+            logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
             break;
         default:
             command = new InvalidCommand();
+            logger.log(Level.INFO, "command was unrecognised and could not be parsed");
         }
         return command;
     }
@@ -71,5 +82,20 @@ public class OuterParser {
     private String getCommandArguments(String commandType, String input) { // TODO: throws FieldEmptyException
         assert input.length() > 0 : "input string should not be empty, at least have command word";
         return input.substring(commandType.length()).trim();
+    }
+
+    /**
+     * Checks if the given input is an integer or not.
+     *
+     * @param input input given by user
+     * @return true if input is an integer, false otherwise
+     */
+    public boolean isInteger(String input) {
+        for (int i = 0; i < input.length(); i += 1) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
