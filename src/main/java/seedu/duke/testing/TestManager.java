@@ -34,8 +34,8 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckManager.getTestDeck(deckIndex);
-            AnswerList userAnswers = new AnswerList(deck);
+            Deck deckToTest = DeckManager.getTestDeck(deckIndex);
+            AnswerList userAnswers = new AnswerList(deckToTest);
 
             testAllCardsShuffled(userAnswers);
             TestHistory.addAnswerList(userAnswers);
@@ -45,7 +45,7 @@ public class TestManager {
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
-            logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
+            logger.log(Level.WARNING, "Deck does not exist causing IndexOutOfBoundsException");
         } catch (EmptyDeckException e) {
             ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Empty deck");

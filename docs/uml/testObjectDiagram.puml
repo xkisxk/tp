@@ -1,0 +1,26 @@
+@startuml
+
+object TestManager
+object AnswerList
+object Answer
+object TestHistory
+object Deck
+object FlashCard
+object TestUi
+object TestParser
+
+TestManager --> "1" Deck
+TestManager -> "1" TestUi
+TestManager -> "1" TestParser
+TestManager --> AnswerList
+TestManager ..> TestHistory
+
+
+AnswerList "1" --> "*" Answer
+AnswerList --> "1" Deck
+
+TestHistory --> "*" AnswerList
+
+Deck --> "*" FlashCard
+
+@enduml

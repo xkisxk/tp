@@ -1,7 +1,6 @@
 package seedu.duke.testing;
 
 import seedu.duke.flashcard.Deck;
-import seedu.duke.flashcard.FlashCard;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -69,6 +68,8 @@ public class AnswerList {
      * @param questionIndex Question number for the question that the answer answers
      */
     public void addAnswer(String answer, int questionIndex) {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Adding card");
         answerList.add(new Answer(answer, questionIndex));
     }
 }

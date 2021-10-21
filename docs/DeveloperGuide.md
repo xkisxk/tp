@@ -9,6 +9,16 @@ original source as well}
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+Test Feature
+Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
+Test allows users to test themselves on a single deck of their choosing or all decks at once.
+
+
+Each user answer is saved as an Answer, which is added into an AnswerList. 
+After the test ends, the program checks through AnswerList and compares each Answer 
+to the corresponding FlashCard to check if the user’s answer is correct. 
+Each time a test ends, the AnswerList is added to the TestHistory.
+
 ## Product scope
 
 ### Target user profile

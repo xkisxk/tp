@@ -44,7 +44,6 @@ public class DeckManager {
 
 
     public static Deck getTestDeck(int index) {
-        assert index >= -1;
         if (index == -1) {
             Deck deckToTest = new Deck("Test");
             for (Deck deck : DeckManager.getDecks()) {

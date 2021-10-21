@@ -1,34 +1,59 @@
 @startuml
-participant ":User" as User
 participant ":Parser" as Parser
-participant ":EditDeckCommand" as EditDeckCommand
+participant ":TestCommand" as TestCommand
+participant "TestManager" as TestManager << class >>
+participant ":TestUi" as TestUi
+participant ":TestParser" as TestParser
 participant ":DeckManager" as DeckManager
+participant ":AnswerList" as AnswerList
 participant ":Deck" as Deck
 
 [-> Parser : parse("test")
 activate Parser
 
-ref over Parser, EditDeckCommand : parseEditDeckCommand(input)
+ref over Parser, TestCommand : parseTestCommand()
 
-[<-- Parser : EditDeckCommand(args)
+[<-- Parser : TestCommand()
 deactivate Parser
 
-[->EditDeckCommand : execute()
-activate EditDeckCommand
+[->TestCommand : execute()
+activate TestCommand
 
-EditDeckCommand -> DeckManager : get(deckIndex)
+TestCommand -> TestManager : startTest()
+activate TestManager
+
+TestManager -> TestUi : getUserMessage()
+activate TestUi
+
+TestManager <-- TestUi : userMessage
+deactivate TestUi
+
+TestManager -> TestParser : toInt()
+activate TestParser
+
+TestParser --> TestManager : deckIndex
+
+TestManager -> DeckManager : getTestDeck()
 activate DeckManager
 
-DeckManager --> EditDeckCommand : deck
-deactivate DeckManager
-
-EditDeckCommand -> Deck : setDeckName(newContent)
+alt deckIndex == -1
+DeckManager -> Deck : Deck()
 activate Deck
+loop every Deck in DeckManager
+loop every FlashCard in Deck
+DeckManager -> Deck : addFlashCard()
+Deck --> DeckManager
+end
+end
+DeckManager --> TestManager : deckToTest
 
-Deck --> EditDeckCommand
-deactivate Deck
+else
+TestManager -> DeckManager : get(deckIndex)
+DeckManager --> TestManager : deckToTest
+end
 
-[<-- EditDeckCommand
-deactivate EditDeckCommand
+
+[<-- TestCommand
+deactivate TestCommand
 
 @enduml

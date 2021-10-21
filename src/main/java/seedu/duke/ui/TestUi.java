@@ -62,13 +62,13 @@ public class TestUi {
     public void printStartTest() {
         System.out.println("Starting test...");
         System.out.println("Which deck do you want to test?");
-        System.out.print("Input an integer: ");
+        System.out.print("Input an integer (or \"all\" to review all decks): ");
     }
 
     public void printStartReview() {
         System.out.println("Starting review...");
         System.out.println("Which deck do you want to review?");
-        System.out.print("Input an integer (-1 to review all decks): ");
+        System.out.print("Input an integer (or \"all\" to review all decks): ");
     }
 
     public void printReviewCard() {
