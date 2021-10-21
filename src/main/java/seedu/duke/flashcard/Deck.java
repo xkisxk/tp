@@ -29,15 +29,18 @@ public class Deck {
         this.name = "Untitled";
     }
 
-    public void editCard(String[] args) {
+    public String editCard(String[] args) {
         if (args[1].equalsIgnoreCase("front")) {
             cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
         } else {
             cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
         }
-        System.out.println("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
+        // TODO: Fix absence of current deck's identifier
+        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + " to " + args[2]);
+        /*
+        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
                 + args[2]);
-
+         */
     }
 
     public String getName() {
@@ -86,7 +89,7 @@ public class Deck {
 
     private String returnNewFlashCard(String front, String back) {
         String result = "\tAdded card:";
-        result.concat(returnCardInfo(front, back)0;
+        result.concat(returnCardInfo(front, back));
         return result;
     }
 
@@ -99,12 +102,18 @@ public class Deck {
         } else {
             result.concat("\tYou have " + getDeckSize() + " cards in your card deck.");
         }
+        return result;
     }
 
-    private String printDeletedFlashCardMessage(String front, String back) {
+    private String returnDeletedFlashCardMessage(String front, String back) {
         String result = "\tDeleted card:";
         result.concat(returnCardInfo(front, back));
         return result;
+    }
+
+    private void printDeletedFlashCardMessage(String front, String back) {
+        String result = returnDeletedFlashCardMessage(front, back);
+        System.out.println(result);
     }
 
     public String prepareToAddFlashCard(String[] input) {
@@ -177,7 +186,7 @@ public class Deck {
 
         FlashCard card = cards.get(indexToBeRemoved);
         cards.remove(card);
-        printDeletedFlashCardMessage(card.getFront(), card.getBack());
+        return returnDeletedFlashCardMessage(card.getFront(), card.getBack());
     }
 
     /**
@@ -192,8 +201,7 @@ public class Deck {
             FlashCard card = cards.get(i);
             if (hasExactCard(description, card)) {
                 cards.remove(card);
-                printDeletedFlashCardMessage(card.getFront(), card.getBack());
-                return;
+                return returnDeletedFlashCardMessage(card.getFront(), card.getBack());
             }
         }
         throw new CardLiException();
