@@ -6,6 +6,7 @@ import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.InnerParser;
+import seedu.duke.parser.Parser;
 import seedu.duke.parser.system.AddDeckParser;
 import seedu.duke.parser.system.EnterDeckParser;
 
@@ -25,13 +26,16 @@ public class EnterDeckCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String[] parameters = parser.parseArguments(super.arguments);
-        String enterInput = parameters[0];
-        int deckIndex = Integer.parseInt(enterInput) - 1;
-        Deck currDeck;
         CommandResult result;
-
         try {
+            String[] parameters = parser.parseArguments(super.arguments);
+            String enterInput = parameters[0];
+
+            if (!Parser.isInteger(enterInput)) {
+                throw new NumberFormatException("That is not a number.");
+            }
+            int deckIndex = Integer.parseInt(enterInput) - 1;
+            Deck currDeck;
             if (!(deckIndex >= 0 && deckIndex < deckManager.getDecks().size())) {
                 throw new DeckNotExistException("That deck doesn't exist.");
             }
