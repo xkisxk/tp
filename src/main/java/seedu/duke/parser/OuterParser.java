@@ -25,7 +25,7 @@ public class OuterParser {
         // the command should be of type `AddDeckCommand`, `DeleteDeckCommand`, etc.
         // anyhow, `Command` can't be instantiated as it is abstract
         logger.setLevel(Level.WARNING);
-        String commandType = getCommandType(input);
+        String commandType = Parser.getCommandType(input);
         logger.log(Level.INFO, "new user input detected");
 
         Command command;
@@ -33,21 +33,22 @@ public class OuterParser {
 
         switch (commandType) {
         case "enter":
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new EnterDeckCommand(arguments, this.deckManager, this.innerParser);
             logger.log(Level.INFO, "enter (deck) command parsed and executed");
         case "add":
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new AddDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "add (deck) command parsed and executed");
             break;
         case "edit": //edit /deck <cat index> /input <input>
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new EditDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "edit (deck) command parsed and executed");
             break;
         case "delete":
             // TODO
+            command = new InvalidCommand();
             logger.log(Level.INFO, "delete (deck) command parsed and executed");
             break;
         case "help":
@@ -66,34 +67,5 @@ public class OuterParser {
         return command;
     }
 
-    /**
-     * Returns the command type of the user's input.
-     * @param input
-     */
-    private String getCommandType(String input) {
-        return input.trim().split(" ")[0].toLowerCase();
-    }
 
-    /**
-     * Returns the String containing the arguments to the command.
-     */
-    private String getCommandArguments(String commandType, String input) { // TODO: throws FieldEmptyException
-        assert input.length() > 0 : "input string should not be empty, at least have command word";
-        return input.substring(commandType.length()).trim();
-    }
-
-    /**
-     * Checks if the given input is an integer or not.
-     *
-     * @param input input given by user
-     * @return true if input is an integer, false otherwise
-     */
-    public boolean isInteger(String input) {
-        for (int i = 0; i < input.length(); i += 1) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

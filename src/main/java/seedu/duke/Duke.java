@@ -37,23 +37,24 @@ public class Duke {
     }
 
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main function that runs the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public void run() {
+
         ui.printGreetingMessage();
         boolean exitProgram = false;
         boolean inDeck;
 
-        /*
+
         while (!exitProgram) {
             String input = ui.getUserMessage();
-            Command command = OuterParser.parseCommand(input);
+            Command command = outerParser.parseCommand(input);
             CommandResult result = command.execute();
             ui.printResult(result);
             inDeck = result.isEnter();
             while (inDeck) {
                 input = ui.getUserMessage();
-                Command command = InnerParser.parseCommand(input);
+                command = innerParser.parseCommand(input);
                 result = command.execute();
                 ui.printResult(result);
                 inDeck = result.isExit();
@@ -61,9 +62,9 @@ public class Duke {
             exitProgram = result.isExit();
         }
         ui.printByeMessage();
-        */
 
 
+/*
         while (!exitProgram) {
             try {
                 String input = ui.getUserMessage();
@@ -81,8 +82,18 @@ public class Duke {
             }
         }
         ui.printByeMessage();
+
+ */
     }
 
+    /**
+     * Entry point to the java.duke.Duke application.
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+    /*
     private static boolean checkBye(String input) {
         if (Parser.getCommand(input).equals("bye")) {
             return true;
@@ -105,4 +116,5 @@ public class Duke {
         }
         return false;
     }
+    */
 }

@@ -28,7 +28,7 @@ public class InnerParser {
 
     public Command parseCommand(String input) {
         logger.setLevel(Level.WARNING);
-        String commandType = getCommandType(input);
+        String commandType = Parser.getCommandType(input);
         logger.log(Level.INFO, "new user input detected");
 
         Command command;
@@ -36,17 +36,17 @@ public class InnerParser {
 
         switch (commandType) { // TODO: add testing-related commands
         case "add":
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new AddCardCommand(arguments, this.currDeck);
             logger.log(Level.INFO, "add (card) command parsed and executed");
             break;
         case "edit": //edit /card <card index> /side <side> /input <input>
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new EditCardCommand(arguments, this.currDeck);
             logger.log(Level.INFO, "edit (card) command parsed and executed");
             break;
         case "delete":
-            arguments = getCommandArguments(commandType, input);
+            arguments = Parser.getCommandArguments(commandType, input);
             command = new DeleteCardCommand(arguments, this.currDeck);
             logger.log(Level.INFO, "delete (card) command parsed and executed");
             break;
@@ -71,37 +71,5 @@ public class InnerParser {
 
     public void setCurrDeck(Deck currDeck) {
         this.currDeck = currDeck;
-    }
-
-    // TODO: clean up code repeated in OuterParser, possibly using inheritance
-    /**
-     * Returns the command type of the user's input.
-     * @param input
-     */
-    private String getCommandType(String input) {
-        return input.trim().split(" ")[0].toLowerCase();
-    }
-
-    /**
-     * Returns the String containing the arguments to the command.
-     */
-    private String getCommandArguments(String commandType, String input) { // TODO: throws FieldEmptyException
-        assert input.length() > 0 : "input string should not be empty, at least have command word";
-        return input.substring(commandType.length()).trim();
-    }
-
-    /**
-     * Checks if the given input is an integer or not.
-     *
-     * @param input input given by user
-     * @return true if input is an integer, false otherwise
-     */
-    public boolean isInteger(String input) {
-        for (int i = 0; i < input.length(); i += 1) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 }

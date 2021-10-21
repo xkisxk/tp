@@ -257,6 +257,7 @@ public class Deck {
         } else {
             result = "This deck has no cards.";
         }
+        return result;
     }
 
     public void viewAllFlashCards() {

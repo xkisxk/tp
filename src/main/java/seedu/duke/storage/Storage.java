@@ -54,13 +54,13 @@ public class Storage {
      */
 
     public ArrayList<Deck> load() {
+        ArrayList<Deck> decks = new ArrayList<>();
+
         try {
             // instantiate scanner to read file contents
             Scanner s = new Scanner(this.file);
 
             int decksCount = Integer.parseInt(s.nextLine());
-
-            ArrayList<Deck> decks = new ArrayList<>();
 
             for (int i = 0; i < decksCount; i++) {
                 String deckName = s.nextLine();
@@ -78,10 +78,10 @@ public class Storage {
                 }
 
                 decks.add(newDeck);
-                return decks;
             }
         } catch (FileNotFoundException e) {
             //TODO: handle file not found exception
         }
+        return decks;
     }
 }

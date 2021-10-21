@@ -1,5 +1,7 @@
 package seedu.duke.ui;
 
+import seedu.duke.commands.CommandResult;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -136,5 +138,9 @@ public class CardLiUi {
                 + " '----------------'  '----------------'\n";
         System.out.println("Welcome to\n" + logo);
         System.out.println("Let's get started!");
+    }
+
+    public static void printResult(CommandResult result) {
+        System.out.println(result.getResult());
     }
 }
