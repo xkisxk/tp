@@ -22,17 +22,24 @@ public class DeckManager {
     private static ArrayList<Deck> decks = new ArrayList<>();
 
     public static void editCard(String[] args) {
+        int deckIndex = Integer.parseInt(args[0]) - 1;
+        int cardIndex = Integer.parseInt(args[1]) - 1;
+        String newContent = args[3];
+
         if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
+            decks.get(deckIndex).getCard(cardIndex).setFront(newContent);
         } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
+            decks.get(deckIndex).getCard(cardIndex).setBack(newContent);
         }
         System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
     }
 
 
-    public static void editCat(String[] args) {
-        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
+    public static void editDeck(String[] args) {
+        int deckIndex = Integer.parseInt(args[0]) - 1;
+        String newContent = args[1];
+
+        decks.get(deckIndex).setDeckName(newContent);
         System.out.println("Changed deck " + args[0] + " to " + args[1]);
     }
 

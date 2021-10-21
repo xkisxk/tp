@@ -1,5 +1,11 @@
 # Developer Guide
 
+#Introduction
+
+CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
+students keep track of all their flashcards. It also does tests for students to test their knowledge. All of this in one
+single platform.
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
@@ -7,7 +13,27 @@ original source as well}
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Editing a Deck
+
+This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
+
+The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
+
+### `EditDeckCommand`
+The 'EditDeckCommand' allows the changing of the name of the `Deck`.
+
+Given below is the sequence diagram for `EditDeckCommand`:
+![](assets/editDeckCommandSeqDiagram.png)
+
+### Editing a FlashCard
+
+The 'EditCardCommand' allows the changing of the content of the `FlashCard`. The user can decide to change either the `front`
+or `back` attributes of the `FlashCard`object, which represents the front and back side of the card.
+
+Given below is the sequence diagram for `EditCardCommand`:
+![](assets/editDeckCommandSeqDiagram.png)
+
+
 
 ###Test Feature
 ![class diagram](../docs/assets/testClassDiagram.png)
@@ -41,7 +67,12 @@ After marking all the questions, the user's results will be printed and saved in
 
 ### Target user profile
 
-CardLI is a Command Line Interface (CLI) flashcard application designed for students who can type quickly.
+* Pre-University/University/Polytechnic students
+* Reasonably comfortable using CLI apps
+* Types fast
+* Prefers to store their information online rather than physically
+* Has a lot of flashcards
+
 
 ### Value proposition
 
