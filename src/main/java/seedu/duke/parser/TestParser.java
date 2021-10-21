@@ -12,6 +12,9 @@ public class TestParser {
     }
 
     public static int toInt(String input) throws NumberFormatException {
+        if (input.toLowerCase().contains("all")) {
+            return -1;
+        }
         return Integer.parseInt(input) - 1;
     }
 

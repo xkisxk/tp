@@ -1,5 +1,11 @@
 # Developer Guide
 
+#Introduction
+
+CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
+students keep track of all their flashcards. It also does tests for students to test their knowledge. All of this in one
+single platform.
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
@@ -7,7 +13,27 @@ original source as well}
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Editing a Deck
+
+This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
+
+The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
+
+### `EditDeckCommand`
+The 'EditDeckCommand' allows the changing of the name of the `Deck`.
+
+Given below is the sequence diagram for `EditDeckCommand`:
+![](assets/editDeckCommandSeqDiagram.png)
+
+### Editing a FlashCard
+
+The 'EditCardCommand' allows the changing of the content of the `FlashCard`. The user can decide to change either the `front`
+or `back` attributes of the `FlashCard`object, which represents the front and back side of the card.
+
+Given below is the sequence diagram for `EditCardCommand`:
+![](assets/editDeckCommandSeqDiagram.png)
+
+
 
 ###Find
 <!DOCTYPE html>
@@ -32,11 +58,47 @@ original source as well}
 </body>
 
 
+
+
+###Test Feature
+![class diagram](../docs/assets/testClassDiagram.png)
+
+Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
+`TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
+and the parsing respectively during the test.
+
+At the start of the test, the user will choose to test themselves with a single deck or all decks at once.
+This is dependent on the integer the user inputs.
+
+In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
+`DeckManager` depending on the condition which is shown by the sequence diagram below. The `AnswerList`
+is where the user's response to the test is stored, and it is made up of `Answer` as shown in the class
+diagram above.
+
+![sequence diagram](../docs/assets/getTestDeckSequenceDiagram.png)
+
+After initializing the `AnswerList`, the testing begins. The `Deck` gets shuffled, then
+the user will answer the question one at a time. This process is repeated for the entire `Deck` that
+is being tested which is shown below by the sequence diagram.
+
+![sequence diagram](../docs/assets/testAllCardsShuffledSequenceDiagram.png)
+
+After all cards have been tested, the marking process begins as shown by the sequence diagram below.
+For every correct answer, the user's score increments and `TestUi` will print a correct answer message.
+After marking all the questions, the user's results will be printed and saved in `TestHistory`.
+
+![sequence diagram](../docs/assets/markTestSequenceDiagram.png)
+
 ## Product scope
 
 ### Target user profile
 
-CardLI is a Command Line Interface (CLI) flashcard application designed for students who can type quickly.
+* Pre-University/University/Polytechnic students
+* Reasonably comfortable using CLI apps
+* Types fast
+* Prefers to store their information online rather than physically
+* Has a lot of flashcards
+
 
 ### Value proposition
 

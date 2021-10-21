@@ -2,7 +2,6 @@ package seedu.duke.parser;
 
 
 import seedu.duke.flashcard.DeckManager;
-import seedu.duke.flashcard.Deck;
 
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
@@ -56,7 +55,6 @@ public class Parser {
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test": //TODO: restructure into deck level
-            //String testInput = removeCommandWord(input, command.length());
             TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
             break;
@@ -82,7 +80,7 @@ public class Parser {
         case "editdeck": //editdeck /deck <cat index> /input <input>
             String editCatInput = removeCommandWord(input, command.length());
             String[] parsedEditCatArgs = parseEditDeckCommand(editCatInput);
-            DeckManager.editCat(parsedEditCatArgs);
+            DeckManager.editDeck(parsedEditCatArgs);
             logger.log(Level.INFO, "editdeck command parsed and executed");
             break;
         case "help":
@@ -198,8 +196,8 @@ public class Parser {
         int cardIndex = Integer.parseInt(args[1]) - 1;
         logger.log(Level.INFO, "checking if deck index and card index are not out of bounds");
         //TODO: make sure this works
-        if (!(cardIndex >= 0 && cardIndex <= DeckManager.getDeck(currDeck).cards.size())) {
 
+        if (!(cardIndex >= 0 && cardIndex <= DeckManager.getDeck(currDeck).getCards().size())) {
             throw new CardLiException("Incorrect index for Card!");
         }
         logger.log(Level.INFO, "checking if user inputted a correct side");

@@ -23,6 +23,10 @@ public class TestUi {
         this.out = out;
     }
 
+    public void showMessage(String input) {
+        System.out.println(input);
+    }
+
     public String getUserMessage() {
         return in.nextLine();
     }
@@ -58,11 +62,13 @@ public class TestUi {
     public void printStartTest() {
         System.out.println("Starting test...");
         System.out.println("Which deck do you want to test?");
-        System.out.print("Input an integer: ");
+        System.out.print("Input an integer (or \"all\" to review all decks): ");
     }
 
     public void printStartReview() {
         System.out.println("Starting review...");
+        System.out.println("Which deck do you want to review?");
+        System.out.print("Input an integer (or \"all\" to review all decks): ");
     }
 
     public void printReviewCard() {
@@ -70,17 +76,17 @@ public class TestUi {
     }
 
     public void printTest(int index, AnswerList answerList) {
-        int score = answerList.getScore();
+        int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
         System.out.println(
-                "Score for " + index + " " + answerList.getDeck().getName()
+                "Score for test " + index + " " + answerList.getDeck().getName()
                         + " " + score + "/" + totalScore
-                        + " " + score / totalScore * 100 + "%");
+                        + " " + (double) score / totalScore * 100 + "%");
     }
 
     public void printScore(int index, int score, int totalScore) {
         System.out.println("You scored " + score + " out of " + totalScore + " for test " + (index + 1));
-        System.out.println("That is " + score / totalScore * 100 + "%!");
+        System.out.println("That is " + (double) score / totalScore * 100 + "%!");
     }
 
     public void printScoreWithCard(FlashCard card) {

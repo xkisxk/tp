@@ -22,17 +22,24 @@ public class DeckManager {
     private static ArrayList<Deck> decks = new ArrayList<>();
 
     public static void editCard(String[] args) {
+        int deckIndex = Integer.parseInt(args[0]) - 1;
+        int cardIndex = Integer.parseInt(args[1]) - 1;
+        String newContent = args[3];
+
         if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
+            decks.get(deckIndex).getCard(cardIndex).setFront(newContent);
         } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
+            decks.get(deckIndex).getCard(cardIndex).setBack(newContent);
         }
         System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
     }
 
 
-    public static void editCat(String[] args) {
-        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
+    public static void editDeck(String[] args) {
+        int deckIndex = Integer.parseInt(args[0]) - 1;
+        String newContent = args[1];
+
+        decks.get(deckIndex).setDeckName(newContent);
         System.out.println("Changed deck " + args[0] + " to " + args[1]);
     }
 
@@ -40,6 +47,23 @@ public class DeckManager {
         assert getDecksSize() > 0;
         assert (index >= 0 && index < getDecksSize());
         return decks.get(index);
+    }
+
+
+    public static Deck getTestDeck(int index) {
+        if (index == -1) {
+            Deck deckToTest = new Deck("Test");
+            for (Deck deck : DeckManager.getDecks()) {
+                for (FlashCard card : deck.getCards()) {
+                    deckToTest.addFlashCard(card);
+                }
+            }
+            return deckToTest;
+        }
+        if (hasDeck(index)) {
+            return decks.get(index);
+        }
+        throw new IndexOutOfBoundsException("This deck does not exist.");
     }
 
     public static int getDecksSize() {
@@ -68,8 +92,16 @@ public class DeckManager {
         return false;
     }
 
+    public static boolean hasDeck(int deckIndex) {
+        return deckIndex >= 0 && deckIndex < DeckManager.getDecksSize();
+    }
+
     private static void addDeck(String deckName) {
         decks.add(new Deck(deckName));
+    }
+
+    public static void deleteDeck(Deck deck) {
+        decks.remove(deck);
     }
 
     public static ArrayList<Deck> getDecks() {

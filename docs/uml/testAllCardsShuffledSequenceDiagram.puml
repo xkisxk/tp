@@ -1,0 +1,48 @@
+@startuml
+participant "TestManager" as TestManager << class >>
+participant ":AnswerList" as AnswerList
+participant ":Collections" as Collections
+participant ":TestUi" as TestUi
+participant "TestParser" as TestParser << class >>
+
+activate TestManager
+
+TestManager -> TestManager : testAllCardsShuffled(userAnswers)
+activate TestManager
+
+TestManager -> Collections : shuffle(deckToTest)
+activate Collections
+
+Collections --> TestManager
+deactivate Collections
+
+loop every card in deckToTest
+
+TestManager -> TestManager : testCard(userAnswers, card)
+activate TestManager
+
+'TestManager -> TestUi : printQuestion(card, questionNumber)
+'TestUi --> TestManager
+
+TestManager -> TestUi : getUserMessage()
+activate TestUi
+TestUi --> TestManager : userResponse
+deactivate TestUi
+
+TestManager -> TestParser : parseUserResponse(userResponse)
+activate TestParser
+TestParser --> TestManager : parsedUserResponse
+deactivate TestParser
+
+TestManager -> AnswerList : addAnswer(parsedUserResponse, questionNumber)
+activate AnswerList
+AnswerList --> TestManager
+deactivate AnswerList
+
+TestManager --> TestManager
+deactivate TestManager
+end
+
+TestManager --> TestManager
+deactivate TestManager
+@enduml
