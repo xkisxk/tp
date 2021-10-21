@@ -56,7 +56,6 @@ public class Parser {
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "test": //TODO: restructure into deck level
-            //String testInput = removeCommandWord(input, command.length());
             TestManager.startTest();
             logger.log(Level.INFO, "test command parsed and executed");
             break;

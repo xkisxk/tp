@@ -1,25 +1,49 @@
 @startuml
+skinparam classAttributeIconSize 0
+package testing {
+    class TestManager {
+    {static}+startTest():void
+    {static}+startReview():void
+    {static}+reviewCards():void
+    {static}+testAllCardsShuffled():void
+    {static}-testCard():void
+    {static}+markTest():void
+    {static}-markCard():void
+    }
+    class AnswerList {
+    -userScore:int
+    }
+    class Answer {
+    -answer:String
+    -questionIndex:int
+    +getAnswer():String
+    +getQuestionIndex():int
+    +isCorrect(userAnswer:String,
+               question:FlashCard):boolean
+    }
+}
 
-object TestManager
-object AnswerList
-object Answer
-object TestHistory
-object Deck
-object FlashCard
-object TestUi
-object TestParser
 
-TestManager --> "1" Deck
-TestManager -> "1" TestUi
-TestManager -> "1" TestParser
-TestManager --> AnswerList
-TestManager ..> TestHistory
+package parser {
+    class TestParser
+}
 
+package ui {
+    class TestUi
+}
+
+package flashcard {
+    class Deck
+    class FlashCard
+}
+
+
+TestManager -left> "1" TestUi
+TestManager .right> "1" TestParser
+TestManager --> "1" AnswerList
 
 AnswerList "1" --> "*" Answer
-AnswerList --> "1" Deck
-
-TestHistory --> "*" AnswerList
+AnswerList -right-> "1" Deck
 
 Deck --> "*" FlashCard
 

@@ -21,7 +21,7 @@ public class AnswerListTest {
         deck.addFlashCard("card", "card");
         AnswerList answerList = new AnswerList(deck);
         answerList.addAnswer("card", 1);
-        TestManager.viewTestResult(answerList);
+        TestManager.markTest(answerList);
         assertEquals(1, answerList.getUserScore());
     }
 }

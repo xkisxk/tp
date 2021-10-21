@@ -39,7 +39,7 @@ public class TestManager {
 
             testAllCardsShuffled(userAnswers);
             TestHistory.addAnswerList(userAnswers);
-            viewTestResult(userAnswers);
+            markTest(userAnswers);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -67,7 +67,6 @@ public class TestManager {
             int deckIndex = TestParser.toInt(input);
             Deck deckToReview = TestHistory.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
-            DeckManager.deleteDeck(deckToReview);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -88,7 +87,7 @@ public class TestManager {
         AnswerList answerList = new AnswerList(deckToReview);
         testAllCardsShuffled(answerList);
         TestHistory.addAnswerList(answerList);
-        viewTestResult(answerList);
+        markTest(answerList);
     }
 
     /**
@@ -137,7 +136,7 @@ public class TestManager {
     /**
      * Marks the user's answers then print their results of test to system output.
      */
-    public static void viewTestResult(AnswerList userAnswers) {
+    public static void markTest(AnswerList userAnswers) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test check");
 
