@@ -30,9 +30,9 @@ public class TestHistory {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "listing all flashcard stats");
 
-        assert DeckManager.getDecks().size() > 0 : "deckList must not be empty";
+        assert deckManager.getDecks().size() > 0 : "deckList must not be empty";
         System.out.println("Listing total scores of flashcards for all tests");
-        for (Deck deck : DeckManager.getDecks()) {
+        for (Deck deck : deckManager.getDecks()) {
             for (FlashCard card : deck.cards) {
                 ui.printScoreWithCard(card);
             }

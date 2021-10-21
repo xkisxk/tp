@@ -16,13 +16,22 @@ import java.util.logging.Level;
  * Implements the test function.
  */
 public class TestManager {
-    private static final TestUi ui = new TestUi();
-    private static final Logger logger = Logger.getLogger(TestManager.class.getName());
+
+    private final TestUi ui = new TestUi();
+    private final Logger logger = Logger.getLogger(TestManager.class.getName());
+
+    private ArrayList<Deck> decks;
+    private TestHistory testHistory;
+
+    public TestManager(ArrayList<Deck> decks) {
+        this.decks = decks;
+        this.testHistory = new TestHistory();
+    }
 
     /**
      * Enters test mode and requires user to input the index of the deck that they want to be tested.
      */
-    public static void startTest() { //TODO: handle case where there are no cards in the deck
+    public void startTest() { //TODO: handle case where there are no cards in the deck
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
@@ -31,7 +40,7 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
 
-            Deck deck = DeckManager.getDecks().get(deckIndex);
+            Deck deck = decks.get(deckIndex);
             AnswerList answersResponse = new AnswerList(deck);
 
             testAllCardsShuffled(answersResponse);
@@ -49,7 +58,7 @@ public class TestManager {
     /**
      * Enters review mode.
      */
-    public static void startReview() {
+    public void startReview() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
@@ -60,7 +69,7 @@ public class TestManager {
     /**
      * Reviews the lowest scoring deck of all tests.
      */
-    public static void reviewCards(Deck deckToReview) {
+    public void reviewCards(Deck deckToReview) {
         logger.log(Level.INFO, "Reviewing low scoring cards");
         ui.printReviewCard();
         AnswerList answerList = new AnswerList(deckToReview);
@@ -76,7 +85,7 @@ public class TestManager {
     /**
      * Goes through all the flashcards and stores the user's responses into answersResponse ArrayList.
      */
-    public static void testAllCardsShuffled(AnswerList answersResponse) {
+    public void testAllCardsShuffled(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
 
 
@@ -117,7 +126,7 @@ public class TestManager {
     /**
      * Prints results of test to system output.
      */
-    public static void viewTestResult(AnswerList answersResponse) {
+    public void viewTestResult(AnswerList answersResponse) {
         logger.setLevel(Level.WARNING);
         int score = 0;
         logger.log(Level.INFO, "starting test check");

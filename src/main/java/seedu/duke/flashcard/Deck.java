@@ -81,30 +81,33 @@ public class Deck {
         System.out.println("\tCan't delete a card with no description!");
     }
 
-    private void printNewFlashCard(String front, String back) {
-        //System.out.println("\tAdded card:");
-        printCardInfo(front, back);
+    private String returnNewFlashCard(String front, String back) {
+        String result = "\tAdded card:";
+        result.concat(returnCardInfo(front, back)0;
+        return result;
     }
 
-    private void printCardInfo(String front, String back) {
-        System.out.println("\tFront: " + front);
-        System.out.println("\tBack: " + back);
+    private String returnCardInfo(String front, String back) {
+        String result = "";
+        result.concat("\tFront: " + front);
+        result.concat("\tBack: " + back);
         if (getDeckSize() == 1) {
-            System.out.println("\tYou have " + getDeckSize() + " card in your card deck.");
+            result.concat("\tYou have " + getDeckSize() + " card in your card deck.");
         } else {
-            System.out.println("\tYou have " + getDeckSize() + " cards in your card deck.");
+            result.concat("\tYou have " + getDeckSize() + " cards in your card deck.");
         }
     }
 
-    private void printDeletedFlashCardMessage(String front, String back) {
-        //System.out.println("\tDeleted card:");
-        printCardInfo(front, back);
+    private String printDeletedFlashCardMessage(String front, String back) {
+        String result = "\tDeleted card:";
+        result.concat(returnCardInfo(front, back));
+        return result;
     }
 
-    public void prepareToAddFlashCard(String[] input) {
+    public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
         addFlashCard(input[0], input[1]);
-        printNewFlashCard(input[0], input[1]);
+        return returnNewFlashCard(input[0], input[1]);
     }
 
     /**
