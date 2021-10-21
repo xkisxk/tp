@@ -1,26 +1,10 @@
 @startuml
 skinparam classAttributeIconSize 0
 package testing {
-    class TestManager {
-    {static}+startTest():void
-    {static}+startReview():void
-    {static}+reviewCards():void
-    {static}+testAllCardsShuffled():void
-    {static}-testCard():void
-    {static}+markTest():void
-    {static}-markCard():void
-    }
-    class AnswerList {
-    -userScore:int
-    }
-    class Answer {
-    -answer:String
-    -questionIndex:int
-    +getAnswer():String
-    +getQuestionIndex():int
-    +isCorrect(userAnswer:String,
-               question:FlashCard):boolean
-    }
+    class TestManager
+    class AnswerList
+    class Answer
+    class TestHistory
 }
 
 
@@ -37,14 +21,19 @@ package flashcard {
     class FlashCard
 }
 
-
 TestManager -left> "1" TestUi
 TestManager .right> "1" TestParser
-TestManager --> "1" AnswerList
+TestManager --> "1" AnswerList : creates
+TestManager .left> TestHistory
+TestManager .> "1" Deck
 
-AnswerList "1" --> "*" Answer
+TestHistory --> "*" AnswerList : stores
+
+AnswerList "1" --> "*" Answer : contains
 AnswerList -right-> "1" Deck
 
 Deck --> "*" FlashCard
+
+Answer .> "1" FlashCard
 
 @enduml

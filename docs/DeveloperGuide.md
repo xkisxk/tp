@@ -9,15 +9,23 @@ original source as well}
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-Test Feature
+###Test Feature
+![class diagram](../docs/assets/testClassDiagram.png)
+
 Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
-Test allows users to test themselves on a single deck of their choosing or all decks at once.
+`TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
+and the parsing respectively during the test.
 
+At the start of the test, the user will choose to test themselves with a single deck of their choosing 
+or all decks at once. This is dependent on the integer the user inputs.
 
-Each user answer is saved as an Answer, which is added into an AnswerList. 
-After the test ends, the program checks through AnswerList and compares each Answer 
-to the corresponding FlashCard to check if the user’s answer is correct. 
-Each time a test ends, the AnswerList is added to the TestHistory.
+In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
+`DeckManager` depending on the condition which is shown by the sequence diagram below. The `AnswerList`
+is where the user's response to the test is stored, and it is made up of `Answer` as shown in the class
+diagram above.
+
+![sequence diagram](../docs/assets/getTestDeckSequenceDiagram.png)
+
 
 ## Product scope
 

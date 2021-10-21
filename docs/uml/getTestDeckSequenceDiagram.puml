@@ -1,0 +1,28 @@
+@startuml
+participant "TestManager" as TestManager << class >>
+participant ":AnswerList" as AnswerList
+participant ":DeckManager" as DeckManager
+participant ":Deck" as Deck
+
+TestManager -> DeckManager : getTestDeck(deckIndex:int)
+activate DeckManager
+
+alt test all
+DeckManager -> Deck : Deck()
+activate Deck
+loop every Deck in DeckManager
+loop every FlashCard in Deck
+DeckManager -> Deck : addFlashCard()
+Deck --> DeckManager
+end
+end
+DeckManager --> TestManager : deckToTest
+
+else
+TestManager -> DeckManager : get(deckIndex)
+DeckManager --> TestManager : deckToTest
+end
+
+TestManager -> AnswerList : AnswerList(deckToTest)
+activate AnswerList
+@enduml
