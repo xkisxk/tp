@@ -2,7 +2,6 @@ package seedu.duke.parser;
 
 
 import seedu.duke.flashcard.DeckManager;
-import seedu.duke.flashcard.Deck;
 
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
@@ -82,7 +81,7 @@ public class Parser {
         case "editdeck": //editdeck /deck <cat index> /input <input>
             String editCatInput = removeCommandWord(input, command.length());
             String[] parsedEditCatArgs = parseEditDeckCommand(editCatInput);
-            DeckManager.editCat(parsedEditCatArgs);
+            DeckManager.editDeck(parsedEditCatArgs);
             logger.log(Level.INFO, "editdeck command parsed and executed");
             break;
         case "help":
