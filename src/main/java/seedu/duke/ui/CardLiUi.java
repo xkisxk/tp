@@ -1,5 +1,7 @@
 package seedu.duke.ui;
 
+import seedu.duke.commands.CommandResult;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -29,7 +31,7 @@ public class CardLiUi {
         System.out.println("\tYou did well today! Goodbye!");
     }
 
-    public static void helpMessage() {
+    public static String returnHelpMessage() {
         String help = "\n"
                 + "................................................................................"
                 + "....................................... \n"
@@ -70,10 +72,15 @@ public class CardLiUi {
                 + "Format: save \n"
                 + "................................................................................"
                 + "....................................... \n";
+        return help;
+    }
+
+    public static void helpMessage() {
+        String help = returnHelpMessage();
         System.out.println(help);
     }
 
-    public static void helpInDeck() {
+    public static String returnHelpInDeckMessage() {
         String help = "\n"
                 + "................................................................................\"\n"
                 + "....................................... \\n\"\n"
@@ -97,6 +104,11 @@ public class CardLiUi {
                 + "Format: exit \n\n"
                 + "................................................................................"
                 + "....................................... \n";
+        return help;
+    }
+
+    public static void helpInDeckMessage() {
+        String help = returnHelpInDeckMessage();
         System.out.println(help);
     }
 
@@ -126,5 +138,9 @@ public class CardLiUi {
                 + " '----------------'  '----------------'\n";
         System.out.println("Welcome to\n" + logo);
         System.out.println("Let's get started!");
+    }
+
+    public static void printResult(CommandResult result) {
+        System.out.println(result.getResult());
     }
 }

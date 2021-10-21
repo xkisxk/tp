@@ -84,27 +84,34 @@ public class FlashCard {
         totalScore++;
     }
 
-    public void viewFlashCard() {
-        System.out.println("*================FRONT================* "
+    public String returnFlashCard() {
+        String result = "";
+        result.concat("*================FRONT================* "
                 + "*===============BACK==================*");
-        System.out.println();
+        result.concat(System.lineSeparator());
 
         String front = this.front;
         String frontSpaces = "";
         for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces += " ";
+            frontSpaces.concat(" ");
         }
 
         String back = this.back;
         String backSpaces = "";
         for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces += " ";
+            backSpaces.concat(" ");
         }
 
-        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
-        System.out.println();
-        System.out.println("*=====================================* "
+        result.concat(frontSpaces + front + frontSpaces + backSpaces + back);
+        result.concat(System.lineSeparator());
+        result.concat("*=====================================* "
                 + "*=====================================*");
+        return result;
+    }
+
+    public void viewFlashCard() {
+        String result = returnFlashCard();
+        System.out.println(result);
     }
 
     public void setBack(String input) {

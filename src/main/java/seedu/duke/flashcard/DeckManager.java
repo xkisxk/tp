@@ -19,9 +19,17 @@ public class DeckManager {
      */
     static final String FILEPATH = "data/CardLI.txt";
 
-    private static ArrayList<Deck> decks = new ArrayList<>();
+    private ArrayList<Deck> decks;
 
-    public static void editCard(String[] args) {
+    public DeckManager() {
+        this.decks = new ArrayList<>();
+    }
+
+    public DeckManager(ArrayList<Deck> decks) {
+        this.decks = decks;
+    }
+
+    public void editCard(String[] args) {
         if (args[2].equalsIgnoreCase("front")) {
             decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
         } else {
@@ -31,35 +39,35 @@ public class DeckManager {
     }
 
 
-    public static void editCat(String[] args) {
+    public String editCat(String[] args) {
         decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
-        System.out.println("Changed deck " + args[0] + " to " + args[1]);
+        return ("Changed deck " + args[0] + " to " + args[1]);
     }
 
-    public static Deck getDeck(int index) {
+    public Deck getDeck(int index) {
         assert getDecksSize() > 0;
         assert (index >= 0 && index < getDecksSize());
         return decks.get(index);
     }
 
-    public static int getDecksSize() {
+    public int getDecksSize() {
         return decks.size();
     }
 
-    public static void prepareToAddDeck(String deckName) {
+    public String prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
             addDeck(deckName);
-            printNewDeck(deckName);
+            return printNewDeck(deckName);
         } else {
-            System.out.println("The category you are trying to create already exists.");
+            return ("The category you are trying to create already exists.");
         }
     }
 
-    private static void printNewDeck(String deckName) {
-        System.out.println("You have just made the deck <<" + deckName + ">>.");
+    private String printNewDeck(String deckName) {
+        return ("You have just made the deck <<" + deckName + ">>.");
     }
 
-    private static boolean hasDeck(String categoryName) {
+    private boolean hasDeck(String categoryName) {
         for (Deck deck : decks) {
             if (deck.getName().trim().equals(categoryName.trim())) {
                 return true;
@@ -68,15 +76,15 @@ public class DeckManager {
         return false;
     }
 
-    private static void addDeck(String deckName) {
+    private void addDeck(String deckName) {
         decks.add(new Deck(deckName));
     }
 
-    public static ArrayList<Deck> getDecks() {
+    public ArrayList<Deck> getDecks() {
         return decks;
     }
 
-    public static void viewDecks() {
+    public void viewDecks() {
         if (getDecksSize() > 0) {
             int i = 1;
             System.out.println("These are your decks: ");
@@ -89,7 +97,7 @@ public class DeckManager {
         }
     }
 
-    public static void viewOneDeck(String input) {
+    public void viewOneDeck(String input) {
         try {
             int deckIndex = Integer.parseInt(input) - 1;
             if (deckIndex < getDecksSize() && deckIndex >= 0) {
@@ -107,7 +115,7 @@ public class DeckManager {
     }
 
 
-    public static void saveToFile() {
+    public void saveToFile() {
         try {
             File file = new File(FILEPATH);
 
@@ -133,7 +141,7 @@ public class DeckManager {
         }
     }
 
-    public static void readFromFile() {
+    public void readFromFile() {
         try {
             File file = new File(FILEPATH);
 
