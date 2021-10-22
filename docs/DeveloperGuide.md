@@ -124,6 +124,69 @@ After marking all the questions, the user's results will be printed and saved in
 
 ![sequence diagram](../docs/assets/markTestSequenceDiagram.png)
 
+### Storage
+
+This feature allows users of CardLI to save their current decks of flashcards. This will also allow them to access their 
+decks of flashcards when they re-enter the application, and not have to keep re-adding the same flashcards into the 
+application over and over again.
+
+This feature is implemented by saving the user’s current decks of flashcards into a separate text file stored within the
+same directory as that of the application “jar” file. The filepath of the text file is hard coded as ``data/CardLI.txt``. 
+When the user inputs the command ``bye``, the application will take that as a cue to execute the save function. When the 
+user restarts or re-enters the application, the application will then read from the same text file to fetch all the 
+decks of flashcards that were previously added. The format of how the decks are saved into the text file are specified 
+during the development process in order to reduce the risk of bugs arising when the text file is being read. More 
+details on the format of how the decks of flashcards are saved will be explained in the following paragraphs.
+
+The methods that implement the save and read functions to and from the text file fall within the ``DeckManager`` class. 
+This was done since ``DeckManager`` has direct access to the ``ArrayList`` of all current decks of flashcards.
+
+``saveToFile()``
+
+This method is invoked by calling ``DeckManager.saveToFile()``, when the ``bye`` command is parsed from the user input at the
+command line. The ``toString()`` methods within the ``Deck`` and ``Flashcard`` classes have also been overridden as per the 
+specified format of saving the decks of flashcards to the text file. For a ``Flashcard`` instance, the ``toString()`` method 
+outputs a formatted string: ``<front> | <back> | <userScore> | <totalScore>``. For a ``Deck`` instance, the ``toString()`` 
+method also outputs a formatted string containing information about the deck name, the number of flashcards within the 
+deck, on top of information on each of the flashcards contained within the deck. An example of the format of the text file 
+where the decks of flashcards are saved is shown in the screenshot below.
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+![](assets/CardLI.txt%20SS.PNG)
+</body>
+<body>
+    <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">This feature allows users of CardLI to find a&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">FlashCard</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;by providing a search term to the input following the command term `find`. By invoking this function the user can view specific&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">FlashCards</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;matching the search term from the main menu, instead of entering each deck and manually looking through the list of&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">FlashCard</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;for the desired ones.</span></p>
+    <p></p>
+    <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Currently, &ldquo;Find&rdquo; is implemented on a Systemwide level. After the&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Ui&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">handles the user input,&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Parser&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">formats the user input and passes the search term(s) to&nbsp;</span><span style="font-size:11pt;font-family:Arial;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Find</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;which repeatedly calls the&nbsp;</span><span style="font-size:11pt;font-family:'Courier New';font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">filter()</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;method that iterates once for each instance of a deck.</span></p>
+    <p></p>
+    <p><span style="font-size:11pt;font-family:'Courier New';font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">filter()</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;is implemented by creating a stream that consists of all the flashcards in one deck, and filters them based on whether they contain the search term given. Finally all the flashcards that contain the search term are collected in an arrayList to be displayed to the user along with their&nbsp;</span><span style="font-size:11pt;font-family:'Courier New';font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">deckIndex</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;and</span><span style="font-size:11pt;font-family:'Courier New';font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">&nbsp;cardIndex</span><span style="font-size:11pt;font-family:Arial;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">.</span></p>
+</body>
+
+``readFromFile()``
+
+The method is invoked by calling ``DeckManager.readFromFile()``, and is executed every time the CardLI 
+is opened. Upon first boot, the specified text file might not yet exist, and hence, the application will 
+treat the current list of decks of flashcards as empty. The method uses an instance of ``Scanner`` to parse 
+through the text file. As per the saving format explained in the ``saveToFile()`` method above, the 
+``readFromFile()`` method essentially reverse engineers the process. Using the above screenshot as an 
+example, Line 1 denotes the number of decks that should be expected in the subsequent lines of the text 
+file. Line 2 denotes the name of the first deck of flashcards, while Line 3 denotes the number of 
+flashcards to be expected in the deck named “ExampleDeck1”, which will be parsed as an integer by the 
+application. Lines 5-6 represent information about the 2 flashcards that are in “ExampleDeck1”. This same
+procedure can be used to parse the second deck named “ExampleDeck2” from the remaining lines of the text file.
+
+
+
 ## Product scope
 
 ### Target user profile
