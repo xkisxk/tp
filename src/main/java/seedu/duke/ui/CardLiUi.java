@@ -138,6 +138,7 @@ public class CardLiUi {
                 + " '----------------'  '----------------'\n";
         System.out.println("Welcome to\n" + logo);
         System.out.println("Let's get started!");
+        System.out.println("Type in 'help' for more details.");
     }
 
     public static void printResult(CommandResult result) {
