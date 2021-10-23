@@ -32,16 +32,18 @@ public class AddCardCommand extends Command {
             if (!arguments.toLowerCase().contains("/f") || !arguments.toLowerCase().contains("/b")) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
-            String[] parameters = parser.parseArguments(super.arguments);
+            String[] rawParameters = parser.parseArguments(super.arguments);
 
-            if (!parameters[0].equalsIgnoreCase("/f") || !parameters[2].equalsIgnoreCase("/b")) {
+            if (!rawParameters[0].equalsIgnoreCase("/f") || !rawParameters[2].equalsIgnoreCase("/b")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
-            String front = parameters[0];
-            String back = parameters[1];
+            String front = rawParameters[1];
+            String back = rawParameters[3];
             if (front.isEmpty() || back.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
+
+            String[] parameters = {front, back};
             result = new CommandResult(deck.prepareToAddFlashCard(parameters));
         } catch (FieldEmptyException | InvalidCommandFormatException e) {
             result = new CommandResult(e.getMessage());
