@@ -29,18 +29,20 @@ public class Deck {
         this.name = "Untitled";
     }
 
-    public String editCard(String[] args) {
-        if (args[1].equalsIgnoreCase("front")) {
-            cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
+    public String editCard(String[] parameters) {
+        // TODO: throw exception if card doesn't exist
+        String enteredCardIndex = parameters[0];
+        int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
+        String side = parameters[1];
+        boolean isFront = side.equalsIgnoreCase("front");
+        String changeTo = parameters[2];
+
+        if (isFront) {
+            cards.get(cardIndex).setFront(changeTo);
         } else {
-            cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
+            cards.get(cardIndex).setBack(changeTo);
         }
-        // TODO: Fix absence of current deck's identifier
-        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + " to " + args[2]);
-        /*
-        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
-                + args[2]);
-         */
+        return ("Changed " + side + " of card " + enteredCardIndex + " to " + changeTo);
     }
 
     public String getName() {
@@ -88,26 +90,26 @@ public class Deck {
     }
 
     private String returnNewFlashCard(String front, String back) {
-        String result = "\tAdded card:";
-        result.concat(returnCardInfo(front, back));
-        return result;
-    }
-
-    private String returnCardInfo(String front, String back) {
-        String result = "";
-        result.concat("\tFront: " + front);
-        result.concat("\tBack: " + back);
+        String result = "\tAdded card:" + System.lineSeparator()
+                + returnCardInfo(front, back);
         if (getDeckSize() == 1) {
-            result.concat("\tYou have " + getDeckSize() + " card in your card deck.");
+            result = result.concat("\tYou have " + getDeckSize()
+                    + " card in your card deck." + System.lineSeparator());
         } else {
-            result.concat("\tYou have " + getDeckSize() + " cards in your card deck.");
+            result = result.concat("\tYou have " + getDeckSize()
+                    + " cards in your card deck." + System.lineSeparator());
         }
         return result;
     }
 
+    private String returnCardInfo(String front, String back) {
+        return "\t\tFront: " + front + System.lineSeparator()
+                + "\t\tBack: " + back + System.lineSeparator();
+    }
+
     private String returnDeletedFlashCardMessage(String front, String back) {
-        String result = "\tDeleted card:";
-        result.concat(returnCardInfo(front, back));
+        String result = "\tDeleted card:" + System.lineSeparator()
+                + returnCardInfo(front, back);
         return result;
     }
 
@@ -250,12 +252,12 @@ public class Deck {
         String result = "";
         if (getDeckSize() > 0) {
             for (int i = 0; i < getDeckSize(); i++) {
-                System.out.println("Card " + (i + 1) + ":");
+                result = result.concat("Card " + (i + 1) + ":" + System.lineSeparator());
                 FlashCard card = cards.get(i);
-                result.concat(card.returnFlashCard());
+                result = result.concat(card.returnFlashCard());
             }
         } else {
-            result = "This deck has no cards.";
+            result = "This deck has no cards." + System.lineSeparator();
         }
         return result;
     }

@@ -37,6 +37,10 @@ public class OuterParser {
             command = new EnterDeckCommand(arguments, this.deckManager, this.innerParser);
             logger.log(Level.INFO, "enter (deck) command parsed and executed");
             break;
+        case "view":
+            command = new ViewDecksCommand(this.deckManager);
+            logger.log(Level.INFO, "view (all decks) command parsed and executed");
+            break;
         case "add":
             arguments = Parser.getCommandArguments(commandType, input);
             command = new AddDeckCommand(arguments, this.deckManager);

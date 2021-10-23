@@ -84,17 +84,20 @@ public class DeckManager {
         return decks;
     }
 
-    public void viewDecks() {
+    public String viewDecks() {
+        String result = "";
         if (getDecksSize() > 0) {
             int i = 1;
-            System.out.println("These are your decks: ");
+            result = result.concat("These are your decks: " + System.lineSeparator());
             for (Deck deck : decks) {
-                System.out.println(i + ". " + deck.getName());
+                result = result.concat("\t" + i + ". " + deck.getName()
+                        + System.lineSeparator());
                 i += 1;
             }
         } else {
-            System.out.println("You have no decks.");
+            result = result.concat("You have no decks.");
         }
+        return result;
     }
 
     public void viewOneDeck(String input) {
