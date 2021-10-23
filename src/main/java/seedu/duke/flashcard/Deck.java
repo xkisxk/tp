@@ -108,7 +108,8 @@ public class Deck {
     }
 
     private String returnDeletedFlashCardMessage(String front, String back) {
-        String result = "\tDeleted card:" + returnCardInfo(front, back);
+        String result = "\tDeleted card:" + System.lineSeparator()
+                + returnCardInfo(front, back);
         return result;
     }
 

@@ -87,7 +87,7 @@ public class CardLiUi {
                 + "Here is the list of commands! \n"
                 + "1. add \n"
                 + "Description: Adds a flashcard to a deck \n"
-                + "Format: add /fro <word/phrase on front of flashcard> /bac"
+                + "Format: add /f <word/phrase on front of flashcard> /b"
                 + " <word/phrase on back of flashcard> \n\n"
                 + "2. delete \n"
                 + "Description: Deletes a flashcard \n"
