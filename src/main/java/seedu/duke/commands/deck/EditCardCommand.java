@@ -6,6 +6,7 @@ import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.FieldEmptyException;
 import seedu.duke.exceptions.InvalidCommandFormatException;
 import seedu.duke.flashcard.Deck;
+import seedu.duke.parser.Parser;
 import seedu.duke.parser.deck.EditCardParser;
 
 public class EditCardCommand extends Command {
@@ -34,22 +35,25 @@ public class EditCardCommand extends Command {
                     || !arguments.toLowerCase().contains("/input")) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
-            String[] parameters = parser.parseArguments(super.arguments);
+            String[] rawParameters = parser.parseArguments(super.arguments);
 
-            if (!parameters[0].equalsIgnoreCase("/card")
-                    | !parameters[2].equalsIgnoreCase("/side")
-                    | !parameters[4].equalsIgnoreCase("/input")) {
+            if (!rawParameters[0].equalsIgnoreCase("/card")
+                    | !rawParameters[2].equalsIgnoreCase("/side")
+                    | !rawParameters[4].equalsIgnoreCase("/input")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
 
-            String card = parameters[1];
-            String side = parameters[3];
-            String input = parameters[5];
+            String card = rawParameters[1];
+            String side = rawParameters[3];
+            String input = rawParameters[5];
             if (card.isEmpty() || side.isEmpty() || input.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
 
-            int cardIndex = Integer.parseInt(card) - 1; // TODO: possibly accept either card name or index
+            if (!Parser.isInteger(card)) {
+                throw new CardLiException(INVALID_INDEX_ERROR_MESSAGE);
+            }
+            int cardIndex = Integer.parseInt(card) - 1;
 
             if (!(cardIndex >= 0 && cardIndex <= this.deck.cards.size())) {
                 throw new CardLiException(INVALID_INDEX_ERROR_MESSAGE);
@@ -58,10 +62,10 @@ public class EditCardCommand extends Command {
                 throw new CardLiException(INVALID_SIDE_ERROR_MESSAGE);
             }
 
+            String[] parameters = {card, side, input};
+
             result = new CommandResult(deck.editCard(parameters));
         } catch (CardLiException e) {
-            // TODO: FieldEmptyException is subclass of CardLiException, so can't put both in the conditional above
-            // TODO: check if want to separate them?
             result = new CommandResult(e.getMessage());
         }
         return result;

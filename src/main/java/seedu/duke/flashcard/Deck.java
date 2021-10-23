@@ -29,20 +29,20 @@ public class Deck {
         this.name = "Untitled";
     }
 
-    public String editCard(String[] args) {
-        // TODO: make this function assume correct inputs
-        // since input validation is done by EditCardCommand
-        if (args[1].equalsIgnoreCase("front")) {
-            cards.get(Integer.parseInt(args[0]) - 1).setFront(args[2]);
+    public String editCard(String[] parameters) {
+        // TODO: throw exception if card doesn't exist
+        String enteredCardIndex = parameters[0];
+        int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
+        String side = parameters[1];
+        boolean isFront = side.equalsIgnoreCase("front");
+        String changeTo = parameters[2];
+
+        if (isFront) {
+            cards.get(cardIndex).setFront(changeTo);
         } else {
-            cards.get(Integer.parseInt(args[0]) - 1).setBack(args[2]);
+            cards.get(cardIndex).setBack(changeTo);
         }
-        // TODO: Fix absence of current deck's identifier
-        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + " to " + args[2]);
-        /*
-        return ("Changed " + args[1] + " of card " + args[0] + " of deck " + Parser.getCurrDeck() + " to "
-                + args[2]);
-         */
+        return ("Changed " + side + " of card " + enteredCardIndex + " to " + changeTo);
     }
 
     public String getName() {
