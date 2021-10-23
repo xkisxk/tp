@@ -82,8 +82,8 @@ public class CardLiUi {
 
     public static String returnHelpInDeckMessage() {
         String help = "\n"
-                + "................................................................................\"\n"
-                + "....................................... \\n\"\n"
+                + "................................................................................"
+                + "....................................... \n"
                 + "Here is the list of commands! \n"
                 + "1. add \n"
                 + "Description: Adds a flashcard to a deck \n"
@@ -138,7 +138,7 @@ public class CardLiUi {
                 + " '----------------'  '----------------'\n";
         System.out.println("Welcome to\n" + logo);
         System.out.println("Let's get started!");
-        System.out.println("Type in 'help' for more details.");
+        System.out.println("Type in \"help\" for more details.");
     }
 
     public static void printResult(CommandResult result) {

@@ -88,9 +88,10 @@ public class DeckManager {
         String result = "";
         if (getDecksSize() > 0) {
             int i = 1;
-            result = result.concat("These are your decks: ");
+            result = result.concat("These are your decks: " + System.lineSeparator());
             for (Deck deck : decks) {
-                result = result.concat(i + ". " + deck.getName());
+                result = result.concat("\t" + i + ". " + deck.getName()
+                        + System.lineSeparator());
                 i += 1;
             }
         } else {
