@@ -34,6 +34,10 @@ public class AddCardCommand extends Command {
             }
             String[] rawParameters = parser.parseArguments(super.arguments);
 
+            if (rawParameters.length < 4) {
+                throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            }
+
             if (!rawParameters[0].equalsIgnoreCase("/f") || !rawParameters[2].equalsIgnoreCase("/b")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }

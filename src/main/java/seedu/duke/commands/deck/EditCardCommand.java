@@ -37,6 +37,10 @@ public class EditCardCommand extends Command {
             }
             String[] rawParameters = parser.parseArguments(super.arguments);
 
+            if (rawParameters.length < 6) {
+                throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            }
+
             if (!rawParameters[0].equalsIgnoreCase("/card")
                     | !rawParameters[2].equalsIgnoreCase("/side")
                     | !rawParameters[4].equalsIgnoreCase("/input")) {
