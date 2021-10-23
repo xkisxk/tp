@@ -23,9 +23,9 @@ public class TestManager {
     private ArrayList<Deck> decks;
     private TestHistory testHistory;
 
-    public TestManager(ArrayList<Deck> decks) {
+    public TestManager(ArrayList<Deck> decks, DeckManager deckManager) {
         this.decks = decks;
-        this.testHistory = new TestHistory();
+        this.testHistory = new TestHistory(deckManager);
     }
 
 //    /**

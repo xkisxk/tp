@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 public abstract class Command {
-    protected String name;
+    protected String name; // TODO: use enum or remove
     protected String arguments;
 
     public Command(String name, String arguments) {
