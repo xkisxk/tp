@@ -1,5 +1,6 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.DeckNotExistException;
 
 import seedu.duke.exceptions.NoSlashException;
@@ -82,6 +83,18 @@ public class DeckManager {
 
     public ArrayList<Deck> getDecks() {
         return decks;
+    }
+
+    public String findCards(String searchInput) {
+        String result = "";
+        if (decks.size() > 0) {
+            for (int i = 0; i < decks.size(); i += 1) {
+                result = result.concat(getDeck(i).returnMatchingFlashCards(searchInput));
+            }
+        } else {
+            result = "There are no decks." + System.lineSeparator();
+        }
+        return result;
     }
 
     public void viewDecks() {

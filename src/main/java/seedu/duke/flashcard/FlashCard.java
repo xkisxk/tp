@@ -86,26 +86,26 @@ public class FlashCard {
 
     public String returnFlashCard() {
         String result = "";
-        result.concat("*================FRONT================* "
+        result = result.concat("*================FRONT================* "
                 + "*===============BACK==================*");
-        result.concat(System.lineSeparator());
+        result = result.concat(System.lineSeparator() + System.lineSeparator());
 
         String front = this.front;
         String frontSpaces = "";
         for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces.concat(" ");
+            frontSpaces = frontSpaces.concat(" ");
         }
 
         String back = this.back;
         String backSpaces = "";
         for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces.concat(" ");
+            backSpaces = backSpaces.concat(" ");
         }
 
-        result.concat(frontSpaces + front + frontSpaces + backSpaces + back);
-        result.concat(System.lineSeparator());
-        result.concat("*=====================================* "
-                + "*=====================================*");
+        result = result.concat(frontSpaces + front + frontSpaces + backSpaces + back);
+        result = result.concat(System.lineSeparator() + System.lineSeparator());
+        result = result.concat("*=====================================* "
+                + "*=====================================*" + System.lineSeparator());
         return result;
     }
 
