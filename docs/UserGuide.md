@@ -50,13 +50,16 @@ Example of Usage:
 
 Expected outcome:
 
+![](assets/ug/adddeck.png)
 ### Viewing all decks: `view`
+
 Displays the names of all decks.
 
 Format: `view`
 
 Expected outcome:
 
+![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
 
@@ -84,7 +87,8 @@ Expected outcome:
 
 ### Entering a deck: `enter`
 
-
+Expected outcome: 
+![](assets/ug/enter.png)
 ### Testing flashcards within a deck: `test`
 
 Enter test mode. The program will ask you to input the index for the deck that is to be tested.
@@ -125,7 +129,12 @@ Expected outcome:
 
 
 ### Finding a flashcard: `find`
+Flashcards with descriptions matching the search terms are displayed on the screen.
 
+Format: `find <search terms>`
+
+Expected outcome:
+![](assets/ug/find.png)
 ### Exiting the app: `bye`
 Exits the CardLI application within the Command Line Interface.
 Using this command will also save the current decks of flashcards into a text file named ``CardLI.txt``
@@ -133,6 +142,9 @@ stored within the same directory as `Duke.jar`.
 
 Format: `bye`
 
+Expected outcome:
+
+![](assets/ug/bye.png)
 ---
 ## Deck Menu
 
@@ -145,9 +157,13 @@ Example of usage:
 
 Expected outcome:
 
+
+![](assets/ug/addflash.png)
+###Deleting a flashcard: `delete`
+
 ### Deleting a flashcard: `delete`
 Format: `delete <word/phrase/index>`
-Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it 
+Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
 
 Format: `delete <word/phrase/index>`
@@ -166,7 +182,8 @@ Example of usage:
 
 Expected outcome:
 
-
+![](assets/ug/deleteflash.png)
+![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
 Edits the front or the back of the flashcard of index <index> to the user input given.
 
@@ -188,11 +205,17 @@ Format: `view`
 Expected outcome:
 
 
+Expected outcome:
+
+![](assets/ug/viewcard.png)
 ### Exiting deck mode: ``exit``
 Exits deck mode and returns to the main menu.
 
 Format: ``exit``
 
+Expected outcome:
+
+![](assets/ug/exit.png)
 ## FAQs
 
 **Q**: How do I transfer my data to another computer? 
