@@ -1,0 +1,43 @@
+@startuml
+
+hide footbox
+
+participant ":Parser" as Parser
+participant ":EditCardCommand" as EditCardCommand
+participant ":DeckManager" as DeckManager
+participant ":Deck" as Deck
+participant ":FlashCard" as FlashCard
+
+
+[-> Parser : parse("edit /c 2 /s front /i 2+2")
+activate Parser
+
+ref over Parser, EditCardCommand : parseEditCardCommand(input)
+
+[<-- Parser : EditCardCommand(args)
+deactivate Parser
+
+[->EditCardCommand : execute()
+activate EditCardCommand
+
+EditCardCommand -> DeckManager : get(deckIndex)
+activate DeckManager
+
+DeckManager --> EditCardCommand : deck
+deactivate DeckManager
+
+EditCardCommand -> Deck : getCard(cardIndex)
+activate Deck
+
+Deck --> EditCardCommand : flashcard
+deactivate Deck
+
+EditCardCommand -> FlashCard : setFront(newContent)
+activate FlashCard
+
+FlashCard --> EditCardCommand
+deactivate FlashCard
+
+[<-- EditCardCommand
+deactivate EditCardCommand
+@enduml
