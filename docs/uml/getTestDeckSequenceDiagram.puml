@@ -9,21 +9,28 @@ activate TestManager
 TestManager -> DeckManager : getTestDeck(deckIndex:int)
 activate DeckManager
 
-alt test all
+alt test all decks
 DeckManager -> Deck : Deck()
 activate Deck
 loop every Deck in DeckManager
 loop every FlashCard in Deck
-DeckManager -> Deck : addFlashCard()
+
+Deck -> Deck : addFlashCard()
+activate Deck
+Deck --> Deck
+deactivate Deck
+
+end
+end
 Deck --> DeckManager
-end
-end
+deactivate Deck
 DeckManager --> TestManager : deckToTest
 
-else
+else test single deck
 TestManager -> DeckManager : get(deckIndex)
 DeckManager --> TestManager : deckToTest
 end
+deactivate DeckManager
 
 TestManager -> AnswerList : AnswerList(deckToTest)
 activate AnswerList
