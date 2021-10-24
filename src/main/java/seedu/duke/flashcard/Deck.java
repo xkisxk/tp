@@ -122,8 +122,8 @@ public class Deck {
 
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
-        addFlashCard(input[1], input[3]);
-        return returnNewFlashCard(input[1], input[3]);
+        addFlashCard(input[0], input[1]);
+        return returnNewFlashCard(input[0], input[1]);
     }
 
     /**

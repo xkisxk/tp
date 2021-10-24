@@ -11,6 +11,8 @@ public class TestCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return null;
+        CommandResult result;
+        result = new CommandResult("Entering test mode...", false, false, true, false);
+        return result;
     }
 }

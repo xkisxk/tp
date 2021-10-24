@@ -17,16 +17,12 @@ import java.util.logging.Level;
  * Implements the test function.
  */
 public class TestManager {
-
     private final TestUi ui = new TestUi();
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
-
-    private ArrayList<Deck> decks;
-    private TestHistory testHistory;
-    private DeckManager deckManager;
+    private final TestHistory testHistory;
+    private final DeckManager deckManager;
 
     public TestManager(DeckManager deckManager) {
-        this.decks = deckManager.getDecks();
         this.testHistory = new TestHistory(deckManager);
         this.deckManager = deckManager;
     }
@@ -51,6 +47,7 @@ public class TestManager {
             testAllCardsShuffled(userAnswers);
             markTest(userAnswers);
             testHistory.addAnswerList(userAnswers);
+            ui.printEndTest();
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");

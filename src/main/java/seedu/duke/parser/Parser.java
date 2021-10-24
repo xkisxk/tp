@@ -1,17 +1,5 @@
 package seedu.duke.parser;
 
-
-import seedu.duke.testing.TestHistory;
-import seedu.duke.testing.TestManager;
-import seedu.duke.exceptions.CardLiException;
-import seedu.duke.exceptions.DeckNotExistException;
-import seedu.duke.exceptions.FieldEmptyException;
-import seedu.duke.exceptions.InvalidCommandFormatException;
-import seedu.duke.ui.CardLiUi;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Deals with the parsing of user input at the command line.
  */

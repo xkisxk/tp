@@ -75,11 +75,6 @@ public class CardLiUi {
         return help;
     }
 
-    public static void helpMessage() {
-        String help = returnHelpMessage();
-        System.out.println(help);
-    }
-
     public static String returnHelpInDeckMessage() {
         String help = "\n"
                 + "................................................................................"
@@ -105,11 +100,6 @@ public class CardLiUi {
                 + "................................................................................"
                 + "....................................... \n";
         return help;
-    }
-
-    public static void helpInDeckMessage() {
-        String help = returnHelpInDeckMessage();
-        System.out.println(help);
     }
 
     public void printGreetingMessage() {

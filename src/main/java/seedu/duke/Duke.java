@@ -8,6 +8,7 @@ import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.InnerParser;
 import seedu.duke.parser.OuterParser;
 import seedu.duke.parser.Parser;
+import seedu.duke.parser.TestParser;
 import seedu.duke.storage.Storage;
 import seedu.duke.testing.TestManager;
 import seedu.duke.ui.CardLiUi;
@@ -24,6 +25,7 @@ public class Duke {
     private Storage storage;
     private DeckManager deckManager;
     private TestManager testManager;
+    private TestParser testParser;
     private InnerParser innerParser;
     private OuterParser outerParser;
 
@@ -32,6 +34,7 @@ public class Duke {
         this.decks = storage.load();
         this.deckManager = new DeckManager(decks);
         this.testManager = new TestManager(this.deckManager);
+        this.testParser = new TestParser();
         this.innerParser = new InnerParser();
         this.outerParser = new OuterParser(deckManager, innerParser);
     }
@@ -44,6 +47,7 @@ public class Duke {
         ui.printGreetingMessage();
         boolean exitProgram = false;
         boolean inDeck;
+        boolean inTest;
 
 
         while (!exitProgram) {
@@ -59,6 +63,10 @@ public class Duke {
                 result = command.execute();
                 ui.printResult(result);
                 inDeck = !result.isExit();
+            }
+            inTest = result.isTest();
+            if (inTest) {
+                testManager.startTest();
             }
         }
         ui.printByeMessage();
