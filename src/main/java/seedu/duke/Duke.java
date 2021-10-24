@@ -10,6 +10,7 @@ import seedu.duke.parser.OuterParser;
 import seedu.duke.parser.Parser;
 import seedu.duke.parser.TestParser;
 import seedu.duke.storage.Storage;
+import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
 import seedu.duke.ui.CardLiUi;
 
@@ -25,18 +26,18 @@ public class Duke {
     private Storage storage;
     private DeckManager deckManager;
     private TestManager testManager;
-    private TestParser testParser;
     private InnerParser innerParser;
     private OuterParser outerParser;
+    private TestHistory testHistory;
 
     private Duke() {
         this.storage = new Storage();
         this.decks = storage.load();
         this.deckManager = new DeckManager(decks);
-        this.testManager = new TestManager(this.deckManager);
-        this.testParser = new TestParser();
+        this.testHistory = new TestHistory(deckManager);
+        this.testManager = new TestManager(testHistory, deckManager);
         this.innerParser = new InnerParser();
-        this.outerParser = new OuterParser(deckManager, innerParser);
+        this.outerParser = new OuterParser(deckManager, innerParser, testHistory);
     }
 
     /**

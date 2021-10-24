@@ -22,8 +22,8 @@ public class TestManager {
     private final TestHistory testHistory;
     private final DeckManager deckManager;
 
-    public TestManager(DeckManager deckManager) {
-        this.testHistory = new TestHistory(deckManager);
+    public TestManager(TestHistory testHistory, DeckManager deckManager) {
+        this.testHistory = testHistory;
         this.deckManager = deckManager;
     }
 

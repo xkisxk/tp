@@ -45,12 +45,11 @@ public class TestHistory {
         }
     }
 
-    public void prepareToViewTest(String input) {
-        try {
-            int index = TestParser.toInt(input);
-            viewTestByIndex(index);
-        } catch (NumberFormatException e) {
-            System.out.println("That's not a number.");
+    public String prepareViewTest(int index) {
+        if (index == -1) {
+            return viewTests();
+        } else {
+            return viewTestByIndex(index);
         }
     }
 
@@ -59,25 +58,40 @@ public class TestHistory {
      * Gives the raw score, followed by the percentage.
      *
      * @param index index of the test
+     * @return that test as string
      */
-    public void viewTestByIndex(int index) {
+    public String viewTestByIndex(int index) {
         AnswerList answerList = testHistory.get(index);
         int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
-        ui.printScore(index, score, totalScore);
+        String result = "You scored " + score + " out of " + totalScore + " for test " + (index + 1)
+                + "\nThat is " + (double) score / totalScore * 100 + "%!";
+        return result;
     }
 
     /**
      * Views the results of the tests in order of all the tests taken.
      * Gives the raw score, followed by the percentage.
      *
+     * @return all the tests as a string
      */
-    public void viewTests() {
+    public String viewTests() {
+        String result = "";
+        if (testHistory.size() <= 0) {
+            return "You have not taken any tests.";
+        }
         int index = 1;
+        result = result.concat("These are your scores: " + System.lineSeparator());
         for (AnswerList answerList : testHistory) {
-            ui.printTest(index, answerList);
+            int score = answerList.getUserScore();
+            int totalScore = answerList.getSize();
+            result = result.concat(
+                    "Score for test " + index + ": " + answerList.getDeck().getName()
+                            + " " + score + "/" + totalScore
+                            + " " + (double) score / totalScore * 100 + "%\n");
             index++;
         }
+        return result;
     }
 
     /**
