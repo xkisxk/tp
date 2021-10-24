@@ -40,8 +40,22 @@ menu to work with the flashcards.
 
 ## Main Menu
 ### Adding a deck: `add`
+Creates and adds a new deck with the given name, if it does not already exist.
+
+Format: `add <name of deck>`
+
+Example of Usage:
+
+`add English vocab`
+
+Expected outcome:
 
 ### Viewing all decks: `view`
+Displays the names of all decks.
+
+Format: `view`
+
+Expected outcome:
 
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
@@ -123,9 +137,17 @@ Format: `bye`
 ## Deck Menu
 
 ### Adding a flashcard `add`
+Adds a flashcard with the given front and back to the current deck.
+Format: `add /f <word/phrase on front of flashcard> /b <word/phrase on front of flashcard>`
 
-###Deleting a flashcard: `delete`
-Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it
+Example of usage:
+` add /f glycerol /b C3H8O3`
+
+Expected outcome:
+
+### Deleting a flashcard: `delete`
+Format: `delete <word/phrase/index>`
+Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
 
 Format: `delete <word/phrase/index>`
@@ -159,6 +181,12 @@ Example of usage:
 Expected outcome:
 
 ### Viewing flashcards: `view`
+Displays all the flashcards in the current deck.
+
+Format: `view`
+
+Expected outcome:
+
 
 ### Exiting deck mode: ``exit``
 Exits deck mode and returns to the main menu.
