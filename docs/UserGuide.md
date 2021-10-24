@@ -132,8 +132,16 @@ Format: ``bye``
 ## Deck Menu
 
 ### Adding a flashcard `add`
+Adds a flashcard with the given front and back to the current deck.
 
-###Deleting a flashcard: `delete`
+Format: `add /f <word/phrase on front of flashcard> /b <word/phrase on front of flashcard>`
+
+Example of usage:
+` add /f glycerol /b C3H8O3`
+
+Expected outcome:
+
+### Deleting a flashcard: `delete`
 Format: `delete <word/phrase/index>`
 Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
@@ -167,6 +175,12 @@ Example of usage:
 Expected outcome:
 
 ### Viewing flashcards: `view`
+Displays all the flashcards in the current deck.
+
+Format: `view`
+
+Expected outcome:
+
 
 ### Exiting deck mode: ``exit``
 Exits deck mode and returns to the main menu.
