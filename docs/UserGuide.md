@@ -159,7 +159,6 @@ Expected outcome:
 
 
 ![](assets/ug/addflash.png)
-###Deleting a flashcard: `delete`
 
 ### Deleting a flashcard: `delete`
 Format: `delete <word/phrase/index>`
