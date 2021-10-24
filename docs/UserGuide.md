@@ -27,8 +27,8 @@ Expected outcome:
 
 ---
 ## Deck Menu
-###Editing a flashcard: edit
-Edits the front or the back of the flashcard of index <index> to the user input.
+### Editing a flashcard: edit
+Edits the front or the back of the flashcard of index <index> to the user input given.
 
 Format: `edit <index> /s <front or back> /i <input>`
 
@@ -48,6 +48,7 @@ Expected outcome:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+### Main Menu
+* Edit `edit /d <index of deck> /n <name>`
+### Deck Menu
+* Edit `edit <index> /s <front or back> /i <input>`
