@@ -14,11 +14,17 @@ import java.util.logging.Logger;
  * TestHistory keeps track of all answerResponses from previous tests.
  */
 public class TestHistory {
-    private static final ArrayList<AnswerList> testHistory = new ArrayList<>();
-    private static final Logger logger = Logger.getLogger(TestManager.class.getName());
-    private static final TestUi ui = new TestUi();
+    private ArrayList<AnswerList> testHistory = new ArrayList<>();
+    private Logger logger = Logger.getLogger(TestManager.class.getName());
+    private TestUi ui = new TestUi();
 
-    public static void addAnswerList(AnswerList answerList) {
+    private DeckManager deckManager;
+
+    public TestHistory(DeckManager deckManager) {
+        this.deckManager = deckManager;
+    }
+
+    public void addAnswerList(AnswerList answerList) {
         testHistory.add(answerList);
     }
 
@@ -26,20 +32,21 @@ public class TestHistory {
      * View overall result statistics of all tests and individual flashcards.
      * Invoked by the user command "viewtests".
      */
-    public static void viewOverallFlashcardStats() {
+    public void viewOverallFlashcardStats() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "listing all flashcard stats");
 
-        assert DeckManager.getDecks().size() > 0 : "deckList must not be empty";
+        assert deckManager.getDecks().size() > 0 : "deckList must not be empty";
         System.out.println("Listing total scores of flashcards for all tests");
-        for (Deck deck : DeckManager.getDecks()) {
-            for (FlashCard card : deck.getCards()) {
+        for (Deck deck : deckManager.getDecks()) {
+            for (FlashCard card : deck.cards) {
                 ui.printScoreWithCard(card);
             }
         }
     }
 
-    public static void prepareToViewTest(String input) {
+
+    public void prepareToViewTest(String input) {
         try {
             int index = TestParser.toInt(input);
             viewTestByIndex(index);
@@ -51,10 +58,10 @@ public class TestHistory {
     /**
      * Views the results of a test given the index.
      * Gives the raw score, followed by the percentage.
-     * 
+     *
      * @param index index of the test
      */
-    public static void viewTestByIndex(int index) {
+    public void viewTestByIndex(int index) {
         AnswerList answerList = testHistory.get(index);
         int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
@@ -66,7 +73,7 @@ public class TestHistory {
      * Gives the raw score, followed by the percentage.
      *
      */
-    public static void viewTests() {
+    public void viewTests() {
         int index = 1;
         for (AnswerList answerList : testHistory) {
             ui.printTest(index, answerList);
@@ -76,15 +83,17 @@ public class TestHistory {
 
     /**
      * Gets all the low scoring cards and put them into a deck.
+     * The cards that are put into the deck are the same cards objects, in other
+     * words they are not new FlashCard objects.
      *
      * @return deck of low scoring cards
      */
-    private static Deck getLowScoringCardsFromAllDecks() {
+    public Deck getLowScoringCards() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Collecting low scoring cards");
         Deck reviewDeck = new Deck("Review");
-        for (Deck deck : DeckManager.getDecks()) {
-            for (FlashCard card : deck.getCards()) {
+        for (Deck deck : deckManager.getDecks()) {
+            for (FlashCard card : deck.cards) {
                 if (isLowScoring(card)) {
                     reviewDeck.addFlashCard(card);
                     logger.log(Level.INFO, "Added a low scoring card");
@@ -95,49 +104,13 @@ public class TestHistory {
     }
 
     /**
-     * Gets all the low scoring cards from a deck and put them into a deck.
-     *
-     * @return deck of low scoring cards
-     */
-    private static Deck getLowScoringCardsFromADeck(Deck deck) {
-        logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "Collecting low scoring cards");
-        Deck reviewDeck = new Deck("Review");
-        for (FlashCard card : deck.getCards()) {
-            if (isLowScoring(card)) {
-                reviewDeck.addFlashCard(card);
-                logger.log(Level.INFO, "Added a low scoring card");
-            }
-        }
-        return reviewDeck;
-    }
-
-    /**
-     * Gets all the low scoring cards and put them into a deck.
-     * If index is -1, get low scaring cards from all decks.
-     * Else get low scoring cards from the deck from that index.
-     * The cards that are put into the deck are the same cards objects, in other
-     * words they are not new FlashCard objects.
-     *
-     * @return deck of low scoring cards
-     */
-    public static Deck getLowScoringCards(int index) {
-        if (index == -1) {
-            return getLowScoringCardsFromAllDecks();
-        }
-        if (DeckManager.hasDeck(index)) {
-            return getLowScoringCardsFromADeck(DeckManager.getDeck(index));
-        }
-        throw new IndexOutOfBoundsException("This deck does not exist.");
-    }
-
-    /**
      * A card is low scoring if its accumulated user score is less than 50% of
      * the total score.
      *
      * @return true if card is low scoring, false otherwise
      */
-    private static boolean isLowScoring(FlashCard card) {
+    private boolean isLowScoring(FlashCard card) {
         return (double) card.getUserScore() * 100 / card.getTotalScore() < 50;
     }
+
 }
