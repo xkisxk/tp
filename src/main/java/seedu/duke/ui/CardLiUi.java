@@ -36,15 +36,15 @@ public class CardLiUi {
                 + "................................................................................"
                 + "....................................... \n"
                 + "Here is the list  of commands! \n"
-                + "1. adddeck \n"
+                + "1. add \n"
                 + "Description: Adds a flashcard deck \n"
-                + "Format: adddeck <name of deck> \n\n"
-                + "2. editdeck \n"
+                + "Format: add <name of deck> \n\n"
+                + "2. edit \n"
                 + "Description: Edits a flashcard deck \n"
-                + "Format: editdeck /deck <index of deck> /input <word/phrase> \n\n"
-                + "3. viewdecks \n"
+                + "Format: edit /deck <index of deck> /input <word/phrase> \n\n"
+                + "3. view \n"
                 + "Description: List flashcard decks \n"
-                + "Format: viewdecks \n\n"
+                + "Format: view \n\n"
                 + "4. enter \n"
                 + "Description: Enters a flashcard deck (further actions can be taken)\n"
                 + "Format: enter <index of deck> \n\n"
@@ -82,12 +82,12 @@ public class CardLiUi {
 
     public static String returnHelpInDeckMessage() {
         String help = "\n"
-                + "................................................................................\"\n"
-                + "....................................... \\n\"\n"
+                + "................................................................................"
+                + "....................................... \n"
                 + "Here is the list of commands! \n"
                 + "1. add \n"
                 + "Description: Adds a flashcard to a deck \n"
-                + "Format: add /fro <word/phrase on front of flashcard> /bac"
+                + "Format: add /f <word/phrase on front of flashcard> /b"
                 + " <word/phrase on back of flashcard> \n\n"
                 + "2. delete \n"
                 + "Description: Deletes a flashcard \n"
@@ -138,6 +138,7 @@ public class CardLiUi {
                 + " '----------------'  '----------------'\n";
         System.out.println("Welcome to\n" + logo);
         System.out.println("Let's get started!");
+        System.out.println("Type in \"help\" for more details.");
     }
 
     public static void printResult(CommandResult result) {

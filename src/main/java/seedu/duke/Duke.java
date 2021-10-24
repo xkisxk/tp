@@ -31,7 +31,7 @@ public class Duke {
         this.storage = new Storage();
         this.decks = storage.load();
         this.deckManager = new DeckManager(decks);
-        this.testManager = new TestManager(decks);
+        this.testManager = new TestManager(decks, this.deckManager);
         this.innerParser = new InnerParser();
         this.outerParser = new OuterParser(deckManager, innerParser);
     }

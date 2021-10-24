@@ -85,10 +85,11 @@ public class FlashCard {
     }
 
     public String returnFlashCard() {
-        String result = "";
-        result = result.concat("*================FRONT================* "
-                + "*===============BACK==================*");
-        result = result.concat(System.lineSeparator() + System.lineSeparator());
+        // TODO: extract the lines bounding a flashcard
+        // TODO: fix spacing. Not sure what's wrong though
+        String result = "*================FRONT================* "
+                + "*===============BACK==================*"
+                + System.lineSeparator();
 
         String front = this.front;
         String frontSpaces = "";
@@ -102,10 +103,11 @@ public class FlashCard {
             backSpaces = backSpaces.concat(" ");
         }
 
-        result = result.concat(frontSpaces + front + frontSpaces + backSpaces + back);
-        result = result.concat(System.lineSeparator() + System.lineSeparator());
-        result = result.concat("*=====================================* "
-                + "*=====================================*" + System.lineSeparator());
+        result = result.concat(frontSpaces + front + frontSpaces + backSpaces + back
+                + System.lineSeparator()
+                + "*=====================================* "
+                + "*=====================================*"
+                + System.lineSeparator());
         return result;
     }
 

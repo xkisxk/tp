@@ -55,7 +55,7 @@ class DeckTest {
         fcm.prepareToAddFlashCard(secondCard);
         fcm.deleteFlashCard("illness");
         fcm.viewAllFlashCards();
-        assertEquals(1, fcm.cards.size());
+        assertEquals(1, fcm.getCards().size());
         fcm.deleteFlashCard("to lose");
     }
 
@@ -68,7 +68,7 @@ class DeckTest {
         fcm.prepareToAddFlashCard(secondCard);
         fcm.deleteFlashCard("1");
         fcm.viewAllFlashCards();
-        assertEquals(1, fcm.cards.size());
+        assertEquals(1, fcm.getCards().size());
         fcm.deleteFlashCard("1");
     }
 
