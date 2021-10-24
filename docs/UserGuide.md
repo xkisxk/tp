@@ -17,7 +17,7 @@ CardLI is a desktop app to help you create, organising, and review flashcards vi
 ### Editing a deck: edit
 Edits the name of the deck indicated by the index.
 
-Format: edit /d <index of deck> /n <name>`
+Format: `edit /d <index of deck> /n <name>`
 
 Example of Usage:
 
@@ -29,7 +29,7 @@ Expected outcome:
 ## Deck Menu
 ###Editing a flashcard: edit
 Format: `edit <index> /s <front or back> /i <input>`
-Edits the front or the back of the flashcard of index <index> to <input>.
+Edits the front or the back of the flashcard of index <index> to the user input.
 
 Example of usage:
 
