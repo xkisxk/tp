@@ -24,7 +24,7 @@ TestManager -> TestUi : printCorrectAnsMessage()
 activate TestUi
 TestUi --> TestManager
 deactivate TestUi
-else
+else answer is wrong
 TestManager -> TestUi : printIncorrectAnsMessage()
 activate TestUi
 TestUi --> TestManager
