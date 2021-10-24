@@ -88,6 +88,7 @@ Expected outcome:
 ### Entering a deck: `enter`
 
 Expected outcome: 
+
 ![](assets/ug/enter.png)
 ### Testing flashcards within a deck: `test`
 
