@@ -134,6 +134,7 @@ Flashcards with descriptions matching the search terms are displayed on the scre
 Format: `find <search terms>`
 
 Expected outcome:
+
 ![](assets/ug/find.png)
 ### Exiting the app: `bye`
 Exits the CardLI application within the Command Line Interface.
