@@ -53,7 +53,7 @@ public class EditDeckCommand extends Command {
 
             String[] editedParameters = {deck, input};
 
-            result = new CommandResult(this.deckManager.editCat(editedParameters));
+            result = new CommandResult(this.deckManager.editDeck(editedParameters));
         } catch (CardLiException e) {
             // TODO: FieldEmptyException is subclass of CardLiException, so can't put both in the conditional above
             // TODO: check if want to separate them?

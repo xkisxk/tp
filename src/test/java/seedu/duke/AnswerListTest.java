@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.DeckManager;
 import seedu.duke.testing.AnswerList;
 import seedu.duke.testing.TestManager;
 
@@ -18,10 +19,12 @@ public class AnswerListTest {
     @Test
     public void getScore_oneCorrectAnswer_expectOne() {
         Deck deck = new Deck();
+        DeckManager deckManager = new DeckManager();
+        TestManager testManager = new TestManager(deckManager);
         deck.addFlashCard("card", "card");
         AnswerList answerList = new AnswerList(deck);
         answerList.addAnswer("card", 1);
-        TestManager.markTest(answerList);
+        testManager.markTest(answerList);
         assertEquals(1, answerList.getUserScore());
     }
 }

@@ -1,4 +1,4 @@
-package seedu.duke.commands.deck;
+package seedu.duke.commands.system;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;

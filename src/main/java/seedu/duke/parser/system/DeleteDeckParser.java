@@ -12,4 +12,14 @@ public class DeleteDeckParser implements CommandArgumentParser {
         parameters[0] = deckName;
         return parameters;
     }
+
+    public static class TestParser implements CommandArgumentParser {
+
+        public TestParser() {}
+
+        @Override
+        public String[] parseArguments(String arguments) {
+            return new String[0];
+        }
+    }
 }
