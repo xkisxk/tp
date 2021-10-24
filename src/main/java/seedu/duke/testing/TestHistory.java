@@ -1,5 +1,6 @@
 package seedu.duke.testing;
 
+import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.flashcard.FlashCard;
@@ -29,20 +30,25 @@ public class TestHistory {
     }
 
     /**
-     * View overall result statistics of all tests and individual flashcards.
-     * Invoked by the user command "viewtests".
+     * View overall result statistics of all or a single flashcards.
+     *
+     * @return FlashCardStats as a string
      */
-    public void viewOverallFlashcardStats() {
+    public String viewAllFlashcardStats() {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "listing all flashcard stats");
 
         assert deckManager.getDecks().size() > 0 : "deckList must not be empty";
-        System.out.println("Listing total scores of flashcards for all tests");
+
+        String result = "Listing total scores of flashcards for all tests: \n";
         for (Deck deck : deckManager.getDecks()) {
             for (FlashCard card : deck.getCards()) {
-                ui.printScoreWithCard(card);
+                result = result.concat(card.returnFlashCard() + "\nScore: "
+                        + card.getUserScore() + " out of " + card.getTotalScore()
+                        + "\n");
             }
         }
+        return result;
     }
 
     public String prepareViewTest(int index) {

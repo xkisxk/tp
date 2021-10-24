@@ -3,17 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
 
-import seedu.duke.commands.system.AddDeckCommand;
-import seedu.duke.commands.system.DeleteDeckCommand;
-import seedu.duke.commands.system.EditDeckCommand;
-import seedu.duke.commands.system.EnterDeckCommand;
-import seedu.duke.commands.system.ExitProgrammeCommand;
-import seedu.duke.commands.system.FindCardsCommand;
-import seedu.duke.commands.system.HelpCommand;
-import seedu.duke.commands.system.ReviewCommand;
-import seedu.duke.commands.system.TestCommand;
-import seedu.duke.commands.system.ViewDecksCommand;
-import seedu.duke.commands.system.ViewTestCommand;
+import seedu.duke.commands.system.*;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.testing.TestHistory;
 
@@ -57,7 +47,7 @@ public class OuterParser {
             logger.log(Level.INFO, "view (all decks) command parsed and executed");
             break;
         case "viewfc": //TODO: renaming or reorganizing where this command belongs
-            command = new InvalidCommand();
+            command = new ViewFlashCardStatsCommand(this.testHistory);
             break;
         case "viewtest": //TODO: renaming or reorganizing where this command belongs
             arguments = Parser.getCommandArguments(commandType, input);
