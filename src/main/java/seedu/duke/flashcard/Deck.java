@@ -110,7 +110,7 @@ public class Deck {
     }
 
     private String returnDeletedFlashCardMessage(String front, String back) {
-        String result = "\tDeleted card:";
+        String result = "\tDeleted card:" + System.lineSeparator();
         result = result.concat(returnCardInfo(front, back));
         return result;
     }
@@ -122,8 +122,8 @@ public class Deck {
 
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
-        addFlashCard(input[1], input[3]);
-        return returnNewFlashCard(input[1], input[3]);
+        addFlashCard(input[0], input[1]);
+        return returnNewFlashCard(input[0], input[1]);
     }
 
     /**
