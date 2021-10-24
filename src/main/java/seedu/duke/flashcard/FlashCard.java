@@ -84,27 +84,36 @@ public class FlashCard {
         totalScore++;
     }
 
-    public void viewFlashCard() {
-        System.out.println("*================FRONT================* "
-                + "*===============BACK==================*");
-        System.out.println();
+    public String returnFlashCard() {
+        // TODO: extract the lines bounding a flashcard
+        // TODO: fix spacing. Not sure what's wrong though
+        String result = "*================FRONT================* "
+                + "*===============BACK==================*"
+                + System.lineSeparator();
 
         String front = this.front;
         String frontSpaces = "";
         for (int i = 0; i < (39 - front.length()) / 2; i++) {
-            frontSpaces += " ";
+            frontSpaces = frontSpaces.concat(" ");
         }
 
         String back = this.back;
         String backSpaces = "";
         for (int i = 0; i < (39 - back.length()) / 2; i++) {
-            backSpaces += " ";
+            backSpaces = backSpaces.concat(" ");
         }
 
-        System.out.println(frontSpaces + front + frontSpaces + backSpaces + back);
-        System.out.println();
-        System.out.println("*=====================================* "
-                + "*=====================================*");
+        result = result.concat(frontSpaces + front + frontSpaces + backSpaces + back
+                + System.lineSeparator()
+                + "*=====================================* "
+                + "*=====================================*"
+                + System.lineSeparator());
+        return result;
+    }
+
+    public void viewFlashCard() {
+        String result = returnFlashCard();
+        System.out.println(result);
     }
 
     public void setBack(String input) {
