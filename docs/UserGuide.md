@@ -12,6 +12,13 @@
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features 
+The current version of CardLI has two menus: main and deck. In the main menu, you are working with
+all the decks, so commands only apply to the decks and not the individual flashcards. Enter the deck
+menu to work with the flashcards.
+
+### Content
+1. [Main Menu](#main-menu)
+2. [Deck Menu](#deck-menu)
 
 ---
 
