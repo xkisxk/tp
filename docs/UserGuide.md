@@ -2,7 +2,7 @@
 
 ## Introduction
 
-{Give a product intro}
+CardLI is a desktop app to help you create, organising, and review flashcards via a Command Line Interface.
 
 ## Quick Start
 
@@ -87,19 +87,32 @@ Example of usage:
 Expected outcome:
 
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+## Main Menu
+### Editing a deck: edit
+Edits the name of the deck indicated by the index.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `edit <index of deck> /n <name>`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Example of Usage:
 
-Example of usage: 
+`edit 2 /n mathematics`
 
-`todo n/Write the rest of the User Guide d/next week`
+Expected outcome:
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+---
+## Deck Menu
+### Editing a flashcard: edit
+Edits the front or the back of the flashcard of index <index> to the user input given.
+
+Format: `edit <index> /s <front or back> /i <input>`
+
+Example of usage:
+
+`edit 3 /s front /i 1 + 1`
+
+`edit 3 /s back /i 2`
+
+Expected outcome:
 
 ## FAQ
 
@@ -109,6 +122,7 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+### Main Menu
+* Edit `edit <index of deck> /n <name>`
+### Deck Menu
+* Edit `edit <index> /s <front or back> /i <input>`
