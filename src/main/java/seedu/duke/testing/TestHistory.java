@@ -1,10 +1,8 @@
 package seedu.duke.testing;
 
-import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.flashcard.FlashCard;
-import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;
 
 import java.util.ArrayList;
