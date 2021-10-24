@@ -28,8 +28,9 @@ Expected outcome:
 ---
 ## Deck Menu
 ###Editing a flashcard: edit
-Format: `edit <index> /s <front or back> /i <input>`
 Edits the front or the back of the flashcard of index <index> to the user input.
+
+Format: `edit <index> /s <front or back> /i <input>`
 
 Example of usage:
 
