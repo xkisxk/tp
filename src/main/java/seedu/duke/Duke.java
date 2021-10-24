@@ -48,6 +48,7 @@ public class Duke {
         boolean exitProgram = false;
         boolean inDeck;
         boolean inTest;
+        boolean inReview;
 
 
         while (!exitProgram) {
@@ -67,6 +68,10 @@ public class Duke {
             inTest = result.isTest();
             if (inTest) {
                 testManager.startTest();
+            }
+            inReview = result.isReview();
+            if (inReview) {
+                testManager.startReview();
             }
         }
         ui.printByeMessage();

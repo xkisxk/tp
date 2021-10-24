@@ -65,6 +65,10 @@ public class OuterParser {
             command = new TestCommand();
             logger.log(Level.INFO, "test command parsed and executed");
             break;
+        case "review":
+            command = new ReviewCommand();
+            logger.log(Level.INFO, "review command parsed and executed");
+            break;
         case "help":
             command = new HelpCommand();
             logger.log(Level.INFO, "help (deck) command parsed and executed");

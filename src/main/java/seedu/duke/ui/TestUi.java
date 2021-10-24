@@ -69,7 +69,6 @@ public class TestUi {
     }
 
     public void printStartReview() {
-        System.out.println("Starting review...");
         System.out.println("Which deck do you want to review?");
         System.out.print("Input an integer (or \"all\" to review all decks): ");
     }

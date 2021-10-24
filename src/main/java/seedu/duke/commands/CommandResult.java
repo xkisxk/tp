@@ -47,4 +47,8 @@ public class CommandResult {
     public boolean isTest() {
         return this.isTest;
     }
+
+    public boolean isReview() {
+        return this.isReview;
+    }
 }
