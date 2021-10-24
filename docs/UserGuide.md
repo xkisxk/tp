@@ -40,8 +40,22 @@ menu to work with the flashcards.
 
 ## Main Menu
 ### Adding a deck: `add`
+Creates and adds a new deck with the given name, if it does not already exist.
+
+Format: `add <name of deck>`
+
+Example of Usage:
+
+`add English vocab`
+
+Expected outcome:
 
 ### Viewing all decks: `view`
+Displays the names of all decks.
+
+Format: `view`
+
+Expected outcome:
 
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
