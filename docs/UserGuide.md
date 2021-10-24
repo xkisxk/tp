@@ -40,3 +40,33 @@ Example of usage:
 {Give a 'cheat sheet' of commands here}
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
+
+System-wide Mode:
+
+|Action|Format|
+|-------|------|
+|add deck|`add <name of deck>`|
+|view decks|`view`|
+|edit deck|`edit <index of deck> /n name`|
+|delete deck|`delete <index/name of deck>`|
+|enter deck|`enter <index of deck>`|
+|test|`test`|
+|view overall statistics for flashcards|`viewfc`|
+|view test statistics|`viewtest <index of test>` prints the result of the test indicated by the index.<br>`viewtest all` prints out the results for all tests.|
+|review|`review`|
+|find flashcard|`find <word/phrase>`|
+|exiting program|`exit`|
+
+Deck Mode:
+
+|Action|Format|
+|------|------|
+|add flashcard|`add /f <word> /b <definition>`|
+|deleting a flashcard|`delete <word/index>`|
+|editing a flashcard|`edit <index> /s <front or back> /i input`|
+|viewing flashcards|`view`|
+|exiting deck mode|`exit`|
+
+
+
+
