@@ -7,7 +7,7 @@ public class Parser {
 
     /**
      * Returns the command type of the user's input.
-     * @param input
+     * @param input user's input
      */
     public static String getCommandType(String input) {
         return input.trim().split(" ")[0].toLowerCase();

@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
  */
 public class Deck {
 
-    private final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "\tCan't delete a card with no description!";
-    private final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE = "\tThe card you are trying to delete does not exist.";
+    private static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "\tCan't delete a card with no description!";
+    private static final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE =
+            "\tThe card you are trying to delete does not exist.";
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;

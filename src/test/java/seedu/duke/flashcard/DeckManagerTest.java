@@ -1,6 +1,7 @@
 package seedu.duke.flashcard;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.DeckNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DeckManagerTest {
 
     @Test
-    void prepareToAddDeck_deckAdded_expectOne() {
+    void prepareToAddDeck_deckAdded_expectOne() throws DeckNotExistException {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("Test");
         assertEquals(1, deckManager.getDecksSize());
@@ -31,7 +32,7 @@ class DeckManagerTest {
     }
 
     @Test
-    void hasDeck_hasDeck_expectTrue() {
+    void hasDeck_hasDeck_expectTrue() throws DeckNotExistException {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("Test");
         assertTrue(deckManager.hasDeck(0));
@@ -39,7 +40,7 @@ class DeckManagerTest {
     }
 
     @Test
-    void getTestDeck_twoCards_expectTwoCards() {
+    void getTestDeck_twoCards_expectTwoCards() throws DeckNotExistException {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("Test Deck 1");
         deckManager.prepareToAddDeck("Test Deck 2");
@@ -48,5 +49,20 @@ class DeckManagerTest {
         assertEquals(2, deckManager.getTestDeck(-1).getDeckSize());
         deckManager.deleteDeck(deckManager.getDeck(0));
         deckManager.deleteDeck(deckManager.getDeck(0));
+    }
+
+    @Test
+    void deleteDeck_noDecks_expectDeckNotExistException() {
+        DeckManager deckManager = new DeckManager();
+        Deck deck = new Deck("euyhfdsifnkjadsanauheaiu");
+        assertThrows(DeckNotExistException.class, () -> deckManager.deleteDeck(deck));
+        assertThrows(DeckNotExistException.class, () -> deckManager.deleteDeck("test"));
+    }
+
+    @Test
+    void deleteDeck_noDecks_expectIndexOutOfBoundsException() {
+        DeckManager deckManager = new DeckManager();
+        Deck deck = new Deck("euyhfdsifnkjadsanauheaiu");
+        assertThrows(IndexOutOfBoundsException.class, () -> deckManager.deleteDeck(1));
     }
 }

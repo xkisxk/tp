@@ -1,6 +1,5 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 
 import java.io.File;
@@ -98,9 +97,12 @@ public class DeckManager {
         decks.add(new Deck(deckName));
     }
 
-    public String deleteDeck(Deck deck) {
+    public String deleteDeck(Deck deck) throws DeckNotExistException {
         String message = returnDeletedDeckMessage(deck);
-        decks.remove(deck);
+        boolean isRemoved = decks.remove(deck);
+        if (!isRemoved) {
+            throw new DeckNotExistException("This deck does not exist");
+        }
         return message;
     }
 
@@ -128,7 +130,7 @@ public class DeckManager {
                 return message;
             }
         }
-        throw new DeckNotExistException();
+        throw new DeckNotExistException("This deck does not exist");
     }
 
     private String returnDeletedDeckMessage(Deck deck) {

@@ -4,7 +4,8 @@ import seedu.duke.parser.CommandArgumentParser;
 
 public class FindCardsParser implements CommandArgumentParser {
 
-    public FindCardsParser() {}
+    public FindCardsParser() {
+    }
 
     @Override
     public String[] parseArguments(String arguments) {

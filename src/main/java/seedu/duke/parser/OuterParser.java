@@ -2,7 +2,17 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.system.*;
+import seedu.duke.commands.system.AddDeckCommand;
+import seedu.duke.commands.system.DeleteDeckCommand;
+import seedu.duke.commands.system.EditDeckCommand;
+import seedu.duke.commands.system.EnterDeckCommand;
+import seedu.duke.commands.system.ExitProgrammeCommand;
+import seedu.duke.commands.system.FindCardsCommand;
+import seedu.duke.commands.system.HelpCommand;
+import seedu.duke.commands.system.ReviewCommand;
+import seedu.duke.commands.system.TestCommand;
+import seedu.duke.commands.system.ViewDecksCommand;
+
 import seedu.duke.flashcard.DeckManager;
 
 import java.util.logging.Level;
@@ -20,6 +30,7 @@ public class OuterParser {
         this.deckManager = deckManager;
         this.innerParser = innerParser;
     }
+
     public Command parseCommand(String input) {
         // create a new Command that has `type` and `arguments`
         // the command should be of type `AddDeckCommand`, `DeleteDeckCommand`, etc.
@@ -40,6 +51,12 @@ public class OuterParser {
         case "view":
             command = new ViewDecksCommand(this.deckManager);
             logger.log(Level.INFO, "view (all decks) command parsed and executed");
+            break;
+        case "viewfc": //TODO: renaming or reorganizing where this command belongs
+            command = new InvalidCommand();
+            break;
+        case "viewtest": //TODO: renaming or reorganizing where this command belongs
+            command = new InvalidCommand();
             break;
         case "add":
             arguments = Parser.getCommandArguments(commandType, input);

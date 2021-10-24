@@ -79,7 +79,7 @@ public class Duke {
 
     /**
      * Entry point to the java.duke.Duke application.
-     * @param args
+     * @param args user's input
      */
     public static void main(String[] args) {
         new Duke().run();

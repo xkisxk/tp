@@ -25,15 +25,16 @@ public class DeleteDeckCommand extends Command {
 
         CommandResult result;
 
-        if (Parser.isInteger(enterInput)) {
-            int deckIndex = Integer.parseInt(enterInput) - 1;
-            return new CommandResult(deckManager.deleteDeck(deckIndex));
-        }
-
         try {
+            if (Parser.isInteger(enterInput)) {
+                int deckIndex = Integer.parseInt(enterInput) - 1;
+                return new CommandResult(deckManager.deleteDeck(deckIndex));
+            }
             result = new CommandResult(deckManager.deleteDeck(enterInput));
         } catch (DeckNotExistException e) {
             result = new CommandResult(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            result = new CommandResult("This deck does not exist.");
         }
         return result;
     }
