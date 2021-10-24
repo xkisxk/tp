@@ -1,5 +1,8 @@
-1
-duke
 2
-1+1 | k 2 | 0 | 1
-front | back | 1 | 1
+ExampleCard1
+2
+ExampleCard1 | def | 0 | 0
+ExampleCard2 | def | 0 | 0
+ExampleDeck2
+1
+ExampleCard3 | def | 0 | 0
