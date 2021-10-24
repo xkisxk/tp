@@ -52,8 +52,8 @@ public class OuterParser {
             logger.log(Level.INFO, "edit (deck) command parsed and executed");
             break;
         case "delete":
-            // TODO
-            command = new InvalidCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new DeleteDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "delete (deck) command parsed and executed");
             break;
         case "find":

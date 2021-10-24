@@ -1,5 +1,8 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.exceptions.CardLiException;
+import seedu.duke.exceptions.DeckNotExistException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -95,8 +98,43 @@ public class DeckManager {
         decks.add(new Deck(deckName));
     }
 
-    public void deleteDeck(Deck deck) {
+    public String deleteDeck(Deck deck) {
+        String message = returnDeletedDeckMessage(deck);
         decks.remove(deck);
+        return message;
+    }
+
+    public String deleteDeck(int deckIndex) {
+        String message = returnDeletedDeckMessage(decks.get(deckIndex));
+        decks.remove(deckIndex);
+        return message;
+    }
+
+    /**
+     * Deletes the deck given by the deck name.
+     * The deck will only be deleted if the name matches
+     * exactly with the name of the deck. If there are
+     * multiple decks with the same name, only the first matching
+     * one will be deleted.
+     *
+     * @param deckName name of the deck to delete
+     * @return delete message
+     */
+    public String deleteDeck(String deckName) throws DeckNotExistException {
+        for (Deck deck : decks) {
+            if (deck.getName().equals(deckName)) {
+                String message = returnDeletedDeckMessage(deck);
+                decks.remove(deck);
+                return message;
+            }
+        }
+        throw new DeckNotExistException();
+    }
+
+    private String returnDeletedDeckMessage(Deck deck) {
+        String result = "\tDeleted deck:";
+        result = result.concat(deck.getName());
+        return result;
     }
 
     public ArrayList<Deck> getDecks() {

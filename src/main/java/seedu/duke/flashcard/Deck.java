@@ -115,11 +115,6 @@ public class Deck {
         return result;
     }
 
-    private void printDeletedFlashCardMessage(String front, String back) {
-        String result = returnDeletedFlashCardMessage(front, back);
-        System.out.println(result);
-    }
-
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
         addFlashCard(input[0], input[1]);
@@ -214,7 +209,8 @@ public class Deck {
     private boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
     }
-//this one only appears in tests
+
+    //this one only appears in tests
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/bac");
         String[] flashCardWords = new String[2];
