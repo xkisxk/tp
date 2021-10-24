@@ -26,7 +26,7 @@ navigation to a file directory in step 5. The remaining steps are the same acros
 
 ## Features 
 
-{Give detailed description of each feature}
+### Main Menu
 
 ### Adding a todo: `todo`
 Adds a new item to the list of todo items.
@@ -48,6 +48,13 @@ Using this command will also save the current decks of flashcards into a text fi
 stored within the same directory as ``Duke.jar``.
 
 Format: ``bye``
+
+### Deck Mode
+
+### Exiting deck mode: ``exit``
+Exits deck mode and returns to the main menu.
+
+Format: ``exit``
 
 ## FAQs
 
