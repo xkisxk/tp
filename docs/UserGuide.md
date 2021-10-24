@@ -16,10 +16,10 @@ while the commands were designed to be intuitive to use.
 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Duke` from [here](http://link.to/duke).
-3. Take note of the full filepath of directory in which ``Duke.jar`` is saved.
-4. Open the command prompt by searching ``cmd`` in the search bar.
-5. Navigate to the file directory containing ``Duke.jar`` using the command ``cd <filepath>``.
-6. Start up CardLI using the command ``java -jar Duke.jar``.
+3. Take note of the full filepath of directory in which `Duke.jar` is saved.
+4. Open the command prompt by searching `cmd` in the search bar.
+5. Navigate to the file directory containing `Duke.jar` using the command `cd <filepath>`.
+6. Start up CardLI using the command``java -jar Duke.jar`.
 
 The above steps are for users who are running CardLI on a Windows device. If you are using an Apple
 and Linux device, you will have to open the command prompt equivalent on your operating system in step 4. 
@@ -39,6 +39,21 @@ menu to work with the flashcards.
 ---
 
 ## Main Menu
+### Adding a deck: `add`
+
+### Viewing all decks: `view`
+
+### Editing a deck: `edit`
+Edits the name of the deck indicated by the index.
+
+Format: `edit <index of deck> /n <name>`
+
+Example of Usage:
+
+`edit 2 /n mathematics`
+
+Expected outcome:
+
 ### Deleting a deck: `delete`
 Deletes the deck indicated by the index or the name.
 
@@ -52,10 +67,14 @@ Example of Usage:
 
 Expected outcome:
 
-### Testing flashcards within a deck: test
+
+### Entering a deck: `enter`
+
+
+### Testing flashcards within a deck: `test`
 Format: `test`
 
-Enter test mode. The program will ask the user to input the index for the deck that is to be tested.
+Enter test mode. The program will ask you to input the index for the deck that is to be tested.
 The word to be tested will be displayed in the console. 
 Typing the exact character-for-character definition for the word will result in a correct answer. 
 Otherwise, the response will be marked as incorrect. Regardless of whether the answer is correct 
@@ -69,8 +88,12 @@ Example of Usage:
 
 Expected outcome:
 
+### View flashcard statistics: `viewfc`
 
-### Review flashcards: review
+### View test statistics: `viewtest`
+
+
+### Review flashcards: `review`
 Format: `review`
 Enter review mode, which is the same as test mode except that the cards tested will be the cards 
 that the user got wrong on more than 50% of the tests.
@@ -81,9 +104,22 @@ Example of usage:
 
 Expected outcome:
 
+
+### Finding a flashcard: `find`
+
+### Exiting the app: `bye`
+Exits the CardLI application within the Command Line Interface.
+Using this command will also save the current decks of flashcards into a text file named ``CardLI.txt``
+stored within the same directory as `Duke.jar`.
+
+Format: ``bye``
+
 ---
 ## Deck Menu
-###Deleting a flashcard: delete
+
+### Adding a flashcard `add`
+
+###Deleting a flashcard: `delete`
 Format: `delete <word/phrase/index>`
 Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
@@ -103,21 +139,7 @@ Example of usage:
 Expected outcome:
 
 
-## Main Menu
-### Editing a deck: edit
-Edits the name of the deck indicated by the index.
-
-Format: `edit <index of deck> /n <name>`
-
-Example of Usage:
-
-`edit 2 /n mathematics`
-
-Expected outcome:
-
----
-## Deck Menu
-### Editing a flashcard: edit
+### Editing a flashcard: `edit`
 Edits the front or the back of the flashcard of index <index> to the user input given.
 
 Format: `edit <index> /s <front or back> /i <input>`
@@ -130,14 +152,7 @@ Example of usage:
 
 Expected outcome:
 
-### Exiting the app: ``bye``
-Exits the CardLI application within the Command Line Interface. 
-Using this command will also save the current decks of flashcards into a text file named ``CardLI.txt`` 
-stored within the same directory as ``Duke.jar``.
-
-Format: ``bye``
-
-### Deck Mode
+### Viewing flashcards: `view`
 
 ### Exiting deck mode: ``exit``
 Exits deck mode and returns to the main menu.
@@ -160,7 +175,28 @@ good grasp of the application.
 
 ## Command Summary
 
-### Main Menu
-* Edit `edit <index of deck> /n <name>`
-### Deck Menu
-* Edit `edit <index> /s <front or back> /i <input>`
+### Main Menu:
+
+|Action|Format|
+|-------|------|
+|add deck|`add <name of deck>`|
+|view decks|`view`|
+|edit deck|`edit <index of deck> /n name`|
+|delete deck|`delete <index/name of deck>`|
+|enter deck|`enter <index of deck>`|
+|test|`test`|
+|view overall statistics for flashcards|`viewfc`|
+|view test statistics|`viewtest <index of test>` prints the result of the test indicated by the index.<br>`viewtest all` prints out the results for all tests.|
+|review|`review`|
+|find flashcard|`find <word/phrase>`|
+|exiting program|`bye`|
+
+### Deck Menu:
+
+|Action|Format|
+|------|------|
+|add flashcard|`add /f <word> /b <definition>`|
+|deleting a flashcard|`delete <word/index>`|
+|editing a flashcard|`edit <index> /s <front or back> /i input`|
+|viewing flashcards|`view`|
+|exiting deck mode|`exit`|
