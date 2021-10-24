@@ -6,4 +6,3 @@ ExampleCard2 | def | 0 | 0
 ExampleDeck2
 1
 ExampleCard3 | def | 0 | 0
-
