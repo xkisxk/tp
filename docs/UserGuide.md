@@ -175,7 +175,9 @@ good grasp of the application.
 
 ## Command Summary
 
+
 ### Main Menu:
+
 
 |Action|Format|
 |-------|------|
@@ -193,6 +195,7 @@ good grasp of the application.
 
 ### Deck Menu:
 
+
 |Action|Format|
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
@@ -200,3 +203,4 @@ good grasp of the application.
 |editing a flashcard|`edit <index> /s <front or back> /i input`|
 |viewing flashcards|`view`|
 |exiting deck mode|`exit`|
+

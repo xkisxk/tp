@@ -8,6 +8,7 @@ import seedu.duke.parser.Parser;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Implements the list of added flashcards.
@@ -98,6 +99,7 @@ public class Deck {
         } else {
             result = result.concat("\tYou have " + getDeckSize()
                     + " cards in your card deck." + System.lineSeparator());
+
         }
         return result;
     }
@@ -108,8 +110,8 @@ public class Deck {
     }
 
     private String returnDeletedFlashCardMessage(String front, String back) {
-        String result = "\tDeleted card:" + System.lineSeparator()
-                + returnCardInfo(front, back);
+        String result = "\tDeleted card:";
+        result = result.concat(returnCardInfo(front, back));
         return result;
     }
 
@@ -120,8 +122,8 @@ public class Deck {
 
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
-        addFlashCard(input[0], input[1]);
-        return returnNewFlashCard(input[0], input[1]);
+        addFlashCard(input[1], input[3]);
+        return returnNewFlashCard(input[1], input[3]);
     }
 
     /**
@@ -212,7 +214,7 @@ public class Deck {
     private boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
     }
-
+//this one only appears in tests
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/bac");
         String[] flashCardWords = new String[2];
@@ -265,6 +267,24 @@ public class Deck {
     public void viewAllFlashCards() {
         String result = returnAllFlashCards();
         System.out.println(result);
+    }
+
+    public String returnMatchingFlashCards(String searchInput) {
+        String result = "";
+        ArrayList<FlashCard> matchingCards = (ArrayList<FlashCard>) cards.stream()
+                .filter((f) -> f.getFront().contains(searchInput) || f.getBack().contains(searchInput))
+                .collect(Collectors.toList());
+        if (matchingCards.size() > 0) {
+            result = result.concat("Decks in " + getName() + " that contain the term " + searchInput + ":"
+                    + System.lineSeparator());
+            for (int i = 0; i < matchingCards.size(); i += 1) {
+                result = result.concat("Card " + (i + 1) + ":" + System.lineSeparator());
+                FlashCard card = matchingCards.get(i);
+                result = result.concat(card.returnFlashCard());
+            }
+            result = result.concat(System.lineSeparator());
+        }
+        return result;
     }
 
     @Override

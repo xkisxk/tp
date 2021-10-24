@@ -56,6 +56,11 @@ public class OuterParser {
             command = new InvalidCommand();
             logger.log(Level.INFO, "delete (deck) command parsed and executed");
             break;
+        case "find":
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new FindCardsCommand(arguments, this.deckManager);
+            logger.log(Level.INFO, "find (card) command parsed and executed");
+            break;
         case "help":
             command = new HelpCommand();
             logger.log(Level.INFO, "help (deck) command parsed and executed");

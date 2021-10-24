@@ -41,8 +41,10 @@ public class AddCardCommand extends Command {
             if (!rawParameters[0].equalsIgnoreCase("/f") || !rawParameters[2].equalsIgnoreCase("/b")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
+
             String front = rawParameters[1];
             String back = rawParameters[3];
+
             if (front.isEmpty() || back.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
