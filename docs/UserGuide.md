@@ -49,6 +49,6 @@ Expected outcome:
 ## Command Summary
 
 ### Main Menu
-* Edit `edit /d <index of deck> /n <name>`
+* Edit `edit <index of deck> /n <name>`
 ### Deck Menu
 * Edit `edit <index> /s <front or back> /i <input>`
