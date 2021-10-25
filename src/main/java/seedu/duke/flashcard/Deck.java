@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
  */
 public class Deck {
 
-    private final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "\tCan't delete a card with no description!";
-    private final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE = "\tThe card you are trying to delete does not exist.";
+    private static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = "\tCan't delete a card with no description!";
+    private static final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE =
+            "\tThe card you are trying to delete does not exist.";
 
     public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
@@ -110,20 +111,15 @@ public class Deck {
     }
 
     private String returnDeletedFlashCardMessage(String front, String back) {
-        String result = "\tDeleted card:";
+        String result = "\tDeleted card:" + System.lineSeparator();
         result = result.concat(returnCardInfo(front, back));
         return result;
     }
 
-    private void printDeletedFlashCardMessage(String front, String back) {
-        String result = returnDeletedFlashCardMessage(front, back);
-        System.out.println(result);
-    }
-
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
-        addFlashCard(input[1], input[3]);
-        return returnNewFlashCard(input[1], input[3]);
+        addFlashCard(input[0], input[1]);
+        return returnNewFlashCard(input[0], input[1]);
     }
 
     /**
@@ -214,7 +210,8 @@ public class Deck {
     private boolean hasExactCard(String query, FlashCard card) {
         return card.getFront().equalsIgnoreCase(query);
     }
-//this one only appears in tests
+
+    //this one only appears in tests
     public String[] trimStrings(String input) throws FieldEmptyException, NoSlashException {
         int slashIndex = input.indexOf("/bac");
         String[] flashCardWords = new String[2];

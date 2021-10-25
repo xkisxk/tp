@@ -13,4 +13,6 @@ Welcome to
  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
 
 Let's get started!
+Type in "help" for more details.
+Exiting
 	You did well today! Goodbye!

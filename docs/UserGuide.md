@@ -15,11 +15,11 @@ while the commands were designed to be intuitive to use.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` from [here](http://link.to/duke).
-3. Take note of the full filepath of directory in which `Duke.jar` is saved.
+2. Down the latest version of `CardLI.jar` from [here](http://link.to/duke).
+3. Take note of the full filepath of directory in which `CardLI.jar` is saved.
 4. Open the command prompt by searching `cmd` in the search bar.
-5. Navigate to the file directory containing `Duke.jar` using the command `cd <filepath>`.
-6. Start up CardLI using the command``java -jar Duke.jar`.
+5. Navigate to the file directory containing `CardLI.jar` using the command `cd <filepath>`.
+6. Start up CardLI using the command``java -jar CardLI.jar`.
 
 The above steps are for users who are running CardLI on a Windows device. If you are using an Apple
 and Linux device, you will have to open the command prompt equivalent on your operating system in step 4. 
@@ -40,9 +40,26 @@ menu to work with the flashcards.
 
 ## Main Menu
 ### Adding a deck: `add`
+Creates and adds a new deck with the given name, if it does not already exist.
 
+Format: `add <name of deck>`
+
+Example of Usage:
+
+`add English vocab`
+
+Expected outcome:
+
+![](assets/ug/adddeck.png)
 ### Viewing all decks: `view`
 
+Displays the names of all decks.
+
+Format: `view`
+
+Expected outcome:
+
+![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
 
@@ -69,10 +86,14 @@ Expected outcome:
 
 
 ### Entering a deck: `enter`
+Enters the deck with the giveni ndex.
 
+Example of Usage:
 
+Expected outcome: 
+
+![](assets/ug/enter.png)
 ### Testing flashcards within a deck: `test`
-Format: `test`
 
 Enter test mode. The program will ask you to input the index for the deck that is to be tested.
 The word to be tested will be displayed in the console. 
@@ -82,47 +103,74 @@ or incorrect, the console will then display the next word to be tested. When all
 have been tested, the percentage of correct answers will be displayed in the console, as well as the 
 cards which received incorrect responses.
 
-Example of Usage:
-
-`test`
+Format: `test`
 
 Expected outcome:
 
 ### View flashcard statistics: `viewfc`
+Prints out all flashcards that have been added up to this point, including the cumulative score of
+all tests done for each of the flashcards.
+
+Format: `viewfc`
+
+Expected outcome:
 
 ### View test statistics: `viewtest`
+Prints the results for a particular test index or for all tests, depending on argument that 
+follows the `viewtest` command.
 
+Format: `viewtest <index>` or `viewtest all`
+
+Expected outcome:
 
 ### Review flashcards: `review`
-Format: `review`
-Enter review mode, which is the same as test mode except that the cards tested will be the cards 
+Enter review mode, which is the same as test mode except that the cards tested will be the cards
 that the user got wrong on more than 50% of the tests.
 
-Example of usage:
-
-`review`
+Format: `review`
 
 Expected outcome:
 
 
 ### Finding a flashcard: `find`
+Flashcards with descriptions matching the search terms are displayed on the screen.
 
+Format: `find <search terms>`
+
+Expected outcome:
+
+![](assets/ug/find.png)
 ### Exiting the app: `bye`
 Exits the CardLI application within the Command Line Interface.
 Using this command will also save the current decks of flashcards into a text file named ``CardLI.txt``
 stored within the same directory as `Duke.jar`.
 
-Format: ``bye``
+Format: `bye`
 
+Expected outcome:
+
+![](assets/ug/bye.png)
 ---
 ## Deck Menu
 
 ### Adding a flashcard `add`
+Adds a flashcard with the given front and back to the current deck.
+Format: `add /f <word/phrase on front of flashcard> /b <word/phrase on front of flashcard>`
 
-###Deleting a flashcard: `delete`
+Example of usage:
+` add /f glycerol /b C3H8O3`
+
+Expected outcome:
+
+
+![](assets/ug/addflash.png)
+
+### Deleting a flashcard: `delete`
 Format: `delete <word/phrase/index>`
-Deletes the <index>th flashcard or the flashcard which front matches <word/phrase> if it 
+Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
+
+Format: `delete <word/phrase/index>`
 
 Remark:
 * If there are cards with identical front description in the deck, the first instance of the card 
@@ -138,7 +186,8 @@ Example of usage:
 
 Expected outcome:
 
-
+![](assets/ug/deleteflash.png)
+![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
 Edits the front or the back of the flashcard of index <index> to the user input given.
 
@@ -153,19 +202,34 @@ Example of usage:
 Expected outcome:
 
 ### Viewing flashcards: `view`
+Displays all the flashcards in the current deck.
 
+Format: `view`
+
+Expected outcome:
+
+
+Expected outcome:
+
+![](assets/ug/viewcard.png)
 ### Exiting deck mode: ``exit``
 Exits deck mode and returns to the main menu.
 
 Format: ``exit``
 
+Expected outcome:
+
+![](assets/ug/exit.png)
 ## FAQs
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: In order to transfer the data on your decks of flashcards to another computer, simply transfer
+the `CardLI.txt` file to your other computer, and download the latest version of CardLI there. 
+Ensure that both the `CardLI.txt` and `CardLI.jar` files are in the **same directory** before running
+the CardLI application in the command prompt as instructed under the Quick Start section. 
 
-**Q**: Can I directly edit the ``CardLI.txt`` file to add, edit or delete decks and flashcards?
+**Q**: Can I directly edit the `CardLI.txt` file to add, edit or delete decks and flashcards?
 
 **A**: If you are familiar with the format of how the decks and flashcards are saved within the text
 file, you are free to do so. However, if errors are generated upon the next start up of the CardLI 
@@ -175,9 +239,7 @@ good grasp of the application.
 
 ## Command Summary
 
-
 ### Main Menu:
-
 
 |Action|Format|
 |-------|------|
@@ -188,13 +250,12 @@ good grasp of the application.
 |enter deck|`enter <index of deck>`|
 |test|`test`|
 |view overall statistics for flashcards|`viewfc`|
-|view test statistics|`viewtest <index of test>` prints the result of the test indicated by the index.<br>`viewtest all` prints out the results for all tests.|
+|view test statistics|`viewtest <index of test>` prints the result of the test indicated by the index.<br>`viewtest all` prints the results for all tests.|
 |review|`review`|
 |find flashcard|`find <word/phrase>`|
 |exiting program|`bye`|
 
 ### Deck Menu:
-
 
 |Action|Format|
 |------|------|

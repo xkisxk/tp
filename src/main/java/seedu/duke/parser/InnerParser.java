@@ -2,12 +2,13 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.deck.*;
-import seedu.duke.commands.system.ExitProgrammeCommand;
-import seedu.duke.commands.system.HelpCommand;
-import seedu.duke.exceptions.CardLiException;
+import seedu.duke.commands.deck.AddCardCommand;
+import seedu.duke.commands.deck.DeleteCardCommand;
+import seedu.duke.commands.deck.EditCardCommand;
+import seedu.duke.commands.deck.ViewCardsCommand;
+import seedu.duke.commands.deck.HelpInDeckCommand;
+import seedu.duke.commands.deck.ExitDeckCommand;
 import seedu.duke.flashcard.Deck;
-import seedu.duke.ui.CardLiUi;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
