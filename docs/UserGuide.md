@@ -86,6 +86,9 @@ Expected outcome:
 
 
 ### Entering a deck: `enter`
+Enters the deck with the giveni ndex.
+
+Example of Usage:
 
 Expected outcome: 
 
