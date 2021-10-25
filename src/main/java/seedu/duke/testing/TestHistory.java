@@ -3,7 +3,6 @@ package seedu.duke.testing;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.flashcard.FlashCard;
-import seedu.duke.ui.TestUi;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 public class TestHistory {
     private final ArrayList<AnswerList> testHistory = new ArrayList<>();
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
-    private final TestUi ui = new TestUi();
 
     private final DeckManager deckManager;
 

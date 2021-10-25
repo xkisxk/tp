@@ -102,27 +102,34 @@ Currently, test feature is implemented on a systemwide level and is handled by `
 `TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
 and the parsing respectively during the test.
 
-At the start of the test, the user will choose to test themselves with a single deck or all decks at once.
-This is dependent on the integer the user inputs.
+![sequence diagram](../docs/assets/TestSequenceDiagram.png)
 
-In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
-`DeckManager` depending on the condition which is shown by the sequence diagram below. The `AnswerList`
-is where the user's response to the test is stored, and it is made up of `Answer` as shown in the class
-diagram above.
+To enter into test mode, the user needs to enter `test` in main menu in which the program will
+prompt the user to input a number corresponding to the index of the deck that they want to 
+be tested on or "all" to test all decks.
 
 ![sequence diagram](../docs/assets/getTestDeckSequenceDiagram.png)
 
-After initializing the `AnswerList`, the testing begins. The `Deck` gets shuffled, then
-the user will answer the question one at a time. This process is repeated for the entire `Deck` that
-is being tested which is shown below by the sequence diagram.
+In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
+`DeckManager` depending on the condition which is shown by the sequence diagram above. 
+If the user decides to test all decks, the program will compile all `FlashCard` into a `Deck`. If the user
+decides to test a single deck, the program will get that deck instance from `DeckManager`.
+The `AnswerList` is where the user's response to the test is stored, and it is made up 
+of `Answer` as shown in the class diagram above. The `AnswerList` is also tagged with the test deck.
 
 ![sequence diagram](../docs/assets/testAllCardsShuffledSequenceDiagram.png)
 
-After all cards have been tested, the marking process begins as shown by the sequence diagram below.
-For every correct answer, the user's score increments and `TestUi` will print a correct answer message.
-After marking all the questions, the user's results will be printed and saved in `TestHistory`.
+After initializing the `AnswerList`, the testing begins. The `Deck` gets shuffled, then the cards (question)
+will be printed one at a time for the user to answer. The user's answer is then parsed and then added into
+the `AnswerList`. This process is repeated for the entire `Deck` that is being tested.
 
 ![sequence diagram](../docs/assets/markTestSequenceDiagram.png)
+
+After all cards have been tested, the marking process begins as shown by the sequence diagram above. The
+program will print the question, followed by the actual answer, followed by the user's answer.
+For every correct answer, the user's score increments and `TestUi` will print a correct answer message.
+After marking all the questions, the user's results will be printed and saved in `TestHistory`.
+This concludes the entire `starTest()` process.
 
 ### Storage
 

@@ -1,0 +1,25 @@
+@startuml
+actor "User" as User
+participant ":Ui" as Ui
+participant ":Logic" as Logic
+participant ":Model" as Model
+
+User -> Ui : "test"
+activate Ui
+
+Ui -> Logic : execute()
+activate Logic
+
+Logic -> Model : startTest()
+activate Model
+
+Model --> Logic
+deactivate Model
+
+Logic --> Ui
+deactivate Logic
+
+Ui --> User : endTestMessage
+deactivate Ui
+
+@enduml

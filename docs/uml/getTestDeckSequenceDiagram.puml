@@ -1,5 +1,5 @@
 @startuml
-participant "TestManager" as TestManager << class >>
+participant ":TestManager" as TestManager
 participant ":AnswerList" as AnswerList
 participant ":DeckManager" as DeckManager
 participant ":Deck" as Deck

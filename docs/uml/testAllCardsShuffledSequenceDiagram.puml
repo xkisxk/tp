@@ -1,9 +1,9 @@
 @startuml
-participant "TestManager" as TestManager << class >>
+participant ":TestManager" as TestManager
 participant ":AnswerList" as AnswerList
 participant ":Collections" as Collections
 participant ":TestUi" as TestUi
-participant "TestParser" as TestParser << class >>
+participant "TestParser" as TestParser
 
 activate TestManager
 
