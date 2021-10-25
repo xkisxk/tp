@@ -36,10 +36,28 @@ How the Parser component works:
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
 
 ### Logic Component
-The Logic component consists of the classes ```DeckManager```, ```Deck```, ```Flashcard```, ```TestManager```, ```AnswerList``` and ```Answer```. It executes user commands by calling on methods in its classes when appropriate with the appropriate arguments as given by the Parser component.
+
+![](assets/LogicArchitectureDiagram.png)
+
+Here is a partial architecture diagram of the `Logic` component. It executes user commands via Command classes when appropriate with the appropriate arguments as given by the Parser component.
 
 CardLi’s user commands operate on a 2-tier structure: a Systemwide level and a Deck level. The Systemwide level commands execute commands related to the management of decks, while the Deck level commands execute commands related to flashcards in a specific deck. The specific implementations are elaborated on in the *Implementation* section.
 
+How the `Logic` component works:
+1. When `Main` is called upon to execute a command, `Inner Parser` or `Outer Parser` parses the user input to get the command word. 
+2. According to the command word a subclass of the `Command` object (eg. `AddCardsCommand`, `DeleteDeckCommand`) which is executed by Main/
+3. The command communicates with the `Model` when it is executed (eg. to add a flashcard).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned to the `UI` from `Logic` to process.
+
+![](assets/parserComponentDiagram.png)
+
+Above is the architecture diagram containing the parser classes in `Logic` that are used for parsing a user command.
+
+How the parsing works:
+
+`Inner Parser` or `Outer Parser` creates a `XYZCommand` which in turn creates its corresponding `XYZCommandParser` (eg. when `InnerParser` creates a `EditCardCommand`, `EditCardCommand` creates a `EditCardParser`.)</li>
+
+All `XYZCommandParser` classes implement the `CommandArgumentParser` interface.
 ### Storage Component
 The Storage component:
 * Saves all the decks
