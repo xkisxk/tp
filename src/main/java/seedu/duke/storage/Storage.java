@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Storage {
@@ -81,6 +82,8 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             //TODO: handle file not found exception
+        } catch (NoSuchElementException e) {
+            //TODO: handle empty save file
         }
         return decks;
     }
