@@ -249,7 +249,7 @@ good grasp of the application.
 |-------|------|
 |add deck|`add <name of deck>`|
 |view decks|`view`|
-|edit deck|`edit <index of deck> /n name`|
+|edit deck|`edit /d <index of deck> /n name`|
 |delete deck|`delete <index/name of deck>`|
 |enter deck|`enter <index of deck>`|
 |test|`test`|
@@ -265,7 +265,7 @@ good grasp of the application.
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
 |deleting a flashcard|`delete <word/index>`|
-|editing a flashcard|`edit <index> /s <front or back> /i input`|
+|editing a flashcard|`edit /c <index> /s <front or back> /i input`|
 |viewing flashcards|`view`|
 |exiting deck mode|`exit`|
 
