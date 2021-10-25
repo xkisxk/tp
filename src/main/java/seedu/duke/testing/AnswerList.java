@@ -45,6 +45,10 @@ public class AnswerList {
         return userScore;
     }
 
+    public void setUserScore(int userScore) {
+        this.userScore = userScore;
+    }
+
     public void incrementUserScore() {
         userScore++;
     }
@@ -71,5 +75,20 @@ public class AnswerList {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
         answerList.add(new Answer(answer, questionIndex));
+    }
+
+    @Override
+    public String toString() {
+        String answersString = "";
+        int answersCount = getSize();
+
+        for (int i = 0; i < answersCount; i++){
+            answersString += answerList.get(i);
+        }
+
+        return getDeck().toString() + '\n'
+                + answersCount + '\n'
+                + answersString + '\n'
+                + getUserScore();
     }
 }

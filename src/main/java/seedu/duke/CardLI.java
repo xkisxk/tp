@@ -2,13 +2,10 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.exceptions.CardLiException;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.InnerParser;
 import seedu.duke.parser.OuterParser;
-import seedu.duke.parser.Parser;
-import seedu.duke.parser.TestParser;
 import seedu.duke.storage.Storage;
 import seedu.duke.testing.TestHistory;
 import seedu.duke.testing.TestManager;
@@ -19,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Represents CardLI application.
  */
-public class Duke {
+public class CardLI {
     private static final CardLiUi ui = new CardLiUi();
 
     private ArrayList<Deck> decks;
@@ -30,11 +27,11 @@ public class Duke {
     private OuterParser outerParser;
     private TestHistory testHistory;
 
-    private Duke() {
+    private CardLI() {
         this.storage = new Storage();
-        this.decks = storage.load();
+        this.decks = storage.readCardsFromFile();
         this.deckManager = new DeckManager(decks);
-        this.testHistory = new TestHistory(deckManager);
+        this.testHistory = new TestHistory(deckManager, storage.readTestsFromFile());
         this.testManager = new TestManager(testHistory, deckManager);
         this.innerParser = new InnerParser();
         this.outerParser = new OuterParser(deckManager, innerParser, testHistory);
@@ -75,6 +72,8 @@ public class Duke {
                 testManager.startReview();
             }
         }
+        storage.writeToFile(deckManager.getDecks(), "cards");
+        storage.writeToFile(testHistory.getTestHistory(), "tests");
         ui.printByeMessage();
     }
 
@@ -83,6 +82,6 @@ public class Duke {
      * @param args user's input
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new CardLI().run();
     }
 }

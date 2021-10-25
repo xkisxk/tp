@@ -6,6 +6,9 @@ import seedu.duke.flashcard.FlashCard;
  * Represents information about a single user answer when test function is invoked.
  */
 public class Answer {
+
+    static final String SEPARATOR = " | ";
+
     private final String answer;
     private final int questionIndex;
 
@@ -27,5 +30,11 @@ public class Answer {
         String lowerCaseUserAnswer = userAnswer.toLowerCase();
         String lowerCaseAnswer = question.getBack().toLowerCase();
         return lowerCaseAnswer.equals(lowerCaseUserAnswer);
+    }
+
+    @Override
+    public String toString() {
+        return getAnswer() + SEPARATOR
+                + getQuestionIndex() + '\n';
     }
 }

@@ -231,7 +231,6 @@ public class Deck {
         cards.add(new FlashCard(front, back));
     }
 
-
     public void addFlashCard(FlashCard card) {
         cards.add(card);
     }
@@ -241,7 +240,6 @@ public class Deck {
         cards.add(new FlashCard(front, back, userScore, totalScore));
 
     }
-
 
     public int getCardIndex(FlashCard card) {
         return cards.indexOf(card);
@@ -294,7 +292,7 @@ public class Deck {
         }
 
         return getName() + '\n'
-                + getDeckSize() + '\n'
+                + cardsCount + '\n'
                 + cardsString;
     }
 }

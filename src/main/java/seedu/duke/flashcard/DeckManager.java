@@ -11,11 +11,6 @@ import java.util.Scanner;
 
 public class DeckManager {
 
-    /**
-     * Specified file path to save task list.
-     */
-    static final String FILEPATH = "data/CardLI.txt";
-
     private final ArrayList<Deck> decks;
 
     public DeckManager() {
@@ -24,15 +19,6 @@ public class DeckManager {
 
     public DeckManager(ArrayList<Deck> decks) {
         this.decks = decks;
-    }
-
-    public void editCard(String[] args) {
-        if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
-        } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
-        }
-        System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
     }
 
 
@@ -170,61 +156,4 @@ public class DeckManager {
         }
         return result;
     }
-
-    public void saveToFile() {
-        try {
-            File file = new File(FILEPATH);
-
-            // create new directory and file if they do not exist
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-
-            // instantiate FileWriter object to overwrite specified text file
-            FileWriter fileWriter = new FileWriter(FILEPATH, false);
-
-            int decksCount = decks.size();
-            fileWriter.write(Integer.toString(decksCount) + '\n');
-
-            for (int i = 0; i < decksCount; i++) {
-                fileWriter.write(decks.get(i).toString());
-            }
-
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong while saving the flashcards to file...");
-        }
-    }
-
-    public void readFromFile() {
-        try {
-            File file = new File(FILEPATH);
-
-            // instantiate scanner to read file contents
-            Scanner s = new Scanner(file);
-
-            int decksCount = Integer.parseInt(s.nextLine());
-
-            for (int i = 0; i < decksCount; i++) {
-                String deckName = s.nextLine();
-                Deck newDeck = new Deck(deckName);
-
-                int cardsCount = Integer.parseInt(s.nextLine());
-
-                for (int j = 0; j < cardsCount; j++) {
-                    String newLine = s.nextLine();
-                    String[] newLineArgs = newLine.split(" \\| ");
-                    newDeck.addFlashCard(newLineArgs[0], newLineArgs[1],
-                            Integer.parseInt(newLineArgs[2]),
-                            Integer.parseInt(newLineArgs[3]));
-                }
-
-                decks.add(newDeck);
-            }
-        } catch (FileNotFoundException e) { // file does not exist on first boot
-            return;
-        }
-    }
-
 }

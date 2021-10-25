@@ -13,14 +13,23 @@ import java.util.logging.Logger;
  * TestHistory keeps track of all answerResponses from previous tests.
  */
 public class TestHistory {
-    private final ArrayList<AnswerList> testHistory = new ArrayList<>();
+    private final ArrayList<AnswerList> testHistory;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
-    private final TestUi ui = new TestUi();
 
     private final DeckManager deckManager;
 
     public TestHistory(DeckManager deckManager) {
+        this.testHistory = new ArrayList<>();
         this.deckManager = deckManager;
+    }
+
+    public TestHistory(DeckManager deckManager , ArrayList<AnswerList> testHistory) {
+        this.testHistory = testHistory;
+        this.deckManager = deckManager;
+    }
+
+    public ArrayList<AnswerList> getTestHistory() {
+        return testHistory;
     }
 
     public void addAnswerList(AnswerList answerList) {
