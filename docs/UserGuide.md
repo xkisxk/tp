@@ -62,7 +62,7 @@ Expected outcome:
 ![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
-`/d` denotes the index of the deck to be edited and `n` denotes the new name
+`/d` denotes the index of the deck to be edited and `/n` denotes the new name
 of the deck.
 
 Format: `edit /d <index> /n <name>`
@@ -192,9 +192,9 @@ Expected outcome:
 ![](assets/ug/deleteflash.png)
 ![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
-Edits the front or the back of the flashcard of index <index> to your given input.
+Edits the front or the back of your chosen flashcard to your given input.
 `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
-`i` denotes the content you want to change the flashcard to.
+`/i` denotes the content you want to change the flashcard to.
 
 Format: `edit /c <index> /s <front or back> /i <input>`
 
@@ -249,7 +249,7 @@ good grasp of the application.
 |-------|------|
 |add deck|`add <name of deck>`|
 |view decks|`view`|
-|edit deck|`edit <index of deck> /n name`|
+|edit deck|`edit /d <index of deck> /n name`|
 |delete deck|`delete <index/name of deck>`|
 |enter deck|`enter <index of deck>`|
 |test|`test`|
@@ -265,7 +265,7 @@ good grasp of the application.
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
 |deleting a flashcard|`delete <word/index>`|
-|editing a flashcard|`edit <index> /s <front or back> /i input`|
+|editing a flashcard|`edit /c <index> /s <front or back> /i input`|
 |viewing flashcards|`view`|
 |exiting deck mode|`exit`|
 
