@@ -60,15 +60,17 @@ public class TestUi {
     }
 
     public void printStartTest() {
-        System.out.println("Starting test...");
         System.out.println("Which deck do you want to test?");
-        System.out.print("Input an integer (or \"all\" to review all decks): ");
+        System.out.print("Input deck index (0 or \"all\" to test all decks): ");
+    }
+
+    public void printEndTest() {
+        System.out.println("End of test. Returning to main menu...");
     }
 
     public void printStartReview() {
-        System.out.println("Starting review...");
         System.out.println("Which deck do you want to review?");
-        System.out.print("Input an integer (or \"all\" to review all decks): ");
+        System.out.print("Input deck index (0 or \"all\" to review all decks): ");
     }
 
     public void printReviewCard() {

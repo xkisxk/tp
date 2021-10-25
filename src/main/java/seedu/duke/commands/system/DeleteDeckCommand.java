@@ -2,8 +2,9 @@ package seedu.duke.commands.system;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.flashcard.Deck;
+import seedu.duke.exceptions.DeckNotExistException;
 import seedu.duke.flashcard.DeckManager;
+import seedu.duke.parser.Parser;
 import seedu.duke.parser.system.DeleteDeckParser;
 
 public class DeleteDeckCommand extends Command {
@@ -11,21 +12,30 @@ public class DeleteDeckCommand extends Command {
     private DeleteDeckParser parser;
     private DeckManager deckManager;
 
-    public DeleteDeckCommand(DeckManager deckManager) {
-        super("DeleteDeckCommand");
+    public DeleteDeckCommand(String arguments, DeckManager deckManager) {
+        super("DeleteDeckCommand", arguments);
         this.parser = new DeleteDeckParser();
         this.deckManager = deckManager;
     }
+
     @Override
     public CommandResult execute() {
         String[] parameters = parser.parseArguments(super.arguments);
         String enterInput = parameters[0];
-        int deckIndex = Integer.parseInt(enterInput) - 1;
 
-        // TODO: add functionality to delete deck
-        // since parameters[0] is a String, can take it as either the
-        // deck name or index
-        CommandResult result = new CommandResult("");
+        CommandResult result;
+
+        try {
+            if (Parser.isInteger(enterInput)) {
+                int deckIndex = Integer.parseInt(enterInput) - 1;
+                return new CommandResult(deckManager.deleteDeck(deckIndex));
+            }
+            result = new CommandResult(deckManager.deleteDeck(enterInput));
+        } catch (DeckNotExistException e) {
+            result = new CommandResult(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            result = new CommandResult("This deck does not exist.");
+        }
         return result;
     }
 }

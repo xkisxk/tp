@@ -3,7 +3,8 @@ package seedu.duke.parser.system;
 import seedu.duke.parser.CommandArgumentParser;
 
 public class EnterDeckParser implements CommandArgumentParser {
-    public EnterDeckParser() {}
+    public EnterDeckParser() {
+    }
 
     @Override
     public String[] parseArguments(String arguments) {

@@ -1,17 +1,5 @@
 package seedu.duke.parser;
 
-
-import seedu.duke.testing.TestHistory;
-import seedu.duke.testing.TestManager;
-import seedu.duke.exceptions.CardLiException;
-import seedu.duke.exceptions.DeckNotExistException;
-import seedu.duke.exceptions.FieldEmptyException;
-import seedu.duke.exceptions.InvalidCommandFormatException;
-import seedu.duke.ui.CardLiUi;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Deals with the parsing of user input at the command line.
  */
@@ -19,7 +7,7 @@ public class Parser {
 
     /**
      * Returns the command type of the user's input.
-     * @param input
+     * @param input user's input
      */
     public static String getCommandType(String input) {
         return input.trim().split(" ")[0].toLowerCase();
