@@ -27,15 +27,15 @@ public class EditDeckCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() { //edit /deck <cat index> /input <input>
+    public CommandResult execute() { //edit /d <deck index> /n <name>
         CommandResult result;
         try {
-            if (!arguments.toLowerCase().contains("/deck") || !arguments.toLowerCase().contains("/input")) {
+            if (!arguments.toLowerCase().contains("/d") || !arguments.toLowerCase().contains("/n")) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
             String[] parameters = parser.parseArguments(super.arguments);
 
-            if (!parameters[0].equalsIgnoreCase("/deck") | !parameters[2].equalsIgnoreCase("/input")) {
+            if (!parameters[0].equalsIgnoreCase("/d") | !parameters[2].equalsIgnoreCase("/n")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
 
