@@ -62,7 +62,7 @@ Expected outcome:
 ![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
-`/d` denotes the index of the deck to be edited and `n` denotes the new name
+`/d` denotes the index of the deck to be edited and `/n` denotes the new name
 of the deck.
 
 Format: `edit /d <index> /n <name>`
@@ -192,9 +192,9 @@ Expected outcome:
 ![](assets/ug/deleteflash.png)
 ![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
-Edits the front or the back of the flashcard of index <index> to your given input.
+Edits the front or the back of your chosen flashcard to your given input.
 `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
-`i` denotes the content you want to change the flashcard to.
+`/i` denotes the content you want to change the flashcard to.
 
 Format: `edit /c <index> /s <front or back> /i <input>`
 
