@@ -26,19 +26,16 @@ public class DeckManager {
         this.decks = decks;
     }
 
-    public void editCard(String[] args) {
-        if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
-        } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
-        }
-        System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+    public String editDeck(String[] args) {
+        String enteredDeckIndex = args[0];
+        int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+        String deckName = args[1];
+        decks.get(deckIndex).setDeckName(deckName);
+        return ("Changed deck " + enteredDeckIndex + " to " + deckName);
     }
 
-
-    public String editDeck(String[] args) {
-        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
-        return ("Changed deck " + args[0] + " to " + args[1]);
+    public int getDeckIndex(Deck deck) {
+        return decks.indexOf(deck);
     }
 
     public Deck getDeck(int index) {

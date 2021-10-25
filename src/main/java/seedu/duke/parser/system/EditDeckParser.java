@@ -9,7 +9,7 @@ public class EditDeckParser implements CommandArgumentParser {
 
     @Override
     public String[] parseArguments(String arguments) {
-        String[] parameters = arguments.trim().split(" ", 4);
+        String[] parameters = arguments.trim().split("/d|/n", 3);
         return parameters;
     }
 }

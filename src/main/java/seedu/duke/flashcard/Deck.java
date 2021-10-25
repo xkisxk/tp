@@ -19,7 +19,7 @@ public class Deck {
     private static final String CARD_DOES_NOT_EXIST_ERROR_MESSAGE =
             "\tThe card you are trying to delete does not exist.";
 
-    public ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
+    private final ArrayList<FlashCard> cards = new ArrayList<FlashCard>();
     private String name;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -32,7 +32,6 @@ public class Deck {
     }
 
     public String editCard(String[] parameters) {
-        // TODO: throw exception if card doesn't exist
         String enteredCardIndex = parameters[0];
         int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
         String side = parameters[1];
