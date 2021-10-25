@@ -8,7 +8,7 @@ public class EditCardParser implements CommandArgumentParser {
     }
 
     @Override
-    public String[] parseArguments(String arguments) { //edit /card <card index> /side <side> /input <input>
+    public String[] parseArguments(String arguments) { //edit /c <index> /s <side> /i <input>
         String[] parameters = arguments.trim().split(" ", 6);
         return parameters;
     }

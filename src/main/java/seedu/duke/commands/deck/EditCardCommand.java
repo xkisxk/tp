@@ -28,11 +28,11 @@ public class EditCardCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() { //edit /card <card index> /side <side> /input <input>
+    public CommandResult execute() { //edit /c <index> /s <side> /i <input>
         CommandResult result;
         try {
-            if (!arguments.toLowerCase().contains("/card") || !arguments.toLowerCase().contains("/side")
-                    || !arguments.toLowerCase().contains("/input")) {
+            if (!arguments.toLowerCase().contains("/c") || !arguments.toLowerCase().contains("/s")
+                    || !arguments.toLowerCase().contains("/i")) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
             String[] rawParameters = parser.parseArguments(super.arguments);
@@ -41,9 +41,9 @@ public class EditCardCommand extends Command {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
 
-            if (!rawParameters[0].equalsIgnoreCase("/card")
-                    | !rawParameters[2].equalsIgnoreCase("/side")
-                    | !rawParameters[4].equalsIgnoreCase("/input")) {
+            if (!rawParameters[0].equalsIgnoreCase("/c")
+                    | !rawParameters[2].equalsIgnoreCase("/s")
+                    | !rawParameters[4].equalsIgnoreCase("/i")) {
                 throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
             }
 
