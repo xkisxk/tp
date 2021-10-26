@@ -31,6 +31,10 @@ public class Deck {
         this.name = "Untitled";
     }
 
+    public boolean hasSameName(String input) {
+        return name.trim().equals(input.trim());
+    }
+
     public String editCard(String[] parameters) {
         String enteredCardIndex = parameters[0];
         int cardIndex = Integer.parseInt(enteredCardIndex) - 1;

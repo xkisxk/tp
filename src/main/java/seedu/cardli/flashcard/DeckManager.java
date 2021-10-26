@@ -100,7 +100,7 @@ public class DeckManager {
 
     private boolean hasDeck(String categoryName) {
         for (Deck deck : decks) {
-            if (deck.getName().trim().equals(categoryName.trim())) {
+            if (deck.hasSameName(categoryName)) {
                 return true;
             }
         }
