@@ -1,0 +1,12 @@
+package seedu.cardli;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+class CardLITest {
+    @Test
+    public void sampleTest() {
+        assertTrue(true);
+    }
+}
