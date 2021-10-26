@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Main-Class: seedu.duke.Duke
 
+=======
+Manifest-Version: 1.0
+Main-Class: seedu.cardli.CardLI
+
+>>>>>>> ddc93eb5751f3dce07cf46d0cb97f1a72c70dc73

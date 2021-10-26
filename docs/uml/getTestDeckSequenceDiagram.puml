@@ -1,8 +1,8 @@
 @startuml
-participant "TestManager" as TestManager << class >>
+participant ":TestManager" as TestManager
 participant ":AnswerList" as AnswerList
 participant ":DeckManager" as DeckManager
-participant ":Deck" as Deck
+participant "deckToTest:Deck" as Deck
 
 activate TestManager
 
@@ -10,7 +10,7 @@ TestManager -> DeckManager : getTestDeck(deckIndex:int)
 activate DeckManager
 
 alt test all decks
-DeckManager -> Deck : Deck()
+DeckManager -> Deck **: Deck()
 activate Deck
 loop every Deck in DeckManager
 loop every FlashCard in Deck

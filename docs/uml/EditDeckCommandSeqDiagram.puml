@@ -2,36 +2,56 @@
 
 hide footbox
 
-participant ":Parser" as Parser
 participant ":EditDeckCommand" as EditDeckCommand
 participant ":DeckManager" as DeckManager
 participant ":Deck" as Deck
+participant ":CardLiUI" as CardLiUI
+actor "User" as User
 
-
-[-> Parser : parse("editdeck /deck 1 /input math")
-activate Parser
-
-ref over Parser, EditDeckCommand : parseEditDeckCommand(input)
-
-[<-- Parser : EditDeckCommand(args)
-deactivate Parser
+[-> EditDeckCommand : new
+activate EditDeckCommand
+[<-- EditDeckCommand : command
+deactivate EditDeckCommand
 
 [->EditDeckCommand : execute()
 activate EditDeckCommand
 
-EditDeckCommand -> DeckManager : get(deckIndex)
+EditDeckCommand -> EditDeckCommand : prepareEditDeckCommand()
+activate EditDeckCommand
+
+EditDeckCommand -> EditDeckCommand: prepareDeckIndex(deck, deckManager)
+activate EditDeckCommand
+
+EditDeckCommand --> EditDeckCommand: deck
+deactivate EditDeckCommand
+
+EditDeckCommand --> EditDeckCommand: preparedArguments
+deactivate EditDeckCommand
+
+EditDeckCommand -> DeckManager: editDeck(parameters)
 activate DeckManager
 
-DeckManager --> EditDeckCommand : deck
-deactivate DeckManager
-
-EditDeckCommand -> Deck : setDeckName(newContent)
+DeckManager -> Deck: setName(deckName)
 activate Deck
-
-Deck --> EditDeckCommand
 deactivate Deck
 
-[<-- EditDeckCommand
+destroy Deck
+
+DeckManager --> EditDeckCommand: message
+deactivate DeckManager
+
+destroy DeckManager
+
+[<-- EditDeckCommand: result
 deactivate EditDeckCommand
+destroy EditDeckCommand
+
+[-> CardLiUI: printResult(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+destroy CardLiUI
 
 @enduml

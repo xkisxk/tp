@@ -3,13 +3,13 @@
 ## Introduction
 
 
-CardLI is a desktop app to help you create, organising, and review flashcards via a Command Line 
+CardLI is a desktop app that helps you create, organise, and review flashcards via a Command Line 
 Interface. As students ourselves, we find that studying through the use of flashcards can greatly
 increase the efficacy of our study sessions as they break down large chapters and concepts into 
 easy-to-understand segments. Hence, CardLI was designed in order to help students study better 
-through the use of flashcards, while also reducing the paper waste that goes into writing our physical
-flashcards. The interfacing within the application has been design to be interactive and functional,
-while the commands were designed to be intuitive to use. 
+through the use of flashcards, while also reducing the paper waste that goes into writing physical
+flashcards. The interfacing within the application is designed to be interactive and functional,
+while the commands are designed to be intuitive to use. 
 
 
 ## Quick Start
@@ -62,15 +62,21 @@ Expected outcome:
 ![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
+`/d` denotes the index of the deck to be edited and `/n` denotes the new name
+of the deck.
 
-Format: `edit <index of deck> /n <name>`
+This command is for those who want to change the name of the deck to a more
+suitable name.
+
+Format: `edit /d <index> /n <name>`
 
 Example of Usage:
 
-`edit 2 /n mathematics`
+`edit /d 1 /n mathematics`
 
 Expected outcome:
 
+![](assets/ug/editdeck.png)
 ### Deleting a deck: `delete`
 Deletes the deck indicated by the index or the name.
 
@@ -86,7 +92,7 @@ Expected outcome:
 
 
 ### Entering a deck: `enter`
-Enters the deck with the giveni ndex.
+Enters the deck with the given index.
 
 Example of Usage:
 
@@ -102,6 +108,11 @@ Otherwise, the response will be marked as incorrect. Regardless of whether the a
 or incorrect, the console will then display the next word to be tested. When all cards in the deck 
 have been tested, the percentage of correct answers will be displayed in the console, as well as the 
 cards which received incorrect responses.
+
+If you do not know the answer to the current question being tested, and you want to skip to another
+question, you can do so by typing `/NEXT` or `/BACK` when prompted with the test question. 
+
+`/NEXT` will skip to the next question while `/BACK` will go back to the previous question tested.
 
 Format: `test`
 
@@ -189,17 +200,45 @@ Expected outcome:
 ![](assets/ug/deleteflash.png)
 ![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
-Edits the front or the back of the flashcard of index <index> to the user input given.
+Edits the front or the back of your chosen flashcard to your given input.
+`/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
+`/i` denotes the content you want to change the flashcard to.
 
-Format: `edit <index> /s <front or back> /i <input>`
+This command is for those who have made a mistake in the front or back of the card
+and wish to fix it without having to resort to deleting and adding the card.
+
+Format: `edit /c <index> /s <front or back> /i <input>`
 
 Example of usage:
 
-`edit 3 /s front /i 1 + 1`
-
-`edit 3 /s back /i 2`
+`edit /c 1 /s front /i 1 + 1`
 
 Expected outcome:
+
+![](assets/ug/editcard.png)
+
+### Moving a flashcard: `move`
+Moves a flashcard from the deck you are currently in to a new deck of your choice.
+`/c` denotes the card index or the front phrase of the card and `/d` denotes the 
+deck index or the name of the deck you want to move the card to.
+
+This command is for those who have accidentally added a flashcard to a wrong deck
+and now want to transfer the card to another deck without going through the hassle
+of deleting the card and adding the card in another deck.
+
+Format: `move /c <card index/front phrase of card> /d <deck index/name of deck>`
+
+Example of usage: 
+
+`move /c ExampleCard1 /d 2`
+
+Expected outcome:
+
+* Deck 2 before moving
+![](assets/ug/move2.png)
+
+* Deck 1 before and after moving; Deck 2 after moving
+![](assets/ug/move4.png)
 
 ### Viewing flashcards: `view`
 Displays all the flashcards in the current deck.
@@ -245,7 +284,7 @@ good grasp of the application.
 |-------|------|
 |add deck|`add <name of deck>`|
 |view decks|`view`|
-|edit deck|`edit <index of deck> /n name`|
+|edit deck|`edit /d <index of deck> /n name`|
 |delete deck|`delete <index/name of deck>`|
 |enter deck|`enter <index of deck>`|
 |test|`test`|
@@ -261,7 +300,7 @@ good grasp of the application.
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
 |deleting a flashcard|`delete <word/index>`|
-|editing a flashcard|`edit <index> /s <front or back> /i input`|
+|editing a flashcard|`edit /c <index> /s <front or back> /i input`|
 |viewing flashcards|`view`|
 |exiting deck mode|`exit`|
 

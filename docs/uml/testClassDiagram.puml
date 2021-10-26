@@ -1,0 +1,41 @@
+@startuml
+hide circle
+
+skinparam classAttributeIconSize 0
+package testing {
+    class TestManager
+    class AnswerList
+    class Answer
+    class TestHistory
+}
+
+
+package parser {
+    class TestParser
+}
+
+package ui {
+    class TestUi
+}
+
+package flashcard {
+    class Deck
+    class FlashCard
+}
+
+TestManager -left> "1" TestUi
+TestManager .right> "1" TestParser
+TestManager --> "1" AnswerList : creates
+TestManager .left> TestHistory
+TestManager .> "1" Deck
+
+TestHistory --> "*" AnswerList : stores
+
+AnswerList "1" --> "*" Answer : contains
+AnswerList -right-> "1" Deck
+
+Deck --> "*" FlashCard
+
+Answer .> "1" FlashCard
+
+@enduml

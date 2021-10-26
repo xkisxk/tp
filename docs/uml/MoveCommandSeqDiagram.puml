@@ -1,0 +1,75 @@
+@startuml
+hide footbox
+
+participant ":MoveCardCommand" as MoveCardCommand
+participant ":EditCardCommand" as EditCardCommand
+participant ":EditDeckCommand" as EditDeckCommand
+participant ":DeckManager" as DeckManager
+participant ":Deck" as Deck
+participant ":CardLiUI" as CardLiUI
+actor "User" as User
+
+[-> MoveCardCommand : new
+activate MoveCardCommand
+[<-- MoveCardCommand : command
+deactivate MoveCardCommand
+
+[->MoveCardCommand : execute()
+activate MoveCardCommand
+
+MoveCardCommand -> MoveCardCommand : prepareMoveCardCommand()
+activate MoveCardCommand
+
+MoveCardCommand -> EditCardCommand: prepareCardIndex(card, deck)
+activate EditCardCommand
+
+EditCardCommand --> MoveCardCommand: cardIndex
+deactivate EditCardCommand
+destroy EditCardCommand
+
+MoveCardCommand -> EditDeckCommand: prepareDeckIndex(deck, deckManager)
+activate EditDeckCommand
+
+EditDeckCommand --> MoveCardCommand: deckIndex
+deactivate EditDeckCommand
+destroy EditDeckCommand
+
+MoveCardCommand --> MoveCardCommand: preparedArguments
+deactivate MoveCardCommand
+
+MoveCardCommand -> DeckManager: moveCard(parameters)
+activate DeckManager
+
+DeckManager -> Deck: getCard(cardIndex)
+activate Deck
+
+Deck --> DeckManager: card
+deactivate Deck
+
+DeckManager -> Deck: addFlashCard(cardCopy)
+activate Deck
+deactivate Deck
+
+DeckManager -> Deck: deleteFlashCard(enteredCardIndex)
+activate Deck
+deactivate Deck
+destroy Deck
+
+
+DeckManager --> MoveCardCommand: message
+deactivate DeckManager
+
+destroy DeckManager
+
+[<-- MoveCardCommand: result
+deactivate MoveCardCommand
+destroy MoveCardCommand
+
+[-> CardLiUI: printResult(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+destroy CardLiUI
+@enduml
