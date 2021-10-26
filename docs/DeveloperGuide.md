@@ -56,7 +56,7 @@ The user can only edit the `name` attribute of the `Deck` object, which represen
 
 ### `EditDeckCommand`
 
-![](assets/EditDeckCommandSeqDiagram.png)
+![](assets/editDeckCommandSeqDiagram.png)
 The 'EditDeckCommand' allows the changing of the name of the `Deck`.
 
 By entering the edit command in the `OuterParser` class, an `EditDeckCommand` object is created and its constructor is
@@ -107,9 +107,9 @@ By entering the edit command in the `InnerParser` class, an `MoveCardCommand` ob
 called. This object is returned to `CardLi` class, which then calls the `execute()` method
 of the `MoveCardCommand` object.
 
-The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCommand()` method, which helps
-the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCommand()` self-invokes the
-`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this, `prepareMoveCommand()`
+The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCardCommand()` method, which helps
+the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCardCommand()` self-invokes the
+`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this, `prepareMoveCardCommand()`
 self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user.`prepareCardIndex()`
 returns `card`, of string type, which represents the card to be edited. `prepareDeckIndex()`
 returns `deck`, of string type, which represents the deck to be edited.`prepareMoveCommand()` will then return

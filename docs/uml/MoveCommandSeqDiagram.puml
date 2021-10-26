@@ -17,7 +17,7 @@ deactivate MoveCardCommand
 [->MoveCardCommand : execute()
 activate MoveCardCommand
 
-MoveCardCommand -> MoveCardCommand : prepareMoveCommand()
+MoveCardCommand -> MoveCardCommand : prepareMoveCardCommand()
 activate MoveCardCommand
 
 MoveCardCommand -> EditCardCommand: prepareCardIndex(card, deck)

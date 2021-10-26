@@ -34,7 +34,7 @@ public class MoveCardCommand extends Command {
         this.parser = new MoveCardParser();
     }
 
-    public String[] prepareMoveCommand() throws CardLiException {
+    public String[] prepareMoveCardCommand() throws CardLiException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing MoveCommand");
         logger.log(Level.INFO, "Checking if input contains /d and /c");
@@ -80,7 +80,7 @@ public class MoveCardCommand extends Command {
     public CommandResult execute() { //move /c <index> /d <index
         CommandResult result;
         try {
-            String[] parameters = prepareMoveCommand();
+            String[] parameters = prepareMoveCardCommand();
             result = new CommandResult(deckManager.moveCard(parameters));
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());

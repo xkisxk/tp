@@ -31,9 +31,16 @@ deactivate EditCardCommand
 EditCardCommand -> Deck: editCard(parameters)
 activate Deck
 
-Deck -> FlashCard: setFront(changeTo)
-activate FlashCard
-deactivate FlashCard
+
+alt front
+    Deck -> FlashCard: setFront(changeTo)
+    activate FlashCard
+    deactivate FlashCard
+else back
+    Deck -> FlashCard: setBack(changeTo)
+    activate FlashCard
+    deactivate FlashCard
+end
 
 destroy FlashCard
 
