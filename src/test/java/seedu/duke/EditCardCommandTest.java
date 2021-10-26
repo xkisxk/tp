@@ -22,7 +22,7 @@ public class EditCardCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
-                + "Format should be\n edit /c <card index> /s <side> /i <input>", output);
+                + "Format should be\n edit /c <card index/front phrase of card> /s <side> /i <input>", output);
     }
 
 }
