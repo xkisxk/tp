@@ -12,10 +12,13 @@ single platform.
 original source as well}
 
 ## Design
-CardLi has one main component, ```Duke```, which is the entry point to the App.
+CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
+<li> At app launch: initialises the components in the correct sequence, and connects them up with each other</li>
+
+![](assets/overallArchitectureDiagram.png)
 
 The rest of the App consists of the following components:
-* ```Parser```: Interfaces with the user by reading and interpreting input
+* ```Model```: Holds the data of the App in memory.
 * ```UI```: The UI of the App
 * ```Logic```: The command executor
 * ```Storage```: Reads and writes data from and to an external file(s)
@@ -23,21 +26,12 @@ The rest of the App consists of the following components:
 Each component is explained in the sections below.
 
 
-### Parser Component
-The Parser component consists of two classes, ```Parser``` and ```TestParser```. Parser deals with input relating to adding, deleting, editing and viewing flashcards and decks, while ```TestParser``` deals with input relating to testing.
-
-How the Parser component works:
-* Identifies the command input by the user
-* Parses command arguments
-* Executes commands using the Logic component
-* Handles exceptions relating to invalid arguments
-
 ### UI Component
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
 
 ### Logic Component
 
-![](assets/LogicArchitectureDiagram.png)
+![](assets/logicArchitectureDiagram.png)
 
 Here is a partial architecture diagram of the `Logic` component. It executes user commands via Command classes when appropriate with the appropriate arguments as given by the Parser component.
 
@@ -49,7 +43,7 @@ How the `Logic` component works:
 3. The command communicates with the `Model` when it is executed (eg. to add a flashcard).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned to the `UI` from `Logic` to process.
 
-![](assets/parserComponentDiagram.png)
+![](assets/parserArchitectureDiagram.png)
 
 Above is the architecture diagram containing the parser classes in `Logic` that are used for parsing a user command.
 
