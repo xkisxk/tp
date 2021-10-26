@@ -14,6 +14,7 @@ public class AnswerList {
     private final Deck deck;
     private int userScore;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
+    private boolean isAllAnswered;
 
     /**
      * AnswerList contains the list of answers from a test and the deck
@@ -25,6 +26,7 @@ public class AnswerList {
         this.answerList = new ArrayList<>();
         this.deck = deck;
         this.userScore = 0;
+        this.isAllAnswered = false;
     }
 
     /**
@@ -36,6 +38,18 @@ public class AnswerList {
     public int getAnswerIndex(Answer answer) {
         return answerList.indexOf(answer);
     }
+
+    public Boolean isQuestionAnswered(int index) {
+        Boolean isQuestionAnswered;
+        try {
+            Answer answer = answerList.get(index);
+            isQuestionAnswered = answer.isAnswered();
+        } catch (IndexOutOfBoundsException e) {
+            isQuestionAnswered = false;
+        }
+        return isQuestionAnswered;
+    }
+
 
     public ArrayList<Answer> getAnswerList() {
         return answerList;
@@ -61,15 +75,34 @@ public class AnswerList {
         return answerList.size();
     }
 
+    public Boolean isAllAnswered() {
+        for (Answer a: answerList) {
+            if(!a.isAnswered()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Saves a new user answer to the current list of user answers.
      *
      * @param answer        String representation of user's answer
      * @param questionIndex Question number for the question that the answer answers
      */
+    public void addAnswer(String answer, int questionIndex, Boolean isAnswered) {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Adding card");
+        answerList.add(new Answer(answer, questionIndex, isAnswered));
+    }
+
     public void addAnswer(String answer, int questionIndex) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
         answerList.add(new Answer(answer, questionIndex));
+    }
+
+    public void setQuestionAnswer(int questionIndex, String answer) {
+        answerList.get(questionIndex).setAnswer(answer);
     }
 }

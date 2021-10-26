@@ -6,12 +6,20 @@ import seedu.duke.flashcard.FlashCard;
  * Represents information about a single user answer when test function is invoked.
  */
 public class Answer {
-    private final String answer;
+    private String answer;
     private final int questionIndex;
+    private boolean isAnswered;
+
+    public Answer(String answer, int questionIndex, Boolean isAnswered) {
+        this.answer = answer;
+        this.questionIndex = questionIndex;
+        this.isAnswered = isAnswered;
+    }
 
     public Answer(String answer, int questionIndex) {
         this.answer = answer;
         this.questionIndex = questionIndex;
+        this.isAnswered = false;
     }
 
     //getter for front
@@ -27,5 +35,17 @@ public class Answer {
         String lowerCaseUserAnswer = userAnswer.toLowerCase();
         String lowerCaseAnswer = question.getBack().toLowerCase();
         return lowerCaseAnswer.equals(lowerCaseUserAnswer);
+    }
+
+    public void setIsAnswered() {
+        this.isAnswered = true;
+    }
+
+    public Boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
