@@ -73,7 +73,7 @@ public class TestManager {
         try {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
-            Deck deckToReview = testHistory.getLowScoringCards(deckIndex);
+            Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input format, make sure the description is a numeric.");

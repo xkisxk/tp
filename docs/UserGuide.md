@@ -3,13 +3,13 @@
 ## Introduction
 
 
-CardLI is a desktop app to help you create, organising, and review flashcards via a Command Line 
+CardLI is a desktop app that helps you create, organise, and review flashcards via a Command Line 
 Interface. As students ourselves, we find that studying through the use of flashcards can greatly
 increase the efficacy of our study sessions as they break down large chapters and concepts into 
 easy-to-understand segments. Hence, CardLI was designed in order to help students study better 
-through the use of flashcards, while also reducing the paper waste that goes into writing our physical
-flashcards. The interfacing within the application has been design to be interactive and functional,
-while the commands were designed to be intuitive to use. 
+through the use of flashcards, while also reducing the paper waste that goes into writing physical
+flashcards. The interfacing within the application is designed to be interactive and functional,
+while the commands are designed to be intuitive to use. 
 
 
 ## Quick Start
