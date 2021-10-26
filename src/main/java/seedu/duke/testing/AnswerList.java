@@ -31,7 +31,7 @@ public class AnswerList {
      * Gets the index of the answer in the list.
      *
      * @param answer answer query
-     * @return       index of the answer
+     * @return index of the answer
      */
     public int getAnswerIndex(Answer answer) {
         return answerList.indexOf(answer);
@@ -82,7 +82,7 @@ public class AnswerList {
         String answersString = "";
         int answersCount = getSize();
 
-        for (int i = 0; i < answersCount; i++){
+        for (int i = 0; i < answersCount; i++) {
             answersString += answerList.get(i);
         }
 

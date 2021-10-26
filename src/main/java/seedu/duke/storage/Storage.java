@@ -18,34 +18,34 @@ public class Storage {
      */
     private static final String CARDS_FILEPATH = "data/Cards_CardLI.txt";
     private static final String TESTS_FILEPATH = "data/Tests_CardLi.txt";
-    File cards_file;
-    File tests_file;
+    File cardsFile;
+    File testsFile;
 
     public Storage() {
         try {
-            this.cards_file = new File(CARDS_FILEPATH);
-            this.tests_file = new File(TESTS_FILEPATH);
+            this.cardsFile = new File(CARDS_FILEPATH);
+            this.testsFile = new File(TESTS_FILEPATH);
 
             // create new directory and file if they do not exist
-            if (!cards_file.exists()) {
-                cards_file.getParentFile().mkdirs();
-                cards_file.createNewFile();
+            if (!cardsFile.exists()) {
+                cardsFile.getParentFile().mkdirs();
+                cardsFile.createNewFile();
             }
-            if (!tests_file.exists()) {
-                tests_file.getParentFile().mkdirs();
-                tests_file.createNewFile();
+            if (!testsFile.exists()) {
+                testsFile.getParentFile().mkdirs();
+                testsFile.createNewFile();
             }
         } catch (IOException e) {
             //TODO: fill catch block
         }
     }
 
-    public <T> void writeToFile(ArrayList<T> arrayList, String type){
+    public <T> void writeToFile(ArrayList<T> arrayList, String type) {
         try {
             // instantiate FileWriter object to overwrite specified text file
             FileWriter fileWriter;
 
-            switch (type){
+            switch (type) {
             case "cards":
                 fileWriter = new FileWriter(CARDS_FILEPATH, false);
                 break;
@@ -69,12 +69,12 @@ public class Storage {
         }
     }
 
-    public ArrayList<Deck> readCardsFromFile(){
+    public ArrayList<Deck> readCardsFromFile() {
         ArrayList<Deck> decks = new ArrayList<>();
 
         try {
             // instantiate scanner to read file contents
-            Scanner s = new Scanner(this.cards_file);
+            Scanner s = new Scanner(this.cardsFile);
 
             int decksCount = Integer.parseInt(s.nextLine());
 
@@ -85,17 +85,17 @@ public class Storage {
             //TODO: how to skip this exception?
         } catch (NoSuchElementException e) {
             //TODO: handle empty save file
-        } finally{
+        } finally {
             return decks;
         }
     }
 
-    public ArrayList<AnswerList> readTestsFromFile(){
+    public ArrayList<AnswerList> readTestsFromFile() {
         ArrayList<AnswerList> testHistory = new ArrayList<>();
 
         try {
             // instantiate scanner to read file contents
-            Scanner s = new Scanner(this.tests_file);
+            Scanner s = new Scanner(this.testsFile);
 
             int answerListsCount = Integer.parseInt(s.nextLine());
 
@@ -106,7 +106,7 @@ public class Storage {
             //TODO: how to skip this exception?
         } catch (NoSuchElementException e) {
             //TODO: handle empty save file
-        } finally{
+        } finally {
             return testHistory;
         }
     }

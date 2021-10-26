@@ -23,7 +23,7 @@ public class TestHistory {
         this.deckManager = deckManager;
     }
 
-    public TestHistory(DeckManager deckManager , ArrayList<AnswerList> testHistory) {
+    public TestHistory(DeckManager deckManager, ArrayList<AnswerList> testHistory) {
         this.testHistory = testHistory;
         this.deckManager = deckManager;
     }
