@@ -1,5 +1,6 @@
 package seedu.cardli;
 
+import org.fusesource.jansi.AnsiConsole;
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
 import seedu.cardli.flashcard.Deck;
@@ -35,6 +36,7 @@ public class CardLI {
         this.testManager = new TestManager(testHistory, deckManager);
         this.innerParser = new InnerParser();
         this.outerParser = new OuterParser(deckManager, innerParser, testHistory);
+        AnsiConsole.systemInstall();
     }
 
     /**

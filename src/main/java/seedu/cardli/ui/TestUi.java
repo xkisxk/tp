@@ -11,6 +11,10 @@ import java.util.Scanner;
  * TestUi class handles the input and output during a test or a review.
  */
 public class TestUi {
+
+    /** The message to be displayed when the timer has expired. */
+    public static final String TIMES_UP_MESSAGE = "TIME'S UP! You can still input an answer, but it won't be counted.";
+
     private final Scanner in;
     private final PrintStream out;
 
