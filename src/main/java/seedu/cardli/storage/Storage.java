@@ -40,20 +40,15 @@ public class Storage {
         }
     }
 
-    public <T> void writeToFile(ArrayList<T> arrayList, String type) {
+    public <T> void writeToFile(ArrayList<T> arrayList, boolean saveCards) {
         try {
             // instantiate FileWriter object to overwrite specified text file
             FileWriter fileWriter;
 
-            switch (type) {
-            case "cards":
+            if (saveCards) {
                 fileWriter = new FileWriter(CARDS_FILEPATH, false);
-                break;
-            case "tests":
+            } else {
                 fileWriter = new FileWriter(TESTS_FILEPATH, false);
-                break;
-            default:
-                fileWriter = null;
             }
 
             int count = arrayList.size();
