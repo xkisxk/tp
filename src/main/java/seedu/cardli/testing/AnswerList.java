@@ -86,9 +86,9 @@ public class AnswerList {
             answersString += answerList.get(i);
         }
 
-        return getDeck().toString() + '\n'
+        return getDeck().toString()
                 + answersCount + '\n'
-                + answersString + '\n'
+                + answersString
                 + getUserScore();
     }
 }
