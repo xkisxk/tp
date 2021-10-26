@@ -77,7 +77,7 @@ public class AnswerList {
 
     public Boolean isAllAnswered() {
         for (Answer a: answerList) {
-            if(!a.isAnswered()) {
+            if (!a.isAnswered()) {
                 return false;
             }
         }
