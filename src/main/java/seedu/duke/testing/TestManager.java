@@ -2,7 +2,6 @@ package seedu.duke.testing;
 
 import seedu.duke.exceptions.EmptyDeckException;
 import seedu.duke.exceptions.FieldEmptyException;
-import seedu.duke.flashcard.Countdown;
 import seedu.duke.flashcard.DeckManager;
 import seedu.duke.parser.TestParser;
 import seedu.duke.ui.TestUi;

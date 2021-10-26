@@ -1,15 +1,11 @@
 package seedu.duke.ui;
 
-import seedu.duke.flashcard.Countdown;
 import seedu.duke.flashcard.FlashCard;
 import seedu.duke.testing.AnswerList;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.concurrent.Future;
 
 /**
  * TestUi class handles the input and output during a test or a review.

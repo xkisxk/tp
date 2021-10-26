@@ -1,4 +1,4 @@
-package seedu.duke.flashcard;
+package seedu.duke.testing;
 
 import org.fusesource.jansi.Ansi;
 
