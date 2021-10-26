@@ -1,41 +1,48 @@
 package seedu.duke.flashcard;
 
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Implements the Countdown class, which creates a timer which counts down
+ * from the given time upon start and displays the remaining time. Once
+ * the time runs out, displays the given message instead.
+ */
 public class Countdown {
 
-    private Timer timer; // could also use a swing timer
+    private Timer timer;
     private CountdownTimerTask countdownTimerTask;
     private int startValue;
-    private boolean isRunning; // if no need to pause timer, this is not needed
+    private String timesUpMessage;
+    private boolean isRunning;
 
-    public Countdown(int startValue) {
+    /**
+     * Constructor for the class Countdown. Creates a Countdown object
+     * with the given startValue and timesUpMessage to be displayed
+     * when the time elapsed reaches zero.
+     * @param startValue
+     * @param timesUpMessage
+     */
+    public Countdown(int startValue, String timesUpMessage) {
         this.timer = new Timer();
         this.startValue = startValue;
-        this.countdownTimerTask = new CountdownTimerTask(startValue);
+        this.timesUpMessage = timesUpMessage;
+        this.countdownTimerTask = new CountdownTimerTask(startValue, timesUpMessage);
         this.isRunning = false;
     }
 
     private class CountdownTimerTask extends TimerTask {
 
-//        private Ansi ansi;
-        private String SAVE_CURSOR_POSITION = "\u001b7";
-        // private Ansi thing = ansi.cursorUpLine(1);
-        private String CLEAR_PREVIOUS_LINE = "\u001b[1F\r\u001b[K\u001b[1B";
-        private String RESTORE_CURSOR_POSITION = "\u001b8";
+        private int startValue;
+        private int timeRemaining;
+        private String timesUpMessage;
 
-        int startValue;
-        int timeRemaining;
-
-        CountdownTimerTask(int startValue) {
-
-//            this.ansi = Ansi.ansi();
+        CountdownTimerTask(int startValue, String timesUpMessage) {
             this.startValue = startValue;
             this.timeRemaining = startValue;
+            this.timesUpMessage = timesUpMessage;
         }
 
         private void countDown() {
@@ -44,24 +51,14 @@ public class Countdown {
             }
         }
 
-        private boolean isStart() {
-            return this.startValue == this.timeRemaining;
-        }
-
-//        clearScreen(PrintStream out) {
-//            out.print(ansi().eraseScreen(Ansi.Erase.ALL).toString());
-//            out.print(ansi().cursor(1, 1).toString());
-//            out.flush();
-
         private void display() {
             if (this.timeRemaining < 0) {
-                System.out.println();
-                this.cancel();
+                Countdown.this.stop();
                 return;
             }
 
-            String displayed = (this.timeRemaining == 0) ? "TIME'S UP!" : String.valueOf(timeRemaining) ;
-            String result = (isStart()) ? displayed : displayed + System.lineSeparator();
+            String displayed = (this.timeRemaining == 0) ? this.timesUpMessage
+                    : "Time remaining: " + this.timeRemaining;
 
             Ansi ansi = Ansi.ansi()
                     .saveCursorPosition()
@@ -70,15 +67,13 @@ public class Countdown {
                     .eraseLine()
                     .append(displayed)
                     .restoreCursorPosition();
-//            Ansi ansi = Ansi.ansi().eraseLine().append(displayed);
 
-            System.out.println(ansi);
-
-//            AnsiConsole.out().print(result);
+            System.out.print(ansi);
         }
 
         /**
-         * Starts the TimerTask. Displays a countdown.
+         * Starts the TimerTask. Displays a countdown starting
+         * from the initialised time.
          */
         @Override
         public void run() {
@@ -87,6 +82,10 @@ public class Countdown {
         }
     }
 
+    /**
+     * Starts the timer with the initialised countdown value.
+     * Displays the countdown in the standard output.
+     */
     public void start() {
         this.isRunning = true;
         int delay = 0;
@@ -99,12 +98,7 @@ public class Countdown {
         timer.cancel();
     }
 
-    public static void main(String[] args) {
-        Countdown countdown = new Countdown(10);
-        AnsiConsole.systemInstall();
-        System.out.println("Starting");
-        countdown.start();
-        System.out.println("Line after");
+    public boolean isRunning() {
+        return this.isRunning;
     }
-
 }

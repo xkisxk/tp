@@ -4,18 +4,23 @@ import seedu.duke.flashcard.Countdown;
 import seedu.duke.flashcard.FlashCard;
 import seedu.duke.testing.AnswerList;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.concurrent.Future;
 
 /**
  * TestUi class handles the input and output during a test or a review.
  */
 public class TestUi {
+
+    /** The message to be displayed when the timer has expired. */
+    public static final String TIMES_UP_MESSAGE = "TIME'S UP! You can still input an answer, but it won't be counted.";
+
     private final Scanner in;
     private final PrintStream out;
-
-    private Countdown timer;
 
     public TestUi() {
         this(System.in, System.out);
@@ -24,7 +29,6 @@ public class TestUi {
     public TestUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
-        this.timer = new Countdown(10);
     }
 
     public void showMessage(String input) {
@@ -44,7 +48,6 @@ public class TestUi {
         //display front of card so that user can understand question
         System.out.println(question.getFront());
         System.out.println("Your answer?");
-        timer.start();
     }
 
     public void printCorrectAnswer(FlashCard question) {
