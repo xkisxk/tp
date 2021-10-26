@@ -172,7 +172,7 @@ in the screenshot below.
 
 <body>
 
-![](assets/CardLI.txt%20SS.PNG)
+![](assets/Cards_CardLI.txt%20Example.png)
 </body>
 
 For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects along
@@ -185,7 +185,19 @@ about the test deck and the user's test score, on top of information on each of 
 An example of the format of the `Tests_CardLI.txt` where the decks of flashcards are saved is shown
 in the screenshot below.
 
-//TODO insert ss of Tests.CardLI.txt
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+![](assets/Tests_CardLI.txt%20Example.png)
+</body>
 
 `readCardsFromFile()` and `readTestsFromFile()`
 
