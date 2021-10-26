@@ -1,6 +1,6 @@
 # Developer Guide
 
-#Introduction
+# Introduction
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
 students keep track of all their flashcards. It also allows students to test their knowledge. All of this in one
@@ -13,6 +13,7 @@ original source as well}
 
 ## Design
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
+
 <li> At app launch: initialises the components in the correct sequence, and connects them up with each other</li>
 
 ![](assets/overallArchitectureDiagram.png)
@@ -72,7 +73,8 @@ The user can only edit the `name` attribute of the `Deck` object, which represen
 Given below is the sequence diagram for `edit` (Deck):
 
 ![](assets/editDeckCommandSeqDiagram.png)
-The 'EditDeckCommand' allows the changing of the name of the `Deck`.
+
+The `EditDeckCommand` allows the changing of the name of the `Deck`.
 
 By entering the edit command in the `OuterParser` class, an `EditDeckCommand` object is created and its constructor is
 called. This object is returned to `CardLi` class, which then calls the `execute()` method
@@ -93,7 +95,8 @@ The `execute()` method will then call the `editDeck()` method of the `DeckManage
 ### `EditCardCommand`
 
 ![](assets/editCardCommandSeqDiagram.png)
-The 'EditCardCommand' allows the changing of the content of the `FlashCard`. The user can decide to change either the `front`
+
+The `EditCardCommand` allows the changing of the content of the `FlashCard`. The user can decide to change either the `front`
 or `back` attributes of the `FlashCard`object, which represents the front and back side of the card.
 
 By entering the edit command in the `InnerParser` class, an `EditCardCommand` object is created and its constructor is
@@ -115,7 +118,8 @@ The `execute()` method will then call the `editCard()` method of the `Deck` clas
 ### Move
 
 ![](assets/moveCardCommandSeqDiagram.png)
-This subsection provides details on the implementation of the `moveCardCommand'. This command
+
+This subsection provides details on the implementation of the `moveCardCommand`. This command
 enables moving of a card in a deck the user is currently in to another deck.
 
 By entering the edit command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
@@ -138,13 +142,13 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-###Find
+### Find
 
-This feature allows users of CardLI to find a **FlashCard** by providing a search term to the input following the command term `find`. By invoking this function the user can view specific **FlashCards** matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
+This feature allows users of CardLI to find a `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the user can view specific `FlashCards` matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
 
-Currently, `find` is implemented on a Systemwide level. After the **CardLiUi** handles the user input, **OuterParser** formats the user input and creates a **FindCardsCommand** object which is returned. **Duke** calls the _execute()_ method of the **FindCardsCommand** object. The **FindCardsParser** extracts the search term(s) and passes them to **CommandResult** which invokes the _findCards()_ method of **DeckManager** that repeatedly calls the _returnMatchingFlashCards()_ method that iterates once for each instance of a **Deck**.
+Currently, `find` is implemented on a Systemwide level. After the `CardLiUi` handles the user input, `OuterParser` formats the user input and creates a `FindCardsCommand` object which is returned. `Duke` calls the `execute()` method of the `FindCardsCommand` object. The `FindCardsParser` extracts the search term(s) and passes them to `CommandResult` which invokes the  `findCards()` method of `DeckManager` that repeatedly calls the `returnMatchingFlashCards()` method that iterates once for each instance of a `Deck`.
 
-_returnMatchingFlashCards()_ is implemented by creating a stream that consists of all the **FlashCards** from one deck, and filters them based on whether they contain the search term given. Finally all the **FlashCards** that contain the search term are collected in an arrayList and their console outputs are returned in string format for **CardLiUi** to display to the user.
+`returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck, and filters them based on whether they contain the search term given. Finally all the `FlashCards` that contain the search term are collected in an arrayList and their console outputs are returned in string format for `CardLiUi` to display to the user.
 
 Given below is the sequence diagram for `find`:
 
@@ -154,7 +158,8 @@ Given below is the sequence diagram for `find`:
 
 
 
-###Test Feature
+### Test Feature
+
 ![class diagram](../docs/assets/testClassDiagram.png)
 
 Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
@@ -238,7 +243,7 @@ in the screenshot below.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+
 </head>
 
 <body>
@@ -262,7 +267,7 @@ in the screenshot below.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+
 </head>
 
 <body>
