@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeckManager {
 
@@ -18,6 +20,7 @@ public class DeckManager {
     static final String FILEPATH = "data/CardLI.txt";
 
     private final ArrayList<Deck> decks;
+    private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
     public DeckManager() {
         this.decks = new ArrayList<>();
@@ -185,6 +188,73 @@ public class DeckManager {
             result = result.concat("You have no decks.");
         }
         return result;
+    }
+
+    /**
+     * Gets all the low scoring cards and put them into a deck.
+     *
+     * @return deck of low scoring cards
+     */
+    private Deck getLowScoringCardsFromAllDecks() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Collecting low scoring cards");
+        Deck reviewDeck = new Deck("Review");
+        for (Deck deck : getDecks()) {
+            for (FlashCard card : deck.getCards()) {
+                if (isLowScoring(card)) {
+                    reviewDeck.addFlashCard(card);
+                    logger.log(Level.INFO, "Added a low scoring card");
+                }
+            }
+        }
+        return reviewDeck;
+    }
+
+    /**
+     * Gets all the low scoring cards from a deck and put them into a deck.
+     *
+     * @return deck of low scoring cards
+     */
+    private Deck getLowScoringCardsFromADeck(Deck deck) {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Collecting low scoring cards");
+        Deck reviewDeck = new Deck("Review");
+        for (FlashCard card : deck.getCards()) {
+            if (isLowScoring(card)) {
+                reviewDeck.addFlashCard(card);
+                logger.log(Level.INFO, "Added a low scoring card");
+            }
+        }
+        return reviewDeck;
+    }
+
+    /**
+     * Gets all the low scoring cards and put them into a deck.
+     * If index is -1, get low scaring cards from all decks.
+     * Else get low scoring cards from the deck from that index.
+     * The cards that are put into the deck are the same cards objects, in other
+     * words they are not new FlashCard objects.
+     *
+     * @return deck of low scoring cards
+     */
+    public Deck getLowScoringCards(int index) {
+        if (index == -1) {
+            return getLowScoringCardsFromAllDecks();
+        }
+        if (hasDeck(index)) {
+            return getLowScoringCardsFromADeck(getDeck(index));
+        }
+        throw new IndexOutOfBoundsException("This deck does not exist.");
+    }
+
+    /**
+     * A card is low scoring if its accumulated user score is less than 50% of
+     * the total score.
+     *
+     * @return true if card is low scoring, false otherwise
+     */
+    private boolean isLowScoring(FlashCard card) {
+        return (double) card.getUserScore() * 100 / card.getTotalScore() < 50;
     }
 
     public void saveToFile() {
