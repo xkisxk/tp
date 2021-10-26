@@ -109,23 +109,72 @@ public class TestManager {
         }
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
+        //populate userAnswer
         for (FlashCard question : deckReplicate) {
-            testCard(userAnswer, question);
+            int questionNumber = userAnswer.getDeck().getCardIndex(question);
+            userAnswer.addAnswer("NIL", questionNumber);
         }
+        logger.log(Level.INFO, "starting test");
+        testInProgress(deckReplicate, userAnswer);
+
         ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         ui.printTestOver();
     }
 
-    private void testCard(AnswerList userAnswer, FlashCard question) {
+    private void testInProgress(ArrayList<FlashCard> deckReplicate,AnswerList userAnswer) {
+        logger.setLevel(Level.WARNING);
+        boolean allQuestionsAnswered = false;
+        int currentQuestion = 0;
+        int nextQuestionFlag = 0;
+        logger.log(Level.INFO, "starting test proper");
+        while (!allQuestionsAnswered) {
+            logger.log(Level.INFO, "currentQuestion is out of index. Either test finished or user scroll too far");
+            while (currentQuestion >= 0 && currentQuestion < deckReplicate.size()) {
+                //question is not answered yet
+                if (!userAnswer.isQuestionAnswered(currentQuestion)) {
+                    logger.log(Level.INFO, "question not answered yet");
+                    nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion));
+                }
+                logger.log(Level.INFO, "setting next question to test");
+                //next question to be tested is currentQuestion - 1
+                if (nextQuestionFlag == 1) {
+                    currentQuestion--;
+                } else {
+                    //next question to be tested is currentQuestion + 1
+                    currentQuestion++;
+                }
+            }
+            logger.log(Level.INFO, "Wraparound for edge case");
+            //wraparound from end of deckReplicate to start of deckReplicate
+            if (currentQuestion == deckReplicate.size()) {
+                currentQuestion = 0;
+            }
+            //wraparound from start of deckReplicate to end of deckReplicate
+            if (currentQuestion == -1) {
+                currentQuestion = deckReplicate.size() - 1;
+            }
+            logger.log(Level.INFO, "checking isAllAnswered");
+            if (userAnswer.isAllAnswered()) {
+                allQuestionsAnswered = true;
+            }
+        }
+    }
+
+    private int testCard(AnswerList userAnswer, FlashCard question) {
+        logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting to test a new card");
+
+        //0 means proceed to next question in userAnswer;1 means go back 1 question
+        int nextQuestionFlag = 0;
+
         int questionNumber = userAnswer.getDeck().getCardIndex(question);
+
         ui.printDividerLine();
         ui.printQuestion(question, questionNumber);
-        //get user's answer to the card shown(currently assume user inputs only his/her answer)
-        //later version to include question number and parsing to allow for randomised testing
         logger.log(Level.INFO, "getting user's answer to the question");
+
         String userResponse = ui.getUserMessage();
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
@@ -134,11 +183,23 @@ public class TestManager {
             userResponse = "NO ANSWER GIVEN :(";
             ui.printAnswerEmptyError();
         }
-        logger.log(Level.INFO, "Saving answer");
-        userAnswer.addAnswer(userResponse, questionNumber);
+
+        //set question as answered with the new user response
+        if (!(userResponse.trim().equalsIgnoreCase("/NEXT") || userResponse.trim().equalsIgnoreCase("/BACK"))) {
+            logger.log(Level.INFO, "Saving answer");
+            userAnswer.setQuestionAnswer(questionNumber,userResponse);
+            userAnswer.getAnswerList().get(questionNumber).setIsAnswered();
+        }
+        //signalling to test previous question next
+        if (userResponse.trim().equalsIgnoreCase("/BACK")) {
+            nextQuestionFlag = 1;
+        }
+
         assert !userAnswer.isEmpty();
         assert userAnswer.getSize() > 0;
         logger.log(Level.INFO, "Finished this card's testing");
+
+        return nextQuestionFlag;
     }
 
     /**

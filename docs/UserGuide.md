@@ -65,6 +65,9 @@ Edits the name of the deck indicated by the index.
 `/d` denotes the index of the deck to be edited and `/n` denotes the new name
 of the deck.
 
+This command is for those who want to change the name of the deck to a more
+suitable name.
+
 Format: `edit /d <index> /n <name>`
 
 Example of Usage:
@@ -105,6 +108,11 @@ Otherwise, the response will be marked as incorrect. Regardless of whether the a
 or incorrect, the console will then display the next word to be tested. When all cards in the deck 
 have been tested, the percentage of correct answers will be displayed in the console, as well as the 
 cards which received incorrect responses.
+
+If you do not know the answer to the current question being tested, and you want to skip to another
+question, you can do so by typing `/NEXT` or `/BACK` when prompted with the test question. 
+
+`/NEXT` will skip to the next question while `/BACK` will go back to the previous question tested.
 
 Format: `test`
 
@@ -196,6 +204,9 @@ Edits the front or the back of your chosen flashcard to your given input.
 `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
 `/i` denotes the content you want to change the flashcard to.
 
+This command is for those who have made a mistake in the front or back of the card
+and wish to fix it without having to resort to deleting and adding the card.
+
 Format: `edit /c <index> /s <front or back> /i <input>`
 
 Example of usage:
@@ -205,6 +216,30 @@ Example of usage:
 Expected outcome:
 
 ![](assets/ug/editcard.png)
+
+### Moving a flashcard: `move`
+Moves a flashcard from the deck you are currently in to a new deck of your choice.
+`/c` denotes the card index or the front phrase of the card and `/d` denotes the 
+deck index or the name of the deck you want to move the card to.
+
+This command is for those who have accidentally added a flashcard to a wrong deck
+and now want to transfer the card to another deck without going through the hassle
+of deleting the card and adding the card in another deck.
+
+Format: `move /c <card index/front phrase of card> /d <deck index/name of deck>`
+
+Example of usage: 
+
+`move /c ExampleCard1 /d 2`
+
+Expected outcome:
+
+* Deck 2 before moving
+![](assets/ug/move2.png)
+
+* Deck 1 before and after moving; Deck 2 after moving
+![](assets/ug/move4.png)
+
 ### Viewing flashcards: `view`
 Displays all the flashcards in the current deck.
 

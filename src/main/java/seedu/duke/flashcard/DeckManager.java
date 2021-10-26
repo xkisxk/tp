@@ -1,5 +1,6 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 
 import java.io.File;
@@ -29,19 +30,34 @@ public class DeckManager {
         this.decks = decks;
     }
 
-    public void editCard(String[] args) {
-        if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
-        } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
-        }
-        System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+    public String moveCard(String[] parameters) throws CardLiException {
+        String enteredCurrentDeckIndex = parameters[0];
+        int currentDeckIndex = Integer.parseInt(enteredCurrentDeckIndex);
+        String enteredCardIndex = parameters[1];
+        int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
+        String enteredDeckIndex = parameters[2];
+        int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+
+        //get card from current deck
+        FlashCard cardCopy = decks.get(currentDeckIndex).getCard(cardIndex);
+        //add card to destination deck
+        decks.get(deckIndex).addFlashCard(cardCopy);
+        //delete card from current deck
+        decks.get(currentDeckIndex).deleteFlashCard(enteredCardIndex);
+
+        return ("Moved card " + enteredCardIndex + " to " + "deck " + enteredDeckIndex);
     }
 
-
     public String editDeck(String[] args) {
-        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
-        return ("Changed deck " + args[0] + " to " + args[1]);
+        String enteredDeckIndex = args[0];
+        int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+        String deckName = args[1];
+        decks.get(deckIndex).setDeckName(deckName);
+        return ("Changed deck " + enteredDeckIndex + " to " + deckName);
+    }
+
+    public int getDeckIndex(Deck deck) {
+        return decks.indexOf(deck);
     }
 
     public Deck getDeck(int index) {
@@ -296,5 +312,4 @@ public class DeckManager {
             return;
         }
     }
-
 }

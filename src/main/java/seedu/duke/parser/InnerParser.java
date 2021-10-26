@@ -3,12 +3,14 @@ package seedu.duke.parser;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.deck.AddCardCommand;
-import seedu.duke.commands.deck.DeleteCardCommand;
 import seedu.duke.commands.deck.EditCardCommand;
+import seedu.duke.commands.deck.DeleteCardCommand;
+import seedu.duke.commands.deck.MoveCardCommand;
 import seedu.duke.commands.deck.ViewCardsCommand;
-import seedu.duke.commands.deck.HelpInDeckCommand;
 import seedu.duke.commands.deck.ExitDeckCommand;
+import seedu.duke.commands.deck.HelpInDeckCommand;
 import seedu.duke.flashcard.Deck;
+import seedu.duke.flashcard.DeckManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +20,8 @@ public class InnerParser {
     private static final Logger logger = Logger.getLogger(InnerParser.class.getName());
 
     private Deck currDeck;
+
+    private DeckManager deckList;
 
     public InnerParser(Deck currDeck) {
         this.currDeck = currDeck;
@@ -55,6 +59,11 @@ public class InnerParser {
             command = new ViewCardsCommand(this.currDeck);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
+        case "move": //move /c <index> /d <index
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new MoveCardCommand(arguments, this.currDeck, this.deckList);
+            logger.log(Level.INFO, "move command parsed and executed");
+            break;
         case "help":
             command = new HelpInDeckCommand();
             logger.log(Level.INFO, "help command parsed and executed");
@@ -72,5 +81,9 @@ public class InnerParser {
 
     public void setCurrDeck(Deck currDeck) {
         this.currDeck = currDeck;
+    }
+
+    public void setDeckManager(DeckManager deckList) {
+        this.deckList = deckList;
     }
 }

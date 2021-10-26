@@ -60,27 +60,83 @@ The Storage component:
 * Saves the results of each test
 
 ## Implementation
-### Editing a Deck
+### Edit
 
 This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
 
 The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
 
 ### `EditDeckCommand`
-The 'EditDeckCommand' allows the changing of the name of the `Deck`.
+
 
 Given below is the sequence diagram for `edit` (Deck):
+
 ![](assets/editDeckCommandSeqDiagram.png)
+The 'EditDeckCommand' allows the changing of the name of the `Deck`.
 
-### Editing a FlashCard
+By entering the edit command in the `OuterParser` class, an `EditDeckCommand` object is created and its constructor is
+called. This object is returned to `CardLi` class, which then calls the `execute()` method
+of the `EditDeckCommand` object.
 
+The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
+the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
+`prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()` 
+returns `deck`, of string type, which represents the deck to be edited. `prepareEditDeckCommand()` will then return
+a string array, `preparedArguments`, which represents the arguments for the next method call.
+
+The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the 
+`setName()` method of the `Deck` class. Once `editDeck()` is completed, a message of string type is returned to the
+`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+
+`CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
+
+### `EditCardCommand`
+
+![](assets/editCardCommandSeqDiagram.png)
 The 'EditCardCommand' allows the changing of the content of the `FlashCard`. The user can decide to change either the `front`
 or `back` attributes of the `FlashCard`object, which represents the front and back side of the card.
 
-Given below is the sequence diagram for `edit`(FlashCard):
-![](assets/editDeckCommandSeqDiagram.png)
+By entering the edit command in the `InnerParser` class, an `EditCardCommand` object is created and its constructor is
+called. This object is returned to `CardLi` class, which then calls the `execute()` method
+of the `EditCardCommand` object.
 
+The `execute()` method in the `EditCardCommand` class self-invokes the `prepareEditCardCommand()` method, which helps
+the handling of edge cases as well as format the method arguments. In turn, `prepareEditClardCommand()` self-invokes the
+`prepareCardIndex` method, which handles the formatting of the card index specified by the user. `prepareCardIndex()`
+returns `card`, of string type, which represents the card to be edited. `prepareEditCardCommand()` will then return
+a string array, `preparedArguments`, which represents the arguments for the next method call.
 
+The `execute()` method will then call the `editCard()` method of the `Deck` class, which in turn calls the
+`setFront()` or `setBack()` method of the `FlashCard` class. Once `editCard()` is completed, a message of string type is returned to the
+`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+
+`CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
+
+### Move
+
+![](assets/moveCardCommandSeqDiagram.png)
+This subsection provides details on the implementation of the `moveCardCommand'. This command
+enables moving of a card in a deck the user is currently in to another deck.
+
+By entering the edit command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
+called. This object is returned to `CardLi` class, which then calls the `execute()` method
+of the `MoveCardCommand` object.
+
+The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCardCommand()` method, which helps
+the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCardCommand()` self-invokes the
+`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this, `prepareMoveCardCommand()`
+self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user.`prepareCardIndex()`
+returns `card`, of string type, which represents the card to be edited. `prepareDeckIndex()`
+returns `deck`, of string type, which represents the deck to be edited.`prepareMoveCommand()` will then return
+a string array, `preparedArguments`, which represents the arguments for the next method call.
+
+The `execute()` method will then call the `moveCard()` method of the `DeckManager` class, which in turn calls the
+`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls the `addFlashCard()`
+method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls the `deleteFlashCard()`
+method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is completed, a message of string type is returned to the
+`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+
+`CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
 ###Find
 
