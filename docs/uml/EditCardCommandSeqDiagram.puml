@@ -2,42 +2,55 @@
 
 hide footbox
 
-participant ":Parser" as Parser
 participant ":EditCardCommand" as EditCardCommand
-participant ":DeckManager" as DeckManager
 participant ":Deck" as Deck
 participant ":FlashCard" as FlashCard
+participant ":CardLiUI" as CardLiUI
+actor "User" as User
 
-
-[-> Parser : parse("edit /c 2 /s front /i 2+2")
-activate Parser
-
-ref over Parser, EditCardCommand : parseEditCardCommand(input)
-
-[<-- Parser : EditCardCommand(args)
-deactivate Parser
+[-> EditCardCommand : new
+activate EditCardCommand
+[<-- EditCardCommand : command
+deactivate EditCardCommand
 
 [->EditCardCommand : execute()
 activate EditCardCommand
 
-EditCardCommand -> DeckManager : get(deckIndex)
-activate DeckManager
+EditCardCommand -> EditCardCommand : prepareEditCardCommand()
+activate EditCardCommand
 
-DeckManager --> EditCardCommand : deck
-deactivate DeckManager
+EditCardCommand -> EditCardCommand: prepareCardIndex(card, deck)
+activate EditCardCommand
 
-EditCardCommand -> Deck : getCard(cardIndex)
+EditCardCommand --> EditCardCommand: card
+deactivate EditCardCommand
+
+EditCardCommand --> EditCardCommand: preparedArguments
+deactivate EditCardCommand
+
+EditCardCommand -> Deck: editCard(parameters)
 activate Deck
 
-Deck --> EditCardCommand : flashcard
-deactivate Deck
-
-EditCardCommand -> FlashCard : setFront(newContent)
+Deck -> FlashCard: setFront(changeTo)
 activate FlashCard
-
-FlashCard --> EditCardCommand
 deactivate FlashCard
 
-[<-- EditCardCommand
+destroy FlashCard
+
+Deck --> EditCardCommand: message
+deactivate Deck
+
+destroy Deck
+
+[<-- EditCardCommand: result
 deactivate EditCardCommand
+destroy EditCardCommand
+
+[-> CardLiUI: printResult(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+destroy CardLiUI
 @enduml

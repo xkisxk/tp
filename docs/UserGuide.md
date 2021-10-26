@@ -109,6 +109,11 @@ or incorrect, the console will then display the next word to be tested. When all
 have been tested, the percentage of correct answers will be displayed in the console, as well as the 
 cards which received incorrect responses.
 
+If you do not know the answer to the current question being tested, and you want to skip to another
+question, you can do so by typing `/NEXT` or `/BACK` when prompted with the test question. 
+
+`/NEXT` will skip to the next question while `/BACK` will go back to the previous question tested.
+
 Format: `test`
 
 Expected outcome:
