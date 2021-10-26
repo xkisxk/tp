@@ -131,8 +131,9 @@ For every correct answer, the user's score increments and `TestUi` will print a 
 After marking all the questions, the user's results will be printed and saved in `TestHistory`.
 This concludes the entire `startTest()` process.
 
-The `startReview()` process is similar to `startTest()` except 
-
+The `startReview()` process is similar to `startTest()`, except the `getTestDeck()` function has an additional
+condition of the `FlashCard` getting less than 50% of the total number of tests. 
+ 
 ### Storage
 
 This feature allows users of CardLI to save their current decks of flashcards. This will also allow them to access their 
