@@ -3,7 +3,7 @@
 #Introduction
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
-students keep track of all their flashcards. It also does tests for students to test their knowledge. All of this in one
+students keep track of all their flashcards. It also allows students to test their knowledge. All of this in one
 single platform.
 
 ## Acknowledgements
@@ -129,7 +129,9 @@ After all cards have been tested, the marking process begins as shown by the seq
 program will print the question, followed by the actual answer, followed by the user's answer.
 For every correct answer, the user's score increments and `TestUi` will print a correct answer message.
 After marking all the questions, the user's results will be printed and saved in `TestHistory`.
-This concludes the entire `starTest()` process.
+This concludes the entire `startTest()` process.
+
+The `startReview()` process is similar to `startTest()` except 
 
 ### Storage
 
