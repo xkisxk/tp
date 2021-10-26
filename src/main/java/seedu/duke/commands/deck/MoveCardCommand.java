@@ -106,9 +106,8 @@ public class MoveCardCommand extends Command {
             }
 
             if ((Integer.parseInt(deckInput) - 1) == deckManager.getDeckIndex(deck)) {
-               throw new CardLiException(SAME_DESTINATION_ERROR_MESSAGE);
+                throw new CardLiException(SAME_DESTINATION_ERROR_MESSAGE);
             }
-
 
             String sourceDeckIndex = String.valueOf(deckManager.getDeckIndex(deck));
 

@@ -2,7 +2,13 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.deck.*;
+import seedu.duke.commands.deck.AddCardCommand;
+import seedu.duke.commands.deck.EditCardCommand;
+import seedu.duke.commands.deck.DeleteCardCommand;
+import seedu.duke.commands.deck.MoveCardCommand;
+import seedu.duke.commands.deck.ViewCardsCommand;
+import seedu.duke.commands.deck.ExitDeckCommand;
+import seedu.duke.commands.deck.HelpInDeckCommand;
 import seedu.duke.flashcard.Deck;
 import seedu.duke.flashcard.DeckManager;
 
