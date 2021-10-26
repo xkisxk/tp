@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.flashcard.Countdown;
 import seedu.duke.flashcard.FlashCard;
 import seedu.duke.testing.AnswerList;
 
@@ -14,6 +15,8 @@ public class TestUi {
     private final Scanner in;
     private final PrintStream out;
 
+    private Countdown timer;
+
     public TestUi() {
         this(System.in, System.out);
     }
@@ -21,6 +24,7 @@ public class TestUi {
     public TestUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+        this.timer = new Countdown(10);
     }
 
     public void showMessage(String input) {
@@ -40,6 +44,7 @@ public class TestUi {
         //display front of card so that user can understand question
         System.out.println(question.getFront());
         System.out.println("Your answer?");
+        timer.start();
     }
 
     public void printCorrectAnswer(FlashCard question) {

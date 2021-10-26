@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import org.fusesource.jansi.AnsiConsole;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.CardLiException;
@@ -38,6 +39,7 @@ public class Duke {
         this.testManager = new TestManager(testHistory, deckManager);
         this.innerParser = new InnerParser();
         this.outerParser = new OuterParser(deckManager, innerParser, testHistory);
+        AnsiConsole.systemInstall();
     }
 
     /**
