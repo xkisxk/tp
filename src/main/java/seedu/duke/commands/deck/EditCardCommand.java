@@ -13,12 +13,12 @@ import seedu.duke.parser.deck.EditCardParser;
 public class EditCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /c <card index> /s <side> /i <input>";
+            + "Format should be\n edit /c <card index/front phrase of card> /s <side> /i <input>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! Format should be\n"
-            + "edit /c <card index> /s <side> /i <input>";
+            + "edit /c <card index/front phrase of card> /s <side> /i <input>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for Card!";
     private static final String INVALID_SIDE_ERROR_MESSAGE = "What side is this? It's only either front or back.";
-    private static final String INVALID_CARD_ERROR_MESSAGE = "No such card of that description exist!";
+    private static final String NO_SUCH_CARD_ERROR_MESSAGE = "No such card of that description exist!";
 
     private EditCardParser parser;
     private Deck deck;
@@ -80,7 +80,7 @@ public class EditCardCommand extends Command {
                     }
                 }
                 if (!cardFound) {
-                    throw new CardLiException(INVALID_CARD_ERROR_MESSAGE);
+                    throw new CardLiException(NO_SUCH_CARD_ERROR_MESSAGE);
                 }
             }
 

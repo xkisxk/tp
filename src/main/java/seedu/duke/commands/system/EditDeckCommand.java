@@ -15,9 +15,9 @@ import seedu.duke.parser.system.EditDeckParser;
 public class EditDeckCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /deck <cat index> /input <input>";
+            + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! Format should be\n"
-            + "editdeck /deck <deck index> /input <input>";
+            + "edit /d <deck index/name of deck> /n <new name of deck>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for deck!";
     private static final String NO_SUCH_DECK_ERROR_MESSAGE = "No deck goes by that name!";
 
@@ -44,6 +44,10 @@ public class EditDeckCommand extends Command {
 
             //"", deck, name
             String[] parameters = parser.parseArguments(super.arguments);
+
+            if (parameters.length < 3) {
+                throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            }
 
             String deck = parameters[1].trim();
             String input = parameters[2].trim();

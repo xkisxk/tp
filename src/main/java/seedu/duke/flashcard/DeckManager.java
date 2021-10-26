@@ -1,5 +1,6 @@
 package seedu.duke.flashcard;
 
+import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
 
 import java.io.File;
@@ -24,6 +25,24 @@ public class DeckManager {
 
     public DeckManager(ArrayList<Deck> decks) {
         this.decks = decks;
+    }
+
+    public String moveCard(String[] parameters) throws CardLiException {
+    String enteredCurrentDeckIndex = parameters[0];
+    int currentDeckIndex = Integer.parseInt(enteredCurrentDeckIndex);
+    String enteredCardIndex = parameters[1];
+    int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
+    String enteredDeckIndex = parameters[2];
+    int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+
+    //get card from current deck
+    FlashCard cardCopy = decks.get(currentDeckIndex).getCard(cardIndex);
+    //add card to destination deck
+    decks.get(deckIndex).addFlashCard(cardCopy);
+    //delete card from current deck
+    decks.get(currentDeckIndex).deleteFlashCard(enteredCardIndex);
+
+    return ("Moved card " + enteredCardIndex + " to " + "deck " + enteredDeckIndex);
     }
 
     public String editDeck(String[] args) {
@@ -223,5 +242,4 @@ public class DeckManager {
             return;
         }
     }
-
 }

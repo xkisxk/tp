@@ -65,6 +65,9 @@ Edits the name of the deck indicated by the index.
 `/d` denotes the index of the deck to be edited and `/n` denotes the new name
 of the deck.
 
+This command is for those who want to change the name of the deck to a more
+suitable name.
+
 Format: `edit /d <index> /n <name>`
 
 Example of Usage:
@@ -196,6 +199,9 @@ Edits the front or the back of your chosen flashcard to your given input.
 `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
 `/i` denotes the content you want to change the flashcard to.
 
+This command is for those who have made a mistake in the front or back of the card
+and wish to fix it without having to resort to deleting and adding the card.
+
 Format: `edit /c <index> /s <front or back> /i <input>`
 
 Example of usage:
@@ -205,6 +211,30 @@ Example of usage:
 Expected outcome:
 
 ![](assets/ug/editcard.png)
+
+### Moving a flashcard: `move`
+Moves a flashcard from the deck you are currently in to a new deck of your choice.
+`/c` denotes the card index or the front phrase of the card and `/d` denotes the 
+deck index or the name of the deck you want to move the card to.
+
+This command is for those who have accidentally added a flashcard to a wrong deck
+and now want to transfer the card to another deck without going through the hassle
+of deleting the card and adding the card in another deck.
+
+Format: `move /c <card index/front phrase of card> /d <deck index/name of deck>`
+
+Example of usage: 
+
+`move /c ExampleCard1 /d 2`
+
+Expected outcome:
+
+* Deck 2 before moving
+![](assets/ug/move2.png)
+
+* Deck 1 before and after moving; Deck 2 after moving
+![](assets/ug/move4.png)
+
 ### Viewing flashcards: `view`
 Displays all the flashcards in the current deck.
 
