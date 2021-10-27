@@ -223,12 +223,13 @@ method calls. The respective methods will be explained in more detail in the fol
 `writeToFile(ArrayList<T> arrayList, String type)`
 
 This method invokes the save function by writing the user's data to the specified text files. It takes in two arguments,
-namely an `ArrayList` of a generic type `<T>` as well as a `String` denoting the `type` of data being saved.
+namely an `ArrayList` of a generic type `<T>` as well as a `boolean` value, `saveCards`, that indicates whether the method
+is saving cards or tests to their respective text files.
 
 ![](assets/writeToFileSequenceDiagram.png)
 
 For the saving of the user's decks of flashcards, the method call will expect an `ArrayList` of `Deck` objects along 
-with a `type` argument of "cards". 
+with a `saveCards` argument of true. 
 The `toString()` methods within the `Deck`and `Flashcard` classes have been overridden as per the specified format
 of saving the decks of flashcards to the text file. 
 For a `Flashcard` instance, the `toString()` method outputs a formatted string: `<front> | <back> | <userScore> 
@@ -240,7 +241,7 @@ in the screenshot below.
 ![](assets/Cards_CardLI.txt%20Example.png)
 
 For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects along
-with a `type` argument of "tests".
+with a `saveCards` argument of false.
 The `toString()` methods within the `AnswerList`and `Answer` classes have been overridden as per the specified format
 of saving the test history to the text file.
 For a `Answer` instance, the `toString()` method outputs a formatted string: `<answer> | <questionIndex>`. 
