@@ -166,7 +166,7 @@ public class TestManager {
     private int testCard(AnswerList userAnswer, FlashCard question) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting to test a new card");
-        int timer = 10;
+        int timer = 20;
         Countdown countdown = new Countdown(timer, TestUi.TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
