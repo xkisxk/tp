@@ -222,8 +222,10 @@ method calls. The respective methods will be explained in more detail in the fol
 
 `writeToFile(ArrayList<T> arrayList, String type)`
 
-This method invoke the save function by writing the user's data to the specified text files. It takes in two arguments,
+This method invokes the save function by writing the user's data to the specified text files. It takes in two arguments,
 namely an `ArrayList` of a generic type `<T>` as well as a `String` denoting the `type` of data being saved.
+
+![](assets/writeToFileSequenceDiagram.png)
 
 For the saving of the user's decks of flashcards, the method call will expect an `ArrayList` of `Deck` objects along 
 with a `type` argument of "cards". 
@@ -235,21 +237,7 @@ about the deck name, the number of flashcards within the deck, on top of informa
 within the deck. An example of the format of the `Cards_CardLI.txt` where the decks of flashcards are saved is shown 
 in the screenshot below.
 
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-
-<body>
-
 ![](assets/Cards_CardLI.txt%20Example.png)
-</body>
 
 For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects along
 with a `type` argument of "tests".
@@ -261,20 +249,7 @@ about the test deck and the user's test score, on top of information on each of 
 An example of the format of the `Tests_CardLI.txt` where the decks of flashcards are saved is shown
 in the screenshot below.
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-
-<body>
-
 ![](assets/Tests_CardLI.txt%20Example.png)
-</body>
-
 
 `readCardsFromFile()` and `readTestsFromFile()`
 
@@ -284,7 +259,8 @@ As per the saving format explained in the `writeToFile()` method above, the
 `readCardsFromFile()`/`readTestsFromFile()` methods essentially reverse engineer the process to save the user's 
 data into the application before any commands are given from the user. 
 
-
+![](assets/readCardsFromFileSequenceDiagram.png)
+![](assets/readTestsFromFileSequenceDiagram.png)
 
 ## Product scope
 
