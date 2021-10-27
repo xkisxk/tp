@@ -275,13 +275,55 @@ in the screenshot below.
 `readCardsFromFile()` and `readTestsFromFile()`
 
 These two methods are executed every time the CardLI application is opened.
-The methods use an instance of the `Scanner` class to parse through the text files. 
+The methods use an instance of the `Scanner` class to parse through the text files line by line. 
 As per the saving format explained in the `writeToFile()` method above, the 
 `readCardsFromFile()`/`readTestsFromFile()` methods essentially reverse engineer the process to save the user's 
-data into the application before any commands are given from the user. 
+data into the application before any commands are given from the user. The individual methods
+will be explained in more detail in the following paragraphs.
 
 ![](assets/readCardsFromFileSequenceDiagram.png)
+
+The `readCardsFromFile()` method reads from the `Cards_CardLI.txt` file.
+A generic instance of this method will be explained using the screenshot of the respective file given 
+above.
+Once the method is invoked, a new instance of an `ArrayList`  of `Deck` instances, called `decks`, 
+is created to store the `Deck` instances that are parsed from the text file.
+Line 1 is parsed as the number of `Deck` instances that are expected within the text file.
+Then, Lines 2-5 represent the first `Deck` instance while lines 6-8 represent the second `Deck` instance.
+Since the decks are saved in a pre-determined format within the text files, the `parseDeck(Scanner s)` 
+method has been abstracted to parse decks from the text file and convert them to `Deck` instances
+to be returned from the method. 
+For each of the `Deck` instances, the first line is parsed as the name of the deck.
+The second line is then parsed as the number of flashcards to expect within the deck.
+The remaining lines of each `Deck` instance is parsed as a flashcard each by splitting the parsed line based on the
+regular expression, `" | "`. 
+All the parsed data is converted to the relevant data types and passed as arguments to form a `Deck` 
+instance.
+Lastly, all the individually parsed `Deck` instances are added to the `decks` variable and returned from
+the method. 
+
 ![](assets/readTestsFromFileSequenceDiagram.png)
+
+The `readTestsFromFile()` method reads from the `Tests_CardLI.txt` file.
+A generic instance of this method will be explained using the screenshot of the respective file given
+above.
+Once the method is invoked, a new instance of an `ArrayList` of `AnswerList` instances, called 
+`testHistory`, is created to store the `AnswerList` instances that are parsed from the text file.
+Line 1 is parsed as the number of `AnswerList` instances that are expected within the text file.
+Lines 2-9 represent the 1 `AnswerList` instance that is expected within this text file.
+Since the answer lists are saved in a pre-determined format within the text files, the 
+`parseAnswerList(Scanner s)` method has been abstracted to parse answer lists from the text file and 
+convert them to `AnswerList` instances to be returned from the method. 
+For each of the `AnswerList` instances, the `parseDeck` method explained in the previous section
+is first called to parse a `Deck` instance from the text file, representing the deck of flashcards
+for which the answers correspond to. This is seen in lines 2-5 in the screenshot provided.
+The next line is parsed as the number of answers that are expected for the answer list.
+Subsequently, 1 line is read for each answer that is expected, where the parsed line is split based on the
+regular expression, `" | "`.
+The last line of each `AnswerList` instance is parsed as the score obtained by the user for the answer list.
+All the parsed data is converted to the relevant data types and passed as arguments to form a `AnswerList` instance.
+Lastly, all the individually parsed `AnswerList` instances are added to the `testHistory` variable and
+returned from the method. 
 
 ## Product scope
 
