@@ -26,6 +26,26 @@ The rest of the App consists of the following components:
 
 Each component is explained in the sections below.
 
+### Model Component
+
+![](assets/modelArchitectureDiagram.png)
+
+The `Model` component consists of two packages: 
+
+The `flashcard` package that contains:
+<li> DeckManager</li>
+<li> Deck </li>
+<li> FlashCard</li>
+<br>
+
+and the `testing` package that contains:
+<li> Answer</li>
+<li> TestManager</li>
+<li> TestHistory</li>
+<li> TestManager</li>
+<li> Countdown</li>
+
+A `Deck` contains a private arrayList of `FlashCards`, and `DeckManager` contains a private arrayList of `Decks`.
 
 ### UI Component
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
