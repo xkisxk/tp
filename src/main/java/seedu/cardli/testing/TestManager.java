@@ -186,7 +186,6 @@ public class TestManager {
         if (countdown.isRunning()) { // timer has not expired yet
             countdown.stop();
         } else {
-            System.out.println("DEBUGGING: Time's up!");
             userResponse = "";
         }
         countdown.stop();
