@@ -8,7 +8,7 @@ import seedu.duke.parser.system.AddDeckParser;
 
 public class AddDeckCommand extends Command {
 
-    private final String FIELD_EMPTY_ERROR_MESSAGE = "What is the name of the deck?";
+    public static final String FIELD_EMPTY_ERROR_MESSAGE = "What is the name of the deck?";
 
     private AddDeckParser parser;
     private DeckManager deckManager;
@@ -30,7 +30,7 @@ public class AddDeckCommand extends Command {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
             result = new CommandResult(deckManager.prepareToAddDeck(deckName));
-        } catch (FieldEmptyException e){
+        } catch (FieldEmptyException e) {
             result = new CommandResult(e.getMessage());
         }
         return result;

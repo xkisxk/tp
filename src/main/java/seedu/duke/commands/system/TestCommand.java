@@ -1,4 +1,4 @@
-package seedu.duke.commands.deck;
+package seedu.duke.commands.system;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
@@ -11,6 +11,8 @@ public class TestCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return null;
+        CommandResult result;
+        result = new CommandResult("Entering test mode...", false, false, true, false);
+        return result;
     }
 }

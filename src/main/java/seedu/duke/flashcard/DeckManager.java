@@ -1,10 +1,7 @@
 package seedu.duke.flashcard;
 
-import seedu.duke.commands.CommandResult;
+import seedu.duke.exceptions.CardLiException;
 import seedu.duke.exceptions.DeckNotExistException;
-
-import seedu.duke.exceptions.NoSlashException;
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +17,7 @@ public class DeckManager {
      */
     static final String FILEPATH = "data/CardLI.txt";
 
-    private ArrayList<Deck> decks;
+    private final ArrayList<Deck> decks;
 
     public DeckManager() {
         this.decks = new ArrayList<>();
@@ -30,25 +27,56 @@ public class DeckManager {
         this.decks = decks;
     }
 
-    public void editCard(String[] args) {
-        if (args[2].equalsIgnoreCase("front")) {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setFront(args[3]);
-        } else {
-            decks.get(Integer.parseInt(args[0]) - 1).getCard(Integer.parseInt(args[1]) - 1).setBack(args[3]);
-        }
-        System.out.println("Changed " + args[2] + " of card " + args[1] + " of deck " + args[0] + " to " + args[3]);
+    public String moveCard(String[] parameters) throws CardLiException {
+        String enteredCurrentDeckIndex = parameters[0];
+        int currentDeckIndex = Integer.parseInt(enteredCurrentDeckIndex);
+        String enteredCardIndex = parameters[1];
+        int cardIndex = Integer.parseInt(enteredCardIndex) - 1;
+        String enteredDeckIndex = parameters[2];
+        int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+
+        //get card from current deck
+        FlashCard cardCopy = decks.get(currentDeckIndex).getCard(cardIndex);
+        //add card to destination deck
+        decks.get(deckIndex).addFlashCard(cardCopy);
+        //delete card from current deck
+        decks.get(currentDeckIndex).deleteFlashCard(enteredCardIndex);
+
+        return ("Moved card " + enteredCardIndex + " to " + "deck " + enteredDeckIndex);
     }
 
+    public String editDeck(String[] args) {
+        String enteredDeckIndex = args[0];
+        int deckIndex = Integer.parseInt(enteredDeckIndex) - 1;
+        String deckName = args[1];
+        decks.get(deckIndex).setDeckName(deckName);
+        return ("Changed deck " + enteredDeckIndex + " to " + deckName);
+    }
 
-    public String editCat(String[] args) {
-        decks.get(Integer.parseInt(args[0]) - 1).setDeckName(args[1]);
-        return ("Changed deck " + args[0] + " to " + args[1]);
+    public int getDeckIndex(Deck deck) {
+        return decks.indexOf(deck);
     }
 
     public Deck getDeck(int index) {
         assert getDecksSize() > 0;
         assert (index >= 0 && index < getDecksSize());
         return decks.get(index);
+    }
+
+    public Deck getTestDeck(int index) {
+        if (index == -1) {
+            Deck deckToTest = new Deck("Test");
+            for (Deck deck : getDecks()) {
+                for (FlashCard card : deck.getCards()) {
+                    deckToTest.addFlashCard(card);
+                }
+            }
+            return deckToTest;
+        }
+        if (hasDeck(index)) {
+            return decks.get(index);
+        }
+        throw new IndexOutOfBoundsException("This deck does not exist.");
     }
 
     public int getDecksSize() {
@@ -77,14 +105,59 @@ public class DeckManager {
         return false;
     }
 
+    public boolean hasDeck(int deckIndex) {
+        return deckIndex >= 0 && deckIndex < getDecksSize();
+    }
+
     private void addDeck(String deckName) {
         decks.add(new Deck(deckName));
+    }
+
+    public String deleteDeck(Deck deck) throws DeckNotExistException {
+        String message = returnDeletedDeckMessage(deck);
+        boolean isRemoved = decks.remove(deck);
+        if (!isRemoved) {
+            throw new DeckNotExistException("This deck does not exist");
+        }
+        return message;
+    }
+
+    public String deleteDeck(int deckIndex) {
+        String message = returnDeletedDeckMessage(decks.get(deckIndex));
+        decks.remove(deckIndex);
+        return message;
+    }
+
+    /**
+     * Deletes the deck given by the deck name.
+     * The deck will only be deleted if the name matches
+     * exactly with the name of the deck. If there are
+     * multiple decks with the same name, only the first matching
+     * one will be deleted.
+     *
+     * @param deckName name of the deck to delete
+     * @return delete message
+     */
+    public String deleteDeck(String deckName) throws DeckNotExistException {
+        for (Deck deck : decks) {
+            if (deck.getName().equals(deckName)) {
+                String message = returnDeletedDeckMessage(deck);
+                decks.remove(deck);
+                return message;
+            }
+        }
+        throw new DeckNotExistException("This deck does not exist");
+    }
+
+    private String returnDeletedDeckMessage(Deck deck) {
+        String result = "\tDeleted deck:";
+        result = result.concat(deck.getName());
+        return result;
     }
 
     public ArrayList<Deck> getDecks() {
         return decks;
     }
-
 
     public String findCards(String searchInput) {
         String result = "";
@@ -97,8 +170,6 @@ public class DeckManager {
         }
         return result;
     }
-
-
 
     public String viewDecks() {
         String result = "";
@@ -115,24 +186,6 @@ public class DeckManager {
         }
         return result;
     }
-
-    public void viewOneDeck(String input) {
-        try {
-            int deckIndex = Integer.parseInt(input) - 1;
-            if (deckIndex < getDecksSize() && deckIndex >= 0) {
-                System.out.println("Viewing deck " + decks.get(deckIndex).getName() + " :");
-                Deck deckToView = decks.get(deckIndex);
-                deckToView.viewAllFlashCards();
-            } else {
-                throw new DeckNotExistException();
-            }
-        } catch (DeckNotExistException e) {
-            System.out.println("This deck doesn't exist.");
-        } catch (NumberFormatException e) {
-            System.out.println("That's not a number.");
-        }
-    }
-
 
     public void saveToFile() {
         try {
@@ -189,5 +242,4 @@ public class DeckManager {
             return;
         }
     }
-
 }

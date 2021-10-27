@@ -41,7 +41,7 @@ public class CardLiUi {
                 + "Format: add <name of deck> \n\n"
                 + "2. edit \n"
                 + "Description: Edits a flashcard deck \n"
-                + "Format: edit /deck <index of deck> /input <word/phrase> \n\n"
+                + "Format: edit /d <index of deck/current name of deck> /n <new name of deck> \n\n"
                 + "3. view \n"
                 + "Description: List flashcard decks \n"
                 + "Format: view \n\n"
@@ -75,11 +75,6 @@ public class CardLiUi {
         return help;
     }
 
-    public static void helpMessage() {
-        String help = returnHelpMessage();
-        System.out.println(help);
-    }
-
     public static String returnHelpInDeckMessage() {
         String help = "\n"
                 + "................................................................................"
@@ -94,22 +89,21 @@ public class CardLiUi {
                 + "Format: delete <word/phrase/index> \n\n"
                 + "3. edit \n"
                 + "Description: Edits a flashcard \n"
-                + "Format: edit /card <index of card> /side <front"
-                + " or back of card> /input <word/phrase> \n\n"
-                + "4. view \n"
+                + "Format: edit /c <index of card/front phrase of card> /s <front"
+                + " or back of card> /i <word/phrase> \n\n"
+                + "4. move \n"
+                + "Description: Moves a flashcard from current deck to another deck \n"
+                + "Format: move /c <card index/front phrase of card>"
+                + " /d <deck index/name of deck> \n\n"
+                + "5. view \n"
                 + "Description: List flashcards in the current deck \n"
                 + "Format: view\n\n"
-                + "5. exit \n"
+                + "6. exit \n"
                 + "Description: Returns the program to main menu. \n"
                 + "Format: exit \n\n"
                 + "................................................................................"
                 + "....................................... \n";
         return help;
-    }
-
-    public static void helpInDeckMessage() {
-        String help = returnHelpInDeckMessage();
-        System.out.println(help);
     }
 
     public void printGreetingMessage() {

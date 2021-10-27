@@ -42,6 +42,7 @@ public class EnterDeckCommand extends Command {
 
             Deck currDeck = deckManager.getDeck(deckIndex);
             this.innerParser.setCurrDeck(currDeck);
+            this.innerParser.setDeckManager(deckManager);
             result = new CommandResult("You are now in deck " + enterInput
                     + ". Type \"help\" for more commands.", false, true);
         } catch (NumberFormatException | DeckNotExistException e) {

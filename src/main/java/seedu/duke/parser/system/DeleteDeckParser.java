@@ -3,7 +3,8 @@ package seedu.duke.parser.system;
 import seedu.duke.parser.CommandArgumentParser;
 
 public class DeleteDeckParser implements CommandArgumentParser {
-    public DeleteDeckParser() {}
+    public DeleteDeckParser() {
+    }
 
     @Override
     public String[] parseArguments(String arguments) {
