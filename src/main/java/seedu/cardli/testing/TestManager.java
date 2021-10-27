@@ -193,7 +193,7 @@ public class TestManager {
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
         } catch (FieldEmptyException e) {
-            logger.log(Level.WARNING, "No user input");
+            logger.log(Level.INFO, "No user input");
             userResponse = "NO ANSWER GIVEN :(";
             ui.printAnswerEmptyError();
         }
