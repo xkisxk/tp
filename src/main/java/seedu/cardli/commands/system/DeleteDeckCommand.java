@@ -35,6 +35,8 @@ public class DeleteDeckCommand extends Command {
             result = new CommandResult(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             result = new CommandResult("This deck does not exist.");
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Input a number or deck name.");
         }
         return result;
     }
