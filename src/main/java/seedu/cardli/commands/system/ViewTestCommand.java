@@ -22,6 +22,8 @@ public class ViewTestCommand extends Command {
             result = new CommandResult(testHistory.prepareViewTest(index));
         } catch (NumberFormatException e) {
             result = new CommandResult("Input a number.");
+        } catch (IndexOutOfBoundsException e) {
+            result = new CommandResult("There is no test at that index.");
         }
         return result;
     }

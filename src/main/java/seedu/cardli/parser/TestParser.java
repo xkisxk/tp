@@ -8,7 +8,7 @@ public class TestParser {
         if (userResponse.isEmpty()) {
             throw new FieldEmptyException();
         }
-        return userResponse;
+        return userResponse.trim();
     }
 
     public static int toInt(String input) throws NumberFormatException {

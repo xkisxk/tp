@@ -34,7 +34,7 @@ public class TestManager {
      * that index will be tested.
      */
     public void startTest() {
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
         String input = ui.getUserMessage();
