@@ -35,21 +35,19 @@ public class EnterDeckCommand extends Command {
                 throw new CardLiException("Invalid input. Please input deck index after \"enter\".");
             }
 
+            if (enterInput.contains("-")) {
+                throw new DeckNotExistException("Invalid deck index. Please input a positive integer.");
+            }
+
             if (!Parser.isInteger(enterInput)) {
                 throw new NumberFormatException("That is not a number.");
             }
 
             int deckIndex = Integer.parseInt(enterInput) - 1;
 
-            if (deckIndex < 0) {
-                throw new DeckNotExistException("Invalid deck index. Please input a positive integer.");
-            }
-
             if (deckIndex >= deckManager.getDecks().size()) {
                 throw new DeckNotExistException("That deck doesn't exist. Please input a valid deck index.");
             }
-
-
 
             Deck currDeck = deckManager.getDeck(deckIndex);
             this.innerParser.setCurrDeck(currDeck);
