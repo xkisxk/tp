@@ -50,7 +50,7 @@ public class TestManager {
             testHistory.addAnswerList(userAnswers);
             ui.printEndTest();
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
@@ -67,7 +67,7 @@ public class TestManager {
      * the deck at that index will be tested.
      */
     public void startReview() {
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
         String input = ui.getUserMessage();
@@ -77,7 +77,7 @@ public class TestManager {
             Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
