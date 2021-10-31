@@ -166,7 +166,7 @@ public class TestManager {
     private int testCard(AnswerList userAnswer, FlashCard question) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting to test a new card");
-        int timer = 10;
+        int timer = 20;
         Countdown countdown = new Countdown(timer, TestUi.TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
@@ -186,7 +186,6 @@ public class TestManager {
         if (countdown.isRunning()) { // timer has not expired yet
             countdown.stop();
         } else {
-            System.out.println("DEBUGGING: Time's up!");
             userResponse = "";
         }
         countdown.stop();
@@ -194,7 +193,7 @@ public class TestManager {
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
         } catch (FieldEmptyException e) {
-            logger.log(Level.WARNING, "No user input");
+            logger.log(Level.INFO, "No user input");
             userResponse = "NO ANSWER GIVEN :(";
             ui.printAnswerEmptyError();
         }
