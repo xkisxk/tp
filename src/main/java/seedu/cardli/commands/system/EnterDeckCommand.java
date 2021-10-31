@@ -30,9 +30,9 @@ public class EnterDeckCommand extends Command {
         try {
             String[] parameters = parser.parseArguments(super.arguments);
             String enterInput = parameters[0];
-            
+
             if (enterInput.isEmpty()) {
-                throw new CardLiException("Please enter the deck index.");
+                throw new CardLiException("Invalid input. Please input deck index after \"enter\".");
             }
 
             if (!Parser.isInteger(enterInput)) {
@@ -40,9 +40,16 @@ public class EnterDeckCommand extends Command {
             }
 
             int deckIndex = Integer.parseInt(enterInput) - 1;
-            if (!(deckIndex >= 0 && deckIndex < deckManager.getDecks().size())) {
-                throw new DeckNotExistException("That deck doesn't exist.");
+
+            if (deckIndex < 0) {
+                throw new DeckNotExistException("Invalid deck index. Please input a positive integer.");
             }
+
+            if (deckIndex >= deckManager.getDecks().size()) {
+                throw new DeckNotExistException("That deck doesn't exist. Please input a valid deck index.");
+            }
+
+
 
             Deck currDeck = deckManager.getDeck(deckIndex);
             this.innerParser.setCurrDeck(currDeck);
