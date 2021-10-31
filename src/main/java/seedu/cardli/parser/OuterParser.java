@@ -58,7 +58,8 @@ public class OuterParser {
             logger.log(Level.INFO, "view (all decks) command parsed and executed");
             break;
         case "viewfc": //TODO: renaming or reorganizing where this command belongs
-            command = new ViewFlashCardStatsCommand(this.testHistory);
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ViewFlashCardStatsCommand(arguments, this.testHistory);
             break;
         case "viewtest": //TODO: renaming or reorganizing where this command belongs
             arguments = Parser.getCommandArguments(commandType, input);
