@@ -1,5 +1,6 @@
 package seedu.cardli.testing;
 
+import org.json.simple.JSONObject;
 import seedu.cardli.flashcard.FlashCard;
 
 /**
@@ -59,5 +60,14 @@ public class Answer {
     public String toString() {
         return getAnswer() + SEPARATOR
                 + getQuestionIndex() + '\n';
+    }
+
+    public JSONObject toJSONObject(){
+        JSONObject jsonAnswer = new JSONObject();
+
+        jsonAnswer.put("answer", getAnswer());
+        jsonAnswer.put("questionIndex", getQuestionIndex());
+
+        return jsonAnswer;
     }
 }

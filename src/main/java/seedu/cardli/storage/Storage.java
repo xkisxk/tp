@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+
 public class Storage {
 
     /**
@@ -40,27 +44,41 @@ public class Storage {
         }
     }
 
-    public <T> void writeToFile(ArrayList<T> arrayList, boolean saveCards) {
+    public void writeCardsToFile(ArrayList<Deck> decks) {
         try {
             // instantiate FileWriter object to overwrite specified text file
-            FileWriter fileWriter;
+            FileWriter fileWriter = new FileWriter(CARDS_FILEPATH, false);
 
-            if (saveCards) {
-                fileWriter = new FileWriter(CARDS_FILEPATH, false);
-            } else {
-                fileWriter = new FileWriter(TESTS_FILEPATH, false);
-            }
-
-            int count = arrayList.size();
-            fileWriter.write(Integer.toString(count) + '\n');
+            JSONArray jsonDecks = new JSONArray();
+            int count = decks.size();
 
             for (int i = 0; i < count; i++) {
-                fileWriter.write(arrayList.get(i).toString());
+                jsonDecks.add(decks.get(i).toJSONObject());
             }
+
+            fileWriter.write(jsonDecks.toJSONString());
 
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong while saving the flashcards to file...");
+        }
+    }
+
+    public void writeTestsToFile(ArrayList<AnswerList> testHistory) {
+        try {
+            // instantiate FileWriter object to overwrite specified text file
+            FileWriter fileWriter = new FileWriter(TESTS_FILEPATH, false);
+
+            JSONArray jsonTestHistory = new JSONArray();
+            int count = testHistory.size();
+
+            for (int i = 0; i < count; i++) {
+                jsonTestHistory.add(testHistory.get(i).toJSONObject());
+            }
+            fileWriter.write(jsonTestHistory.toJSONString());
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong while saving the tests to file...");
         }
     }
 

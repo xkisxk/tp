@@ -1,5 +1,7 @@
 package seedu.cardli.flashcard;
 
+import org.json.simple.JSONObject;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -137,5 +139,16 @@ public class FlashCard {
                 + getBack() + SEPARATOR
                 + getUserScore() + SEPARATOR
                 + getTotalScore() + '\n';
+    }
+
+    public JSONObject toJSONObject(){
+        JSONObject jsonCard = new JSONObject();
+
+        jsonCard.put("front", getFront());
+        jsonCard.put("back", getBack());
+        jsonCard.put("userScore", getUserScore());
+        jsonCard.put("totalScore", getTotalScore());
+
+        return jsonCard;
     }
 }

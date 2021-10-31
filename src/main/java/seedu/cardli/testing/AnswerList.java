@@ -1,5 +1,7 @@
 package seedu.cardli.testing;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import seedu.cardli.flashcard.Deck;
 
 import java.util.ArrayList;
@@ -125,5 +127,20 @@ public class AnswerList {
                 + answersString
                 + getUserScore();
 
+    }
+
+    public JSONObject toJSONObject(){
+        JSONObject jsonAnswerList = new JSONObject();
+
+        int answerCount = getSize();
+        JSONArray jsonAnswers = new JSONArray();
+
+        for (int i = 0; i < answerCount; i++) {
+            jsonAnswers.add(answerList.get(i).toJSONObject());
+        }
+        jsonAnswerList.put("answerList", jsonAnswers);
+        jsonAnswerList.put("deck", getDeck().toJSONObject());
+        jsonAnswerList.put("userScore", getUserScore());
+        return jsonAnswerList;
     }
 }
