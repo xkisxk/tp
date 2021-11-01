@@ -9,15 +9,15 @@ import java.util.logging.Logger;
  */
 public class FlashCard {
 
-    private final String FLASHCARD_TOP_FRONT = "*================FRONT================*";
-    private final String FLASHCARD_TOP_BACK = "*===============BACK==================*";
-    private final String FLASHCARD_BOTTOM = "*=====================================*";
-    private final String FLASHCARD_WHITESPACE = " ";
-    private final String FLASHCARD_TOP_LINE = FLASHCARD_TOP_FRONT +
-            FLASHCARD_WHITESPACE + FLASHCARD_TOP_BACK;
-    private final String FLASHCARD_BOTTOM_LINE = FLASHCARD_BOTTOM
+    private static final String FLASHCARD_TOP_FRONT = "*================FRONT================*";
+    private static final String FLASHCARD_TOP_BACK = "*===============BACK==================*";
+    private static final String FLASHCARD_BOTTOM = "*=====================================*";
+    private static final String FLASHCARD_WHITESPACE = " ";
+    private static final String FLASHCARD_TOP_LINE = FLASHCARD_TOP_FRONT
+            + FLASHCARD_WHITESPACE + FLASHCARD_TOP_BACK;
+    private static final String FLASHCARD_BOTTOM_LINE = FLASHCARD_BOTTOM
             + FLASHCARD_WHITESPACE + FLASHCARD_BOTTOM;
-    private final int FLASHCARD_MAX_LINE_LENGTH = 37;
+    private static final int FLASHCARD_MAX_LINE_LENGTH = 37;
     static final String SEPARATOR = " | ";
 
     private static final Logger logger = Logger.getLogger("Card");
@@ -165,7 +165,7 @@ public class FlashCard {
             }
         }
         String result = "";
-        for (int i = 0; i < numOfLines; i++){
+        for (int i = 0; i < numOfLines; i++) {
             String line = FLASHCARD_WHITESPACE + newFrontLines[i] + FLASHCARD_WHITESPACE
                     + FLASHCARD_WHITESPACE
                     + FLASHCARD_WHITESPACE + newBackLines[i];
