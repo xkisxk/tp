@@ -78,7 +78,7 @@ public class TestHistory {
         int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
         String result = "You scored " + score + " out of " + totalScore + " for test " + (index + 1)
-                + "\nThat is " + (double) score / totalScore * 100 + "%!";
+                + "\nThat is " + Math.round(((double)score / totalScore) * 10000)/100 + "%!";
         return result;
     }
 
