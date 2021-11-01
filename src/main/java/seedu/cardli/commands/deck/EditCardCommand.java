@@ -50,7 +50,7 @@ public class EditCardCommand extends Command {
             logger.log(Level.INFO, "checking if integer cardIndex is out of bounds");
             //card is an index
             cardIndex = Integer.parseInt(card) - 1;
-            if (!(cardIndex >= 0 && cardIndex <= deck.getCards().size())) {
+            if (!(cardIndex >= 0 && cardIndex < deck.getCards().size())) {
                 throw new CardLiException(INVALID_INDEX_ERROR_MESSAGE);
             }
         } else {

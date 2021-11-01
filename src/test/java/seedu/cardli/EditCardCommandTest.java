@@ -112,7 +112,7 @@ public class EditCardCommandTest {
     public void execute_invalidIntegerIndex_expectInvalidIndexErrorMessage() {
         Deck deck = new Deck();
         deck.addFlashCard("card", "card");
-        String input = "edit /c 10 /s front /i name";
+        String input = "edit /c 2 /s front /i name";
         String commandType = Parser.getCommandType(input);
         String arguments = Parser.getCommandArguments(commandType, input);
         Command test = new EditCardCommand(arguments, deck);

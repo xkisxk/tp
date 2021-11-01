@@ -99,7 +99,7 @@ public class EditDeckCommandTest {
     public void execute_invalidIntegerIndex_expectInvalidIndexErrorMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
-        String input = "edit /d 10 /n name";
+        String input = "edit /d 2 /n name";
         String commandType = Parser.getCommandType(input);
         String arguments = Parser.getCommandArguments(commandType, input);
         Command test = new EditDeckCommand(arguments, deckManager);
