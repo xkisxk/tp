@@ -54,8 +54,10 @@ public class EnterDeckCommand extends Command {
             this.innerParser.setDeckManager(deckManager);
             result = new CommandResult("You are now in deck " + enterInput
                     + ". Type \"help\" for more commands.", false, true);
-        } catch (NumberFormatException | CardLiException e) {
+        } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
 
         return result;

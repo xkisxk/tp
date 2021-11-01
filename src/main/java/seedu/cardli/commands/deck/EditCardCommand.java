@@ -36,7 +36,7 @@ public class EditCardCommand extends Command {
         this.parser = new EditCardParser();
     }
 
-    public static String prepareCardIndex(String card, Deck deck) throws CardLiException {
+    public static String prepareCardIndex(String card, Deck deck) throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing Card Index");
         int cardIndex = 0;
@@ -54,7 +54,7 @@ public class EditCardCommand extends Command {
         return card;
     }
 
-    public String[] prepareEditCardCommand() throws CardLiException {
+    public String[] prepareEditCardCommand() throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditCardCommand");
         logger.log(Level.INFO, "Checking if input contains /c, /s and /i");
@@ -103,6 +103,8 @@ public class EditCardCommand extends Command {
             result = new CommandResult(deck.editCard(parameters));
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Card index must be smaller than 2147483647.");
         }
         return result;
     }

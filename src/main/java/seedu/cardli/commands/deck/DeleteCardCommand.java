@@ -41,7 +41,7 @@ public class DeleteCardCommand extends Command {
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Please enter an integer smaller than 2147483647.");
+            result = new CommandResult("Card index must be smaller than 2147483647.");
         }
         return result;
     }

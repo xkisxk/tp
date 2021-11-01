@@ -38,7 +38,7 @@ public class DeleteDeckCommand extends Command {
         } catch (DeckNotExistException e) {
             result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Please input a positive integer smaller than 2147483647.");
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
         return result;
     }

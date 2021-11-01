@@ -86,6 +86,8 @@ public class MoveCardCommand extends Command {
             result = new CommandResult(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
             result = new CommandResult("You are moving the card to a deck that does not exist.");
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Card index and Deck index must be smaller than 2147483647.");
         }
         return result;
     }
