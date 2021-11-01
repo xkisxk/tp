@@ -96,7 +96,7 @@ public class TestUi {
     }
 
     public void printScoreWithCard(FlashCard card) {
-        card.viewFlashCard();
+        card.printFlashCard();
         System.out.println("Score: " + card.getUserScore() + " out of " + card.getTotalScore());
     }
 
