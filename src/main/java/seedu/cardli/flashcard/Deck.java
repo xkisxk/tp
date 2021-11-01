@@ -72,28 +72,6 @@ public class Deck {
         return cards.size();
     }
 
-    public void printNoSlashFoundError() {
-        System.out.println("\tRemember that a command must contain \"/bac\"!");
-    }
-
-    public void printFieldEmptyError() {
-        System.out.println("\tRemember that both sides of the flashcard must be filled in!");
-    }
-
-    private void printInvalidAddFormat() {
-        System.out.println("\tHey, the command you printed is invalid.");
-        System.out.println("\tThe correct command format to add a flash card is as follows:");
-        System.out.println("\tadd <deck index> /fro <word on front> /bac <word on back>");
-    }
-
-    private void printDoesNotExistError() {
-        System.out.println(CARD_DOES_NOT_EXIST_ERROR_MESSAGE);
-    }
-
-    private void printEmptyDescriptionError() {
-        System.out.println(EMPTY_DESCRIPTION_ERROR_MESSAGE);
-    }
-
     private String returnNewFlashCard(String front, String back) {
         String result = "\tAdded card:" + System.lineSeparator()
                 + returnCardInfo(front, back);
@@ -164,8 +142,8 @@ public class Deck {
         }
         assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");
-        if (!Parser.isInteger(input)) {
-            return deleteFlashCardByDescription(input);
+        if (Parser.isInteger(input)) {
+            return deleteFlashCardByIndex(input);
         } else {
             return deleteFlashCardByIndex(input);
         }
@@ -178,11 +156,11 @@ public class Deck {
      * @throws CardLiException if the index of the card exceeds the number of flashcards in cards
      *                         or index of card is less than 1
      */
-    private String deleteFlashCardByIndex(String index) throws CardLiException {
+    public String deleteFlashCardByIndex(String index) throws CardLiException {
         logger.setLevel(Level.WARNING);
         int indexToBeRemoved = Integer.parseInt(index) - 1;
         if (!((indexToBeRemoved < getDeckSize()) && (indexToBeRemoved >= 0))) {
-            throw new CardLiException();
+            throw new CardLiException("Please enter a valid deck index.");
         }
         assert getDeckSize() > 0 : "cards.size() should be greater than 0";
         logger.log(Level.INFO, "Detecting the type of input, ie word/phrase or index");

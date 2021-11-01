@@ -2,8 +2,10 @@ package seedu.cardli.commands.deck;
 
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
+import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.FieldEmptyException;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.parser.Parser;
 import seedu.cardli.parser.deck.DeleteCardParser;
 
 public class DeleteCardCommand extends Command {
@@ -30,9 +32,16 @@ public class DeleteCardCommand extends Command {
             if (enterInput.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
-            result = new CommandResult(deck.prepareToDeleteFlashCard(enterInput));
-        } catch (FieldEmptyException e) {
+
+            if (Parser.isInteger(enterInput)) {
+                result = new CommandResult(deck.deleteFlashCardByIndex(enterInput));
+            } else {
+                throw new CardLiException("Please enter an integer.");
+            }
+        } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Please enter an integer smaller than 2147483647.");
         }
         return result;
     }
