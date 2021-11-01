@@ -1,6 +1,10 @@
 package seedu.cardli.storage;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.flashcard.FlashCard;
 import seedu.cardli.testing.AnswerList;
 
 import java.io.File;
@@ -11,17 +15,15 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
 
 public class Storage {
 
     /**
      * Specified file path to save task list.
      */
-    private static final String CARDS_FILEPATH = "data/Cards_CardLI.txt";
-    private static final String TESTS_FILEPATH = "data/Tests_CardLi.txt";
+    private static final String CARDS_FILEPATH = "data/Cards_CardLI.json";
+    private static final String TESTS_FILEPATH = "data/Tests_CardLi.json";
     File cardsFile;
     File testsFile;
 
@@ -50,17 +52,16 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(CARDS_FILEPATH, false);
 
             JSONArray jsonDecks = new JSONArray();
-            int count = decks.size();
 
-            for (int i = 0; i < count; i++) {
-                jsonDecks.add(decks.get(i).toJSONObject());
+            for (Deck deck: decks) {
+                jsonDecks.add(deck.toJSONObject());
             }
 
             fileWriter.write(jsonDecks.toJSONString());
 
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving the flashcards to file...");
+            System.out.println("Something went wrong while saving to file...");
         }
     }
 
@@ -70,15 +71,14 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(TESTS_FILEPATH, false);
 
             JSONArray jsonTestHistory = new JSONArray();
-            int count = testHistory.size();
 
-            for (int i = 0; i < count; i++) {
-                jsonTestHistory.add(testHistory.get(i).toJSONObject());
+            for (AnswerList answerList: testHistory) {
+                jsonTestHistory.add(answerList.toJSONObject());
             }
             fileWriter.write(jsonTestHistory.toJSONString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving the tests to file...");
+            System.out.println("Something went wrong while saving to file...");
         }
     }
 
@@ -88,19 +88,16 @@ public class Storage {
         try {
             // instantiate scanner to read file contents
             Scanner s = new Scanner(this.cardsFile);
+            JSONParser parser = new JSONParser();
+            JSONArray jsonDecks = (JSONArray) parser.parse(s.nextLine());
 
-            int decksCount = Integer.parseInt(s.nextLine());
-
-            for (int i = 0; i < decksCount; i++) {
-                decks.add(parseDeck(s));
+            for (Object o: jsonDecks) {
+                decks.add(parseDeck((JSONObject) o));
             }
-        } catch (FileNotFoundException e) {
-            //TODO: how to skip this exception?
-        } catch (NoSuchElementException e) {
-            //TODO: handle empty save file
-        } finally {
-            return decks;
+        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
+            System.out.println(e.getMessage());
         }
+        return decks;
     }
 
     public ArrayList<AnswerList> readTestsFromFile() {
@@ -109,48 +106,44 @@ public class Storage {
         try {
             // instantiate scanner to read file contents
             Scanner s = new Scanner(this.testsFile);
+            JSONParser parser = new JSONParser();
+            JSONArray jsonTestHistory = (JSONArray) parser.parse(s.nextLine());
 
-            int answerListsCount = Integer.parseInt(s.nextLine());
-
-            for (int i = 0; i < answerListsCount; i++) {
-                testHistory.add(parseAnswerList(s));
+            for (Object o: jsonTestHistory) {
+                testHistory.add(parseAnswerList((JSONObject) o));
             }
-        } catch (FileNotFoundException e) {
-            //TODO: how to skip this exception?
-        } catch (NoSuchElementException e) {
-            //TODO: handle empty save file
-        } finally {
-            return testHistory;
+        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
+            System.out.println(e.getMessage());
         }
+        return testHistory;
     }
 
-    private AnswerList parseAnswerList(Scanner s) {
-        AnswerList newAnswerList = new AnswerList(parseDeck(s));
+    private AnswerList parseAnswerList(JSONObject jsonAnswerList) {
+        JSONObject jsonDeck = (JSONObject) jsonAnswerList.get("deck");
+        AnswerList newAnswerList = new AnswerList(parseDeck(jsonDeck));
 
-        int answersCount = Integer.parseInt(s.nextLine());
+        JSONArray jsonAnswers = (JSONArray) jsonAnswerList.get("answerList");
 
-        for (int j = 0; j < answersCount; j++) {
-            String newLine = s.nextLine();
-            String[] newLineArgs = newLine.split(" \\| ");
-            newAnswerList.addAnswer(newLineArgs[0],
-                    Integer.parseInt(newLineArgs[1]));
+        for (Object o: jsonAnswers) {
+            JSONObject jsonAnswer = (JSONObject) o;
+            newAnswerList.addAnswer((String) jsonAnswer.get("answer"),
+                    (int) (long) jsonAnswer.get("questionIndex"));
         }
-        newAnswerList.setUserScore(Integer.parseInt(s.nextLine()));
+        newAnswerList.setUserScore((int) (long) jsonAnswerList.get("userScore"));
         return newAnswerList;
     }
 
-    private Deck parseDeck(Scanner s) {
-        String deckName = s.nextLine();
-        Deck newDeck = new Deck(deckName);
+    private Deck parseDeck(JSONObject jsonDeck) {
+        Deck newDeck = new Deck((String) jsonDeck.get("deckName"));
+        JSONArray jsonCards = (JSONArray) jsonDeck.get("cards");
 
-        int cardsCount = Integer.parseInt(s.nextLine());
-
-        for (int j = 0; j < cardsCount; j++) {
-            String newLine = s.nextLine();
-            String[] newLineArgs = newLine.split(" \\| ");
-            newDeck.addFlashCard(newLineArgs[0], newLineArgs[1],
-                    Integer.parseInt(newLineArgs[2]),
-                    Integer.parseInt(newLineArgs[3]));
+        for (Object o: jsonCards) {
+            JSONObject jsonCard = (JSONObject) o;
+            FlashCard newFlashCard = new FlashCard((String) jsonCard.get("front"),
+                    (String) jsonCard.get("back"),
+                    (int) (long) jsonCard.get("userScore"),
+                    (int) (long) jsonCard.get("totalScore"));
+            newDeck.addFlashCard(newFlashCard);
         }
         return newDeck;
     }
