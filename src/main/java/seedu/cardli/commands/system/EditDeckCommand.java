@@ -83,6 +83,10 @@ public class EditDeckCommand extends Command {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditDeckCommand");
 
+        if (arguments.isEmpty()) {
+            throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+        }
+
         logger.log(Level.INFO, "Checking if no flags have been used as arguments");
         if ((countMatches(arguments, "/d") != 1) || (countMatches(arguments, "/n") != 1)) {
             throw new CardLiException(INVALID_ARGUMENTS_MESSAGE);
@@ -104,9 +108,7 @@ public class EditDeckCommand extends Command {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
         logger.log(Level.INFO, "Checking if /d and /n are in the right order");
-        if (!(parameters[0].trim().equalsIgnoreCase("/d") && parameters[2].trim().equalsIgnoreCase("/n"))) {
-            System.out.println(parameters[0]);
-            System.out.println(parameters[2]);
+        if (!(parameters[0].trim().equals("/d") && parameters[2].trim().equals("/n"))) {
             throw new InvalidCommandFormatException(INVALID_ARGUMENTS_MESSAGE);
         }
 

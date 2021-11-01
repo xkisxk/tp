@@ -9,7 +9,7 @@ public class EditCardParser implements CommandArgumentParser {
 
     @Override
     public String[] parseArguments(String arguments) { //edit /c <index> /s <side> /i <input>
-        String[] parameters = arguments.trim().split("/c|/s|/i", 4);
+        String[] parameters = arguments.trim().split(" ", 6);
         return parameters;
     }
 }

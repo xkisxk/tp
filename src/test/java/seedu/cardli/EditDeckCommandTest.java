@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EditDeckCommandTest {
 
     @Test
-    public void execute_emptyArgument_expectInvalidArgumentsMessage() {
+    public void execute_emptyString_expectFieldEmptyErrorMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
         String input = "edit";
@@ -21,15 +21,15 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("You cannot leave any field empty! "
+                + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
     public void execute_duplicateCorrectFlags_expectInvalidArgumentsMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
-        String input = "edit";
+        String input = "edit /d /d /n /n";
         String commandType = Parser.getCommandType(input);
         String arguments = Parser.getCommandArguments(commandType, input);
         Command test = new EditDeckCommand(arguments, deckManager);
@@ -54,7 +54,7 @@ public class EditDeckCommandTest {
     }
 
     @Test
-    public void execute_wrongFlagOrder_expectWrongOrderErrorMessage() {
+    public void execute_swappedFlagOrder_expectWrongOrderErrorMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
         String input = "edit /n 1 /d name";
