@@ -82,7 +82,7 @@ public class AnswerList {
     }
 
     public Boolean isAllAnswered() {
-        for (Answer a: answerList) {
+        for (Answer a : answerList) {
             if (!a.isAnswered()) {
                 return false;
             }
@@ -129,17 +129,17 @@ public class AnswerList {
 
     }
 
-    public JSONObject toJSONObject(){
+    public JSONObject toJsonObject() {
         JSONObject jsonAnswerList = new JSONObject();
 
         int answerCount = getSize();
         JSONArray jsonAnswers = new JSONArray();
 
         for (int i = 0; i < answerCount; i++) {
-            jsonAnswers.add(answerList.get(i).toJSONObject());
+            jsonAnswers.add(answerList.get(i).toJsonObject());
         }
         jsonAnswerList.put("answerList", jsonAnswers);
-        jsonAnswerList.put("deck", getDeck().toJSONObject());
+        jsonAnswerList.put("deck", getDeck().toJsonObject());
         jsonAnswerList.put("userScore", getUserScore());
         return jsonAnswerList;
     }

@@ -54,7 +54,7 @@ public class Storage {
             JSONArray jsonDecks = new JSONArray();
 
             for (Deck deck: decks) {
-                jsonDecks.add(deck.toJSONObject());
+                jsonDecks.add(deck.toJsonObject());
             }
 
             fileWriter.write(jsonDecks.toJSONString());
@@ -73,7 +73,7 @@ public class Storage {
             JSONArray jsonTestHistory = new JSONArray();
 
             for (AnswerList answerList: testHistory) {
-                jsonTestHistory.add(answerList.toJSONObject());
+                jsonTestHistory.add(answerList.toJsonObject());
             }
             fileWriter.write(jsonTestHistory.toJSONString());
             fileWriter.close();

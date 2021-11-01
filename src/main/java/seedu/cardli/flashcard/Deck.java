@@ -301,14 +301,14 @@ public class Deck {
                 + cardsString;
     }
 
-    public JSONObject toJSONObject(){
+    public JSONObject toJsonObject() {
         JSONObject jsonDeck = new JSONObject();
 
         int cardsCount = getDeckSize();
         JSONArray jsonCards = new JSONArray();
 
         for (int i = 0; i < cardsCount; i++) {
-            jsonCards.add(cards.get(i).toJSONObject());
+            jsonCards.add(cards.get(i).toJsonObject());
         }
         jsonDeck.put("deckName", getName());
         jsonDeck.put("cards", jsonCards);

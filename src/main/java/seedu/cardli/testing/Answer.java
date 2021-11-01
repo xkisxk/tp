@@ -62,7 +62,7 @@ public class Answer {
                 + getQuestionIndex() + '\n';
     }
 
-    public JSONObject toJSONObject(){
+    public JSONObject toJsonObject() {
         JSONObject jsonAnswer = new JSONObject();
 
         jsonAnswer.put("answer", getAnswer());

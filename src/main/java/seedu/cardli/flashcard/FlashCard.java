@@ -141,7 +141,7 @@ public class FlashCard {
                 + getTotalScore() + '\n';
     }
 
-    public JSONObject toJSONObject(){
+    public JSONObject toJsonObject() {
         JSONObject jsonCard = new JSONObject();
 
         jsonCard.put("front", getFront());

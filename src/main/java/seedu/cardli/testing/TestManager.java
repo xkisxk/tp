@@ -234,7 +234,7 @@ public class TestManager {
         int score = userAnswers.getUserScore();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + Math.round(((double)score / answersCount) * 10000)/100  + "%!");
+        System.out.println("That is " + Math.round(((double) score / answersCount) * 10000) / 100  + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 
