@@ -11,7 +11,7 @@ import seedu.cardli.parser.deck.DeleteCardParser;
 public class DeleteCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n delete <word/phrase/index>";
+            + "Format should be\n delete <index>";
 
     private DeleteCardParser parser;
     private Deck deck;

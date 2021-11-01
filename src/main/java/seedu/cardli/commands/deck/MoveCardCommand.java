@@ -84,6 +84,8 @@ public class MoveCardCommand extends Command {
             result = new CommandResult(deckManager.moveCard(parameters));
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            result = new CommandResult("You are moving the card to a deck that does not exist.");
         }
         return result;
     }

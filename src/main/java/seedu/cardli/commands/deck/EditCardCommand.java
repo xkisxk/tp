@@ -19,9 +19,9 @@ import seedu.cardli.testing.TestManager;
 public class EditCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /c <card index/front phrase of card> /s <side> /i <input>";
+            + "Format should be\n edit /c <card index> /s <side> /i <input>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! Format should be\n"
-            + "edit /c <card index/front phrase of card> /s <side> /i <input>";
+            + "edit /c <card index> /s <side> /i <input>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for Card!";
     private static final String INVALID_SIDE_ERROR_MESSAGE = "What side is this? It's only either front or back.";
     private static final String NO_SUCH_CARD_ERROR_MESSAGE = "No such card of that description exist!";
@@ -44,24 +44,11 @@ public class EditCardCommand extends Command {
             logger.log(Level.INFO, "checking if integer cardIndex is out of bounds");
             //card is an index
             cardIndex = Integer.parseInt(card) - 1;
-            if (!(cardIndex >= 0 && cardIndex <= deck.getCards().size())) {
+            if (!(cardIndex >= 0 && cardIndex < deck.getCards().size())) {
                 throw new CardLiException(INVALID_INDEX_ERROR_MESSAGE);
             }
         } else {
-            logger.log(Level.INFO, "Checking if String cardIndex exists in deck");
-            //card is a string input corresponding to front of the flashcard
-            boolean cardFound = false;
-            for (FlashCard c: deck.getCards()) {
-                if (c.getFront().equalsIgnoreCase(card)) {
-                    //card now is a string type containing index of card to be edited
-                    //assume no duplicate cards
-                    card = String.valueOf(deck.getCardIndex(c) + 1);
-                    cardFound = true;
-                }
-            }
-            if (!cardFound) {
-                throw new CardLiException(NO_SUCH_CARD_ERROR_MESSAGE);
-            }
+            throw new CardLiException(WRONG_ORDER_ERROR_MESSAGE);
         }
 
         return card;
