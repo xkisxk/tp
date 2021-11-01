@@ -9,6 +9,15 @@ import java.util.logging.Logger;
  */
 public class FlashCard {
 
+    private final String FLASHCARD_TOP_FRONT = "*================FRONT================*";
+    private final String FLASHCARD_TOP_BACK = "*===============BACK==================*";
+    private final String FLASHCARD_BOTTOM = "*=====================================*";
+    private final String FLASHCARD_WHITESPACE = " ";
+    private final String FLASHCARD_TOP_LINE = FLASHCARD_TOP_FRONT +
+            FLASHCARD_WHITESPACE + FLASHCARD_TOP_BACK;
+    private final String FLASHCARD_BOTTOM_LINE = FLASHCARD_BOTTOM
+            + FLASHCARD_WHITESPACE + FLASHCARD_BOTTOM;
+    private final int FLASHCARD_MAX_LINE_LENGTH = 37;
     static final String SEPARATOR = " | ";
 
     private static final Logger logger = Logger.getLogger("Card");
@@ -41,59 +50,8 @@ public class FlashCard {
         logger.log(Level.INFO, "Card back: " + back);
     }
 
-    /**
-     * Getter for String on front of flashcard.
-     *
-     * @return String on front of flashcard
-     */
-    public String getFront() {
-        logger.setLevel(Level.WARNING);
-        assert this.front != null;
-        logger.log(Level.INFO, "Getting card front: " + front);
-        return this.front;
-    }
 
-    /**
-     * Getter for String on back of flashcard.
-     *
-     * @return String on back of flashcard
-     */
-    public String getBack() {
-        logger.setLevel(Level.WARNING);
-        assert this.back != null;
-        logger.log(Level.INFO, "Getting card back: " + back);
-        return this.back;
-    }
 
-    public int getUserScore() {
-        return this.userScore;
-    }
-
-    public int getTotalScore() {
-        return this.totalScore;
-    }
-
-    public void incrementUserScore() {
-        logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "Incrementing flashcard user score");
-        userScore++;
-    }
-
-    public void incrementTotalScore() {
-        logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "Incrementing flashcard total score");
-        totalScore++;
-    }
-
-    private final String FLASHCARD_TOP_FRONT = "*================FRONT================*";
-    private final String FLASHCARD_TOP_BACK = "*===============BACK==================*";
-    private final String FLASHCARD_BOTTOM = "*=====================================*";
-    private final String FLASHCARD_WHITESPACE = " ";
-    private final String FLASHCARD_TOP_LINE = FLASHCARD_TOP_FRONT +
-            FLASHCARD_WHITESPACE + FLASHCARD_TOP_BACK;
-    private final String FLASHCARD_BOTTOM_LINE = FLASHCARD_BOTTOM
-            + FLASHCARD_WHITESPACE + FLASHCARD_BOTTOM;
-    private final int FLASHCARD_MAX_LINE_LENGTH = 37;
 
     /**
      * Splits the given word/phrase into a String array so that it
@@ -245,6 +203,50 @@ public class FlashCard {
     public void printFlashCard() {
         String result = returnFlashCard();
         System.out.println(result);
+    }
+
+    public void incrementUserScore() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Incrementing flashcard user score");
+        userScore++;
+    }
+
+    public void incrementTotalScore() {
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Incrementing flashcard total score");
+        totalScore++;
+    }
+
+    /**
+     * Getter for String on front of flashcard.
+     *
+     * @return String on front of flashcard
+     */
+    public String getFront() {
+        logger.setLevel(Level.WARNING);
+        assert this.front != null;
+        logger.log(Level.INFO, "Getting card front: " + front);
+        return this.front;
+    }
+
+    /**
+     * Getter for String on back of flashcard.
+     *
+     * @return String on back of flashcard
+     */
+    public String getBack() {
+        logger.setLevel(Level.WARNING);
+        assert this.back != null;
+        logger.log(Level.INFO, "Getting card back: " + back);
+        return this.back;
+    }
+
+    public int getUserScore() {
+        return this.userScore;
+    }
+
+    public int getTotalScore() {
+        return this.totalScore;
     }
 
     /**
