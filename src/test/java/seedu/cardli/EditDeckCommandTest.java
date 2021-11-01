@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
 import seedu.cardli.commands.system.EditDeckCommand;
-import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.parser.Parser;
 
@@ -22,8 +21,8 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! " +
-                "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("Please use the correct flags and in the correct order! "
+                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
@@ -36,8 +35,8 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! " +
-                "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("Please use the correct flags and in the correct order! "
+                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
@@ -50,8 +49,8 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! " +
-                "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("Please use the correct flags and in the correct order! "
+                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
@@ -92,8 +91,8 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! " +
-                "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("Please use the correct flags and in the correct order! "
+                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
