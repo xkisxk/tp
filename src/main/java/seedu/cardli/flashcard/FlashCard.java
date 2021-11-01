@@ -50,9 +50,6 @@ public class FlashCard {
         logger.log(Level.INFO, "Card back: " + back);
     }
 
-
-
-
     /**
      * Splits the given word/phrase into a String array so that it
      * can fit nicely into the flashcard to be printed to the
@@ -241,10 +238,18 @@ public class FlashCard {
         return this.back;
     }
 
+    /**
+     * Getter for userScore.
+     * @return An integer representing userScore
+     */
     public int getUserScore() {
         return this.userScore;
     }
 
+    /**
+     * Getter for totalScore.
+     * @return An integer representing totalScore
+     */
     public int getTotalScore() {
         return this.totalScore;
     }
