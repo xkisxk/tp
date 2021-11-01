@@ -5,7 +5,7 @@ import seedu.cardli.commands.CommandResult;
 
 public class ExitProgrammeCommand extends Command {
     public ExitProgrammeCommand(String arguments) {
-        super("ExitProgrammeCommand");
+        super("ExitProgrammeCommand", arguments);
     }
 
     @Override
