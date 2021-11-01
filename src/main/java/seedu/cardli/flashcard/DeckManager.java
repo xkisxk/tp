@@ -168,7 +168,11 @@ public class DeckManager {
                 result = result.concat(getDeck(i).returnMatchingFlashCards(searchInput));
             }
         } else {
-            result = "There are no decks." + System.lineSeparator();
+            result = "There are no decks.";
+        }
+
+        if (result.isEmpty()) {
+            result = "There are no cards matching the search term.";
         }
         return result;
     }
