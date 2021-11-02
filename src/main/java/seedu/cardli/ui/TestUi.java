@@ -81,24 +81,6 @@ public class TestUi {
         System.out.println("Reviewing all low scoring cards");
     }
 
-    public void printTest(int index, AnswerList answerList) {
-        int score = answerList.getUserScore();
-        int totalScore = answerList.getSize();
-        System.out.println(
-                "Score for test " + index + " " + answerList.getDeck().getName()
-                        + " " + score + "/" + totalScore
-                        + " " + (double) score / totalScore * 100 + "%");
-    }
-
-    public void printScore(int index, int score, int totalScore) {
-        System.out.println("You scored " + score + " out of " + totalScore + " for test " + (index + 1));
-        System.out.println("That is " + (double) score / totalScore * 100 + "%!");
-    }
-
-    public void printScoreWithCard(FlashCard card) {
-        card.printFlashCard();
-        System.out.println("Score: " + card.getUserScore() + " out of " + card.getTotalScore());
-    }
 
     public void printCorrectAnsMessage() {
         System.out.println("Well done! You got this question correct");

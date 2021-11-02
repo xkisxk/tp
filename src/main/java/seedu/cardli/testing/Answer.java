@@ -42,7 +42,6 @@ public class Answer {
         return lowerCaseAnswer.equals(lowerCaseUserAnswer);
     }
 
-
     public void setIsAnswered() {
         this.isAnswered = true;
     }

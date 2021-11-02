@@ -34,7 +34,7 @@ public class TestManager {
      * that index will be tested.
      */
     public void startTest() {
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
         String input = ui.getUserMessage();
@@ -50,7 +50,7 @@ public class TestManager {
             testHistory.addAnswerList(userAnswers);
             ui.printEndTest();
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
@@ -67,7 +67,7 @@ public class TestManager {
      * the deck at that index will be tested.
      */
     public void startReview() {
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
         String input = ui.getUserMessage();
@@ -77,7 +77,7 @@ public class TestManager {
             Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is a numeric.");
+            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
@@ -103,7 +103,6 @@ public class TestManager {
      * Goes through all the flashcards and stores the user's responses into userAnswer ArrayList.
      */
     public void testAllCardsShuffled(AnswerList userAnswer) throws EmptyDeckException {
-        logger.setLevel(Level.WARNING);
         ArrayList<FlashCard> deckReplicate = userAnswer.getDeck().getCards();
         if (deckReplicate.isEmpty()) {
             throw new EmptyDeckException("There are no cards to test.");
@@ -125,7 +124,6 @@ public class TestManager {
     }
 
     private void testInProgress(ArrayList<FlashCard> deckReplicate,AnswerList userAnswer) {
-        logger.setLevel(Level.WARNING);
         boolean allQuestionsAnswered = false;
         int currentQuestion = 0;
         int nextQuestionFlag = 0;
@@ -164,7 +162,6 @@ public class TestManager {
     }
 
     private int testCard(AnswerList userAnswer, FlashCard question) {
-        logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting to test a new card");
         int timer = 20;
         Countdown countdown = new Countdown(timer, TestUi.TIMES_UP_MESSAGE);
@@ -220,7 +217,6 @@ public class TestManager {
      * Marks the user's answers then print their results of test to system output.
      */
     public void markTest(AnswerList userAnswers) {
-        logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "starting test check");
 
         //there must be at least one response to start a test
