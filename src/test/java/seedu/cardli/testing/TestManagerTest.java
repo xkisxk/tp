@@ -17,4 +17,13 @@ class TestManagerTest {
         AnswerList answerList = new AnswerList(deck);
         assertThrows(EmptyDeckException.class, () -> testManager.testAllCardsShuffled(answerList));
     }
+
+    @Test
+    void testReviewCards_emptyDeck_expectEmptyDeckException() {
+        Deck deck = new Deck("Test");
+        DeckManager deckManager = new DeckManager();
+        TestHistory testHistory = new TestHistory(deckManager);
+        TestManager testManager = new TestManager(testHistory, deckManager);
+        assertThrows(EmptyDeckException.class, () -> testManager.reviewCards(deck));
+    }
 }

@@ -20,12 +20,14 @@ public class AnswerListTest {
     @Test
     public void getScore_oneCorrectAnswer_expectOne() {
         Deck deck = new Deck();
+        deck.addFlashCard("card", "card");
+        deck.addFlashCard("card2", "card2");
+        AnswerList answerList = new AnswerList(deck);
+        answerList.addAnswer("card", 1);
+        answerList.addAnswer("card", 2);
         DeckManager deckManager = new DeckManager();
         TestHistory testHistory = new TestHistory(deckManager);
         TestManager testManager = new TestManager(testHistory, deckManager);
-        deck.addFlashCard("card", "card");
-        AnswerList answerList = new AnswerList(deck);
-        answerList.addAnswer("card", 1);
         testManager.markTest(answerList);
         assertEquals(1, answerList.getUserScore());
     }

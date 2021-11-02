@@ -54,13 +54,15 @@ public class OuterParser {
             logger.log(Level.INFO, "enter (deck) command parsed and executed");
             break;
         case "view":
-            command = new ViewDecksCommand(this.deckManager);
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ViewDecksCommand(this.deckManager, arguments);
             logger.log(Level.INFO, "view (all decks) command parsed and executed");
             break;
-        case "viewfc": //TODO: renaming or reorganizing where this command belongs
-            command = new ViewFlashCardStatsCommand(this.testHistory);
+        case "viewfc":
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ViewFlashCardStatsCommand(arguments, this.testHistory);
             break;
-        case "viewtest": //TODO: renaming or reorganizing where this command belongs
+        case "viewtest":
             arguments = Parser.getCommandArguments(commandType, input);
             command = new ViewTestCommand(arguments, this.testHistory);
             break;
@@ -85,19 +87,23 @@ public class OuterParser {
             logger.log(Level.INFO, "find (card) command parsed and executed");
             break;
         case "test":
-            command = new TestCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new TestCommand(arguments);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "review":
-            command = new ReviewCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ReviewCommand(arguments);
             logger.log(Level.INFO, "review command parsed and executed");
             break;
         case "help":
-            command = new HelpCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new HelpCommand(arguments);
             logger.log(Level.INFO, "help (deck) command parsed and executed");
             break;
         case "bye":
-            command = new ExitProgrammeCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ExitProgrammeCommand(arguments);
             logger.log(Level.INFO, "current list of decks and flashcards saved to text file");
             logger.log(Level.INFO, "bye command parsed and executed, program will terminate");
             break;
