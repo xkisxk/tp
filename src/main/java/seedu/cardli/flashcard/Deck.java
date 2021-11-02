@@ -1,5 +1,7 @@
 package seedu.cardli.flashcard;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.FieldEmptyException;
 import seedu.cardli.exceptions.NoSlashException;
@@ -275,5 +277,19 @@ public class Deck {
         return getName() + '\n'
                 + cardsCount + '\n'
                 + cardsString;
+    }
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonDeck = new JSONObject();
+
+        int cardsCount = getDeckSize();
+        JSONArray jsonCards = new JSONArray();
+
+        for (int i = 0; i < cardsCount; i++) {
+            jsonCards.add(cards.get(i).toJsonObject());
+        }
+        jsonDeck.put("deckName", getName());
+        jsonDeck.put("cards", jsonCards);
+        return jsonDeck;
     }
 }
