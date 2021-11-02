@@ -29,14 +29,17 @@ public class DeleteDeckCommand extends Command {
             if (Parser.isInteger(enterInput)) {
                 int deckIndex = Integer.parseInt(enterInput) - 1;
                 return new CommandResult(deckManager.deleteDeck(deckIndex));
+            } else {
+                throw new DeckNotExistException("Please input a positive integer.");
             }
-            result = new CommandResult(deckManager.deleteDeck(enterInput));
-        } catch (DeckNotExistException e) {
-            result = new CommandResult(e.getMessage());
+
         } catch (IndexOutOfBoundsException e) {
             result = new CommandResult("This deck does not exist.");
+
+        } catch (DeckNotExistException e) {
+            result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Input a number or deck name.");
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
         return result;
     }

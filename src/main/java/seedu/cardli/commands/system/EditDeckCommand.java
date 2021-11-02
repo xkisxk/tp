@@ -20,9 +20,9 @@ import seedu.cardli.testing.TestManager;
 public class EditDeckCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>";
+            + "Format should be\n edit /d <deck index> /n <new name of deck>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! Format should be\n"
-            + "edit /d <deck index/name of deck> /n <new name of deck>";
+            + "edit /d <deck index> /n <new name of deck>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for deck!";
     private static final String NO_SUCH_DECK_ERROR_MESSAGE = "No deck goes by that name!";
 
@@ -36,7 +36,8 @@ public class EditDeckCommand extends Command {
         this.deckManager = deckManager;
     }
 
-    public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException {
+    public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException,
+            NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing Deck Index");
         int deckIndex = 0;
@@ -44,30 +45,17 @@ public class EditDeckCommand extends Command {
             logger.log(Level.INFO, "checking if integer deckIndex is out of bounds");
             //deck is an index
             deckIndex = Integer.parseInt(deck) - 1;
-            if (!(deckIndex >= 0 && deckIndex <= deckManager.getDecksSize())) {
+            if (!(deckIndex >= 0 && deckIndex < deckManager.getDecksSize())) {
                 throw new DeckNotExistException(INVALID_INDEX_ERROR_MESSAGE);
             }
         } else {
-            logger.log(Level.INFO, "Checking if String deckIndex exists in deck");
-            //deck is a string input corresponding to name of the deck
-            boolean deckFound = false;
-            for (Deck d : deckManager.getDecks()) {
-                if (d.getName().equalsIgnoreCase(deck)) {
-                    //card now is a string type containing index of card to be edited
-                    //assume no duplicate cards
-                    deck = String.valueOf(deckManager.getDeckIndex(d) + 1);
-                    deckFound = true;
-                }
-            }
-            if (!deckFound) {
-                throw new CardLiException(NO_SUCH_DECK_ERROR_MESSAGE);
-            }
+            throw new CardLiException(WRONG_ORDER_ERROR_MESSAGE);
         }
 
         return deck;
     }
 
-    public String[] prepareEditDeckCommand() throws CardLiException {
+    public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditDeckCommand");
         logger.log(Level.INFO, "Checking if input contains /d and /n");
@@ -108,6 +96,8 @@ public class EditDeckCommand extends Command {
             result = new CommandResult(this.deckManager.editDeck(parameters));
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
         return result;
     }

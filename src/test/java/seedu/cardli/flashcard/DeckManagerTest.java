@@ -51,13 +51,6 @@ class DeckManagerTest {
         deckManager.deleteDeck(deckManager.getDeck(0));
     }
 
-    @Test
-    void deleteDeck_noDecks_expectDeckNotExistException() {
-        DeckManager deckManager = new DeckManager();
-        Deck deck = new Deck("euyhfdsifnkjadsanauheaiu");
-        assertThrows(DeckNotExistException.class, () -> deckManager.deleteDeck(deck));
-        assertThrows(DeckNotExistException.class, () -> deckManager.deleteDeck("test"));
-    }
 
     @Test
     void deleteDeck_noDecks_expectIndexOutOfBoundsException() {

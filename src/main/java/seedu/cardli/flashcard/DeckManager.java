@@ -130,26 +130,6 @@ public class DeckManager {
         return message;
     }
 
-    /**
-     * Deletes the deck given by the deck name.
-     * The deck will only be deleted if the name matches
-     * exactly with the name of the deck. If there are
-     * multiple decks with the same name, only the first matching
-     * one will be deleted.
-     *
-     * @param deckName name of the deck to delete
-     * @return delete message
-     */
-    public String deleteDeck(String deckName) throws DeckNotExistException {
-        for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
-                String message = returnDeletedDeckMessage(deck);
-                decks.remove(deck);
-                return message;
-            }
-        }
-        throw new DeckNotExistException("This deck does not exist");
-    }
 
     private String returnDeletedDeckMessage(Deck deck) {
         String result = "\tDeleted deck:";
@@ -168,7 +148,11 @@ public class DeckManager {
                 result = result.concat(getDeck(i).returnMatchingFlashCards(searchInput));
             }
         } else {
-            result = "There are no decks." + System.lineSeparator();
+            result = "There are no decks.";
+        }
+
+        if (result.isEmpty()) {
+            result = "There are no cards matching the search term.";
         }
         return result;
     }

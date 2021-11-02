@@ -30,9 +30,13 @@ public class EnterDeckCommand extends Command {
         try {
             String[] parameters = parser.parseArguments(super.arguments);
             String enterInput = parameters[0];
-            
+
             if (enterInput.isEmpty()) {
-                throw new CardLiException("Please enter the deck index.");
+                throw new CardLiException("Invalid input. Please input deck index after \"enter\".");
+            }
+
+            if (enterInput.contains("-")) {
+                throw new DeckNotExistException("Invalid deck index. Please input a positive integer.");
             }
 
             if (!Parser.isInteger(enterInput)) {
@@ -40,8 +44,9 @@ public class EnterDeckCommand extends Command {
             }
 
             int deckIndex = Integer.parseInt(enterInput) - 1;
-            if (!(deckIndex >= 0 && deckIndex < deckManager.getDecks().size())) {
-                throw new DeckNotExistException("That deck doesn't exist.");
+
+            if (deckIndex >= deckManager.getDecks().size()) {
+                throw new DeckNotExistException("That deck doesn't exist. Please input a valid deck index.");
             }
 
             Deck currDeck = deckManager.getDeck(deckIndex);
@@ -49,8 +54,10 @@ public class EnterDeckCommand extends Command {
             this.innerParser.setDeckManager(deckManager);
             result = new CommandResult("You are now in deck " + enterInput
                     + ". Type \"help\" for more commands.", false, true);
-        } catch (NumberFormatException | CardLiException e) {
+        } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
 
         return result;
