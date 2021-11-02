@@ -77,11 +77,13 @@ public class TestHistory {
         AnswerList answerList = testHistory.get(index);
         int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
+
         double percentage = (double) score / totalScore * 100;
         String percentageAsString = String.format("%.2f", percentage);
         String result = "For test " + (index + 1) + ": " + answerList.getDeck().getName()
                 + "\nYou scored " + score + " out of " + totalScore
                 + "\nThat is " + percentageAsString + "%!";
+
         return result;
     }
 
