@@ -2,6 +2,7 @@ package seedu.cardli.commands.system;
 
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
+import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.DeckNotExistException;
 import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
@@ -29,6 +30,10 @@ public class EnterDeckCommand extends Command {
         try {
             String[] parameters = parser.parseArguments(super.arguments);
             String enterInput = parameters[0];
+            
+            if (enterInput.isEmpty()) {
+                throw new CardLiException("Please enter the deck index.");
+            }
 
             if (!Parser.isInteger(enterInput)) {
                 throw new NumberFormatException("That is not a number.");
@@ -44,7 +49,7 @@ public class EnterDeckCommand extends Command {
             this.innerParser.setDeckManager(deckManager);
             result = new CommandResult("You are now in deck " + enterInput
                     + ". Type \"help\" for more commands.", false, true);
-        } catch (NumberFormatException | DeckNotExistException e) {
+        } catch (NumberFormatException | CardLiException e) {
             result = new CommandResult(e.getMessage());
         }
 

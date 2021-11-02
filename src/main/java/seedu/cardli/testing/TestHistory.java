@@ -77,8 +77,13 @@ public class TestHistory {
         AnswerList answerList = testHistory.get(index);
         int score = answerList.getUserScore();
         int totalScore = answerList.getSize();
-        String result = "You scored " + score + " out of " + totalScore + " for test " + (index + 1)
-                + "\nThat is " + Math.round(((double) score / totalScore) * 10000) / 100 + "%!";
+
+        double percentage = (double) score / totalScore * 100;
+        String percentageAsString = String.format("%.2f", percentage);
+        String result = "For test " + (index + 1) + ": " + answerList.getDeck().getName()
+                + "\nYou scored " + score + " out of " + totalScore
+                + "\nThat is " + percentageAsString + "%!";
+
         return result;
     }
 
@@ -98,10 +103,12 @@ public class TestHistory {
         for (AnswerList answerList : testHistory) {
             int score = answerList.getUserScore();
             int totalScore = answerList.getSize();
+            double percentage = (double) score / totalScore * 100;
+            String percentageAsString = String.format("%.2f", percentage);
             result = result.concat(
                     "Score for test " + index + ": " + answerList.getDeck().getName()
                             + " " + score + "/" + totalScore
-                            + " " + (double) score / totalScore * 100 + "%\n");
+                            + " " + percentageAsString + "%\n");
             index++;
         }
         return result;

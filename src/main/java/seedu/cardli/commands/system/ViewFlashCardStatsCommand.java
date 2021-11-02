@@ -8,13 +8,16 @@ public class ViewFlashCardStatsCommand extends Command {
 
     private final TestHistory testHistory;
 
-    public ViewFlashCardStatsCommand(TestHistory testHistory) {
-        super("ViewFlashCardStatsCommand");
+    public ViewFlashCardStatsCommand(String arguments, TestHistory testHistory) {
+        super("ViewFlashCardStatsCommand", arguments);
         this.testHistory = testHistory;
     }
 
     @Override
     public CommandResult execute() {
+        if (arguments.length() > 0) {
+            return new CommandResult("There should not be any arguments.");
+        }
         return new CommandResult(testHistory.viewAllFlashcardStats());
     }
 }
