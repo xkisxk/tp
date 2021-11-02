@@ -8,11 +8,11 @@ public class TestParser {
         if (userResponse.isEmpty()) {
             throw new FieldEmptyException();
         }
-        return userResponse;
+        return userResponse.trim();
     }
 
     public static int toInt(String input) throws NumberFormatException {
-        if (input.toLowerCase().contains("all")) {
+        if (input.equalsIgnoreCase("all")) {
             return -1;
         }
         return Integer.parseInt(input) - 1;

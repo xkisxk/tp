@@ -23,6 +23,7 @@ public class EditDeckCommand extends Command {
             + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! /n should come after /d. Format "
             + "should be\n edit /d <deck index/name of deck> /n <new name of deck>";
+
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for deck!";
     private static final String ARGUMENT_TYPE_ERROR_MESSAGE = "You can only input the index of the deck, which is "
             + "a positive integer!";
@@ -40,7 +41,8 @@ public class EditDeckCommand extends Command {
         this.deckManager = deckManager;
     }
 
-    public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException {
+    public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException,
+            NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing Deck Index");
         int deckIndex = 0;
@@ -52,11 +54,13 @@ public class EditDeckCommand extends Command {
                 throw new DeckNotExistException(INVALID_INDEX_ERROR_MESSAGE);
             }
         } else {
+
             throw new CardLiException(ARGUMENT_TYPE_ERROR_MESSAGE);
         }
 
         return deck;
     }
+
 
     /* Checks if a string is empty ("") or null. */
     public static boolean isEmpty(String s) {
@@ -79,7 +83,9 @@ public class EditDeckCommand extends Command {
         return count;
     }
 
-    public String[] prepareEditDeckCommand() throws CardLiException {
+
+    public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
+
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditDeckCommand");
 
@@ -134,6 +140,8 @@ public class EditDeckCommand extends Command {
             result = new CommandResult(this.deckManager.editDeck(parameters));
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
+        } catch (NumberFormatException e) {
+            result = new CommandResult("Deck index must be smaller than 2147483647.");
         }
         return result;
     }

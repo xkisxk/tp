@@ -73,9 +73,9 @@ public class CardLI {
             if (inReview) {
                 testManager.startReview();
             }
+            storage.writeCardsToFile(deckManager.getDecks());
+            storage.writeTestsToFile(testHistory.getTestHistory());
         }
-        storage.writeToFile(deckManager.getDecks(), true);
-        storage.writeToFile(testHistory.getTestHistory(), false);
         ui.printByeMessage();
     }
 

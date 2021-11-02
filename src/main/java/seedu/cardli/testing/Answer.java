@@ -1,5 +1,6 @@
 package seedu.cardli.testing;
 
+import org.json.simple.JSONObject;
 import seedu.cardli.flashcard.FlashCard;
 
 /**
@@ -42,7 +43,6 @@ public class Answer {
         return lowerCaseAnswer.equals(lowerCaseUserAnswer);
     }
 
-
     public void setIsAnswered() {
         this.isAnswered = true;
     }
@@ -59,5 +59,14 @@ public class Answer {
     public String toString() {
         return getAnswer() + SEPARATOR
                 + getQuestionIndex() + '\n';
+    }
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonAnswer = new JSONObject();
+
+        jsonAnswer.put("answer", getAnswer());
+        jsonAnswer.put("questionIndex", getQuestionIndex());
+
+        return jsonAnswer;
     }
 }
