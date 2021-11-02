@@ -1,5 +1,7 @@
 package seedu.cardli;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.fusesource.jansi.AnsiConsole;
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
@@ -64,6 +66,7 @@ public class CardLI {
                 result = command.execute();
                 ui.printResult(result);
                 inDeck = !result.isExit();
+                storage.writeCardsToFile(deckManager.getDecks());
             }
             inTest = result.isTest();
             if (inTest) {

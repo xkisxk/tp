@@ -12,6 +12,7 @@ public class DeleteCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
             + "Format should be\n delete <index>";
+    public static final String CARD_INDEX_TOO_BIG_MESSAGE = "Card index must be smaller than 2147483647.";
 
     private DeleteCardParser parser;
     private Deck deck;
@@ -41,7 +42,7 @@ public class DeleteCardCommand extends Command {
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Card index must be smaller than 2147483647.");
+            result = new CommandResult(CARD_INDEX_TOO_BIG_MESSAGE);
         }
         return result;
     }
