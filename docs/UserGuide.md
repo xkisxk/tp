@@ -1,5 +1,7 @@
 # User Guide
 
+
+![](assets/logo.png)
 ## Introduction
 
 
