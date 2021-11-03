@@ -51,8 +51,8 @@ public class TestHistory {
         String result = "Listing total scores of flashcards for all tests:\n";
         for (Deck deck : deckManager.getDecks()) {
             for (FlashCard card : deck.getCards()) {
-                result = result.concat(card.returnFlashCard() + "\nScore: "
-                        + card.getUserScore() + " out of " + card.getTotalScore()
+                result = result.concat(card.returnFlashCard() + "\nScore: " + card.getUserScore()
+                        + " out of " + card.getTotalScore()
                         + "\n");
             }
         }

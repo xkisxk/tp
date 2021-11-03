@@ -48,9 +48,9 @@ public class TestHistoryTest {
         testHistory.addAnswerList(answerList);
         testHistory.addAnswerList(answerListTwo);
 
-        assertEquals("These are your scores:\n" +
-                "Score for test 1: Test 0/1 0.00%\n" +
-                "Score for test 2: Test2 0/1 0.00%",
+        assertEquals("These are your scores:\n"
+                        + "Score for test 1: Test 0/1 0.00%\n"
+                        + "Score for test 2: Test2 0/1 0.00%",
                 testHistory.prepareViewTest(-1).trim());
 
         deckManager.deleteDeck(deck);

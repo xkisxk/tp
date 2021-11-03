@@ -71,11 +71,13 @@ public class TestUi {
     }
 
     public void printStartTest() {
+        out.println("Entering test mode...");
         out.println("Which deck do you want to test?");
         out.print("Input deck index (0 or \"all\" to test all decks): ");
     }
 
     public void printStartReview() {
+        out.println("Entering review mode...");
         out.println("Which deck do you want to review?");
         out.print("Input deck index (0 or \"all\" to review all decks): ");
     }

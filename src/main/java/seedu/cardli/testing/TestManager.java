@@ -47,8 +47,10 @@ public class TestManager {
      * Enters test mode and requires user to input the index of the deck that they want to be tested.
      * If the input is "all", all decks will be tested. If the input is an integer, the deck at
      * that index will be tested.
+     *
+     * @return end test message
      */
-    public void startTest() {
+    public String startTest() {
         logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting test");
         ui.printStartTest();
@@ -63,7 +65,7 @@ public class TestManager {
             testAllCardsShuffled(userAnswers);
             markTest(userAnswers);
             testHistory.addAnswerList(userAnswers);
-            ui.showMessage(END_TEST_MESSAGE);
+            return END_TEST_MESSAGE;
         } catch (NumberFormatException e) {
             ui.showMessage(INCORRECT_INPUT_FORMAT_MESSAGE);
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -74,14 +76,17 @@ public class TestManager {
             ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Empty deck");
         }
+        return "";
     }
 
     /**
      * Enters review mode and requires user to input the index of the deck that they want to be reviewed.
      * If the input is "all", the cards will come from all decks. If the input is an integer, only cards from
      * the deck at that index will be tested.
+     *
+     * @return end review message
      */
-    public void startReview() {
+    public String startReview() {
         logger.setLevel(Level.SEVERE);
         logger.log(Level.INFO, "starting review");
         ui.printStartReview();
@@ -91,7 +96,7 @@ public class TestManager {
             int deckIndex = TestParser.toInt(input);
             Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
-            ui.showMessage(END_REVIEW_MESSAGE);
+            return END_REVIEW_MESSAGE;
         } catch (NumberFormatException e) {
             ui.showMessage(INCORRECT_INPUT_FORMAT_MESSAGE);
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
@@ -101,6 +106,7 @@ public class TestManager {
         } catch (EmptyDeckException e) {
             ui.showMessage(NO_CARDS_TO_REVIEW_MESSAGE);
         }
+        return "";
     }
 
     /**

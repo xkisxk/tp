@@ -100,9 +100,7 @@ class TestManagerTest {
 
         TestManager testManager = new TestManager(testHistory, deckManager, testUi);
 
-        testManager.startReview();
-
-        String outputText = byteArrayOutputStream.toString().trim();
+        String outputText = testManager.startReview().trim();
         String actual = outputText.substring(outputText.length() - END_REVIEW_MESSAGE.length()).trim();
         assertEquals(actual, END_REVIEW_MESSAGE);
         deckManager.deleteDeck(deck);
@@ -172,9 +170,7 @@ class TestManagerTest {
 
         TestManager testManager = new TestManager(testHistory, deckManager, testUi);
 
-        testManager.startTest();
-
-        String outputText = byteArrayOutputStream.toString().trim();
+        String outputText = testManager.startTest();
         String actual = outputText.substring(outputText.length() - END_TEST_MESSAGE.length()).trim();
         assertEquals(actual, END_TEST_MESSAGE);
         deckManager.deleteDeck(deck);
