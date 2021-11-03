@@ -179,7 +179,7 @@ public class TestManager {
 
     private int testCard(AnswerList userAnswer, FlashCard question) {
         logger.log(Level.INFO, "starting to test a new card");
-        int timer = 10;
+        int timer = 20;
         Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
@@ -206,7 +206,7 @@ public class TestManager {
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
         } catch (FieldEmptyException e) {
-            logger.log(Level.WARNING, "No user input");
+            logger.log(Level.INFO, "No user input");
             userResponse = "NO ANSWER GIVEN :(";
             ui.printAnswerEmptyError();
         }
@@ -245,7 +245,7 @@ public class TestManager {
         int score = userAnswers.getUserScore();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + (double) score / answersCount * 100 + "%!");
+        System.out.println("That is " + Math.round(((double) score / answersCount) * 10000) / 100  + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 

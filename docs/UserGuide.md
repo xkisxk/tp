@@ -301,6 +301,7 @@ good grasp of the application.
 |add flashcard|`add /f <word> /b <definition>`|
 |deleting a flashcard|`delete <word/index>`|
 |editing a flashcard|`edit /c <index> /s <front or back> /i input`|
+|moving a flashcard| `move /c <word/index of card> /d <word/index of deck>`|
 |viewing flashcards|`view`|
 |exiting deck mode|`exit`|
 

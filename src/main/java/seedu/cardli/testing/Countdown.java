@@ -89,7 +89,7 @@ public class Countdown {
     public void start() {
         this.isRunning = true;
         int delay = 0;
-        int period = 1000;
+        int period = 1000; // repeat at intervals of 1s
         timer.scheduleAtFixedRate(this.countdownTimerTask, delay, period);
     }
 
