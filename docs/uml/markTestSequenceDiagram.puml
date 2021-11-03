@@ -1,5 +1,5 @@
 @startuml
-participant "TestManager" as TestManager << class >>
+participant ":TestManager" as TestManager
 participant ":AnswerList" as AnswerList
 participant ":Answer" as Answer
 participant ":TestHistory" as TestHistory
@@ -13,6 +13,21 @@ loop every answer in (userAnswers)
 
 TestManager -> TestManager : markQuestion(userAnswers, answer)
 activate TestManager
+
+TestManager -> TestUi : printQuestion()
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
+
+TestManager -> TestUi : printCorrectAnswer()
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
+
+TestManager -> TestUi : printUserAnswer()
+activate TestUi
+TestUi --> TestManager
+deactivate TestUi
 
 alt answer is correct
 TestManager -> AnswerList : incrementUserScore()
