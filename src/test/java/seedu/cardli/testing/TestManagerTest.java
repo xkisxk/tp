@@ -34,7 +34,7 @@ class TestManagerTest {
     }
 
     @Test
-    void testStartReview_emptyDeck_expectCaughtEmptyDeckMessage() throws DeckNotExistException {
+    void testStartReview_emptyDeck_expectCaughtEmptyDeckMessage() {
         deckManager.prepareToAddDeck("Test");
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream("0".getBytes());
@@ -49,7 +49,7 @@ class TestManagerTest {
         String outputText = byteArrayOutputStream.toString().trim();
         String actual = outputText.substring(outputText.length() - NO_CARDS_TO_REVIEW_MESSAGE.length()).trim();
         assertEquals(actual, NO_CARDS_TO_REVIEW_MESSAGE);
-        deckManager.deleteDeck("Test");
+        deckManager.deleteDeck(0);
     }
 
     @Test
@@ -177,6 +177,6 @@ class TestManagerTest {
         String outputText = byteArrayOutputStream.toString().trim();
         String actual = outputText.substring(outputText.length() - END_TEST_MESSAGE.length()).trim();
         assertEquals(actual, END_TEST_MESSAGE);
-        deckManager.deleteDeck("Test");
+        deckManager.deleteDeck(deck);
     }
 }

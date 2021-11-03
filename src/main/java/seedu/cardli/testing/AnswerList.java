@@ -90,18 +90,18 @@ public class AnswerList {
         return true;
     }
 
-    /**
-     * Saves a new user answer to the current list of user answers.
-     *
-     * @param answer        String representation of user's answer
-     * @param questionIndex Question number for the question that the answer answers
-     */
     public void addAnswer(String answer, int questionIndex, Boolean isAnswered) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
         answerList.add(new Answer(answer, questionIndex, isAnswered));
     }
 
+    /**
+     * Saves a new user answer to the current list of user answers.
+     *
+     * @param answer        String representation of user's answer
+     * @param questionIndex Question number for the question that the answer answers
+     */
     public void addAnswer(String answer, int questionIndex) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
