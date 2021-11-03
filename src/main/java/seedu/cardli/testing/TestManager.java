@@ -13,11 +13,18 @@ import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import static seedu.cardli.ui.TestUi.END_REVIEW_MESSAGE;
+import static seedu.cardli.ui.TestUi.END_TEST_MESSAGE;
+import static seedu.cardli.ui.TestUi.INCORRECT_INPUT_FORMAT_MESSAGE;
+import static seedu.cardli.ui.TestUi.NO_CARDS_TO_REVIEW_MESSAGE;
+import static seedu.cardli.ui.TestUi.NO_CARDS_TO_TEST_MESSAGE;
+import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
+
 /**
  * Implements the test function.
  */
 public class TestManager {
-    private final TestUi ui = new TestUi();
+    private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
     private final TestHistory testHistory;
     private final DeckManager deckManager;
@@ -26,6 +33,14 @@ public class TestManager {
         this.logger.setLevel(Level.WARNING);
         this.testHistory = testHistory;
         this.deckManager = deckManager;
+        this.ui = new TestUi();
+    }
+
+    public TestManager(TestHistory testHistory, DeckManager deckManager, TestUi ui) {
+        this.logger.setLevel(Level.WARNING);
+        this.testHistory = testHistory;
+        this.deckManager = deckManager;
+        this.ui = ui;
     }
 
     /**
@@ -48,9 +63,9 @@ public class TestManager {
             testAllCardsShuffled(userAnswers);
             markTest(userAnswers);
             testHistory.addAnswerList(userAnswers);
-            ui.printEndTest();
+            ui.showMessage(END_TEST_MESSAGE);
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
+            ui.showMessage(INCORRECT_INPUT_FORMAT_MESSAGE);
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
@@ -76,21 +91,22 @@ public class TestManager {
             int deckIndex = TestParser.toInt(input);
             Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
             reviewCards(deckToReview);
+            ui.showMessage(END_REVIEW_MESSAGE);
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input format, make sure the description is either a numeric or all.");
+            ui.showMessage(INCORRECT_INPUT_FORMAT_MESSAGE);
             logger.log(Level.WARNING, "Incorrect format causing NumberFormatException");
         } catch (IndexOutOfBoundsException e) {
             ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Incorrect format causing IndexOutOfBoundsException");
         } catch (EmptyDeckException e) {
-            ui.showMessage("Congratulations you don't have any low scoring cards!");
+            ui.showMessage(NO_CARDS_TO_REVIEW_MESSAGE);
         }
     }
 
     /**
      * Reviews the lowest scoring deck of all tests.
      */
-    public void reviewCards(Deck deckToReview) throws EmptyDeckException {
+    private void reviewCards(Deck deckToReview) throws EmptyDeckException {
         logger.log(Level.INFO, "Reviewing low scoring cards");
         ui.printReviewCard();
         AnswerList answerList = new AnswerList(deckToReview);
@@ -105,7 +121,7 @@ public class TestManager {
     public void testAllCardsShuffled(AnswerList userAnswer) throws EmptyDeckException {
         ArrayList<FlashCard> deckReplicate = userAnswer.getDeck().getCards();
         if (deckReplicate.isEmpty()) {
-            throw new EmptyDeckException("There are no cards to test.");
+            throw new EmptyDeckException(NO_CARDS_TO_TEST_MESSAGE);
         }
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
@@ -164,7 +180,7 @@ public class TestManager {
     private int testCard(AnswerList userAnswer, FlashCard question) {
         logger.log(Level.INFO, "starting to test a new card");
         int timer = 10;
-        Countdown countdown = new Countdown(timer, TestUi.TIMES_UP_MESSAGE);
+        Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
         int nextQuestionFlag = 0;
@@ -183,7 +199,6 @@ public class TestManager {
         if (countdown.isRunning()) { // timer has not expired yet
             countdown.stop();
         } else {
-            System.out.println("DEBUGGING: Time's up!");
             userResponse = "";
         }
         countdown.stop();

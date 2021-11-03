@@ -4,18 +4,16 @@ package seedu.cardli.flashcard;
 import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.DeckNotExistException;
 
-import seedu.cardli.exceptions.DeckNotExistException;
+import static seedu.cardli.ui.TestUi.DECK_NOT_EXIST_MESSAGE;
 
 
 import java.util.ArrayList;
 
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class DeckManager {
-
     private final ArrayList<Deck> decks;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -78,7 +76,7 @@ public class DeckManager {
         if (hasDeck(index)) {
             return decks.get(index);
         }
-        throw new IndexOutOfBoundsException("This deck does not exist.");
+        throw new IndexOutOfBoundsException(DECK_NOT_EXIST_MESSAGE);
     }
 
     public int getDecksSize() {
@@ -119,7 +117,7 @@ public class DeckManager {
         String message = returnDeletedDeckMessage(deck);
         boolean isRemoved = decks.remove(deck);
         if (!isRemoved) {
-            throw new DeckNotExistException("This deck does not exist");
+            throw new DeckNotExistException(DECK_NOT_EXIST_MESSAGE);
         }
         return message;
     }
@@ -148,7 +146,7 @@ public class DeckManager {
                 return message;
             }
         }
-        throw new DeckNotExistException("This deck does not exist");
+        throw new DeckNotExistException(DECK_NOT_EXIST_MESSAGE);
     }
 
     private String returnDeletedDeckMessage(Deck deck) {
@@ -244,7 +242,7 @@ public class DeckManager {
         if (hasDeck(index)) {
             return getLowScoringCardsFromADeck(getDeck(index));
         }
-        throw new IndexOutOfBoundsException("This deck does not exist.");
+        throw new IndexOutOfBoundsException(DECK_NOT_EXIST_MESSAGE);
     }
 
     /**
@@ -256,8 +254,4 @@ public class DeckManager {
     private boolean isLowScoring(FlashCard card) {
         return (double) card.getUserScore() * 100 / card.getTotalScore() < 50;
     }
-
-
-
-
 }
