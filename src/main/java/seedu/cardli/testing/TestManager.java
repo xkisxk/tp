@@ -62,7 +62,9 @@ public class TestManager {
             Deck deckToTest = deckManager.getTestDeck(deckIndex);
             AnswerList userAnswers = new AnswerList(deckToTest);
 
-            testAllCardsShuffled(userAnswers);
+            ArrayList<FlashCard> shuffledDeck = prepareTestDeck(userAnswers);
+            testInProgress(shuffledDeck, userAnswers);
+
             markTest(userAnswers);
             testHistory.addAnswerList(userAnswers);
             return END_TEST_MESSAGE;
@@ -95,7 +97,16 @@ public class TestManager {
             logger.log(Level.INFO, "choosing deck to test");
             int deckIndex = TestParser.toInt(input);
             Deck deckToReview = deckManager.getLowScoringCards(deckIndex);
-            reviewCards(deckToReview);
+
+            logger.log(Level.INFO, "Reviewing low scoring cards");
+            AnswerList answerList = new AnswerList(deckToReview);
+
+            ArrayList<FlashCard> shuffledDeck = prepareTestDeck(answerList);
+            testInProgress(shuffledDeck, answerList);
+
+            markTest(answerList);
+            testHistory.addAnswerList(answerList);
+
             return END_REVIEW_MESSAGE;
         } catch (NumberFormatException e) {
             ui.showMessage(INCORRECT_INPUT_FORMAT_MESSAGE);
@@ -110,41 +121,35 @@ public class TestManager {
     }
 
     /**
-     * Reviews the lowest scoring deck of all tests.
+     * Shuffles the test deck and initializes the AnswerList with empty Answers.
+     *
+     * @param userAnswer          user's answers
+     * @return                    shuffled test deck
+     * @throws EmptyDeckException if test deck is empty
      */
-    private void reviewCards(Deck deckToReview) throws EmptyDeckException {
-        logger.log(Level.INFO, "Reviewing low scoring cards");
-        ui.printReviewCard();
-        AnswerList answerList = new AnswerList(deckToReview);
-        testAllCardsShuffled(answerList);
-        testHistory.addAnswerList(answerList);
-        markTest(answerList);
-    }
-
-    /**
-     * Goes through all the flashcards and stores the user's responses into userAnswer ArrayList.
-     */
-    public void testAllCardsShuffled(AnswerList userAnswer) throws EmptyDeckException {
+    public ArrayList<FlashCard> prepareTestDeck(AnswerList userAnswer) throws EmptyDeckException {
         ArrayList<FlashCard> deckReplicate = userAnswer.getDeck().getCards();
         if (deckReplicate.isEmpty()) {
             throw new EmptyDeckException(NO_CARDS_TO_TEST_MESSAGE);
         }
         Collections.shuffle(deckReplicate);
         logger.log(Level.INFO, "replicated and shuffled flashcard list");
+        logger.log(Level.INFO, "populating userAnswer");
         //populate userAnswer
         for (FlashCard question : deckReplicate) {
             int questionNumber = userAnswer.getDeck().getCardIndex(question);
             userAnswer.addAnswer("NIL", questionNumber);
         }
-        logger.log(Level.INFO, "starting test");
-        testInProgress(deckReplicate, userAnswer);
-
-        ui.printDividerLine();
-        logger.log(Level.INFO, "Finished test");
-        //let user know testing is over
-        ui.printTestOver();
+        return deckReplicate;
     }
 
+    /**
+     * Iterates through the shuffled deck for the user to answer.
+     * The user's answer is saved into an AnswerList.
+     *
+     * @param deckReplicate shuffled test deck
+     * @param userAnswer    user's answers
+     */
     private void testInProgress(ArrayList<FlashCard> deckReplicate,AnswerList userAnswer) {
         boolean allQuestionsAnswered = false;
         int currentQuestion = 0;
@@ -181,6 +186,10 @@ public class TestManager {
                 allQuestionsAnswered = true;
             }
         }
+        ui.printDividerLine();
+        logger.log(Level.INFO, "Finished test");
+        //let user know testing is over
+        ui.printTestOver();
     }
 
     private int testCard(AnswerList userAnswer, FlashCard question) {
@@ -221,7 +230,7 @@ public class TestManager {
         if (!(userResponse.trim().equalsIgnoreCase("/NEXT") || userResponse.trim().equalsIgnoreCase("/BACK"))) {
             logger.log(Level.INFO, "Saving answer");
             userAnswer.setQuestionAnswer(questionNumber,userResponse);
-            userAnswer.getAnswerList().get(questionNumber).setIsAnswered();
+            userAnswer.getAnswer(questionNumber).setIsAnswered();
         }
         //signalling to test previous question next
         if (userResponse.trim().equalsIgnoreCase("/BACK")) {

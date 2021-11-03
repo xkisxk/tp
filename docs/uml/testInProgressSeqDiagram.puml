@@ -1,0 +1,20 @@
+@startuml
+participant ":TestManager" as TestManager
+activate TestManager
+
+TestManager -> TestManager : testInProgress(shuffledDeckToTest, userAnswers)
+activate TestManager
+
+loop until every card in deckToTest is answered
+loop currentQuestion >= 0 && currentQuestion < deckReplicate.size()
+alt current question is not answered
+TestManager -> TestManager : testCard(userAnswer, currentQuestion:FlashCard)
+activate TestManager
+TestManager --> TestManager : nextQuestionFlag:Int
+deactivate TestManager
+end
+end
+end
+TestManager --> TestManager
+deactivate TestManager
+@enduml

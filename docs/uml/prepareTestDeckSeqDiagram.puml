@@ -1,0 +1,36 @@
+@startuml
+participant ":TestManager" as TestManager
+participant ":AnswerList" as AnswerList
+participant ":Collections" as Collections
+participant "ShuffledDeck:Deck" as Deck
+
+activate TestManager
+
+TestManager -> TestManager : prepareTestDeck(userAnswers)
+activate TestManager
+
+TestManager -> Collections : shuffle(deckToTest)
+activate Collections
+
+Collections --> TestManager : ShuffledDeck
+deactivate Collections
+
+loop every card in deckToTest
+TestManager -> AnswerList : getDeck()
+activate AnswerList
+AnswerList -> Deck : getQuestionNumber(question:FlashCard)
+activate Deck
+Deck --> AnswerList : questionNumber:Int
+deactivate Deck
+AnswerList --> TestManager : questionNumber:Int
+deactivate AnswerList
+
+TestManager -> AnswerList : addAnswer("NIL", questionNumber)
+activate AnswerList
+AnswerList --> TestManager
+deactivate AnswerList
+end
+
+TestManager --> TestManager
+deactivate TestManager
+@enduml

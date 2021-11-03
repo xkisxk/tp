@@ -30,7 +30,7 @@ class TestManagerTest {
         Deck deck = new Deck("Test");
         AnswerList answerList = new AnswerList(deck);
         TestManager testManager = new TestManager(testHistory, deckManager);
-        assertThrows(EmptyDeckException.class, () -> testManager.testAllCardsShuffled(answerList));
+        assertThrows(EmptyDeckException.class, () -> testManager.prepareTestDeck(answerList));
     }
 
     @Test

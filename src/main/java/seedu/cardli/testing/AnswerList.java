@@ -3,6 +3,7 @@ package seedu.cardli.testing;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.flashcard.FlashCard;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -111,6 +112,10 @@ public class AnswerList {
 
     public void setQuestionAnswer(int questionIndex, String answer) {
         answerList.get(questionIndex).setAnswer(answer);
+    }
+
+    public Answer getAnswer(int questionIndex) {
+        return answerList.get(questionIndex);
     }
 
     @Override
