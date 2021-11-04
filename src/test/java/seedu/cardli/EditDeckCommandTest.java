@@ -22,11 +22,11 @@ public class EditDeckCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
-                + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>", output);
+                + "Format should be\nedit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
-    public void execute_duplicateCorrectFlags_expectInvalidArgumentsMessage() {
+    public void execute_duplicateCorrectFlags_expectFlagArgumentErrorMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
         String input = "edit /d /d /n /n";
@@ -35,12 +35,11 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("You should not use this command's flag as your argument", output);
     }
 
     @Test
-    public void execute_incorrectFlag_expectInvalidArgumentsMessage() {
+    public void execute_incorrectFlag_expectMissingFlagMessage() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("yeet");
         String input = "edit /b 1 /e name";
@@ -49,8 +48,7 @@ public class EditDeckCommandTest {
         Command test = new EditDeckCommand(arguments, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>", output);
+        assertEquals("You are missing the relevant flag/flags", output);
     }
 
     @Test
@@ -64,7 +62,7 @@ public class EditDeckCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("Incorrect edit command! /n should come after /d. Format "
-                + "should be\n edit /d <deck index/name of deck> /n <new name of deck>", output);
+                + "should be\nedit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
@@ -78,7 +76,7 @@ public class EditDeckCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
-                + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>", output);
+                + "Format should be\nedit /d <deck index/name of deck> /n <new name of deck>", output);
     }
 
     @Test
@@ -134,5 +132,18 @@ public class EditDeckCommandTest {
         String output = result.getResult();
         assertEquals("You can only input the index of the deck, which is "
                 + "a positive integer!", output);
+    }
+
+    @Test
+    public void execute_largeInteger_expectLargeIntegerErrorMessage() {
+        DeckManager deckManager = new DeckManager();
+        deckManager.prepareToAddDeck("yeet");
+        String input = "edit /d 2147483648 /n name";
+        String commandType = Parser.getCommandType(input);
+        String arguments = Parser.getCommandArguments(commandType, input);
+        Command test = new EditDeckCommand(arguments, deckManager);
+        CommandResult result = test.execute();
+        String output = result.getResult();
+        assertEquals("Deck index must be smaller than 2147483647.", output);
     }
 }

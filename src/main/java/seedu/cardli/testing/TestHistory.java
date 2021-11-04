@@ -1,6 +1,7 @@
 package seedu.cardli.testing;
 
 
+import seedu.cardli.exceptions.DeckNotExistException;
 import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.flashcard.FlashCard;
@@ -47,18 +48,18 @@ public class TestHistory {
 
         assert deckManager.getDecks().size() > 0 : "deckList must not be empty";
 
-        String result = "Listing total scores of flashcards for all tests: \n";
+        String result = "Listing total scores of flashcards for all tests:\n";
         for (Deck deck : deckManager.getDecks()) {
             for (FlashCard card : deck.getCards()) {
-                result = result.concat(card.returnFlashCard() + "\nScore: "
-                        + card.getUserScore() + " out of " + card.getTotalScore()
+                result = result.concat(card.returnFlashCard() + "\nScore: " + card.getUserScore()
+                        + " out of " + card.getTotalScore()
                         + "\n");
             }
         }
         return result;
     }
 
-    public String prepareViewTest(int index) {
+    public String prepareViewTest(int index) throws DeckNotExistException {
         if (index == -1) {
             return viewTests();
         } else {
@@ -93,13 +94,13 @@ public class TestHistory {
      *
      * @return all the tests as a string
      */
-    public String viewTests() {
+    public String viewTests() throws DeckNotExistException {
         String result = "";
         if (testHistory.size() <= 0) {
-            return "You have not taken any tests.";
+            throw new DeckNotExistException("You have not taken any tests.");
         }
         int index = 1;
-        result = result.concat("These are your scores: " + System.lineSeparator());
+        result = result.concat("These are your scores:\n");
         for (AnswerList answerList : testHistory) {
             int score = answerList.getUserScore();
             int totalScore = answerList.getSize();

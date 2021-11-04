@@ -22,11 +22,11 @@ public class EditCardCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
-                + "Format should be\n edit /c <card index> /s <side> /i <input>", output);
+                + "Format should be\nedit /c <card index> /s <side> /i <input>", output);
     }
 
     @Test
-    public void execute_duplicateCorrectFlags_expectInvalidArgumentsMessage() {
+    public void execute_duplicateCorrectFlags_expectFlagArgumentErrorMessage() {
         Deck deck = new Deck();
         deck.addFlashCard("card", "card");
         String input = "edit /c /c /s /s /i /i";
@@ -35,12 +35,11 @@ public class EditCardCommandTest {
         Command test = new EditCardCommand(arguments, deck);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat should be\n edit /c <card index> /s <side> /i <input>", output);
+        assertEquals("You should not use this command's flag as your argument", output);
     }
 
     @Test
-    public void execute_incorrectFlags_expectInvalidArgumentsMessage() {
+    public void execute_incorrectFlags_expectMissingFlagMessage() {
         Deck deck = new Deck();
         deck.addFlashCard("card", "card");
         String input = "edit /d 1 /j back /e noice";
@@ -49,8 +48,7 @@ public class EditCardCommandTest {
         Command test = new EditCardCommand(arguments, deck);
         CommandResult result = test.execute();
         String output = result.getResult();
-        assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat should be\n edit /c <card index> /s <side> /i <input>", output);
+        assertEquals("You are missing the relevant flag/flags", output);
     }
 
     @Test
@@ -64,7 +62,7 @@ public class EditCardCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("/c should come before /s, which should come before /i!"
-                + " Format should be\n edit /c <card index> /s <side> /i <input>", output);
+                + " Format should be\nedit /c <card index> /s <side> /i <input>", output);
     }
 
     @Test
@@ -78,7 +76,7 @@ public class EditCardCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
-                + "Format should be\n edit /c <card index> /s <side> /i <input>", output);
+                + "Format should be\nedit /c <card index> /s <side> /i <input>", output);
     }
 
     @Test
@@ -92,7 +90,7 @@ public class EditCardCommandTest {
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("Please use the correct flags and in the correct order! "
-                + "\nFormat should be\n edit /c <card index> /s <side> /i <input>", output);
+                + "\nFormat should be edit /c <card index> /s <side> /i <input>", output);
     }
 
     @Test
@@ -147,6 +145,19 @@ public class EditCardCommandTest {
         String output = result.getResult();
         assertEquals("You can only input the index of the card, which is "
                 + "a positive integer!", output);
+    }
+
+    @Test
+    public void execute_largeInteger_expectLargeIntegerErrorMessage() {
+        Deck deck = new Deck();
+        deck.addFlashCard("card", "card");
+        String input = "edit /c 2147483648 /s front /i name";
+        String commandType = Parser.getCommandType(input);
+        String arguments = Parser.getCommandArguments(commandType, input);
+        Command test = new EditCardCommand(arguments, deck);
+        CommandResult result = test.execute();
+        String output = result.getResult();
+        assertEquals("Card index must be smaller than 2147483647.", output);
     }
 
 

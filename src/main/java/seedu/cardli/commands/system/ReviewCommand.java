@@ -2,11 +2,15 @@ package seedu.cardli.commands.system;
 
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
+import seedu.cardli.testing.TestManager;
 
 public class ReviewCommand extends Command {
 
-    public ReviewCommand(String arguments) {
+    private final TestManager testManager;
+
+    public ReviewCommand(String arguments, TestManager testManager) {
         super("ReviewCommand", arguments);
+        this.testManager = testManager;
     }
 
     @Override
@@ -15,7 +19,7 @@ public class ReviewCommand extends Command {
         if (arguments.length() > 0) {
             return new CommandResult("There should not be any arguments.");
         }
-        result = new CommandResult("Entering review mode...", false, false, false, true);
+        result = new CommandResult(testManager.startReview(), false, false);
         return result;
     }
 }

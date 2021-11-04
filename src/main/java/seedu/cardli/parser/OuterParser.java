@@ -17,6 +17,7 @@ import seedu.cardli.commands.system.ViewFlashCardStatsCommand;
 import seedu.cardli.commands.system.ViewTestCommand;
 import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.testing.TestHistory;
+import seedu.cardli.testing.TestManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +29,15 @@ public class OuterParser {
     private DeckManager deckManager;
     private InnerParser innerParser;
     private TestHistory testHistory;
+    private TestManager testManager;
 
-    public OuterParser(DeckManager deckManager, InnerParser innerParser, TestHistory testHistory) {
+    public OuterParser(DeckManager deckManager, InnerParser innerParser,
+                       TestHistory testHistory, TestManager testManager) {
         logger.setLevel(Level.WARNING);
         this.deckManager = deckManager;
         this.innerParser = innerParser;
         this.testHistory = testHistory;
+        this.testManager = testManager;
     }
 
     public Command parseCommand(String input) {
@@ -88,12 +92,12 @@ public class OuterParser {
             break;
         case "test":
             arguments = Parser.getCommandArguments(commandType, input);
-            command = new TestCommand(arguments);
+            command = new TestCommand(arguments, this.testManager);
             logger.log(Level.INFO, "test command parsed and executed");
             break;
         case "review":
             arguments = Parser.getCommandArguments(commandType, input);
-            command = new ReviewCommand(arguments);
+            command = new ReviewCommand(arguments, this.testManager);
             logger.log(Level.INFO, "review command parsed and executed");
             break;
         case "help":

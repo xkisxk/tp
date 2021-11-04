@@ -32,7 +32,7 @@ DeckManager --> TestManager : deckToTest
 end
 deactivate DeckManager
 
-TestManager -> AnswerList : AnswerList(deckToTest)
+TestManager -> AnswerList **: AnswerList(deckToTest)
 activate AnswerList
 
 TestManager <-- AnswerList : userAnswers
