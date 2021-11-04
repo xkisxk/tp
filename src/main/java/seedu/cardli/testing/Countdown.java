@@ -55,8 +55,8 @@ public class Countdown {
 
             this.ticks = (this.ticks < 10) ? (this.ticks + 1) : 0;
             // update timeRemaining when 1s has passed
-            this.timeRemaining = (this.ticks == 10) ?
-                    (this.timeRemaining - 1) : this.timeRemaining;
+            this.timeRemaining = (this.ticks == 10)
+                    ? (this.timeRemaining - 1) : this.timeRemaining;
 
             if (this.ticks > 0) {
                 // allow Countdown to start displaying after 0.1s since start()
