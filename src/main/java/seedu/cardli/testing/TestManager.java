@@ -24,6 +24,9 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
  * Implements the test function.
  */
 public class TestManager {
+
+    private final static int TIME_PER_QUESTION = 15;
+
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
     private final TestHistory testHistory;
@@ -154,12 +157,17 @@ public class TestManager {
         boolean allQuestionsAnswered = false;
         int currentQuestion = 0;
         int nextQuestionFlag = 0;
+        int numOfQuestions = deckReplicate.size();
+        int timer = numOfQuestions * TIME_PER_QUESTION;
+        Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
+
         logger.log(Level.INFO, "starting test proper");
-        while (!allQuestionsAnswered) {
+        countdown.start();
+        while (!allQuestionsAnswered && countdown.isRunning()) {
             logger.log(Level.INFO, "currentQuestion is out of index. Either test finished or user scroll too far");
-            while (currentQuestion >= 0 && currentQuestion < deckReplicate.size()) {
+            while (currentQuestion >= 0 && currentQuestion < deckReplicate.size() && countdown.isRunning()) {
                 //question is not answered yet
-                if (!userAnswer.isQuestionAnswered(currentQuestion)) {
+                if (!userAnswer.isQuestionAnswered(currentQuestion) && countdown.isRunning()) {
                     logger.log(Level.INFO, "question not answered yet");
                     nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion));
                 }
@@ -186,6 +194,9 @@ public class TestManager {
                 allQuestionsAnswered = true;
             }
         }
+        if (countdown.isRunning()) {
+            countdown.stop();
+        }
         ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
@@ -194,8 +205,6 @@ public class TestManager {
 
     private int testCard(AnswerList userAnswer, FlashCard question) {
         logger.log(Level.INFO, "starting to test a new card");
-        int timer = 20;
-        Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
         int nextQuestionFlag = 0;
@@ -204,19 +213,12 @@ public class TestManager {
 
         ui.printDividerLine();
         ui.printQuestion(question, questionNumber);
-        countdown.start();
 
         //get user's answer to the card shown(currently assume user inputs only his/her answer)
         //later version to include question number and parsing to allow for randomised testing
         logger.log(Level.INFO, "getting user's answer to the question");
 
         String userResponse = ui.getUserMessage();
-        if (countdown.isRunning()) { // timer has not expired yet
-            countdown.stop();
-        } else {
-            userResponse = "";
-        }
-        countdown.stop();
 
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
