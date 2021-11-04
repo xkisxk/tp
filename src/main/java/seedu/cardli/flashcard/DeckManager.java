@@ -129,7 +129,7 @@ public class DeckManager {
     }
 
     private String returnDeletedDeckMessage(Deck deck) {
-        String result = "\tDeleted deck:";
+        String result = "\tDeleted deck: ";
         result = result.concat(deck.getName());
         return result;
     }

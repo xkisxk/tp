@@ -34,7 +34,7 @@ public class MoveCardCommand extends Command {
     private static Logger logger = Logger.getLogger(TestManager.class.getName());
 
     public MoveCardCommand(String arguments, Deck deck, DeckManager deckManager) {
-        super("EditCardCommand", arguments);
+        super("MoveCardCommand", arguments);
         this.deck = deck;
         this.deckManager = deckManager;
         this.parser = new MoveCardParser();

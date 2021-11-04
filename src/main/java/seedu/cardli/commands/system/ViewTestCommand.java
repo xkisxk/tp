@@ -22,7 +22,7 @@ public class ViewTestCommand extends Command {
             int index = TestParser.toInt(super.arguments.trim());
             result = new CommandResult(testHistory.prepareViewTest(index));
         } catch (NumberFormatException e) {
-            result = new CommandResult("Input a number or all.");
+            result = new CommandResult("Input a positive integer or \"all\" after viewtest.");
         } catch (IndexOutOfBoundsException e) {
             result = new CommandResult("There is no test at that index.");
         } catch (DeckNotExistException e) {

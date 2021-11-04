@@ -57,7 +57,8 @@ public class InnerParser {
             logger.log(Level.INFO, "delete (card) command parsed and executed");
             break;
         case "view":
-            command = new ViewCardsCommand(this.currDeck);
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ViewCardsCommand(this.currDeck, arguments);
             logger.log(Level.INFO, "view command parsed and executed");
             break;
         case "move": //move /c <index> /d <index
@@ -71,7 +72,8 @@ public class InnerParser {
             logger.log(Level.INFO, "help command parsed and executed");
             break;
         case "exit":
-            command = new ExitDeckCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new ExitDeckCommand(arguments);
             logger.log(Level.INFO, "exit command parsed and executed");
             break;
         default:
