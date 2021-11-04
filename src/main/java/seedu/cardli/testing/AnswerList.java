@@ -3,6 +3,7 @@ package seedu.cardli.testing;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.flashcard.FlashCard;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -90,18 +91,18 @@ public class AnswerList {
         return true;
     }
 
-    /**
-     * Saves a new user answer to the current list of user answers.
-     *
-     * @param answer        String representation of user's answer
-     * @param questionIndex Question number for the question that the answer answers
-     */
     public void addAnswer(String answer, int questionIndex, Boolean isAnswered) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
         answerList.add(new Answer(answer, questionIndex, isAnswered));
     }
 
+    /**
+     * Saves a new user answer to the current list of user answers.
+     *
+     * @param answer        String representation of user's answer
+     * @param questionIndex Question number for the question that the answer answers
+     */
     public void addAnswer(String answer, int questionIndex) {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Adding card");
@@ -111,6 +112,10 @@ public class AnswerList {
 
     public void setQuestionAnswer(int questionIndex, String answer) {
         answerList.get(questionIndex).setAnswer(answer);
+    }
+
+    public Answer getAnswer(int questionIndex) {
+        return answerList.get(questionIndex);
     }
 
     @Override

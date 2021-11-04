@@ -179,23 +179,15 @@ Expected outcome:
 ![](assets/ug/addflash.png)
 
 ### Deleting a flashcard: `delete`
-Format: `delete <word/phrase/index>`
+Format: `delete <index>`
 Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
 
-Format: `delete <word/phrase/index>`
-
-Remark:
-* If there are cards with identical front description in the deck, the first instance of the card 
-matching that <word/phrase> will be deleted.
+Format: `delete <index>`
 
 Example of usage:
 
 `delete 1`
-
-`delete card`
-
-`delete sequence diagrams`
 
 Expected outcome:
 
