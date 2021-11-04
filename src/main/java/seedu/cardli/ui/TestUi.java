@@ -1,5 +1,6 @@
 package seedu.cardli.ui;
 
+import org.fusesource.jansi.Ansi;
 import seedu.cardli.flashcard.FlashCard;
 import seedu.cardli.testing.AnswerList;
 
@@ -42,6 +43,11 @@ public class TestUi {
         return in.nextLine();
     }
 
+    public void clearScreen() {
+        Ansi ansi = Ansi.ansi().eraseScreen();
+        System.out.print(ansi);
+    }
+
     public void printDividerLine() {
         System.out.println("--------------------------------------------------");
     }
@@ -51,6 +57,7 @@ public class TestUi {
         //display front of card so that user can understand question
         out.println(question.getFront());
         out.println("Your answer?");
+        out.println(); // extra line for timer
     }
 
     public void printCorrectAnswer(FlashCard question) {

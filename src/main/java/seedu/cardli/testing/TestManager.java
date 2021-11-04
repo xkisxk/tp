@@ -25,7 +25,7 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
  */
 public class TestManager {
 
-    private static final int TIME_PER_QUESTION = 15;
+    private static final int TIME_PER_QUESTION = 5;
 
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
@@ -197,6 +197,7 @@ public class TestManager {
         if (countdown.isRunning()) {
             countdown.stop();
         }
+        ui.clearScreen();
         ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
@@ -211,6 +212,7 @@ public class TestManager {
 
         int questionNumber = userAnswer.getDeck().getCardIndex(question);
 
+        ui.clearScreen();
         ui.printDividerLine();
         ui.printQuestion(question, questionNumber);
 

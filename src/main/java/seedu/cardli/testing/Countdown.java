@@ -35,25 +35,39 @@ public class Countdown {
      */
     private class CountdownTimerTask extends TimerTask {
 
-        private int startValue;
         private int timeRemaining;
-        private String timesUpMessage;
+        private int ticks;
+        private final String timesUpMessage;
+        private boolean willDisplay;
 
         CountdownTimerTask(int startValue, String timesUpMessage) {
-            this.startValue = startValue;
             this.timeRemaining = startValue;
+            this.ticks = 0;
             this.timesUpMessage = timesUpMessage;
+            this.willDisplay = false;
         }
 
         private void countDown() {
-            if (this.timeRemaining >= 0) {
-                this.timeRemaining--;
+            if (this.timeRemaining <= 0) {
+                Countdown.this.stop();
+                return;
+            }
+
+            this.ticks = (this.ticks < 10) ? (this.ticks + 1) : 0;
+            // update timeRemaining when 1s has passed
+            this.timeRemaining = (this.ticks == 10) ?
+                    (this.timeRemaining - 1) : this.timeRemaining;
+
+            if (this.ticks > 0) {
+                // allow Countdown to start displaying after 0.1s since start()
+                // this allows some synchronous tasks called after to complete first
+                this.willDisplay = true;
             }
         }
 
         private void display() {
-            if (this.timeRemaining < 0) {
-                Countdown.this.stop();
+            if (!this.willDisplay) {
+                // do not display
                 return;
             }
 
@@ -89,7 +103,7 @@ public class Countdown {
     public void start() {
         this.isRunning = true;
         int delay = 0;
-        int period = 1000; // repeat at intervals of 1s
+        int period = 100; // repeat at intervals of 0.1s
         timer.scheduleAtFixedRate(this.countdownTimerTask, delay, period);
     }
 
