@@ -198,11 +198,27 @@ decides to test a single deck, the program will get that deck instance from `Dec
 The `AnswerList` is where the user's response to the test is stored, and it is made up 
 of `Answer` as shown in the class diagram above. The `AnswerList` is also tagged with the test deck.
 
-![sequence diagram](assets/testAllCardsShuffledSequenceDiagram.png)
+![sequence diagram](assets/prepareTestDeckSeqDiagram.png)
 
-After initializing the `AnswerList`, the testing begins. The `Deck` gets shuffled, then the cards (question)
-will be printed one at a time for the user to answer. The user's answer is then parsed and then added into
-the `AnswerList`. This process is repeated for the entire `Deck` that is being tested.
+After constructing the `AnswerList`, the preparation begins. The `Deck` that is attached to
+the `AnswerList` gets duplicated, then shuffled. Afterwards, the `AnswerList` will be populated with
+"NIL" `Answers`.
+
+![sequence diagram](assets/testInProgressSeqDiagram.png)
+
+This is where the actual test starts. The test will keep looping until every card in the `Deck` to test
+is answered. And there is another loop within that loops until the `currentQuestion`, which is an `int` 
+representing the question number, goes out of bounds. Inside the inner loop, `testCard` is called to
+test an individual card. The resulting `nextQuestionFlag` decides whether to proceed to the next question
+(if it equals to '0') or go back to a previous question (if it equals to '1'). If this results in 
+`currentQuestion` going out of bounds and if every question is not answered, currentQuestion will get
+reset to either the lowest or highest question number that is not answered.
+
+![sequence diagram](assets/testCardSeqDiagram.png)
+
+The question is printed for the user to answer. The user's answer is then parsed and checked if 
+it is `/Next` or `/Back`. If it is neither, the user's answer is added into `AnswerList`. If it is
+`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1.
 
 ![sequence diagram](assets/markTestSequenceDiagram.png)
 
@@ -213,7 +229,19 @@ After marking all the questions, the user's results will be printed and saved in
 This concludes the entire `startTest()` process.
 
 The `startReview()` process is similar to `startTest()`, except the `getTestDeck()` function has an additional
-condition of the `FlashCard` getting less than 50% of the total number of tests. 
+condition of the `FlashCard` getting strictly less than 50% of the total number of tests. 
+
+<details>
+<summary>Remark</summary>
+
+>`TestCommand` and `ReviewCommand` is executed quite differently compared to the other features.
+> The other commands returns the resulting string of the execution but test and review only returns the end
+> test/review message.
+> This is because, unlike the others, test and review needs to constantly interact with the user,
+> which means that the feature needs to print out a response message after the user's input. Not only
+> that, it needs to also update the timer live, which makes storing the entire process as a string
+> when `Command.execute()` is called not really feasible.
+</details>
  
 ### Storage
 

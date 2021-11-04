@@ -14,6 +14,13 @@ public class TestUi {
 
     /** The message to be displayed when the timer has expired. */
     public static final String TIMES_UP_MESSAGE = "TIME'S UP! You can still input an answer, but it won't be counted.";
+    public static final String INCORRECT_INPUT_FORMAT_MESSAGE = "Incorrect input format, "
+            + "make sure the description is either a numeric or all.";
+    public static final String NO_CARDS_TO_REVIEW_MESSAGE = "Congratulations you don't have any low scoring cards!";
+    public static final String DECK_NOT_EXIST_MESSAGE = "This deck does not exist";
+    public static final String NO_CARDS_TO_TEST_MESSAGE = "There are no cards to test.";
+    public static final String END_TEST_MESSAGE = "End of test. Returning to main menu...";
+    public static final String END_REVIEW_MESSAGE = "End of review. Returning to main menu...";
 
     private final Scanner in;
     private final PrintStream out;
@@ -28,7 +35,7 @@ public class TestUi {
     }
 
     public void showMessage(String input) {
-        System.out.println(input);
+        out.println(input);
     }
 
     public String getUserMessage() {
@@ -40,14 +47,14 @@ public class TestUi {
     }
 
     public void printQuestion(FlashCard question, int questionNumber) {
-        System.out.println("Question " + (questionNumber + 1) + ":");
+        out.println("Question " + (questionNumber + 1) + ":");
         //display front of card so that user can understand question
-        System.out.println(question.getFront());
-        System.out.println("Your answer?");
+        out.println(question.getFront());
+        out.println("Your answer?");
     }
 
     public void printCorrectAnswer(FlashCard question) {
-        System.out.println("Correct answer: " + question.getBack());
+        out.println("Correct answer: " + question.getBack());
     }
 
     /**
@@ -56,41 +63,34 @@ public class TestUi {
      * @param userAnswer the user's answer for the question
      */
     public void printUserAnswer(String userAnswer) {
-        System.out.println("Your answer: " + userAnswer);
+        out.println("Your answer: " + userAnswer);
     }
 
     public void printTestOver() {
-        System.out.println("Test Over");
+        out.println("Test Over");
     }
 
     public void printStartTest() {
-        System.out.println("Which deck do you want to test?");
-        System.out.print("Input deck index (0 or \"all\" to test all decks): ");
-    }
-
-    public void printEndTest() {
-        System.out.println("End of test. Returning to main menu...");
+        out.println("Entering test mode...");
+        out.println("Which deck do you want to test?");
+        out.print("Input deck index (0 or \"all\" to test all decks): ");
     }
 
     public void printStartReview() {
-        System.out.println("Which deck do you want to review?");
-        System.out.print("Input deck index (0 or \"all\" to review all decks): ");
+        out.println("Entering review mode...");
+        out.println("Which deck do you want to review?");
+        out.print("Input deck index (0 or \"all\" to review all decks): ");
     }
-
-    public void printReviewCard() {
-        System.out.println("Reviewing all low scoring cards");
-    }
-
 
     public void printCorrectAnsMessage() {
-        System.out.println("Well done! You got this question correct");
+        out.println("Well done! You got this question correct");
     }
 
     public void printWrongAnsMessage() {
-        System.out.println("You got this question wrong! Take note of the correct answer!");
+        out.println("You got this question wrong! Take note of the correct answer!");
     }
 
     public void printAnswerEmptyError() {
-        System.out.println("Remember to provide an answer next time! Don't give up!");
+        out.println("Remember to provide an answer next time! Don't give up!");
     }
 }

@@ -47,19 +47,6 @@ class CardLiTest {
     }
 
     @Test
-    public void deleteFlashCard_provideDescription_expectDelete() throws CardLiException {
-        Deck fcm = new Deck();
-        String[] firstCard = {"illness", "byouki"};
-        String[] secondCard = {"to lose", "nakushimasu"};
-        fcm.prepareToAddFlashCard(firstCard);
-        fcm.prepareToAddFlashCard(secondCard);
-        fcm.deleteFlashCard("illness");
-        fcm.viewAllFlashCards();
-        assertEquals(1, fcm.getCards().size());
-        fcm.deleteFlashCard("to lose");
-    }
-
-    @Test
     public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
         Deck fcm = new Deck();
         String[] firstCard = {"illness", "byouki"};
