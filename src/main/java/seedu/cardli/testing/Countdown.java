@@ -33,6 +33,10 @@ public class Countdown {
         this.isRunning = false;
     }
 
+    /**
+     * Private nested class extending a TimerTask that counts down
+     * and displays the timer on the standard output.
+     */
     private class CountdownTimerTask extends TimerTask {
 
         private int startValue;
@@ -93,11 +97,19 @@ public class Countdown {
         timer.scheduleAtFixedRate(this.countdownTimerTask, delay, period);
     }
 
+    /**
+     * Stops the timer. The timer will no longer run or display.
+     */
     public void stop() {
         this.isRunning = false;
         timer.cancel();
     }
 
+    /**
+     * Returns the status of the timer, namely whether it is
+     * running or not.
+     * @return true if the timer is running, false if not
+     */
     public boolean isRunning() {
         return this.isRunning;
     }
