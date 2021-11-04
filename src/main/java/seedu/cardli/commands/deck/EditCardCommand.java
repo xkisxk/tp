@@ -10,29 +10,25 @@ import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.FieldEmptyException;
 import seedu.cardli.exceptions.InvalidCommandFormatException;
 import seedu.cardli.flashcard.Deck;
-import seedu.cardli.flashcard.FlashCard;
 import seedu.cardli.parser.Parser;
 import seedu.cardli.parser.deck.EditCardParser;
 import seedu.cardli.testing.TestManager;
 
-import static seedu.cardli.commands.system.EditDeckCommand.countMatches;
-
-
 public class EditCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /c <card index> /s <side> /i <input>";
-
+            + "Format should be\nedit /c <card index> /s <side> /i <input>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "/c should come before /s, which should come before /i!"
-            + " Format should be\n edit /c <card index> /s <side> /i <input>";
-
+            + " Format should be\nedit /c <card index> /s <side> /i <input>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for Card!";
     private static final String INVALID_SIDE_ERROR_MESSAGE = "What side is this? It's only either front or back";
-    private static final String NO_SUCH_CARD_ERROR_MESSAGE = "No such card of that description exist!";
+    private static final String LARGE_INTEGER_ERROR_MESSAGE = "Card index must be smaller than 2147483647.";
     private static final String ARGUMENT_TYPE_ERROR_MESSAGE = "You can only input the index of the card, which is "
             + "a positive integer!";
     private static final String INVALID_ARGUMENTS_MESSAGE = "Please use the correct flags and in the correct order! "
-            + "\nFormat should be\n edit /c <card index> /s <side> /i <input>";
+            + "\nFormat should be edit /c <card index> /s <side> /i <input>";
+    private static final String FLAG_ARGUMENT_ERROR_MESSAGE = "You should not use this command's flag as your argument";
+    private static final String MISSING_FLAG_MESSAGE = "You are missing the relevant flag/flags";
 
     private EditCardParser parser;
     private Deck deck;
@@ -70,16 +66,10 @@ public class EditCardCommand extends Command {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
 
-        logger.log(Level.INFO, "Checking if no flags have been used as arguments");
-        if ((countMatches(arguments, "/s") != 1) || (countMatches(arguments, "/i") != 1)
-                || (countMatches(arguments, "/c") != 1)) {
-            throw new CardLiException(INVALID_ARGUMENTS_MESSAGE);
-        }
-
         logger.log(Level.INFO, "Checking if input contains /c, /s and /i");
         if (!arguments.contains("/c") || !arguments.contains("/s")
                 || !arguments.contains("/i")) {
-            throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            throw new FieldEmptyException(MISSING_FLAG_MESSAGE);
         }
 
         logger.log(Level.INFO, "Checking if /c,/s and /i are in the right order");
@@ -111,6 +101,10 @@ public class EditCardCommand extends Command {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
 
+        if (input.equalsIgnoreCase("/c") || input.equalsIgnoreCase("/s") || input.equalsIgnoreCase("/i")) {
+            throw new CardLiException(FLAG_ARGUMENT_ERROR_MESSAGE);
+        }
+
         logger.log(Level.INFO, "checking only front and back inputted to /s");
         if (!(side.equalsIgnoreCase("front") | side.equalsIgnoreCase("back"))) {
             throw new CardLiException(INVALID_SIDE_ERROR_MESSAGE);
@@ -132,7 +126,7 @@ public class EditCardCommand extends Command {
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Card index must be smaller than 2147483647.");
+            result = new CommandResult(LARGE_INTEGER_ERROR_MESSAGE);
         }
         return result;
     }

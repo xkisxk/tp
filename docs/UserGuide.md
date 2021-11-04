@@ -1,5 +1,7 @@
 # User Guide
 
+
+![](assets/logo.png)
 ## Introduction
 
 
@@ -201,7 +203,6 @@ Format: `delete <index of card>`
 Example of usage:
 
 `delete 1`
-
 
 Expected outcome:
 

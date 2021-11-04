@@ -38,7 +38,7 @@ public class CardLI {
         this.testHistory = new TestHistory(deckManager, storage.readTestsFromFile());
         this.testManager = new TestManager(testHistory, deckManager);
         this.innerParser = new InnerParser();
-        this.outerParser = new OuterParser(deckManager, innerParser, testHistory);
+        this.outerParser = new OuterParser(deckManager, innerParser, testHistory, testManager);
         AnsiConsole.systemInstall();
     }
 
@@ -50,7 +50,6 @@ public class CardLI {
         ui.printGreetingMessage();
         boolean exitProgram = false;
         boolean inDeck;
-        boolean inTest;
         boolean inReview;
 
 
@@ -68,14 +67,6 @@ public class CardLI {
                 ui.printResult(result);
                 inDeck = !result.isExit();
                 storage.writeCardsToFile(deckManager.getDecks());
-            }
-            inTest = result.isTest();
-            if (inTest) {
-                testManager.startTest();
-            }
-            inReview = result.isReview();
-            if (inReview) {
-                testManager.startReview();
             }
             storage.writeCardsToFile(deckManager.getDecks());
             storage.writeTestsToFile(testHistory.getTestHistory());
