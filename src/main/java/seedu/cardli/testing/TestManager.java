@@ -25,7 +25,7 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
  */
 public class TestManager {
 
-    private final static int TIME_PER_QUESTION = 15;
+    private static final int TIME_PER_QUESTION = 15;
 
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
