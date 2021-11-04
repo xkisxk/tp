@@ -14,8 +14,6 @@ public class Countdown {
 
     private Timer timer;
     private CountdownTimerTask countdownTimerTask;
-    private int startValue;
-    private String timesUpMessage;
     private boolean isRunning;
 
     /**
@@ -27,8 +25,6 @@ public class Countdown {
      */
     public Countdown(int startValue, String timesUpMessage) {
         this.timer = new Timer();
-        this.startValue = startValue;
-        this.timesUpMessage = timesUpMessage;
         this.countdownTimerTask = new CountdownTimerTask(startValue, timesUpMessage);
         this.isRunning = false;
     }
