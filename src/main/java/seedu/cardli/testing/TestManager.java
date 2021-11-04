@@ -26,6 +26,7 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
 public class TestManager {
 
     private static final int TIME_PER_QUESTION = 5;
+    private static final String EMPTY_ANSWER = "NIL";
 
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
@@ -141,7 +142,7 @@ public class TestManager {
         //populate userAnswer
         for (FlashCard question : deckReplicate) {
             int questionNumber = userAnswer.getDeck().getCardIndex(question);
-            userAnswer.addAnswer("NIL", questionNumber);
+            userAnswer.addAnswer(EMPTY_ANSWER, questionNumber);
         }
         return deckReplicate;
     }
@@ -169,7 +170,7 @@ public class TestManager {
                 //question is not answered yet
                 if (!userAnswer.isQuestionAnswered(currentQuestion) && countdown.isRunning()) {
                     logger.log(Level.INFO, "question not answered yet");
-                    nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion));
+                    nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion), countdown);
                 }
                 logger.log(Level.INFO, "setting next question to test");
                 //next question to be tested is currentQuestion - 1
@@ -204,7 +205,7 @@ public class TestManager {
         ui.printTestOver();
     }
 
-    private int testCard(AnswerList userAnswer, FlashCard question) {
+    private int testCard(AnswerList userAnswer, FlashCard question, Countdown countdown) {
         logger.log(Level.INFO, "starting to test a new card");
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
@@ -226,8 +227,13 @@ public class TestManager {
             userResponse = TestParser.parseUserResponse(userResponse);
         } catch (FieldEmptyException e) {
             logger.log(Level.INFO, "No user input");
-            userResponse = "NO ANSWER GIVEN :(";
+            userResponse = EMPTY_ANSWER;
             ui.printAnswerEmptyError();
+        }
+
+        if (!countdown.isRunning()) {
+            // timer has run out
+            userResponse = EMPTY_ANSWER;
         }
 
         //set question as answered with the new user response

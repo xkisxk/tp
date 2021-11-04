@@ -13,8 +13,6 @@ import java.util.Scanner;
  */
 public class TestUi {
 
-    /** The message to be displayed when the timer has expired. */
-    public static final String TIMES_UP_MESSAGE = "TIME'S UP! Finish up your last answer...";
     public static final String INCORRECT_INPUT_FORMAT_MESSAGE = "Incorrect input format, "
             + "make sure the description is either a numeric or all.";
     public static final String NO_CARDS_TO_REVIEW_MESSAGE = "Congratulations you don't have any low scoring cards!";
@@ -22,6 +20,8 @@ public class TestUi {
     public static final String NO_CARDS_TO_TEST_MESSAGE = "There are no cards to test.";
     public static final String END_TEST_MESSAGE = "End of test. Returning to main menu...";
     public static final String END_REVIEW_MESSAGE = "End of review. Returning to main menu...";
+    /** The message to be displayed when the timer has expired. */
+    public static final String TIMES_UP_MESSAGE = "TIME'S UP! You can still input an answer, but it won't be graded.";
 
     private final Scanner in;
     private final PrintStream out;
