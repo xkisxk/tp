@@ -25,7 +25,7 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
  */
 public class TestManager {
 
-    private static final int TIME_PER_QUESTION = 5;
+    private static final int TIME_PER_QUESTION = 15;
     private static final String EMPTY_ANSWER = "NIL";
 
     private final TestUi ui;
