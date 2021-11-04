@@ -26,7 +26,7 @@ class CardLiTest {
     }
 
     @Test
-    public void trimStrings_emptyFront_expectNoSlashException()  {
+    public void trimStrings_emptyFront_expectNoSlashException() {
         Deck fcm = new Deck();
         String input = "/bac ohayou";
         assertThrows(NoSlashException.class, () -> fcm.trimStrings(input));
@@ -46,8 +46,10 @@ class CardLiTest {
         assertThrows(CardLiException.class, () -> fcm.deleteFlashCard(input));
     }
 
+
+
     @Test
-    public void deleteFlashCard_provideIndex_expectCard() throws CardLiException {
+    public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
         Deck fcm = new Deck();
         String[] firstCard = {"illness", "byouki"};
         String[] secondCard = {"to lose", "nakushimasu"};

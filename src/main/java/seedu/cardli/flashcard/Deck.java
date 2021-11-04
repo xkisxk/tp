@@ -8,6 +8,7 @@ import seedu.cardli.exceptions.NoSlashException;
 import seedu.cardli.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -250,10 +251,11 @@ public class Deck {
     public String returnMatchingFlashCards(String searchInput) {
         String result = "";
         ArrayList<FlashCard> matchingCards = (ArrayList<FlashCard>) cards.stream()
-                .filter((f) -> f.getFront().contains(searchInput) || f.getBack().contains(searchInput))
+                .filter((f) -> f.getFront().toLowerCase().contains(searchInput.toLowerCase())
+                        || f.getBack().toLowerCase().contains(searchInput.toLowerCase()))
                 .collect(Collectors.toList());
         if (matchingCards.size() > 0) {
-            result = result.concat("Decks in " + getName() + " that contain the term " + searchInput + ":"
+            result = result.concat("Cards in " + getName() + " that contain the term " + searchInput + ":"
                     + System.lineSeparator());
             for (int i = 0; i < matchingCards.size(); i += 1) {
                 result = result.concat("Card " + (i + 1) + ":" + System.lineSeparator());
