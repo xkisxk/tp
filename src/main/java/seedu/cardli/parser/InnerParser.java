@@ -66,7 +66,8 @@ public class InnerParser {
             logger.log(Level.INFO, "move command parsed and executed");
             break;
         case "help":
-            command = new HelpInDeckCommand();
+            arguments = Parser.getCommandArguments(commandType, input);
+            command = new HelpInDeckCommand(arguments);
             logger.log(Level.INFO, "help command parsed and executed");
             break;
         case "exit":

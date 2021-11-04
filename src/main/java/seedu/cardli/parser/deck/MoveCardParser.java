@@ -9,7 +9,7 @@ public class MoveCardParser implements CommandArgumentParser {
 
     @Override
     public String[] parseArguments(String arguments) {
-        String[] parameters = arguments.trim().split("/d |/c ", 3);
+        String[] parameters = arguments.trim().split(" ", 4);
         return parameters;
     }
 }

@@ -47,7 +47,7 @@ class CardLiTest {
     }
 
     @Test
-    public void deleteFlashCard_provideIndex_expectDelete() throws CardLiException {
+    public void deleteFlashCard_provideIndex_expectCard() throws CardLiException {
         Deck fcm = new Deck();
         String[] firstCard = {"illness", "byouki"};
         String[] secondCard = {"to lose", "nakushimasu"};

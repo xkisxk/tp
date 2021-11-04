@@ -1,5 +1,5 @@
 # Developer Guide
-
+![](assets/logo.png)
 # Introduction
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help

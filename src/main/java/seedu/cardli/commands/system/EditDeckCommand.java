@@ -3,8 +3,6 @@ package seedu.cardli.commands.system;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
@@ -20,16 +18,17 @@ import seedu.cardli.testing.TestManager;
 public class EditDeckCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
-            + "Format should be\n edit /d <deck index/name of deck> /n <new name of deck>";
+            + "Format should be\nedit /d <deck index/name of deck> /n <new name of deck>";
     private static final String WRONG_ORDER_ERROR_MESSAGE = "Incorrect edit command! /n should come after /d. Format "
-            + "should be\n edit /d <deck index/name of deck> /n <new name of deck>";
-
+            + "should be\nedit /d <deck index/name of deck> /n <new name of deck>";
     private static final String INVALID_INDEX_ERROR_MESSAGE = "Incorrect index for deck!";
     private static final String ARGUMENT_TYPE_ERROR_MESSAGE = "You can only input the index of the deck, which is "
             + "a positive integer!";
-    private static final String NO_SUCH_DECK_ERROR_MESSAGE = "No deck goes by that name!";
+    private static final String LARGE_INTEGER_ERROR_MESSAGE = "Deck index must be smaller than 2147483647.";
     private static final String INVALID_ARGUMENTS_MESSAGE = "Please use the correct flags and in the correct order! "
             + "\nFormat + should be edit /d <deck index/name of deck> /n <new name of deck>";
+    private static final String FLAG_ARGUMENT_ERROR_MESSAGE = "You should not use this command's flag as your argument";
+    private static final String MISSING_FLAG_MESSAGE = "You are missing the relevant flag/flags";
 
     private EditDeckParser parser;
     private DeckManager deckManager;
@@ -61,29 +60,6 @@ public class EditDeckCommand extends Command {
         return deck;
     }
 
-
-    /* Checks if a string is empty ("") or null. */
-    public static boolean isEmpty(String s) {
-        return s == null || s.length() == 0;
-    }
-
-    /* Counts how many times the substring appears in the larger string. */
-    public static int countMatches(String text, String str) {
-        if (isEmpty(text) || isEmpty(str)) {
-            return 0;
-        }
-
-        Matcher matcher = Pattern.compile(str).matcher(text);
-
-        int count = 0;
-        while (matcher.find()) {
-            count++;
-        }
-
-        return count;
-    }
-
-
     public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
 
         logger.setLevel(Level.WARNING);
@@ -93,14 +69,11 @@ public class EditDeckCommand extends Command {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
 
-        logger.log(Level.INFO, "Checking if no flags have been used as arguments");
-        if ((countMatches(arguments, "/d") != 1) || (countMatches(arguments, "/n") != 1)) {
-            throw new CardLiException(INVALID_ARGUMENTS_MESSAGE);
-        }
+
         //maybe remove
         logger.log(Level.INFO, "Checking if input contains /d and /n");
         if (!arguments.contains("/d") || !arguments.contains("/n")) {
-            throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            throw new FieldEmptyException(MISSING_FLAG_MESSAGE);
         }
         logger.log(Level.INFO, "Checking if /d and /n are in the right order");
         if (!(arguments.indexOf("/d") < arguments.indexOf("/n"))) {
@@ -125,6 +98,9 @@ public class EditDeckCommand extends Command {
         if (deck.isEmpty() || input.isEmpty()) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
+        if (input.equalsIgnoreCase("/d") || input.equalsIgnoreCase("/n")) {
+            throw new CardLiException(FLAG_ARGUMENT_ERROR_MESSAGE);
+        }
         logger.log(Level.INFO, "preparing deckIndex");
         deck = prepareDeckIndex(deck, deckManager);
 
@@ -141,7 +117,7 @@ public class EditDeckCommand extends Command {
         } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
         } catch (NumberFormatException e) {
-            result = new CommandResult("Deck index must be smaller than 2147483647.");
+            result = new CommandResult(LARGE_INTEGER_ERROR_MESSAGE);
         }
         return result;
     }
