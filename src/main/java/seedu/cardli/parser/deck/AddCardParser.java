@@ -11,7 +11,7 @@ public class AddCardParser implements CommandArgumentParser {
     private Logger logger;
 
     public AddCardParser() {
-        this.logger = Logger.getLogger(Parser.class.getName()); // TODO: idk? change name?
+        this.logger = Logger.getLogger(Parser.class.getName());
         logger.setLevel(Level.WARNING);
     }
 

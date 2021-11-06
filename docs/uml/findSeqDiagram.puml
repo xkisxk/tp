@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+!include style.puml
+
+participant ":OuterParser" as Parser logicCOLOUR
+participant "FindCardsCommand" as FindCardsCommand  logicCOLOUR
+participant "FindCardsParser" as FindCardsParser logicCOLOUR
+participant "CommandResult" as CommandResult logicCOLOUR
+participant ":DeckManager" as Dm modelCOLOUR
+participant ":Deck" as deck modelCOLOUR
+autonumber
+
+
+
+
+        [-> Parser: parseCommand(input)
+            activate Parser
+            ref over Parser
+            parsing
+            arguments
+            end ref
+             create FindCardsCommand
+                    Parser -> FindCardsCommand
+
+                    activate FindCardsCommand
+                    create FindCardsParser
+                    FindCardsCommand->FindCardsParser
+                            activate FindCardsParser
+                            FindCardsParser --> FindCardsCommand
+                            deactivate FindCardsParser
+                            Parser <--FindCardsCommand : command:Command
+                            deactivate FindCardsCommand
+                                    [<--Parser : command:Command
+                                    deactivate Parser
+        [-> FindCardsCommand: execute()
+        activate FindCardsCommand
+        FindCardsCommand->FindCardsParser: parseArguments(arguments)
+        activate FindCardsParser
+        FindCardsParser-->FindCardsCommand: parameters:String[]
+        deactivate FindCardsParser
+        destroy FindCardsParser
+
+        alt !findInput.isEmpty()
+            create CommandResult
+            FindCardsCommand -> CommandResult
+            activate CommandResult
+            CommandResult -> Dm: findCards(searchInput)
+            activate Dm
+            loop all decks
+                Dm -> deck: returnMatchingFlashCards(searchInput)
+                activate deck
+                deck --> Dm: result:String
+                deactivate deck
+                destroy deck
+            end
+            Dm --> CommandResult: result:String
+            deactivate Dm
+            destroy Dm
+            CommandResult --> FindCardsCommand: result:CommandResult
+            deactivate CommandResult
+            destroy CommandResult
+        end
+        [<--FindCardsCommand: result: CommandResult
+        deactivate FindCardsCommand
+        destroy FindCardsCommand
+@enduml

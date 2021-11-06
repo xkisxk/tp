@@ -11,7 +11,7 @@ public class DeleteCardParser implements CommandArgumentParser {
     private Logger logger;
 
     public DeleteCardParser() {
-        this.logger = Logger.getLogger(Parser.class.getName()); // TODO: idk? change name?
+        this.logger = Logger.getLogger(Parser.class.getName());
         logger.setLevel(Level.WARNING);
     }
 

@@ -1,3 +1,4 @@
+//@@author xRossKoh
 package seedu.cardli.storage;
 
 import org.json.simple.JSONObject;
@@ -42,7 +43,7 @@ public class Storage {
                 testsFile.createNewFile();
             }
         } catch (IOException e) {
-            //TODO: fill catch block
+            System.out.println((e.getMessage()));
         }
     }
 

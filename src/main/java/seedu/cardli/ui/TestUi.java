@@ -39,10 +39,6 @@ public class TestUi {
         out.println(input);
     }
 
-    public String getUserMessage() {
-        return in.nextLine();
-    }
-
     public void clearScreen() {
         Ansi ansi = Ansi.ansi().eraseScreen();
         System.out.print(ansi);
@@ -99,5 +95,9 @@ public class TestUi {
 
     public void printAnswerEmptyError() {
         out.println("Remember to provide an answer next time! Don't give up!");
+    }
+
+    public String getUserMessage() {
+        return in.nextLine();
     }
 }

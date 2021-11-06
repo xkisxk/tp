@@ -19,14 +19,7 @@ public class CardLiUi {
         this.out = out;
     }
 
-    public String getUserMessage() {
-        return in.nextLine();
-    }
-
-    public void showMessage(String input) {
-        System.out.println(input);
-    }
-
+    //@@author JWweiyin
     public void printByeMessage() {
         System.out.println("\tYou did well today! Goodbye!");
     }
@@ -35,7 +28,7 @@ public class CardLiUi {
         String help = "\n"
                 + "................................................................................"
                 + "....................................... \n"
-                + "Here is the list  of commands! \n"
+                + "Here is the list of commands! \n"
                 + "1. add \n"
                 + "Description: Adds a flashcard deck \n"
                 + "Format: add <name of deck> \n\n"
@@ -106,6 +99,7 @@ public class CardLiUi {
         return help;
     }
 
+    //@@author JWweiyin
     public void printGreetingMessage() {
         String logo = "\n"
                 + " .----------------.  .----------------.  .----------------.  .----------------. "
@@ -137,5 +131,10 @@ public class CardLiUi {
 
     public static void printResult(CommandResult result) {
         System.out.println(result.getResult());
+    }
+
+    //@@author xkisxk
+    public String getUserMessage() {
+        return in.nextLine();
     }
 }

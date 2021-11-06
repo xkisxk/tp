@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+!define logicCOLOUR #a6f0ff
+!define boxCOLOUR #86b1db
+!define mainCOLOUR #b5b5b5
+
+rectangle parser as "Parser" boxCOLOUR{
+rectangle "InnerParser" as iParser logicCOLOUR
+rectangle "OuterParser" as oParser logicCOLOUR
+rectangle "<<interface>>\nCommandArgumentParser" as CAP logicCOLOUR
+rectangle "XYZCommandParser" as XYZCP logicCOLOUR
+
+}
+
+rectangle "{abstract}\nCommand" as Command logicCOLOUR
+rectangle "XYZCommand" as XYZCommand logicCOLOUR
+
+rectangle "Main" as Main mainCOLOUR
+
+XYZCP -up-|> CAP
+iParser -[dashed]->XYZCommand: > creates
+oParser -[dashed]->XYZCommand: > creates
+XYZCommand-[dashed]->XYZCP: > creates
+XYZCommand-up-|>Command
+
+Main -down-> iParser
+Main -down-> oParser
+@enduml

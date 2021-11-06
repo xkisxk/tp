@@ -32,16 +32,6 @@ public class AnswerList {
         this.isAllAnswered = false;
     }
 
-    /**
-     * Gets the index of the answer in the list.
-     *
-     * @param answer answer query
-     * @return index of the answer
-     */
-    public int getAnswerIndex(Answer answer) {
-        return answerList.indexOf(answer);
-    }
-
     public Boolean isQuestionAnswered(int index) {
         Boolean isQuestionAnswered;
         try {
@@ -53,33 +43,12 @@ public class AnswerList {
         return isQuestionAnswered;
     }
 
-
-    public ArrayList<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public int getUserScore() {
-        return userScore;
-    }
-
-    public void setUserScore(int userScore) {
-        this.userScore = userScore;
-    }
-
     public void incrementUserScore() {
         userScore++;
     }
 
     public Boolean isEmpty() {
         return answerList.isEmpty();
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public int getSize() {
-        return answerList.size();
     }
 
     public Boolean isAllAnswered() {
@@ -89,12 +58,6 @@ public class AnswerList {
             }
         }
         return true;
-    }
-
-    public void addAnswer(String answer, int questionIndex, Boolean isAnswered) {
-        logger.setLevel(Level.WARNING);
-        logger.log(Level.INFO, "Adding card");
-        answerList.add(new Answer(answer, questionIndex, isAnswered));
     }
 
     /**
@@ -109,13 +72,42 @@ public class AnswerList {
         answerList.add(new Answer(answer, questionIndex));
     }
 
-
-    public void setQuestionAnswer(int questionIndex, String answer) {
-        answerList.get(questionIndex).setAnswer(answer);
+    /**
+     * Gets the index of the answer in the list.
+     *
+     * @param answer answer query
+     * @return index of the answer
+     */
+    public int getAnswerIndex(Answer answer) {
+        return answerList.indexOf(answer);
     }
 
     public Answer getAnswer(int questionIndex) {
         return answerList.get(questionIndex);
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public int getSize() {
+        return answerList.size();
+    }
+
+    public ArrayList<Answer> getAnswerList() {
+        return answerList;
+    }
+
+    public int getUserScore() {
+        return userScore;
+    }
+
+    public void setUserScore(int userScore) {
+        this.userScore = userScore;
+    }
+
+    public void setQuestionAnswer(int questionIndex, String answer) {
+        answerList.get(questionIndex).setAnswer(answer);
     }
 
     @Override
