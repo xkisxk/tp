@@ -13,6 +13,13 @@ through the use of flashcards, while also reducing the paper waste that goes int
 flashcards. The interfacing within the application is designed to be interactive and functional,
 while the commands are designed to be intuitive to use. 
 
+## Purpose
+
+This guide is meant to help you to get familiarised with all the features of CardLI. The `Quick Start`
+section will tell you how to download and get CardLI set up. The `Features` section provides an
+in depth description of all available features, which you can refer to if you to know the exact definitions. 
+There is also a `Command Summary` section that will give you a brief overview of the format of all
+commands and an example in table format to make it easier for you to navigate.
 
 ## Quick Start
 
@@ -36,6 +43,11 @@ menu to work with the flashcards.
 
 ### Content
 1. [Main Menu](#main-menu)
+   1. [Delete](#deleting-a-deck-delete)
+   2. [Test](#test-flashcards-test)
+   3. [View Flashcard Stats](#view-flashcard-statistics-viewfc)
+   4. [View Test](#view-test-statistics-viewtest)
+   5. [Review](#review-flashcards-review)
 2. [Deck Menu](#deck-menu)
 
 ---
@@ -101,7 +113,7 @@ Format:
 Expected outcome: 
 
 ![](assets/ug/enter.png)
-### Testing flashcards within a deck: `test`
+### Test flashcards: `test`
 
 Enter test mode. The program will ask you to input the index for the deck that is to be tested.
 The word to be tested will be displayed in the console. 
