@@ -8,6 +8,7 @@ import seedu.cardli.exceptions.NoSlashException;
 import seedu.cardli.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -131,10 +132,15 @@ public class Deck {
     }
 
     //TODO: don't allow cards with same front to be entered. no duplicate front across the entire app
-    private boolean hasExactCard(String query, FlashCard card) {
-        return card.getFront().equalsIgnoreCase(query);
+    public boolean hasCardWithSameName(String query)
+    {
+        for (FlashCard f: cards) {
+            if (f.getFront().equals(query.trim())){
+                return true;
+            }
+        }
+        return false;
     }
-
 
     public void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));

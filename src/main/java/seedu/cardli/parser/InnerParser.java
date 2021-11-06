@@ -22,7 +22,7 @@ public class InnerParser {
 
     private Deck currDeck;
 
-    private DeckManager deckList;
+    private DeckManager deckManager;
 
     public InnerParser(Deck currDeck) {
         this.currDeck = currDeck;
@@ -43,7 +43,7 @@ public class InnerParser {
         switch (commandType) {
         case "add":
             arguments = Parser.getCommandArguments(commandType, input);
-            command = new AddCardCommand(arguments, this.currDeck);
+            command = new AddCardCommand(arguments, this.currDeck, this.deckManager);
             logger.log(Level.INFO, "add (card) command parsed and executed");
             break;
         case "edit": //edit /c <index> /s <side> /i <input>
@@ -63,7 +63,7 @@ public class InnerParser {
             break;
         case "move": //move /c <index> /d <index
             arguments = Parser.getCommandArguments(commandType, input);
-            command = new MoveCardCommand(arguments, this.currDeck, this.deckList);
+            command = new MoveCardCommand(arguments, this.currDeck, this.deckManager);
             logger.log(Level.INFO, "move command parsed and executed");
             break;
         case "help":
@@ -88,6 +88,6 @@ public class InnerParser {
     }
 
     public void setDeckManager(DeckManager deckList) {
-        this.deckList = deckList;
+        this.deckManager = deckList;
     }
 }
