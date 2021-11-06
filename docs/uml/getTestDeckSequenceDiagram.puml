@@ -1,8 +1,12 @@
 @startuml
-participant ":TestManager" as TestManager
-participant ":AnswerList" as AnswerList
-participant ":DeckManager" as DeckManager
-participant "deckToTest:Deck" as Deck
+!include style.puml
+autonumber
+hide footbox
+
+participant ":TestManager" as TestManager modelCOLOUR
+participant ":AnswerList" as AnswerList modelCOLOUR
+participant ":DeckManager" as DeckManager modelCOLOUR
+participant "deckToTest:Deck" as Deck modelCOLOUR
 
 activate TestManager
 
@@ -31,6 +35,7 @@ TestManager -> DeckManager : get(deckIndex)
 DeckManager --> TestManager : deckToTest
 end
 deactivate DeckManager
+destroy DeckManager
 
 TestManager -> AnswerList **: AnswerList(deckToTest)
 activate AnswerList

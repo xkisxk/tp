@@ -41,6 +41,7 @@ menu to work with the flashcards.
 ---
 ## Main Menu
 >💾 Your decks are saved after each command.
+
 ### Adding a deck: `add`
 Creates and adds a new deck with the given name, if it does not already exist.
 
