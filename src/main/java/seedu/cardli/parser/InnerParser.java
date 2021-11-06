@@ -48,7 +48,7 @@ public class InnerParser {
             break;
         case "edit": //edit /c <index> /s <side> /i <input>
             arguments = Parser.getCommandArguments(commandType, input);
-            command = new EditCardCommand(arguments, this.currDeck);
+            command = new EditCardCommand(arguments, this.currDeck, this.deckManager);
             logger.log(Level.INFO, "edit (card) command parsed and executed");
             break;
         case "delete":
