@@ -9,7 +9,9 @@ participant "newAnswer: Answer" as Ans
 autonumber
 hide footbox
 
-[->Store: parseAnswerList(jsonAnswerList: JSONObject)
+activate Store
+
+Store->Store: parseAnswerList(jsonAnswerList: JSONObject)
 activate Store
 
 Store->jsonAL: get("deck")
@@ -76,7 +78,7 @@ activate AL
 Store<--AL
 deactivate AL
 
-[<--Store: newAnswerList
-destroy Store
+Store-->Store: newAnswerList
+deactivate Store
 
 @enduml

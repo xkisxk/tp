@@ -9,7 +9,9 @@ participant "newFlashCard: FlashCard" as Card
 autonumber
 hide footbox
 
-[->Store: parseDeck(jsonDeck: JSONObject)
+activate Store
+
+Store->Store: parseDeck(jsonDeck: JSONObject)
 activate Store
 
 Store->jsonDeck: get("deckName")
@@ -69,7 +71,7 @@ deactivate Deck
 
 end
 
-[<--Store: newDeck
-destroy Store
+Store-->Store: newDeck
+deactivate Store
 
 @enduml
