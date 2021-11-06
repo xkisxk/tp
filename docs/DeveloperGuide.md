@@ -28,7 +28,7 @@ Each component is explained in the sections below.
 
 ### Model Component
 
-![](assets/modelArchitectureDiagram.png)
+![](assets/modelArchitectureDiagram2.png)
 
 The `Model` component consists of two packages: 
 
@@ -47,12 +47,18 @@ and the `testing` package that contains:
 
 A `Deck` contains a private arrayList of `FlashCards`, and `DeckManager` contains a private arrayList of `Decks`.
 
+An `AnswerList` contains a private arrayList of `Answers`, which is created by `TestManager` when the commands for the test functions are executed (`ReviewCommand`, `TestCommand`). 
+
+The `Countdown` class creates a timer that displays the time left for a question during a Test or Review.
+
 ### UI Component
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
 
 ### Logic Component
 
 ![](assets/logicArchitectureDiagram.png)
+
+> ℹ️  `XYZCommand` is a placeholder name for subclasses of the abstract `Command` class (eg. `AddCardsCommand`, `DeleteDeckCommand`, `TestCommand` etc)
 
 Here is a partial architecture diagram of the `Logic` component. It executes user commands via Command classes when appropriate with the appropriate arguments as given by the Parser component.
 
@@ -74,11 +80,13 @@ How the parsing works:
 
 All `XYZCommandParser` classes implement the `CommandArgumentParser` interface.
 ### Storage Component
-The Storage component:
+The `Storage` component:
 * Saves all the decks
 * Saves all the flashcards
 * Remembers which deck each flashcard belongs to
 * Saves the results of each test
+
+All app data is saved as JSON files.
 
 ## Implementation
 ### Edit
@@ -164,16 +172,13 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 ### Find
 
-This feature allows users of CardLI to find a `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the user can view specific `FlashCards` matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
+![](assets/findFlashcardDiagram.png)
+
+Given above is the sequence diagram of the `find` function. This feature allows users of CardLI to find a `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the user can view specific `FlashCards` matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
 
 Currently, `find` is implemented on a Systemwide level. After the `CardLiUi` handles the user input, `OuterParser` formats the user input and creates a `FindCardsCommand` object which is returned. `Duke` calls the `execute()` method of the `FindCardsCommand` object. The `FindCardsParser` extracts the search term(s) and passes them to `CommandResult` which invokes the  `findCards()` method of `DeckManager` that repeatedly calls the `returnMatchingFlashCards()` method that iterates once for each instance of a `Deck`.
 
 `returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck, and filters them based on whether they contain the search term given. Finally all the `FlashCards` that contain the search term are collected in an arrayList and their console outputs are returned in string format for `CardLiUi` to display to the user.
-
-Given below is the sequence diagram for `find`:
-
-![](assets/findFlashcardDiagram.png)
-
 
 ### Test Feature
 
@@ -389,7 +394,11 @@ CardLI provides a:
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+<li> The app should be usable by a user who is reasonably comfortable using Command Line Interface.</li>
+<li> The app should be able to handle at least 25 flashcard decks of at least 25 cards each.</li>
+<li> The app should work on a computer that has Java 11 or above installed.</li>
+<li> The app should store data in a format that is readable by humans, and easy for machines to parse and generate.</li>
+
 
 ## Glossary
 
