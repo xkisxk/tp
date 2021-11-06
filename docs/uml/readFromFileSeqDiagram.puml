@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+autonumber
+participant ": Storage" as Store
+participant "decks: ArrayList<Deck> /\ntestHistory: ArrayList<AnswerList>" as ArrayList
+participant "s: Scanner" as Scan
+participant "parser: JSONParser" as Parser
+
+[->Store: readCardsFromFile() /\nreadTestsFromFile()
+activate Store
+
+Store->ArrayList**: new ArrayList<>()
+activate ArrayList
+
+Store<--ArrayList
+deactivate ArrayList
+
+Store->Scan**: new Scanner(filepath: String)
+activate Scan
+
+Store<--Scan
+deactivate Scan
+
+Store->Parser**: new JSONParser()
+activate Parser
+
+Store<--Parser
+deactivate Parser
+
+Store->Scan: nextLine()
+activate Scan
+
+Store<--Scan: scannedString: String
+destroy Scan
+
+Store->Parser: parse(scannedString)
+activate Parser
+
+Store<--Parser: JSONArray jsonDecks / jsonTestHistory\n = ((JSONArray) scannedObject: Object)
+deactivate Parser
+
+loop (JSONObject) object in jsonDecks / jsonTestHistory
+
+Store->Store: parseDeck / parseAnswerList(object)
+activate Store
+
+ref over Store
+parse Deck / AnswerList from JSONObject
+end ref
+
+Store-->Store: deck: Deck / answerList: AnswerList
+deactivate Store
+
+Store->ArrayList: add(deck / answerList)
+activate ArrayList
+
+Store<--ArrayList
+deactivate ArrayList
+
+end
+
+[<--Store: decks / testHistory
+destroy Store
+
+@enduml

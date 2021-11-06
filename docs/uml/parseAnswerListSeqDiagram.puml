@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ": Storage" as Store
+participant "jsonAnswerList: JSONObject" as jsonAL
+participant "newAnswerList: AnswerList" as AL
+participant "jsonAnswer: JSONObject" as jsonAns
+participant "newAnswer: Answer" as Ans
+autonumber
+hide footbox
+
+[->Store: parseAnswerList(jsonAnswerList: JSONObject)
+activate Store
+
+Store->jsonAL: get("deck")
+activate jsonAL
+
+Store<--jsonAL: jsonDeck: Object
+deactivate jsonAL
+
+Store->Store: parseDeck\n((JSONObject) jsonDeck)
+activate Store
+
+Store-->Store: newDeck: Deck
+deactivate Store
+
+Store->AL**:new AnswerList(newDeck)
+activate AL
+
+Store<--AL
+deactivate AL
+
+Store->jsonAL: get("answerList")
+activate jsonAL
+
+Store<--jsonAL: JSONArray jsonAnswers\n = ((JSONArray) answerList:\n Object)
+deactivate jsonAL
+
+loop (JSONObject) jsonAnswer in jsonAnswers
+
+Store->jsonAns: get("answer")
+activate jsonAns
+
+Store<--jsonAns: answer: Object
+deactivate jsonAns
+
+Store->jsonAns: get("questionIndex")
+activate jsonAns
+
+Store<--jsonAns: questionIndex: Object
+deactivate jsonAns
+
+Store->Ans**: new Answer((String) answer, (int)(long) questionIndex)
+activate Ans
+
+Store<--Ans
+deactivate Ans
+
+Store->AL: add(newAnswer)
+activate AL
+
+Store<--AL
+deactivate AL
+
+end
+
+Store->jsonAL: get("userScore")
+activate jsonAL
+
+Store<--jsonAL: userScore: Object
+deactivate jsonAL
+
+Store->AL: setUserScore((int)(long) userScore)
+activate AL
+
+Store<--AL
+deactivate AL
+
+[<--Store: newAnswerList
+destroy Store
+
+@enduml

@@ -59,7 +59,6 @@ public class Storage {
             }
 
             fileWriter.write(jsonDecks.toJSONString());
-
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong while saving to file...");
@@ -122,7 +121,6 @@ public class Storage {
     private AnswerList parseAnswerList(JSONObject jsonAnswerList) {
         JSONObject jsonDeck = (JSONObject) jsonAnswerList.get("deck");
         AnswerList newAnswerList = new AnswerList(parseDeck(jsonDeck));
-
         JSONArray jsonAnswers = (JSONArray) jsonAnswerList.get("answerList");
 
         for (Object o: jsonAnswers) {
@@ -140,11 +138,10 @@ public class Storage {
 
         for (Object o: jsonCards) {
             JSONObject jsonCard = (JSONObject) o;
-            FlashCard newFlashCard = new FlashCard((String) jsonCard.get("front"),
+            newDeck.addFlashCard(new FlashCard((String) jsonCard.get("front"),
                     (String) jsonCard.get("back"),
                     (int) (long) jsonCard.get("userScore"),
-                    (int) (long) jsonCard.get("totalScore"));
-            newDeck.addFlashCard(newFlashCard);
+                    (int) (long) jsonCard.get("totalScore")));
         }
         return newDeck;
     }

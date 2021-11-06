@@ -1,0 +1,53 @@
+@startuml
+hide footbox
+autonumber
+participant ": Storage" as Storage
+participant "fileWriter: FileWriter" as File
+participant "jsonDecks / jsonTestHistory:\n JSONArray" as JSON
+participant "deck: Deck /\nanswerList: AnswerList" as Object
+[-> Storage: writeCardsToFile\n(decks: ArrayList<Deck>) /\nwriteTestsToFile\n(testHistory: ArrayList<AnswerList>)
+activate Storage
+
+Storage -> File **: FileWriter(filepath: String, append: boolean)
+activate File
+
+File --> Storage
+deactivate File
+
+Storage->JSON**: new JSONArray()
+activate JSON
+
+Storage<--JSON
+deactivate JSON
+
+loop deck in decks/answerList in testHistory
+
+Storage->Object: toJSONObject()
+activate Object
+
+Storage<--Object: jsonDeck / jsonAnswerList: JSONObject
+destroy Object
+
+Storage->JSON: add(jsonDeck / jsonAnswerList)
+activate JSON
+
+Storage<--JSON
+destroy JSON
+
+end
+
+Storage->File: write(jsonDecks / jsonTestHistory)
+activate File
+
+File --> Storage
+deactivate File
+
+Storage->File: close()
+activate File
+
+File --> Storage
+destroy File
+
+[<-- Storage
+destroy Storage
+@enduml
