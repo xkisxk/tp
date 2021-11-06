@@ -19,7 +19,7 @@ Given below are my contributions to the project.
     a certain deck and may wish to move it to another deck in a convenient way rather than having to delete the card and
   add the card in another deck.
 
-* **New Feature**: Basic Testing.
+* **New Feature**: FlashCard Testing.
   * What it does: Through creating the initial Answer, AnswerList and TestManager classes, users can test his/her
   knowledge with the flashcards.
   * Justification: This feature is essential to the product as the purpose of flashcards is to test oneself with them.
