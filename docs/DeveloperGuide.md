@@ -255,28 +255,28 @@ the tests that they have completed thus far. This will also allow users to re-ac
 when they re-enter the application. This way, they will not have to keep re-adding the same flashcards,
 while also being able to review tests that they had previously done on the application. 
 
-This feature is implemented by saving the user’s data into two separate text files, which will be saved into
+This feature is implemented by saving the user’s data into two separate `json` files, which will be saved into
 a new `data` directory created upon first start up of the application if it does not yet exist. 
 This new directory will be created within the current directory from which the `CardLI.jar` file is run in the CLI. 
-The file paths of the two text files are hard coded as `Cards_CardLI.txt` and `Tests_CardLItxt`, which will save data
+The file paths of the two text files are hard coded as `Cards_CardLI.json` and `Tests_CardLI.json`, which will save data
 on the user's decks of flashcards and test history respectively. 
-When the user inputs the command `bye`, the application execute the save functions. When the 
-user restarts or re-enters the application, the application will parse the text files and convert them into
-the relevant data. The format of how the data is saved into the text files are specified 
-during the development process in order to reduce the risk of bugs arising when the text files are being parsed, which
+Whenever the user inputs a new command, the application will execute the save functions after the actions corresponding
+to the command are completed. When the user restarts or re-enters the application, the application will parse the `json` 
+files and convert them into the relevant data. The format of how the data is saved into the `json` files are specified 
+during the development process in order to reduce the risk of bugs arising when they are being parsed, which
 will be explained in the following paragraphs.
 
 A `Storage` class was implemented to contain all the methods to execute the save and parse functions to and from the 
 relevant text files. An instance of this class is created upon first start up the application to handle all the 
 method calls. The respective methods will be explained in more detail in the following paragraphs.
 
-`writeToFile(ArrayList<T> arrayList, String type)`
+`writeCardsToFile(ArrayList<Deck> decks)`/`writeTestsToFile(ArrayList<AnswerList> testHistory)`
 
 This method invokes the save function by writing the user's data to the specified text files. It takes in two arguments,
 namely an `ArrayList` of a generic type `<T>` as well as a `boolean` value, `saveCards`, that indicates whether the method
 is saving cards or tests to their respective text files.
 
-![](assets/writeToFileSequenceDiagram.png)
+
 
 For the saving of the user's decks of flashcards, the method call will expect an `ArrayList` of `Deck` objects along 
 with a `saveCards` argument of true. 

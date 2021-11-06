@@ -9,6 +9,7 @@ participant "newAnswer: Answer" as Ans
 autonumber
 hide footbox
 
+mainframe **ref** parseAnswerList
 activate Store
 
 Store->Store: parseAnswerList(jsonAnswerList: JSONObject)

@@ -46,7 +46,7 @@ Store->Store: parseDeck / parseAnswerList(object)
 activate Store
 
 ref over Store
-parse Deck / AnswerList from JSONObject
+parseDeck / parseAnswerList
 end ref
 
 Store-->Store: deck: Deck / answerList: AnswerList

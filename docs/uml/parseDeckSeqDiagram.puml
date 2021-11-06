@@ -9,6 +9,7 @@ participant "newFlashCard: FlashCard" as Card
 autonumber
 hide footbox
 
+mainframe **ref** parseDeck
 activate Store
 
 Store->Store: parseDeck(jsonDeck: JSONObject)
