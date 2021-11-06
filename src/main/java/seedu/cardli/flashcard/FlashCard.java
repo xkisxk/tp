@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class FlashCard {
 
     private static final String FLASHCARD_TOP_FRONT = "*================FRONT================*";
-    private static final String FLASHCARD_TOP_BACK = "*===============BACK==================*";
+    private static final String FLASHCARD_TOP_BACK = "*================BACK=================*";
     private static final String FLASHCARD_BOTTOM = "*=====================================*";
     private static final String FLASHCARD_WHITESPACE = " ";
     private static final String FLASHCARD_TOP_LINE = FLASHCARD_TOP_FRONT

@@ -24,6 +24,10 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
  * Implements the test function.
  */
 public class TestManager {
+
+    private static final int TIME_PER_QUESTION = 15;
+    private static final String EMPTY_ANSWER = "NIL";
+
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
     private final TestHistory testHistory;
@@ -138,7 +142,7 @@ public class TestManager {
         //populate userAnswer
         for (FlashCard question : deckReplicate) {
             int questionNumber = userAnswer.getDeck().getCardIndex(question);
-            userAnswer.addAnswer("NIL", questionNumber);
+            userAnswer.addAnswer(EMPTY_ANSWER, questionNumber);
         }
         return deckReplicate;
     }
@@ -154,14 +158,19 @@ public class TestManager {
         boolean allQuestionsAnswered = false;
         int currentQuestion = 0;
         int nextQuestionFlag = 0;
+        int numOfQuestions = deckReplicate.size();
+        int timer = numOfQuestions * TIME_PER_QUESTION;
+        Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
+
         logger.log(Level.INFO, "starting test proper");
-        while (!allQuestionsAnswered) {
+        countdown.start();
+        while (!allQuestionsAnswered && countdown.isRunning()) {
             logger.log(Level.INFO, "currentQuestion is out of index. Either test finished or user scroll too far");
-            while (currentQuestion >= 0 && currentQuestion < deckReplicate.size()) {
+            while (currentQuestion >= 0 && currentQuestion < deckReplicate.size() && countdown.isRunning()) {
                 //question is not answered yet
-                if (!userAnswer.isQuestionAnswered(currentQuestion)) {
+                if (!userAnswer.isQuestionAnswered(currentQuestion) && countdown.isRunning()) {
                     logger.log(Level.INFO, "question not answered yet");
-                    nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion));
+                    nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion), countdown);
                 }
                 logger.log(Level.INFO, "setting next question to test");
                 //next question to be tested is currentQuestion - 1
@@ -186,44 +195,45 @@ public class TestManager {
                 allQuestionsAnswered = true;
             }
         }
+        if (countdown.isRunning()) {
+            countdown.stop();
+        }
+        ui.clearScreen();
         ui.printDividerLine();
         logger.log(Level.INFO, "Finished test");
         //let user know testing is over
         ui.printTestOver();
     }
 
-    private int testCard(AnswerList userAnswer, FlashCard question) {
+    private int testCard(AnswerList userAnswer, FlashCard question, Countdown countdown) {
         logger.log(Level.INFO, "starting to test a new card");
-        int timer = 20;
-        Countdown countdown = new Countdown(timer, TIMES_UP_MESSAGE);
 
         //0 means proceed to next question in userAnswer;1 means go back 1 question
         int nextQuestionFlag = 0;
 
         int questionNumber = userAnswer.getDeck().getCardIndex(question);
 
+        ui.clearScreen();
         ui.printDividerLine();
         ui.printQuestion(question, questionNumber);
-        countdown.start();
 
         //get user's answer to the card shown(currently assume user inputs only his/her answer)
         //later version to include question number and parsing to allow for randomised testing
         logger.log(Level.INFO, "getting user's answer to the question");
 
         String userResponse = ui.getUserMessage();
-        if (countdown.isRunning()) { // timer has not expired yet
-            countdown.stop();
-        } else {
-            userResponse = "";
-        }
-        countdown.stop();
 
         try {
             userResponse = TestParser.parseUserResponse(userResponse);
         } catch (FieldEmptyException e) {
             logger.log(Level.INFO, "No user input");
-            userResponse = "NO ANSWER GIVEN :(";
+            userResponse = EMPTY_ANSWER;
             ui.printAnswerEmptyError();
+        }
+
+        if (!countdown.isRunning()) {
+            // timer has run out
+            userResponse = EMPTY_ANSWER;
         }
 
         //set question as answered with the new user response
