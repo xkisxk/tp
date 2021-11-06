@@ -18,6 +18,9 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user can make mistakes in placing a card in
     a certain deck and may wish to move it to another deck in a convenient way rather than having to delete the card and
   add the card in another deck.
+  * Comments: This feature was slightly harder to implement compared to the `edit` feature as it needed access to 
+  both the system level and the deck level, whereas `edit` either used the system level or the deck level but not both
+  at the same time
 
 * **New Feature**: FlashCard Testing.
   * What it does: Through creating the initial Answer, AnswerList and TestManager classes, users can test his/her
@@ -28,6 +31,10 @@ Given below are my contributions to the project.
   * What it does: Added the ability to skip a question during tests.
   * Justification: This feature improves the product significantly as a user may not know the answer to a flashcard
   and may want to come back to the question later.
+  * Comments: This feature was more of a challenge than initially thought. There were many bugs to take care of and the
+  underlying method of testing had to be changed to enable this feature. Instead of a for loop testing all the 
+  flashcards in a deck, the use of a counter variable to keep track of the current question being tested and a flag
+  to check if a question has already been answered had to be developed.
 
 * **New Feature**: Added help command.
   * What it does: Added the ability to ask for the list of commands.
