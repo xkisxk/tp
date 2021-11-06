@@ -40,7 +40,7 @@ public class InnerParser {
         Command command;
         String arguments;
 
-        switch (commandType) { // TODO: add testing-related commands
+        switch (commandType) {
         case "add":
             arguments = Parser.getCommandArguments(commandType, input);
             command = new AddCardCommand(arguments, this.currDeck);

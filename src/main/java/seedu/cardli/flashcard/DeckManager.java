@@ -53,35 +53,6 @@ public class DeckManager {
         return ("Changed deck " + enteredDeckIndex + " to " + deckName);
     }
 
-    public int getDeckIndex(Deck deck) {
-        return decks.indexOf(deck);
-    }
-
-    public Deck getDeck(int index) {
-        assert getDecksSize() > 0;
-        assert (index >= 0 && index < getDecksSize());
-        return decks.get(index);
-    }
-
-    public Deck getTestDeck(int index) {
-        if (index == -1) {
-            Deck deckToTest = new Deck("Test");
-            for (Deck deck : getDecks()) {
-                for (FlashCard card : deck.getCards()) {
-                    deckToTest.addFlashCard(card);
-                }
-            }
-            return deckToTest;
-        }
-        if (hasDeck(index)) {
-            return decks.get(index);
-        }
-        throw new IndexOutOfBoundsException(DECK_NOT_EXIST_MESSAGE);
-    }
-
-    public int getDecksSize() {
-        return decks.size();
-    }
 
     public String prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
@@ -134,9 +105,6 @@ public class DeckManager {
         return result;
     }
 
-    public ArrayList<Deck> getDecks() {
-        return decks;
-    }
 
     public String findCards(String searchInput) {
         String result = "";
@@ -236,5 +204,39 @@ public class DeckManager {
      */
     private boolean isLowScoring(FlashCard card) {
         return (double) card.getUserScore() * 100 / card.getTotalScore() < 50;
+    }
+
+    public ArrayList<Deck> getDecks() {
+        return decks;
+    }
+
+    public int getDeckIndex(Deck deck) {
+        return decks.indexOf(deck);
+    }
+
+    public Deck getDeck(int index) {
+        assert getDecksSize() > 0;
+        assert (index >= 0 && index < getDecksSize());
+        return decks.get(index);
+    }
+
+    public Deck getTestDeck(int index) {
+        if (index == -1) {
+            Deck deckToTest = new Deck("Test");
+            for (Deck deck : getDecks()) {
+                for (FlashCard card : deck.getCards()) {
+                    deckToTest.addFlashCard(card);
+                }
+            }
+            return deckToTest;
+        }
+        if (hasDeck(index)) {
+            return decks.get(index);
+        }
+        throw new IndexOutOfBoundsException(DECK_NOT_EXIST_MESSAGE);
+    }
+
+    public int getDecksSize() {
+        return decks.size();
     }
 }

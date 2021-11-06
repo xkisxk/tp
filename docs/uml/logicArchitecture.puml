@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!define logicCOLOUR #a6f0ff
+!define boxCOLOUR #86b1db
+!define uiCOLOUR #88fca7
+!define storageCOLOUR #fc9e88
+!define modelCOLOUR #c088fc
+!define mainCOLOUR #b5b5b5
+
+
+
+
+rectangle Main as Main mainCOLOUR
+rectangle logic  as "Logic" boxCOLOUR{
+
+
+rectangle InnerParser as iParser logicCOLOUR
+rectangle OuterParser as oParser logicCOLOUR
+rectangle CommandResult as CommandResult logicCOLOUR
+rectangle "{abstract}\nCommand " as Command logicCOLOUR
+
+rectangle XYZCommand as XYZCommand logicCOLOUR
+}
+ model <-[dashed]- XYZCommand
+User -[dashed]-> UI
+Main --> "1"iParser
+Main --> "1"oParser
+iParser -[dashed]->XYZCommand: > creates
+oParser -[dashed]->XYZCommand: > creates
+XYZCommand --|> Command
+
+
+Command -[dashed]->CommandResult: > produces
+Main -[dashed]->CommandResult
+Main --> storage
+
+UI <-[dashed]-> Main
+
+rectangle storage as "Storage" storageCOLOUR {
+
+}
+
+rectangle model as "Model" modelCOLOUR {
+
+}
+
+rectangle UI as "UI" uiCOLOUR {
+
+}
+
+
+
+
+
+
+@enduml

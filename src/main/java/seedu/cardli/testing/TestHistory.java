@@ -29,10 +29,6 @@ public class TestHistory {
         this.deckManager = deckManager;
     }
 
-    public ArrayList<AnswerList> getTestHistory() {
-        return testHistory;
-    }
-
     public void addAnswerList(AnswerList answerList) {
         testHistory.add(answerList);
     }
@@ -113,5 +109,9 @@ public class TestHistory {
             index++;
         }
         return result;
+    }
+
+    public ArrayList<AnswerList> getTestHistory() {
+        return testHistory;
     }
 }

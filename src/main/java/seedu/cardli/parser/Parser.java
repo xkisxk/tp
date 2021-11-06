@@ -16,7 +16,7 @@ public class Parser {
     /**
      * Returns the String containing the arguments to the command.
      */
-    public static String getCommandArguments(String commandType, String input) { // TODO: throws FieldEmptyException
+    public static String getCommandArguments(String commandType, String input) {
         assert input.length() > 0 : "input string should not be empty, at least have command word";
         return input.substring(commandType.length()).trim();
     }

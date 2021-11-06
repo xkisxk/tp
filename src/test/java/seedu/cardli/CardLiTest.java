@@ -11,33 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardLiTest {
 
-    @Test
-    public void trimStrings_hasFrontHasBack_expectTwoParts() throws NoSlashException, FieldEmptyException {
-        Deck fcm = new Deck();
-        String input = "add good morning /bac ohayou";
-        assertEquals(2, fcm.trimStrings(input).length);
-    }
-
-    @Test
-    public void trimStrings_hasNoSlash_expectNoSlashException() {
-        Deck fcm = new Deck();
-        String input = "add good morning ohayou";
-        assertThrows(NoSlashException.class, () -> fcm.trimStrings(input));
-    }
-
-    @Test
-    public void trimStrings_emptyFront_expectNoSlashException() {
-        Deck fcm = new Deck();
-        String input = "/bac ohayou";
-        assertThrows(NoSlashException.class, () -> fcm.trimStrings(input));
-    }
-
-    @Test
-    public void trimStrings_emptyBack_expectFieldEmptyException() {
-        Deck fcm = new Deck();
-        String input = "good morning /bac";
-        assertThrows(FieldEmptyException.class, () -> fcm.trimStrings(input));
-    }
 
     @Test
     public void deleteFlashCard_cardNotExist_expectCardLiException() {

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+!define logicCOLOUR #a6f0ff
+!define storageCOLOUR #fc9e88
+!define modelCOLOUR #c088fc
+!define mainCOLOUR #b5b5b5
+!define uiCOLOUR #88fca7
+!define dataCOLOUR #e34668
+
+actor "User" as user
+file "data/CardLi.txt" as data dataCOLOUR
+
+rectangle "CardLI" as CLI {
+rectangle "UI" as UI uiCOLOUR
+rectangle "Main" as main mainCOLOUR
+rectangle "Logic" as logic logicCOLOUR
+rectangle "Storage" as storage storageCOLOUR
+rectangle "Model" as model modelCOLOUR
+}
+
+user -down->  UI
+main -right-> UI
+main -down->  logic
+main -down->  model
+main -left-> storage
+storage -left-> data
+storage -[dashed]-> model
+logic -> model
+
+@enduml

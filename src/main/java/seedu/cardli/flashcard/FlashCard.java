@@ -59,6 +59,7 @@ public class FlashCard {
      * Splits the given word/phrase into a String array so that it
      * can fit nicely into the flashcard to be printed to the
      * standard output.
+     *
      * @param word The word/phrase to be split
      * @return A String array containing the split input
      */
@@ -189,6 +190,7 @@ public class FlashCard {
     /**
      * Formats the flashcard to be printed to the standard output
      * as a String.
+     *
      * @return A String containing the formatted flashcard
      */
     public String returnFlashCard() {
@@ -197,14 +199,6 @@ public class FlashCard {
         String bottom = FLASHCARD_BOTTOM_LINE + System.lineSeparator();
         String result = top + middle + bottom;
         return result;
-    }
-
-    /**
-     * Prints the formatted flashcard to the standard output.
-     */
-    public void printFlashCard() {
-        String result = returnFlashCard();
-        System.out.println(result);
     }
 
     public void incrementUserScore() {
@@ -219,6 +213,19 @@ public class FlashCard {
         totalScore++;
     }
 
+    //@@author xRossKoh
+    public JSONObject toJsonObject() {
+        JSONObject jsonCard = new JSONObject();
+
+        jsonCard.put("front", getFront());
+        jsonCard.put("back", getBack());
+        jsonCard.put("userScore", getUserScore());
+        jsonCard.put("totalScore", getTotalScore());
+
+        return jsonCard;
+    }
+
+    //@@author astralum
     /**
      * Getter for String on front of flashcard.
      *
@@ -245,6 +252,7 @@ public class FlashCard {
 
     /**
      * Getter for userScore.
+     *
      * @return An integer representing userScore
      */
     public int getUserScore() {
@@ -253,6 +261,7 @@ public class FlashCard {
 
     /**
      * Getter for totalScore.
+     *
      * @return An integer representing totalScore
      */
     public int getTotalScore() {
@@ -261,6 +270,7 @@ public class FlashCard {
 
     /**
      * Setter for front.
+     *
      * @param input The input to replace front.
      */
     public void setFront(String input) {
@@ -272,6 +282,7 @@ public class FlashCard {
 
     /**
      * Setter for back.
+     *
      * @param input The input to replace back.
      */
     public void setBack(String input) {
@@ -281,6 +292,7 @@ public class FlashCard {
         this.back = input;
     }
 
+    //@@author xRossKoh
     @Override
     public String toString() {
         return getFront() + SEPARATOR
@@ -289,14 +301,5 @@ public class FlashCard {
                 + getTotalScore() + '\n';
     }
 
-    public JSONObject toJsonObject() {
-        JSONObject jsonCard = new JSONObject();
 
-        jsonCard.put("front", getFront());
-        jsonCard.put("back", getBack());
-        jsonCard.put("userScore", getUserScore());
-        jsonCard.put("totalScore", getTotalScore());
-
-        return jsonCard;
-    }
 }

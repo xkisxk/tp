@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+!define logicCOLOUR #a6f0ff
+!define storageCOLOUR #fc9e88
+!define modelCOLOUR #c088fc
+!define boxCOLOUR #a08dc7
+!define boxCOLOUR1 #dac0eb
+!define mainCOLOUR #b5b5b5
+!define uiCOLOUR #88fca7
+!define dataCOLOUR #e34668
+
+rectangle "Main" as main mainCOLOUR
+rectangle "Storage" as storage storageCOLOUR
+rectangle "XYZCommand" as command logicCOLOUR
+rectangle "TestUi" as tui uiCOLOUR
+
+rectangle "Model" as model boxCOLOUR {
+rectangle "flashcard" boxCOLOUR1 {
+
+    rectangle "Deck" as deck modelCOLOUR
+    rectangle "DeckManager" as dm modelCOLOUR
+    rectangle "FlashCard" as fc modelCOLOUR
+
+}
+
+rectangle "testing" boxCOLOUR1 {
+
+    rectangle "Answer" as answer modelCOLOUR
+    rectangle "AnswerList" as al modelCOLOUR
+
+    rectangle "TestHistory" as th modelCOLOUR
+    rectangle "TestManager" as tm modelCOLOUR
+    rectangle "Countdown" as cd modelCOLOUR
+
+}
+}
+
+main -> storage
+main -[dashed]-> command: > calls execute()
+main --> "1" dm
+main --> "1" th
+dm --> "*" deck
+deck --> "*" fc
+command -[dashed]-> dm: > accesses
+command --[dashed]-> deck: > accesses
+command -[dashed]-> tm: > accesses
+command -[dashed]-> th : > accesses
+tm -left-> "1" tui
+tm --> dm
+tm -> th
+
+al -> "*" answer
+al -> "1" deck
+tm -[dashed]-> al: > creates
+
+tm -[dashed]-> cd
+
+
+
+@enduml

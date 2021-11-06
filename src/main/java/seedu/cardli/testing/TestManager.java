@@ -124,11 +124,13 @@ public class TestManager {
         return "";
     }
 
+    //@@author ThaddeusLim99
+
     /**
      * Shuffles the test deck and initializes the AnswerList with empty Answers.
      *
-     * @param userAnswer          user's answers
-     * @return                    shuffled test deck
+     * @param userAnswer user's answers
+     * @return shuffled test deck
      * @throws EmptyDeckException if test deck is empty
      */
     public ArrayList<FlashCard> prepareTestDeck(AnswerList userAnswer) throws EmptyDeckException {
@@ -154,7 +156,7 @@ public class TestManager {
      * @param deckReplicate shuffled test deck
      * @param userAnswer    user's answers
      */
-    private void testInProgress(ArrayList<FlashCard> deckReplicate,AnswerList userAnswer) {
+    private void testInProgress(ArrayList<FlashCard> deckReplicate, AnswerList userAnswer) {
         boolean allQuestionsAnswered = false;
         int currentQuestion = 0;
         int nextQuestionFlag = 0;
@@ -239,7 +241,7 @@ public class TestManager {
         //set question as answered with the new user response
         if (!(userResponse.trim().equalsIgnoreCase("/NEXT") || userResponse.trim().equalsIgnoreCase("/BACK"))) {
             logger.log(Level.INFO, "Saving answer");
-            userAnswer.setQuestionAnswer(questionNumber,userResponse);
+            userAnswer.setQuestionAnswer(questionNumber, userResponse);
             userAnswer.getAnswer(questionNumber).setIsAnswered();
         }
         //signalling to test previous question next
@@ -253,6 +255,7 @@ public class TestManager {
 
         return nextQuestionFlag;
     }
+    //@@author xRossKoh
 
     /**
      * Marks the user's answers then print their results of test to system output.
@@ -270,7 +273,7 @@ public class TestManager {
         int score = userAnswers.getUserScore();
         assert score <= answersCount;
         System.out.println("You scored " + score + " out of " + answersCount + " for this test.");
-        System.out.println("That is " + Math.round(((double) score / answersCount) * 10000) / 100  + "%!");
+        System.out.println("That is " + Math.round(((double) score / answersCount) * 10000) / 100 + "%!");
         logger.log(Level.INFO, "all answers checked, score printed to system output");
     }
 
