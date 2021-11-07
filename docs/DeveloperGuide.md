@@ -475,18 +475,39 @@ CardLI provides a:
 ### Edit Deck
 1. Dealing with duplicate flags<br/>
 &nbsp;1. Test case: `edit /d /d /n /n`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command flags
-as part of the command arguments is printed.
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flags as part of the command arguments is printed.
 2. Dealing with string input<br/>
 &nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
-integer to indicate the deck to edit is printed.
-3. Changing name of a deck<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer to indicate the deck to edit is printed.
+3. Changing name of Deck2<br/>
 &nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the 
-edited deck
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
+
+### Edit Card
+1. Dealing with wrong flags<br/>
+&nbsp;1. Test case: `edit /d 1 /j front /e EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that there are missing flags is printed.
+2. Dealing with invalid side input<br/>
+&nbsp;1. Test case: `edit /c 1 /s middle /i EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only "front" or "back" can be 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entered into the `/s` argument.
+3. Changing front side of Card1<br/>
+&nbsp;1. Test case: `edit /c 1 /s front /i EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited card, the index of the 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited card as well as the side changed
 
 ### Move Card
-1. 
-2.
-3.
+1. Dealing with negative integers<br/>
+   &nbsp;1. Test case: `move /c 1 /d -2`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
+   &nbsp;&nbsp;&nbsp;&nbsp; is printed.
+2. Dealing with empty arguments<br/>
+   &nbsp;1. Test case: `move /c /d `<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
+3. Moving EditedCard1 to Deck2<br/>
+   &nbsp;1. Test case: `move /c 1 /d 2`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.
