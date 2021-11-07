@@ -1,5 +1,7 @@
-No line found
-No line found
+data/Cards_CardLI does not yet exist or is empty.
+If this is your first boot of CardLI, you may ignore this warning.
+data/Tests_CardLI.json does not yet exist or is empty.
+If this is your first boot of CardLI, you may ignore this warning.
 Welcome to
 
  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.
