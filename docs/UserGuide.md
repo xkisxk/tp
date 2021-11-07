@@ -47,27 +47,27 @@ menu to work with the flashcards.
 1.1 [Add Deck](#11-adding-a-deck-add)<br/>
 1.2 [Edit Deck](#12-editing-a-deck-edit)<br/>
 1.3 [Delete Deck](#13-deleting-a-deck-delete)<br/>
-1.4 [Enter Deck](#14-entering-a-deck-entercontent)<br/>
-1.5 [Test](#15-test-flashcards-testcontent)<br/>
-1.6 [Review](#16-review-flashcards-reviewcontent)<br/>
-1.7 [View Decks](#17-viewing-all-decks-viewcontent)<br/>
-1.8 [View Flashcard Stats](#18-view-flashcard-statistics-viewfccontent)<br/>
-1.9 [View Test Stats](#19-view-test-statistics-viewtestcontent)<br/>
-1.10 [Find Flashcard](#110-finding-a-flashcard-findcontent)<br/>
-1.11 [Help](#111-listing-all-commands-helpcontent)<br/>
-1.12 [Exit App](#112-exiting-the-app-byecontent)<br/>
-2. [Deck Menu](#2-deck-menucontent)<br/>
-2.1 [Add Flashcard](#21-adding-a-flashcard-addcontent)<br/>
-2.2 [Edit Flashcard](#22-editing-a-flashcard-editcontent)<br/>
-2.3 [Delete Flashcard](#23-deleting-a-flashcard-deletecontent)<br/>
-2.4 [Move Flashcard](#24-moving-a-flashcard-movecontent)<br/>
-2.5 [View Flashcard](#25-viewing-flashcards-viewcontent)<br/>
-2.6 [Help](#26-listing-all-commands-in-deck-mode-helpcontent)<br/>
-2.7 [Exit Deck Mode](#27-exiting-deck-mode-exitcontent)<br/>
-3. [FAQ](#3-faqscontent)<br/>
-4. [Command Summary](#4-command-summarycontent)<br/>
-4.1 [Main Menu](#41-main-menucontent)<br/>
-4.2 [Deck Menu](#42-deck-menucontent)<br/>
+1.4 [Enter Deck](#14-entering-a-deck-enter)<br/>
+1.5 [Test](#15-test-flashcards-test)<br/>
+1.6 [Review](#16-review-flashcards-review)<br/>
+1.7 [View Decks](#17-viewing-all-decks-view)<br/>
+1.8 [View Flashcard Stats](#18-view-flashcard-statistics-viewfc)<br/>
+1.9 [View Test Stats](#19-view-test-statistics-viewtest)<br/>
+1.10 [Find Flashcard](#110-finding-a-flashcard-find)<br/>
+1.11 [Help](#111-listing-all-commands-help)<br/>
+1.12 [Exit App](#112-exiting-the-app-bye)<br/>
+2. [Deck Menu](#2-deck-menu)<br/>
+2.1 [Add Flashcard](#21-adding-a-flashcard-add)<br/>
+2.2 [Edit Flashcard](#22-editing-a-flashcard-edit)<br/>
+2.3 [Delete Flashcard](#23-deleting-a-flashcard-delete)<br/>
+2.4 [Move Flashcard](#24-moving-a-flashcard-move)<br/>
+2.5 [View Flashcard](#25-viewing-flashcards-view)<br/>
+2.6 [Help](#26-listing-all-commands-in-deck-mode-help)<br/>
+2.7 [Exit Deck Mode](#27-exiting-deck-mode-exit)<br/>
+3. [FAQ](#3-faqs)<br/>
+4. [Command Summary](#4-command-summary)<br/>
+4.1 [Main Menu](#41-main-menu)<br/>
+4.2 [Deck Menu](#42-deck-menu)<br/>
 
 ---
 ## [1. Main Menu](#content)
