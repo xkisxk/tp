@@ -188,7 +188,7 @@ public class EditCardCommandTest {
     }
 
     @Test
-    public void execute_newFrontWithDifferentCase_expectSuccess() {
+    public void execute_sameSpellingDifferentCase_expectSuccess() {
         DeckManager deckManager = new DeckManager();
         deckManager.prepareToAddDeck("deck1");
         deckManager.getDeck(0).addFlashCard("card", "card");
