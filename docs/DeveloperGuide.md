@@ -409,19 +409,19 @@ sequence diagram in the following sections.
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
-The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert the saved data into individual `Deck`
-instances to be added into the application. The sequence diagram depicting the exact implementation and execute of
-the `parseDeck(JSONObject jsonDeck)` method is shown below.
+The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram under the 
+"Reading from JSON files" header, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert 
+the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the 
+exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is shown below.
 
 ![](assets/parseDeckSeqDiagram.png)
 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
-The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively to convert the saved data into
-individual `AnswerList` instances to be added into the application. The sequence diagram depicting the exact
-implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
+The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram under the
+"Reading from JSON files" header, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively 
+to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram 
+depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
 
 ![](assets/parseAnswerListSeqDiagram.png)
 
@@ -475,4 +475,4 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Storage testing
