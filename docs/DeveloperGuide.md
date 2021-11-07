@@ -476,8 +476,11 @@ CardLI provides a:
 ## [9. Instructions for Manual Testing](#content)
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-## Testing
 
-Using the 
+### View Test Statistics
 
-## Reviewing
+1. Viewing Test Statistics </br>
+   Test Case: `viewtest invalid`</br>
+   Expected: `Input a positive integer or "all" after viewtest.`</br>
+
+3. Viewing FlashCard Statistics

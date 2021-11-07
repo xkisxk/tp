@@ -70,7 +70,6 @@ deactivate Deck
 AnswerList --> TestManager
 deactivate AnswerList
 
-TestManager --> TestManager
 deactivate TestManager
 end
 
@@ -79,7 +78,7 @@ activate TestUi
 TestUi --> TestManager
 deactivate TestUi
 
-TestManager --> TestManager
+
 deactivate TestManager
 
 TestManager -> TestHistory : addAnswerList(userAnswers)
