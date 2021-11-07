@@ -26,8 +26,8 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
 public class TestManager {
 
     private static final int TIME_PER_QUESTION = 15;
-    private static final String EMPTY_ANSWER = "NIL";
-    private static final String EMPTY_STRING = "";
+
+    private static final String EMPTY_ANSWER = "";
 
     private final TestUi ui;
     private final Logger logger = Logger.getLogger(TestManager.class.getName());
@@ -83,7 +83,7 @@ public class TestManager {
             ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Empty deck");
         }
-        return EMPTY_STRING;
+        return EMPTY_ANSWER;
     }
 
     /**
@@ -122,7 +122,7 @@ public class TestManager {
         } catch (EmptyDeckException e) {
             ui.showMessage(NO_CARDS_TO_REVIEW_MESSAGE);
         }
-        return EMPTY_STRING;
+        return EMPTY_ANSWER;
     }
 
     //@@author ThaddeusLim99
@@ -171,7 +171,7 @@ public class TestManager {
             logger.log(Level.INFO, "currentQuestion is out of index. Either test finished or user scroll too far");
             while (currentQuestion >= 0 && currentQuestion < deckReplicate.size() && countdown.isRunning()) {
                 //question is not answered yet
-                if (!userAnswer.isQuestionAnswered(currentQuestion) && countdown.isRunning()) {
+                if (!userAnswer.isQuestionAnswered(currentQuestion)) {
                     logger.log(Level.INFO, "question not answered yet");
                     nextQuestionFlag = testCard(userAnswer, deckReplicate.get(currentQuestion), countdown);
                 }

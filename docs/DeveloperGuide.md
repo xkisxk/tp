@@ -8,8 +8,9 @@ single platform.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+Third-party libraries used include [Jansi](https://mvnrepository.com/artifact/org.fusesource.jansi/jansi) for creating 
+the countdown timer and [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple) 
+for saving and storing JSON objects.
 
 ## Design
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
