@@ -164,7 +164,7 @@ public class Deck {
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
     }
-    
+
     //@@author astralum
     public String returnAllFlashCards() { // TODO: throw exception if no cards
         String result = "";

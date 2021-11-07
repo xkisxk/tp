@@ -12,7 +12,7 @@ participant ":DeckManager" as Dm modelCOLOUR
 participant ":Deck" as deck modelCOLOUR
 autonumber
 
-
+hide footbox
 
 
         [-> Parser: parseCommand(input)
