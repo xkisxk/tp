@@ -5,7 +5,7 @@
 1. [Introduction](#introduction)<br/>
 2. [Acknowledgements](#acknowledgements)<br/>
 3. [Design](#design)<br/>
-3.1. [Model Component](#model-component)<br/>
+3.1. [Model Component](#3.1.-model-component)<br/>
 3.2. [UI Component](#ui-component)<br/>
 3.3. [Logic Component](#logic-component)<br/>
 3.4. [Storage Component](#storage-component)<br/>
@@ -28,10 +28,10 @@
 5.2 [Value Proposition](#value-proposition)<br/>
 6. [User Stories](#user-stories)<br/>
 7. [Non-Functional Requirements](#non-functional-requirements)<br/>
-8. [GLossary](#glossary)<br/>
+8. [Glossary](#glossary)<br/>
 9. [Instructions for Manual Mesting](#instructions-for-manual-testing)
 
-# 1. [Introduction](#content)
+#  1. [Introduction](#content)
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
 students keep track of all their flashcards. It also allows students to test their knowledge. All of this in one
@@ -60,7 +60,7 @@ The rest of the App consists of the following components:
 
 Each component is explained in the sections below.
 
-### 3.1. [Model Component](#content)
+### 3.1. Model Component
 
 ![](assets/modelArchitectureDiagram2.png)
 
