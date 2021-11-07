@@ -1,14 +1,14 @@
 # Developer Guide
 ![](assets/logo.png)
 
-&nbsp;1. Introduction<br/>
-&nbsp;2. Acknowledgements<br/>
-&nbsp;3. Design<br/>
-&nbsp;&nbsp;&nbsp;3.1. Model Component<br/>
-&nbsp;&nbsp;&nbsp;3.2. UI Component<br/>
-&nbsp;&nbsp;&nbsp;3.3. Logic Component<br/>
-&nbsp;&nbsp;&nbsp;3.4. Storage Component<br/>
-&nbsp;4. Implementation<br/>
+&nbsp;1. [Introduction](#introduction)<br/>
+&nbsp;2. [Acknowledgements](#acknowledgements)<br/>
+&nbsp;3. [Design](#design)<br/>
+&nbsp;&nbsp;&nbsp;3.1. [Model Component](#model-component)<br/>
+&nbsp;&nbsp;&nbsp;3.2. [UI Component](#ui-component)<br/>
+&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#logic-component)<br/>
+&nbsp;&nbsp;&nbsp;3.4. [Storage Component](#storage-component)<br/>
+&nbsp;4. [Implementation](#implementation)<br/>
 
 # Introduction
 
