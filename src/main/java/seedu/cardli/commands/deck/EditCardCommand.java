@@ -41,11 +41,11 @@ public class EditCardCommand extends Command {
     }
 
     /**
-     * Returns the card index for prepareEditCardCommand as a string
+     * Returns the card index for prepareEditCardCommand as a string.
      *
-     * @return card index
-     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card index
-     * @throws CardLiException If a non-integer is given as index, if the card index given is out of bounds
+     * @return card index.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card index.
+     * @throws CardLiException If a non-integer is given as index, if the card index given is out of bounds.
      */
     public static String prepareCardIndex(String card, Deck deck) throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
@@ -66,14 +66,14 @@ public class EditCardCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for EditCardCommand
+     * Returns the checked arguments for EditCardCommand.
      *
-     * @return checked arguments
+     * @return checked arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
-     * @throws InvalidCommandFormatException If flags are in the wrong position
-     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card index
+     * @throws InvalidCommandFormatException If flags are in the wrong position.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card index.
      * @throws CardLiException If flags are used as arguments, if a non-integer is given as index,if front or side are
-     * not entered as a side
+     *      not entered as a side.
      */
     public String[] prepareEditCardCommand() throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);

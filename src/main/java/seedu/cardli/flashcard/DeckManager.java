@@ -28,11 +28,11 @@ public class DeckManager {
     }
 
     /**
-     * Returns the details of the transfer that took place as a message
+     * Returns the details of the transfer that took place as a message.
      *
-     * @param parameters string array containing the destination deck index, current deck index, card index
-     * @return the details of the transfer that took place as a message
-     * @throws CardLiException If card does not exist
+     * @param parameters string array containing the destination deck index, current deck index, card index.
+     * @return the details of the transfer that took place as a message.
+     * @throws CardLiException If card does not exist.
      */
     public String moveCard(String[] parameters) throws CardLiException {
         String enteredCurrentDeckIndex = parameters[0];
@@ -53,10 +53,10 @@ public class DeckManager {
     }
 
     /**
-     * Returns the details of the edit that took place as a message
+     * Returns the details of the edit that took place as a message.
      *
-     * @param args string array containing the  deck index and name
-     * @return the details of the transfer that took place as a message
+     * @param args string array containing the  deck index and name.
+     * @return the details of the transfer that took place as a message.
      */
     public String editDeck(String[] args) {
         String enteredDeckIndex = args[0];

@@ -33,10 +33,10 @@ public class AnswerList {
     }
 
     /**
-     * Returns true or false regarding if a question is answered
+     * Returns true or false regarding if a question is answered.
      *
-     * @param index the question in the answerList
-     * @return true or false regarding if a question is answered
+     * @param index the question in the answerList.
+     * @return true or false regarding if a question is answered.
      */
     public Boolean isQuestionAnswered(int index) {
         Boolean isQuestionAnswered;

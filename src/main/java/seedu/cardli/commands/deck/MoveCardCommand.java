@@ -41,15 +41,15 @@ public class MoveCardCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for MoveCardCommand
+     * Returns the checked arguments for MoveCardCommand.
      *
-     * @return checked arguments
+     * @return checked arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
-     * @throws InvalidCommandFormatException If flags are in the wrong position
-     * @throws seedu.cardli.exceptions.DeckNotExistException If the deck index given is out of bounds
-     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card or deck index
+     * @throws InvalidCommandFormatException If flags are in the wrong position.
+     * @throws seedu.cardli.exceptions.DeckNotExistException If the deck index given is out of bounds.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card or deck index.
      * @throws CardLiException If flags are used as arguments,if a card is being sent to the deck it is currently in,
-     * if a non-integer is given as index, if the card index given is out of bounds
+     *      if a non-integer is given as index, if the card index given is out of bounds.
      */
     public String[] prepareMoveCardCommand() throws CardLiException {
         logger.setLevel(Level.WARNING);

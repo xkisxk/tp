@@ -41,12 +41,12 @@ public class EditDeckCommand extends Command {
     }
 
     /**
-     * Returns the deck index for prepareEditDeckCommand as a string
+     * Returns the deck index for prepareEditDeckCommand as a string.
      *
-     * @return deck index
-     * @throws DeckNotExistException If the deck index given is out of bounds
-     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index
-     * @throws CardLiException If a non-integer is given as index
+     * @return deck index.
+     * @throws DeckNotExistException If the deck index given is out of bounds.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index.
+     * @throws CardLiException If a non-integer is given as index.
      */
     public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException,
             NumberFormatException {
@@ -68,14 +68,14 @@ public class EditDeckCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for EditDeckCommand
+     * Returns the checked arguments for EditDeckCommand.
      *
-     * @return checked arguments
+     * @return checked arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
-     * @throws InvalidCommandFormatException If flags are in the wrong position
-     * @throws DeckNotExistException If the deck index given is out of bounds
-     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index
-     * @throws CardLiException If flags are used as arguments, if a non-integer is given as index
+     * @throws InvalidCommandFormatException If flags are in the wrong position.
+     * @throws DeckNotExistException If the deck index given is out of bounds.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index.
+     * @throws CardLiException If flags are used as arguments, if a non-integer is given as index.
      */
     public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
