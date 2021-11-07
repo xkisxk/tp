@@ -1,7 +1,6 @@
 package seedu.cardli;
 
 import org.junit.jupiter.api.Test;
-import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.flashcard.FlashCard;
 import seedu.cardli.flashcard.Deck;
 
@@ -36,33 +35,5 @@ public class DeckTest {
                 + "{\"back\":\"testBack2\",\"front\":\"testFront2\",\"userScore\":2,\"totalScore\":3},"
                 + "{\"back\":\"testBack3\",\"front\":\"testFront3\",\"userScore\":1,\"totalScore\":2}],"
                 + "\"deckName\":\"testDeck\"}", deck.toJsonObject().toJSONString());
-    }
-
-    @Test
-    public void testDeleteFlashCard() throws CardLiException {
-        Deck deck = new Deck("testDeck");
-        deck.addFlashCard("testFront1", "testBack1");
-        deck.addFlashCard("testFront2", "testBack2", 2, 3);
-        deck.deleteFlashCard("1");
-        assertEquals("testDeck\n1\n"
-                + "testFront2 | testBack2 | 0 | 0\n", deck.toString());
-    }
-
-    @Test
-    public void testEditFlashCardFront() {
-        Deck deck = new Deck("testDeck");
-        deck.addFlashCard("testFront1", "testBack1");
-        deck.editCard(new String[]{"1", "front", "testEdit1"});
-        assertEquals("testDeck\n1\n"
-                + "testEdit1 | testBack1 | 0 | 0\n", deck.toString());
-    }
-
-    @Test
-    public void testEditFlashCardBack() {
-        Deck deck = new Deck("testDeck");
-        deck.addFlashCard("testFront1", "testBack1");
-        deck.editCard(new String[]{"1", "back", "testEdit1"});
-        assertEquals("testDeck\n1\n"
-                + "testFront1 | testEdit1 | 0 | 0\n", deck.toString());
     }
 }
