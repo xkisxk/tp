@@ -44,12 +44,24 @@ menu to work with the flashcards.
 
 ### Content
 1. [Main Menu](#main-menu)
-   1. [Delete](#deleting-a-deck-delete)
-   2. [Test](#test-flashcards-test)
-   3. [View Flashcard Stats](#view-flashcard-statistics-viewfc)
-   4. [View Test](#view-test-statistics-viewtest)
-   5. [Review](#review-flashcards-review)
-2. [Deck Menu](#deck-menu)
+
+   1.1 [Add Deck](#adding-a-deck-add)
+
+   1.2 [Edit Deck](#editing-a-deck-edit)
+
+   1.3 [Delete Deck](#deleting-a-deck-delete)
+
+   1.4 [Enter Deck](#entering-a-deck-enter)
+   
+   1.5 [Test](#test-flashcards-test)
+
+   1.4 [View Flashcard Stats](#view-flashcard-statistics-viewfc)
+
+   1.5 [View Test](#view-test-statistics-viewtest)
+
+   1.6 [Review](#review-flashcards-review)
+
+   1.7 [Deck Menu](#deck-menu)
 
 ---
 ## Main Menu
