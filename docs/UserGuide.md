@@ -16,12 +16,12 @@ while the commands are designed to be intuitive to use.
 
 ## How To Use
 
-This guide is meant to help you to get familiarised with all the features of CardLI. The `Quick Start`
-section will tell you how to download and get CardLI set up. The `Features` section provides an
+This guide is meant to help you to get familiarised with all the features of CardLI. The [Quick Start](#quick-start)
+section will tell you how to download and get CardLI set up. The [Features](#features) section provides an
 in depth description of all available features, which you can refer to if you to know the exact definitions. 
-There is also a `Command Summary` section that will give you a brief overview of the format of all
+There is also a [Command Summary](#4-command-summarycontent) section that will give you a brief overview of the format of all
 commands and an example in table format to make it easier for you to navigate. To make it easier for you
-to navigate, the content table is linked to their respective sections.
+to navigate, the [contents](#content) is linked to their respective sections.
 
 ## Quick Start
 
