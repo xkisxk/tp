@@ -1,8 +1,10 @@
 @startuml
+
+!include style.puml
 hide footbox
 autonumber
-participant ": Storage" as Storage
-participant "fileWriter: FileWriter" as File
+participant ": Storage" as Storage storageCOLOUR
+participant "fileWriter: FileWriter" as File storageCOLOUR
 participant "jsonDecks / jsonTestHistory:\n JSONArray" as JSON
 participant "deck: Deck /\nanswerList: AnswerList" as Object
 [-> Storage: writeCardsToFile\n(decks: ArrayList<Deck>) /\nwriteTestsToFile\n(testHistory: ArrayList<AnswerList>)

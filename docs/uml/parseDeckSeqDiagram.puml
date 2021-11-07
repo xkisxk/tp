@@ -1,11 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-participant ": Storage" as Store
+!include style.puml
+participant ": Storage" as Store storageCOLOUR
 participant "jsonDeck: JSONObject" as jsonDeck
-participant "newDeck: Deck" as Deck
+participant "newDeck: Deck" as Deck modelCOLOUR
 participant "jsonCard: JSONObject" as jsonCard
-participant "newFlashCard: FlashCard" as Card
+participant "newFlashCard: FlashCard" as Card modelCOLOUR
 autonumber
 hide footbox
 

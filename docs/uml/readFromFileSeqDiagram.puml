@@ -1,10 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+
+!include style.puml
 hide footbox
 autonumber
-participant ": Storage" as Store
-participant "decks: ArrayList<Deck> /\ntestHistory: ArrayList<AnswerList>" as ArrayList
-participant "s: Scanner" as Scan
+participant ": Storage" as Store storageCOLOUR
+participant "decks: ArrayList<Deck> /\ntestHistory: ArrayList<AnswerList>" as ArrayList modelCOLOUR
+participant "s: Scanner" as Scan uiCOLOUR
 participant "parser: JSONParser" as Parser
 
 [->Store: readCardsFromFile() /\nreadTestsFromFile()
