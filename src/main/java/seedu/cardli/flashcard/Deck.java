@@ -36,7 +36,6 @@ public class Deck {
         return name.trim().equals(input.trim());
     }
 
-
     //@@author ThaddeusLim99
     public String editCard(String[] parameters) {
         String enteredCardIndex = parameters[0];
@@ -244,6 +243,4 @@ public class Deck {
                 + cardsCount + '\n'
                 + cardsString;
     }
-
-
 }

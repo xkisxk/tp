@@ -3,6 +3,8 @@ package seedu.cardli;
 import org.junit.jupiter.api.Test;
 import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
+import seedu.cardli.flashcard.FlashCard;
+import seedu.cardli.testing.Answer;
 import seedu.cardli.testing.AnswerList;
 import seedu.cardli.testing.TestHistory;
 import seedu.cardli.testing.TestManager;
