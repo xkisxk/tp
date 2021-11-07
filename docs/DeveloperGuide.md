@@ -306,8 +306,10 @@ How the `Countdown` class works is shown in the diagram above. When the `Countdo
 nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the 
 `timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`, 
 every second, the time remaining will be printed, then decremented, and the current printed line will be erased and 
-replaced with the new time remaining. This occurs until the time runs out or `Countdown` has been stopped by calling 
-`stop()`, which will internally call `stop()` in `CountdownTimerTask`.
+replaced with the new time remaining. Note, however, that the displaying of the first time remaining will be delayed 
+by 0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has 
+been stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out, 
+`CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
 
 ![sequence diagram](assets/testCardSeqDiagram.png)
 
