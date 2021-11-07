@@ -43,10 +43,10 @@ menu to work with the flashcards.
 
 
 ### Content
-1. [Main Menu](#1-main-menucontent)<br/>
-1.1 [Add Deck](#11-adding-a-deck-addcontent)<br/>
-1.2 [Edit Deck](#12-editing-a-deck-editcontent)<br/>
-1.3 [Delete Deck](#13-deleting-a-deck-deletecontent)<br/>
+1. [Main Menu](#1-main-menu)<br/>
+1.1 [Add Deck](#11-adding-a-deck-add)<br/>
+1.2 [Edit Deck](#12-editing-a-deck-edit)<br/>
+1.3 [Delete Deck](#13-deleting-a-deck-delete)<br/>
 1.4 [Enter Deck](#14-entering-a-deck-entercontent)<br/>
 1.5 [Test](#15-test-flashcards-testcontent)<br/>
 1.6 [Review](#16-review-flashcards-reviewcontent)<br/>
