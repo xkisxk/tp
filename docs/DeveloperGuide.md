@@ -60,7 +60,7 @@ The rest of the App consists of the following components:
 
 Each component is explained in the sections below.
 
-### [3.1 Model Component](#content)
+### [3.1. Model Component](#content)
 
 ![](assets/modelArchitectureDiagram2.png)
 
@@ -419,7 +419,7 @@ returned from the method.
 CardLI provides a:
 <li> User-friendly </li>
 <li> Storage efficient</li>
-<li> Internet connection independent flashcard experience.
+<li> Internet connection independent flashcard experience. </li>
 
 ## [6. User Stories](#content)
 
