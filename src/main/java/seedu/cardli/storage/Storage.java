@@ -61,7 +61,7 @@ public class Storage {
             fileWriter.write(jsonDecks.toJSONString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to file...");
+            System.out.println("Something went wrong while saving to data/Cards_CardLI.json...");
         }
     }
 
@@ -78,7 +78,7 @@ public class Storage {
             fileWriter.write(jsonTestHistory.toJSONString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to file...");
+            System.out.println("Something went wrong while saving to data/Tests_CardLI.json...");
         }
     }
 
@@ -94,9 +94,10 @@ public class Storage {
             for (Object o: jsonDecks) {
                 decks.add(parseDeck((JSONObject) o));
             }
-        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        } catch (ParseException e) {
+            System.out.println("Something went wrong parsing data/Cards_CardLI.json...");
+            System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
+        } catch (FileNotFoundException | NoSuchElementException e){}
         return decks;
     }
 
@@ -112,9 +113,10 @@ public class Storage {
             for (Object o: jsonTestHistory) {
                 testHistory.add(parseAnswerList((JSONObject) o));
             }
-        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
-            System.out.println(e.getMessage());
-        }
+        } catch (ParseException e) {
+            System.out.println("Something went wrong parsing data/Tests_CardLI.json...");
+            System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
+        } catch (FileNotFoundException | NoSuchElementException e){}
         return testHistory;
     }
 
