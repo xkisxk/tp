@@ -477,10 +477,45 @@ CardLI provides a:
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-### View Test Statistics
+#### View Test and FlashCard Statistics
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
-1. Viewing Test Statistics </br>
-   Test Case: `viewtest invalid`</br>
-   Expected: `Input a positive integer or "all" after viewtest.`</br>
+1. Test Case: `viewtest invalid`
 
-3. Viewing FlashCard Statistics
+   Expected: `Input a positive integer or "all" after viewtest.`
+2. Test Case: `viewtest all`
+   
+   Expected:
+   ``` 
+   These are your scores:
+   Score for test 1: ExampleDeck1 1/2 50.00%
+   Score for test 2: Test 2/3 66.67%
+   ```
+3. Test Case: `viewtest 5`
+
+   Expected: `There is no test at that index.`
+
+4. Test Case: `viewfc all`
+
+   Expected: `There should not be any arguments.`
+5. Test Case: `viewfc`
+   
+   Expected: 
+   ```
+   Listing total scores of flashcards for all tests:
+   *================FRONT================* *================BACK=================*
+                    Card2                                 CardBack2
+   *=====================================* *=====================================*
+   
+   Score: 1 out of 2
+   *================FRONT================* *================BACK=================*
+                    Card1                                 CardBack1
+   *=====================================* *=====================================*
+   
+   Score: 2 out of 2
+   *================FRONT================* *================BACK=================*
+                    Card3                                 CardBack3
+   *=====================================* *=====================================*
+   
+   Score: 0 out of 1
+   ```
