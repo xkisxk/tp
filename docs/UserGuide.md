@@ -43,16 +43,17 @@ menu to work with the flashcards.
 
 
 ### Content
-&nbsp;1. [Main Menu](#main-menu)
-&nbsp;&nbsp;&nbsp;1.1 [Add Deck](#adding-a-deck-add)
-&nbsp;&nbsp;&nbsp;1.2 [Edit Deck](#editing-a-deck-edit)
-&nbsp;&nbsp;&nbsp;1.3 [Delete Deck](#deleting-a-deck-delete)
-&nbsp;&nbsp;&nbsp;1.4 [Enter Deck](#entering-a-deck-enter)
-&nbsp;&nbsp;&nbsp;1.5 [Test](#test-flashcards-test)
-&nbsp;&nbsp;&nbsp;1.4 [View Flashcard Stats](#view-flashcard-statistics-viewfc)
-&nbsp;&nbsp;&nbsp;1.5 [View Test](#view-test-statistics-viewtest)
-&nbsp;&nbsp;&nbsp;1.6 [Review](#review-flashcards-review)
-&nbsp;&nbsp;&nbsp;1.7 [Deck Menu](#deck-menu)
+1. [Main Menu](#main-menu)<br/>
+1.1 [Add Deck](#adding-a-deck-add)<br/>
+1.2 [Edit Deck](#editing-a-deck-edit)<br/>
+1.3 [Delete Deck](#deleting-a-deck-delete)<br/>
+1.4 [Enter Deck](#entering-a-deck-enter)<br/>
+1.5 [Test](#test-flashcards-test)<br/>
+1.4 [View Flashcard Stats](#view-flashcard-statistics-viewfc)<br/>
+1.5 [View Test](#view-test-statistics-viewtest)<br/>
+1.6 [Review](#review-flashcards-review)<br/>
+
+2. [Deck Menu](#deck-menu)<br/>
 
 
 
