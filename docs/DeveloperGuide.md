@@ -1,43 +1,43 @@
 # Developer Guide
 ![](assets/logo.png)
 
-# Content
-1. [Introduction](#introduction)<br/>
-2. [Acknowledgements](#acknowledgements)<br/>
-3. [Design](#design)<br/>
-3.1. [Model Component](#3.1.-model-component)<br/>
-3.2. [UI Component](#ui-component)<br/>
-3.3. [Logic Component](#logic-component)<br/>
-3.4. [Storage Component](#storage-component)<br/>
-4. [Implementation](#implementation)<br/>
-4.1. [Edit](#edit)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [EditDeckCommand](#editdeckcommand)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [EditCardCommand](#editcardcommand)<br/>
-4.2. [Move](#move)<br/>
-4.3. [Find](#find)<br/>
-4.4. [Test Feature](#test-feature)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Test Setup](#test-setup)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Testing Process](#testing-process)<br/>
-4.5. [Storage](#storage)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.5.1. [Writing to File](#writing-to-file)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.5.2. [Reading from File](#reading-from-file)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#readcardsfromfile)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#readtestfromfile)<br/>
-5. [Product Scope](#product-scope)<br/>
-5.1 [Target User Profile](#target-user-profile)<br/>
-5.2 [Value Proposition](#value-proposition)<br/>
-6. [User Stories](#user-stories)<br/>
-7. [Non-Functional Requirements](#non-functional-requirements)<br/>
-8. [Glossary](#glossary)<br/>
-9. [Instructions for Manual Mesting](#instructions-for-manual-testing)
+## Content
+1. [Introduction](#1-introduction)<br/>
+2. [Acknowledgements](#2-acknowledgements)<br/>
+3. [Design](#3-design)<br/>
+3.1. [Model Component](#31-model-component)<br/>
+3.2. [UI Component](#32-ui-component)<br/>
+3.3. [Logic Component](#33-logic-component)<br/>
+3.4. [Storage Component](#34-storage-component)<br/>
+4. [Implementation](#4-implementation)<br/>
+4.1. [Edit](#41-edit)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [EditDeckCommand](#411-editdeckcommand)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [EditCardCommand](#412-editcardcommand)<br/>
+4.2. [Move](#42-move)<br/>
+4.3. [Find](#43-find)<br/>
+4.4. [Test Feature](#44-test-feature)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Test Setup](#441-test-setup)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Testing Process](#442-testing-process)<br/>
+4.5. [Storage](#45-storage)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.1. [Writing to File](#451-writing-to-file)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.2. [Reading from File](#452-reading-from-file)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#4521-readcardsfromfile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#4522-readtestfromfile)<br/>
+5. [Product Scope](#5-product-scope)<br/>
+5.1 [Target User Profile](#51-target-user-profile)<br/>
+5.2 [Value Proposition](#52-value-proposition)<br/>
+6. [User Stories](#6-user-stories)<br/>
+7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
+8. [Glossary](#8-glossary)<br/>
+9. [Instructions for Manual Mesting](#9-instructions-for-manual-testing)
 
-#  1. [Introduction](#content)
+## [1. Introduction](#content)
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
 students keep track of all their flashcards. It also allows students to test their knowledge. All of this in one
 single platform.
 
-## 2. [Acknowledgements](#content)
+## [2. Acknowledgements](#content)
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
 original source as well}
@@ -45,7 +45,7 @@ original source as well}
 * [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
 * __Jansi:__ For its ANSI escape sequence library, currently used in flashcard testing
 
-## 3. [Design](#content)
+## [3. Design](#content)
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
 
 <li> At app launch: initialises the components in the correct sequence, and connects them up with each other</li>
@@ -60,7 +60,7 @@ The rest of the App consists of the following components:
 
 Each component is explained in the sections below.
 
-### 3.1. Model Component
+### [3.1.Model Component](#content)
 
 ![](assets/modelArchitectureDiagram2.png)
 
@@ -85,10 +85,10 @@ An `AnswerList` contains a private arrayList of `Answers`, which is created by `
 
 The `Countdown` class creates a timer that displays the time left for a question during a Test or Review.
 
-### 3.2. [UI Component](#content)
+### [3.2. UI Component](#content)
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
 
-### 3.3. [Logic Component](#content)
+### [3.3. Logic Component](#content)
 
 ![](assets/logicArchitectureDiagram.png)
 
@@ -113,7 +113,7 @@ How the parsing works:
 `Inner Parser` or `Outer Parser` creates a `XYZCommand` which in turn creates its corresponding `XYZCommandParser` (eg. when `InnerParser` creates a `EditCardCommand`, `EditCardCommand` creates a `EditCardParser`.)</li>
 
 All `XYZCommandParser` classes implement the `CommandArgumentParser` interface.
-### 3.4. [Storage Component](#content)
+### [3.4. Storage Component](#content)
 The `Storage` component:
 * Saves all the decks
 * Saves all the flashcards
@@ -122,18 +122,18 @@ The `Storage` component:
 
 All app data is saved as JSON files.
 
-## 4. [Implementation](#content)
+## [4. Implementation](#content)
 
 > ℹ️  Note: In the sequence diagrams below, the lifeline for objects should end at the destroy marker (X) but due
 > to a limitation of PLANTUML, the lifeline reaches the end of the diagram.
 
-### 4.1. [Edit](#content)
+### [4.1. Edit](#content)
 
 This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
 
 The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
 
-#### 4.1.1. [`EditDeckCommand`](#content)
+#### [4.1.1. `EditDeckCommand`](#content)
 
 
 Given below is the sequence diagram for `edit` (Deck):
@@ -158,7 +158,7 @@ The `execute()` method will then call the `editDeck()` method of the `DeckManage
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-#### 4.1.2. [`EditCardCommand`](#content)
+#### [4.1.2. `EditCardCommand`](#content)
 
 ![](assets/editCardCommandSeqDiagram.png)
 
@@ -181,7 +181,7 @@ The `execute()` method will then call the `editCard()` method of the `Deck` clas
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-### 4.2. [Move](#content)
+### [4.2. Move](#content)
 
 ![](assets/moveCardCommandSeqDiagram.png)
 
@@ -208,7 +208,7 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-### 4.3. [Find](#content)
+### [4.3. Find](#content)
 
 ![](assets/findFlashcardDiagram.png)
 
@@ -218,14 +218,14 @@ Currently, `find` is implemented on a Systemwide level. After the `CardLiUi` han
 
 `returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck, and filters them based on whether they contain the search term given. Finally all the `FlashCards` that contain the search term are collected in an arrayList and their console outputs are returned in string format for `CardLiUi` to display to the user.
 
-### 4.4. [Test Feature](#content)
+### [4.4. Test Feature](#content)
 
 ![class diagram](assets/testClassDiagram.png)
 
 Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
 `TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
 and the parsing respectively during the test.
-#### 4.4.1. [Test Setup](#content)
+#### [4.4.1. Test Setup](#content)
 
 ![sequence diagram](assets/TestSequenceDiagram.png)
 
@@ -248,7 +248,7 @@ After constructing the `AnswerList`, the preparation begins. The `Deck` that is 
 the `AnswerList` gets duplicated, then shuffled. Afterwards, the `AnswerList` will be populated with
 "NIL" `Answers`.
 
-#### 4.4.2. [Testing Process](#content)
+#### [4.4.2. Testing Process](#content)
 
 ![sequence diagram](assets/testInProgressSeqDiagram.png)
 
@@ -289,7 +289,7 @@ condition of the `FlashCard` getting strictly less than 50% of the total number 
 > when `Command.execute()` is called not really feasible.
 </details>
  
-### 4.5. [Storage](#content)
+### [4.5. Storage](#content)
 
 This feature allows users of CardLI to save data on their current decks of flashcards as well as
 the tests that they have completed thus far. This will also allow users to re-access the data
@@ -311,7 +311,7 @@ A `Storage` class was implemented to contain all the methods to execute the save
 relevant text files. An instance of this class is created upon first start up the application to handle all the 
 method calls. The respective methods will be explained in more detail in the following paragraphs.
 
-#### 4.5.1. [Writing to File](#content)
+#### [4.5.1. Writing to File](#content)
 
 `writeToFile(ArrayList<T> arrayList, String type)`
 
@@ -345,7 +345,7 @@ in the screenshot below.
 
 ![](assets/Tests_CardLI.txt%20Example.png)
 
-#### 4.5.2. [Reading from File](#content)
+#### [4.5.2. Reading from File](#content)
 
 `readCardsFromFile()` and `readTestsFromFile()`
 
@@ -356,7 +356,7 @@ As per the saving format explained in the `writeToFile()` method above, the
 data into the application before any commands are given from the user. The individual methods
 will be explained in more detail in the following paragraphs.
 
-##### 4.5.2.1 [`readCardsFromFile`](#content)
+##### [4.5.2.1 `readCardsFromFile`](#content)
 
 ![](assets/readCardsFromFileSequenceDiagram.png)
 
@@ -379,7 +379,7 @@ instance.
 Lastly, all the individually parsed `Deck` instances are added to the `decks` variable and returned from
 the method. 
 
-##### 4.5.2.2 [`readTestFromFile`](#content)
+##### [4.5.2.2 `readTestFromFile`](#content)
 
 ![](assets/readTestsFromFileSequenceDiagram.png)
 
@@ -404,9 +404,9 @@ All the parsed data is converted to the relevant data types and passed as argume
 Lastly, all the individually parsed `AnswerList` instances are added to the `testHistory` variable and
 returned from the method. 
 
-## 5. [Product scope](#content)
+## [5. Product scope](#content)
 
-### 5.1. [Target user profile](#content)
+### [5.1. Target user profile](#content)
 
 * Pre-University/University/Polytechnic students
 * Reasonably comfortable using CLI apps
@@ -414,14 +414,14 @@ returned from the method.
 * Prefers to store their information online rather than physically
 * Has a lot of flashcards
 
-### 5.2. [Value proposition](#content)
+### [5.2. Value proposition](#content)
 
 CardLI provides a:
 <li> User-friendly </li>
 <li> Storage efficient</li>
 <li> Internet connection independent flashcard experience. </li>
 
-## 6. [User Stories](#content)
+## [6. User Stories](#content)
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -440,7 +440,7 @@ CardLI provides a:
 | |student with many flashcards and decks|find a flashcard by searching for a term matching it|find the flashcard without looking through all my decks
 | |student with little time|save my flashcards|I do not have to add my flashcards to the app every time I use it
 
-## 7. [Non-Functional Requirements](#content)
+## [7. Non-Functional Requirements](#content)
 
 <li> The app should be usable by a user who is reasonably comfortable using Command Line Interface.</li>
 <li> The app should be able to handle at least 25 flashcard decks of at least 25 cards each.</li>
@@ -448,10 +448,10 @@ CardLI provides a:
 <li> The app should store data in a format that is readable by humans, and easy for machines to parse and generate.</li>
 
 
-## 8. [Glossary](#content)
+## [8. Glossary](#content)
 
 * *glossary item* - Definition
 
-## 9. [Instructions for Manual Testing](#content)
+## [9. Instructions for Manual Testing](#content)
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
