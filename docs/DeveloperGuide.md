@@ -294,7 +294,7 @@ before they are combined into a single `JSONObject` instance and returned from t
 An example of the format of the `Cards_CardLI.json` where the decks of flashcards are saved is shown 
 in the screenshot below.
 
-// TODO insert JSON file example
+![](assets/Cards_CardLI.txt Example.png)
 
 `writeTestsToFile(ArrayList<AnswerList> testHistory)`
 
