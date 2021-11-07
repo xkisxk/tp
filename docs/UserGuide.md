@@ -49,19 +49,22 @@ menu to work with the flashcards.
 1.3 [Delete Deck](#deleting-a-deck-delete)<br/>
 1.4 [Enter Deck](#entering-a-deck-enter)<br/>
 1.5 [Test](#test-flashcards-test)<br/>
-1.4 [View Flashcard Stats](#view-flashcard-statistics-viewfc)<br/>
-1.5 [View Test](#view-test-statistics-viewtest)<br/>
 1.6 [Review](#review-flashcards-review)<br/>
-
+1.7 [View Decks](#viewing-all-decks-view)<br/>
+1.8 [View Flashcard Stats](#view-flashcard-statistics-viewfc)<br/>
+1.9 [View Test Stats](#view-test-statistics-viewtest)<br/>
+1.10 [Find Flashcard](#finding-a-flashcard-find)<br/>
+1.11 [Help](#listing-all-commands-help)<br/>
 2. [Deck Menu](#deck-menu)<br/>
+2.1 [Move Flashcard](#moving-a-flashcard-move)<br/>
 
 
 
 ---
-## Main Menu
+## [Main Menu](#content)
 >💾 Your decks are saved after each command.
 
-### Adding a deck: `add`
+### [Adding a deck: `add`](#content)
 Creates and adds a new deck with the given name, if it does not already exist.
 
 Format: `add <name of deck>`
@@ -74,7 +77,7 @@ Expected outcome:
 
 ![](assets/ug/adddeck.png)
 
-### Editing a deck: `edit`
+### [Editing a deck: `edit`](#content)
 Edits the name of the deck indicated by the index.
 `/d` denotes the index of the deck to be edited and `/n` denotes the new name
 of the deck.
@@ -91,7 +94,7 @@ Example of Usage:
 Expected outcome:
 
 ![](assets/ug/editdeck.png)
-### Deleting a deck: `delete`
+### [Deleting a deck: `delete`](#content)
 Deletes the deck indicated by the index or the name.
 
 Format: `delete <index of deck>`
@@ -104,7 +107,7 @@ Expected outcome:
 
 ![](assets/ug/deleteDeck.png)
 
-### Entering a deck: `enter`
+### [Entering a deck: `enter`](#content)
 Enters the deck with the given index.
 
 Format:
@@ -113,7 +116,7 @@ Format:
 Expected outcome: 
 
 ![](assets/ug/enter.png)
-### Test flashcards: `test`
+### [Test flashcards: `test`](#content)
 
 Enter test mode. The program will ask you to input the index for the deck that is to be tested.
 The word to be tested will be displayed in the console. 
@@ -135,7 +138,7 @@ Expected outcome:
 
 ![](assets/ug/test.png)
 
-### Review flashcards: `review`
+### [Review flashcards: `review`](#content)
 Enters review mode, which is the same as test mode except that the cards tested will be the cards
 that the user got wrong on more than 50% of the tests.
 
@@ -145,7 +148,7 @@ Expected outcome:
 
 ![](assets/ug/review.png)
 
-### Viewing all decks: `view`
+### [Viewing all decks: `view`](#content)
 Displays the names of all decks.
 
 Format: `view`
@@ -154,7 +157,7 @@ Expected outcome:
 
 ![](assets/ug/viewdeck.png)
 
-### View flashcard statistics: `viewfc`
+### [View flashcard statistics: `viewfc`](#content)
 Prints out all flashcards that have been added up to this point, including the cumulative score of
 all tests done for each of the flashcards.
 
@@ -163,7 +166,7 @@ Format: `viewfc`
 Expected outcome:
 
 ![](assets/ug/viewfc.png)
-### View test statistics: `viewtest`
+### [View test statistics: `viewtest`](#content)
 Prints the results for a particular test index or for all tests, depending on argument that 
 follows the `viewtest` command.
 
@@ -174,7 +177,7 @@ Expected outcome:
 ![](assets/ug/viewtestIndex.png)
 ![](assets/ug/viewtestAll.png)
 
-### Finding a flashcard: `find`
+### [Finding a flashcard: `find`](#content)
 Flashcards with descriptions matching the search terms are displayed on the screen.
 
 Format: `find <search terms>`
@@ -183,7 +186,7 @@ Expected outcome:
 
 ![](assets/ug/find.png)
 
-### Listing all commands: `help`
+### [Listing all commands: `help`](#content)
 Lists all commands within the main menu.
 
 Format: `help`
@@ -193,7 +196,7 @@ Expected outcome:
 ![](assets/ug/help1.png)
 
 ![](assets/ug/help2.png)
-### Exiting the app: `bye`
+### [Exiting the app: `bye`](#content)
 Exits the CardLI application within the Command Line Interface.
 
 Format: `bye`
@@ -202,7 +205,7 @@ Expected outcome:
 
 ![](assets/ug/bye.png)
 ---
-## Deck Menu
+## [Deck Menu](#content)
 > 💾 Your flashcards are saved after each command.
 
 ### Adding a flashcard `add`
