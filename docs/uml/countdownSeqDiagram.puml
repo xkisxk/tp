@@ -15,10 +15,15 @@ Countdown->CountdownTimerTask: scheduleAtFixedRate(timerTask,\n delay, period)
 loop until time is up or Countdown is stopped
 [<--CountdownTimerTask: display()
 CountdownTimerTask->CountdownTimerTask: countDown()
-opt
-[->Countdown: stop()
-Countdown->CountdownTimerTask: cancel()
+    opt
+    [->Countdown: stop()
+    Countdown->CountdownTimerTask: cancel()
+    end
 end
+
+alt not already stopped
+CountdownTimerTask->Countdown: stop()
+Countdown->CountdownTimerTask: cancel()
 end
 
 deactivate CountdownTimerTask
