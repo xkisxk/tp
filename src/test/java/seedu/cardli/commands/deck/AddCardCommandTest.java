@@ -6,7 +6,7 @@ import seedu.cardli.commands.CommandResult;
 import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCardCommandTest {
 
