@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Implements the list of added flashcards.
+ * Implements the class Deck, which contains all the FlashCards and
+ * methods to operate on them, such as add, delete, edit, view, etc.
  */
 public class Deck {
 
@@ -98,7 +99,6 @@ public class Deck {
     }
 
     //@@author xkisxk
-
     /**
      * Deletes the flashcard with the given input.
      *
@@ -120,7 +120,6 @@ public class Deck {
     }
 
     //@@author JWweiyin
-
     /**
      * Deletes the flashcard with the given index.
      *
@@ -165,7 +164,6 @@ public class Deck {
         cards.add(card);
     }
 
-
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
     }
@@ -191,7 +189,6 @@ public class Deck {
     }
 
     //@@author JWweiyin
-
     /**
      * Returns all matching flashcards which fronts or backs match the search terms. Not case sensitive.
      * @param searchInput The search terms input by the user

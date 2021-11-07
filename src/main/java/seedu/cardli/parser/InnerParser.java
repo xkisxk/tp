@@ -100,10 +100,16 @@ public class InnerParser {
         return command;
     }
 
+    /**
+     * Setter for currDeck.
+     */
     public void setCurrDeck(Deck currDeck) {
         this.currDeck = currDeck;
     }
 
+    /**
+     * Setter for deckManager.
+     */
     public void setDeckManager(DeckManager deckList) {
         this.deckManager = deckList;
     }
