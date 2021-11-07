@@ -172,7 +172,7 @@ object.
 The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
 `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the deck to be edited. `prepareEditDeckCommand()` will then return a
+returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will then return a
 string array, `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the
@@ -196,13 +196,13 @@ object.
 The `execute()` method in the `EditCardCommand` class self-invokes the `prepareEditCardCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditCardCommand()` self-invokes the
 `prepareCardIndex` method, which handles the formatting of the card index specified by the user. `prepareCardIndex()`
-returns `card`, of string type, which represents the card to be edited. `prepareEditCardCommand()` will then return a
-string array, `preparedArguments`, which represents the arguments for the next method call.
+returns the index of the card to be edited as a string. `prepareEditCardCommand()` will then return a string array, 
+`preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editCard()` method of the `Deck` class, which in turn calls the
 `setFront()` or `setBack()` method of the `FlashCard` class. Once `editCard()` is completed, a message of string type is
-returned to the
-`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+returned to the `execute()` method. The message is stored in a `CommandResult` class, which is then returned to 
+`CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
 
@@ -210,31 +210,28 @@ returned to the
 
 ![](assets/moveCardCommandSeqDiagram.png)
 
-This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card
+This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card 
 in a deck the user is currently in to another deck.
 
-By entering the `move` command in the `InnerParser` class, a `MoveCardCommand` object is created and its constructor is
-called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand`
+By entering the move command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
+called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand` 
 object.
 
 The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCardCommand()` method, which helps
-format the method arguments as well as handle edge cases. In turn, `prepareMoveCardCommand()` self-invokes the
-`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After
-this, `prepareMoveCardCommand()`
-self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index specified by the
-user.`prepareCardIndex()`
-returns `card`, of string type, which represents the card to be edited. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the deck to be edited.`prepareMoveCommand()` will then return a string
-array, `preparedArguments`, which represents the arguments for the next method call.
+the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCardCommand()` self-invokes the
+`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this,
+`prepareMoveCardCommand()` self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index 
+specified by the user.`prepareCardIndex()` returns `card`, of string type, which represents the index of the card to be 
+edited. `prepareDeckIndex()`returns `deck`, of string type, which represents the index of the deck to be edited.
+`prepareMoveCommand()` will then return a string array, `preparedArguments`, which represents the arguments for the next 
+method call.
 
 The `execute()` method will then call the `moveCard()` method of the `DeckManager` class, which in turn calls the
-`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls
-the `addFlashCard()`
-method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls
-the `deleteFlashCard()`
-method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is completed, a message of
-string type is returned to the
-`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls the 
+`addFlashCard()` method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls
+the `deleteFlashCard()` method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is 
+completed, a message of string type is returned to the `execute()` method. The message is stored in a `CommandResult` 
+class, which is then returned to `CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
 
