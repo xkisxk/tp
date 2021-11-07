@@ -41,9 +41,9 @@ public class MoveCardCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for MoveCardCommand.
+     * Returns the arguments for MoveCardCommand if accepted.
      *
-     * @return checked arguments.
+     * @return accepted arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
      * @throws InvalidCommandFormatException If flags are in the wrong position.
      * @throws seedu.cardli.exceptions.DeckNotExistException If the deck index given is out of bounds.

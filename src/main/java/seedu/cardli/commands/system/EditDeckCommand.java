@@ -68,9 +68,9 @@ public class EditDeckCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for EditDeckCommand.
+     * Returns the arguments for EditDeckCommand if accepted.
      *
-     * @return checked arguments.
+     * @return accepted arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
      * @throws InvalidCommandFormatException If flags are in the wrong position.
      * @throws DeckNotExistException If the deck index given is out of bounds.

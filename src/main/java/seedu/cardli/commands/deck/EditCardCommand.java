@@ -66,9 +66,9 @@ public class EditCardCommand extends Command {
     }
 
     /**
-     * Returns the checked arguments for EditCardCommand.
+     * Returns the arguments for EditCardCommand if accepted.
      *
-     * @return checked arguments.
+     * @return accepted arguments.
      * @throws FieldEmptyException If arguments or flags are empty.
      * @throws InvalidCommandFormatException If flags are in the wrong position.
      * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card index.

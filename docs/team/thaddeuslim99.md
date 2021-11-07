@@ -46,6 +46,7 @@ Given below are my contributions to the project.
 * **Project management**:
     * Managed milestone V1.0 and V2.1
     * Ensured tracker progress for V2.0 and V2.1
+    * Reviewed team's PR. Example: [\#188](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/188)
 
 * **Enhancements to existing features**:
     * Created CardLI logo
