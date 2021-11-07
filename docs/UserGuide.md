@@ -13,7 +13,8 @@ through the use of flashcards, while also reducing the paper waste that goes int
 flashcards. The interfacing within the application is designed to be interactive and functional,
 while the commands are designed to be intuitive to use. 
 
-## Purpose
+
+## How To Use
 
 This guide is meant to help you to get familiarised with all the features of CardLI. The `Quick Start`
 section will tell you how to download and get CardLI set up. The `Features` section provides an
@@ -66,14 +67,7 @@ Example of Usage:
 Expected outcome:
 
 ![](assets/ug/adddeck.png)
-### Viewing all decks: `view`
-Displays the names of all decks.
 
-Format: `view`
-
-Expected outcome:
-
-![](assets/ug/viewdeck.png)
 ### Editing a deck: `edit`
 Edits the name of the deck indicated by the index.
 `/d` denotes the index of the deck to be edited and `/n` denotes the new name
@@ -134,6 +128,26 @@ Format: `test`
 Expected outcome:
 
 ![](assets/ug/test.png)
+
+### Review flashcards: `review`
+Enters review mode, which is the same as test mode except that the cards tested will be the cards
+that the user got wrong on more than 50% of the tests.
+
+Format: `review`
+
+Expected outcome:
+
+![](assets/ug/review.png)
+
+### Viewing all decks: `view`
+Displays the names of all decks.
+
+Format: `view`
+
+Expected outcome:
+
+![](assets/ug/viewdeck.png)
+
 ### View flashcard statistics: `viewfc`
 Prints out all flashcards that have been added up to this point, including the cumulative score of
 all tests done for each of the flashcards.
@@ -154,15 +168,6 @@ Expected outcome:
 ![](assets/ug/viewtestIndex.png)
 ![](assets/ug/viewtestAll.png)
 
-### Review flashcards: `review`
-Enters review mode, which is the same as test mode except that the cards tested will be the cards
-that the user got wrong on more than 50% of the tests.
-
-Format: `review`
-
-Expected outcome:
-
-![](assets/ug/review.png)
 ### Finding a flashcard: `find`
 Flashcards with descriptions matching the search terms are displayed on the screen.
 
@@ -207,19 +212,6 @@ Expected outcome:
 
 ![](assets/ug/addflash.png)
 
-### Deleting a flashcard: `delete`
-Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
-exists in the current deck of flashcards.
-
-Format: `delete <index of card>`
-
-Example of usage:
-
-`delete 1`
-
-Expected outcome:
-
-![](assets/ug/deleteindexflash.png)
 ### Editing a flashcard: `edit`
 Edits the front or the back of your chosen flashcard to your given input.
 `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
@@ -237,6 +229,20 @@ Example of usage:
 Expected outcome:
 
 ![](assets/ug/editcard.png)
+
+### Deleting a flashcard: `delete`
+Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
+exists in the current deck of flashcards.
+
+Format: `delete <index of card>`
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+![](assets/ug/deleteindexflash.png)
 
 ### Moving a flashcard: `move`
 Moves a flashcard from the deck you are currently in to a new deck of your choice.
@@ -310,14 +316,14 @@ good grasp of the application.
 |Action|Format|
 |-------|------|
 |add deck|`add <name of deck>`|
-|view decks|`view`|
 |edit deck|`edit /d <index of deck> /n name`|
 |delete deck|`delete <index>`|
 |enter deck|`enter <index of deck>`|
 |test|`test`|
+|review|`review`|
+|view decks|`view`|
 |view overall statistics for flashcards|`viewfc`|
 |view test statistics|`viewtest <index of test>` prints the result of the test indicated by the index.<br>`viewtest all` prints the results for all tests.|
-|review|`review`|
 |find flashcard|`find <word/phrase>`|
 |lists all commands in main menu|`help`|
 |exiting program|`bye`|
@@ -327,8 +333,8 @@ good grasp of the application.
 |Action|Format|
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
-|deleting a flashcard|`delete <index of card>`|
 |editing a flashcard|`edit /c <index of card> /s <front or back> /i input`|
+|deleting a flashcard|`delete <index of card>`|
 |moving a flashcard| `move /c <index of card> /d <index of deck>`|
 |viewing flashcards|`view`|
 |lists all commands in deck mode|`help`|
