@@ -20,7 +20,7 @@ public class EditCardCommandTest {
         String input = "edit ";
         String commandType = Parser.getCommandType(input);
         String arguments = Parser.getCommandArguments(commandType, input);
-        Command test = new EditCardCommand(arguments, deck, deckManager;
+        Command test = new EditCardCommand(arguments, deck, deckManager);
         CommandResult result = test.execute();
         String output = result.getResult();
         assertEquals("You cannot leave any field empty! "
@@ -171,6 +171,52 @@ public class EditCardCommandTest {
         String output = result.getResult();
         assertEquals("Card index must be smaller than 2147483647.", output);
     }
+
+    @Test
+    public void execute_cardWithExactSameFrontExists_expectErrorMessage() {
+        DeckManager deckManager = new DeckManager();
+        deckManager.prepareToAddDeck("deck1");
+        deckManager.getDeck(0).addFlashCard("card", "card");
+        deckManager.getDeck(0).addFlashCard("card2", "card");
+        String input = "edit /c 2 /s front /i card";
+        String commandType = Parser.getCommandType(input);
+        String arguments = Parser.getCommandArguments(commandType, input);
+        Command test = new EditCardCommand(arguments, deckManager.getDeck(0), deckManager);
+        CommandResult result = test.execute();
+        String output = result.getResult();
+        assertEquals("There is already a card with card on the front in deck deck1.", output);
+    }
+
+    @Test
+    public void execute_newFrontWithDifferentCase_expectSuccess() {
+        DeckManager deckManager = new DeckManager();
+        deckManager.prepareToAddDeck("deck1");
+        deckManager.getDeck(0).addFlashCard("card", "card");
+        deckManager.getDeck(0).addFlashCard("card2", "card");
+        String input = "edit /c 2 /s front /i Card";
+        String commandType = Parser.getCommandType(input);
+        String arguments = Parser.getCommandArguments(commandType, input);
+        Command test = new EditCardCommand(arguments, deckManager.getDeck(0), deckManager);
+        CommandResult result = test.execute();
+        String output = result.getResult();
+        assertEquals("Changed front of card 2 to Card", output);
+    }
+
+    @Test
+    public void execute_cardWithSameFrontDoesNotExist_expectSuccess() {
+        DeckManager deckManager = new DeckManager();
+        deckManager.prepareToAddDeck("deck1");
+        deckManager.getDeck(0).addFlashCard("card", "card");
+        deckManager.getDeck(0).addFlashCard("card2", "card");
+        String input = "edit /c 2 /s front /i no";
+        String commandType = Parser.getCommandType(input);
+        String arguments = Parser.getCommandArguments(commandType, input);
+        Command test = new EditCardCommand(arguments, deckManager.getDeck(0), deckManager);
+        CommandResult result = test.execute();
+        String output = result.getResult();
+        assertEquals("Changed front of card 2 to no", output);
+    }
+
 
 
 }

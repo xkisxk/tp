@@ -124,7 +124,6 @@ public class DeckManager {
 
     public String cardHasSameName(String query) {
         String deckWithSameNameCard = "";
-        assert decks.size() > 0;
         for (Deck d : decks) {
             if (d.hasCardWithSameName(query)) {
                 deckWithSameNameCard = d.getName();

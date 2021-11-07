@@ -80,6 +80,12 @@ public class Deck {
         return result;
     }
 
+    /**
+     * Adds a new flashcard and returns the message printed after the addition of the flashcard.
+     *
+     * @param input An array containing the content for front of the flashcard and the back of the flashcard
+     * @return Message printed after adding of flashcard
+     */
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
         addFlashCard(input[0], input[1]);
@@ -131,11 +137,15 @@ public class Deck {
         return returnDeletedFlashCardMessage(card.getFront(), card.getBack());
     }
 
-    //TODO: don't allow cards with same front to be entered. no duplicate front across the entire app
-    public boolean hasCardWithSameName(String query)
-    {
-        for (FlashCard f: cards) {
-            if (f.getFront().equals(query.trim())){
+    /**
+     * Checks if there are flashcards within the deck with fronts that match the query term exactly.
+     *
+     * @param query String to be checked.
+     * @return true if there is a card with front that matches the query exactly, false otherwise
+     */
+    public boolean hasCardWithSameName(String query) {
+        for (FlashCard f : cards) {
+            if (f.getFront().equals(query.trim())) {
                 return true;
             }
         }
@@ -154,8 +164,7 @@ public class Deck {
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
     }
-
-
+    
     //@@author astralum
     public String returnAllFlashCards() { // TODO: throw exception if no cards
         String result = "";
@@ -177,6 +186,12 @@ public class Deck {
     }
 
     //@@author JWweiyin
+
+    /**
+     * Returns all matching flashcards which fronts or backs match the search terms. Not case sensitive.
+     * @param searchInput The search terms input by the user
+     * @return All matching flashcards, returns an empty string if there are no matching flashcards
+     */
     public String returnMatchingFlashCards(String searchInput) {
         String result = "";
         ArrayList<FlashCard> matchingCards = (ArrayList<FlashCard>) cards.stream()
