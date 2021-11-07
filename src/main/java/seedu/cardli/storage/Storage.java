@@ -56,6 +56,7 @@ public class Storage {
      *
      * @param decks     User's current decks of flashcards
      */
+    @SuppressWarnings("unchecked") // placed method-level to allow for unit testing
     public void writeCardsToFile(ArrayList<Deck> decks) {
         try {
             // instantiate FileWriter object to overwrite specified text file
@@ -79,6 +80,7 @@ public class Storage {
      *
      * @param testHistory       User's current test history
      */
+    @SuppressWarnings("unchecked") // placed method-level to allow for unit testing
     public void writeTestsToFile(ArrayList<AnswerList> testHistory) {
         try {
             // instantiate FileWriter object to overwrite specified text file
