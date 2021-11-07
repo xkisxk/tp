@@ -15,6 +15,10 @@ import seedu.cardli.parser.Parser;
 import seedu.cardli.parser.deck.EditCardParser;
 import seedu.cardli.testing.TestManager;
 
+/**
+ * Implements the EditCardCommand class, which edits the specified side of
+ * the card with the specified index in the given deck.
+ */
 public class EditCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "

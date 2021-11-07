@@ -14,6 +14,10 @@ import seedu.cardli.testing.TestManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Implements the MoveCardCommand class, which moves the specified card in
+ * the current deck to another deck.
+ */
 public class MoveCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "

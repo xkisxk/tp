@@ -8,6 +8,10 @@ import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.parser.deck.AddCardParser;
 
+/**
+ * Implements the AddCardCommand class, which adds a card with the
+ * specified front and back to the given deck.
+ */
 public class AddCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "
