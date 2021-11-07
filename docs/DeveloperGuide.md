@@ -1,14 +1,25 @@
 # Developer Guide
 ![](assets/logo.png)
 
-&nbsp;1. [Introduction](#introduction)<br/>
-&nbsp;2. [Acknowledgements](#acknowledgements)<br/>
-&nbsp;3. [Design](#design)<br/>
-&nbsp;&nbsp;&nbsp;3.1. [Model Component](#model-component)<br/>
-&nbsp;&nbsp;&nbsp;3.2. [UI Component](#ui-component)<br/>
-&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#logic-component)<br/>
-&nbsp;&nbsp;&nbsp;3.4. [Storage Component](#storage-component)<br/>
-&nbsp;4. [Implementation](#implementation)<br/>
+# Content
+1. [Introduction](#introduction)<br/>
+2. [Acknowledgements](#acknowledgements)<br/>
+3. [Design](#design)<br/>
+3.1. [Model Component](#model-component)<br/>
+3.2. [UI Component](#ui-component)<br/>
+3.3. [Logic Component](#logic-component)<br/>
+3.4. [Storage Component](#storage-component)<br/>
+4. [Implementation](#implementation)<br/>
+4.1. [Edit](#edit)<br/>
+4.1.1 [EditDeckCommand](#editdeckcommand)<br/>
+4.1.2 [EditCardCommand](#editcardcommand)<br/>
+4.2. [Move](#move)<br/>
+4.3. [Find](#find)<br/>
+4.4. [Test Feature](#test-feature)<br/>
+4.5. [Storage](#storage)<br/>
+5. [Product Scope](#product-scope)<br/>
+5.1 [Target User Profile](#target-user-profile)<br/>
+5.2 [User Proposition](#user-proposition)
 
 # Introduction
 
@@ -112,7 +123,7 @@ This subsection provides details on the implementation of the commands that enab
 
 The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
 
-### `EditDeckCommand`
+### [`EditDeckCommand`](#content)
 
 
 Given below is the sequence diagram for `edit` (Deck):
