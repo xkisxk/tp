@@ -110,7 +110,7 @@ public class Deck {
         if (Parser.isInteger(input)) {
             return deleteFlashCardByIndex(input);
         } else {
-            return deleteFlashCardByIndex(input);
+            throw new CardLiException("Please enter a positive number.");
         }
     }
 

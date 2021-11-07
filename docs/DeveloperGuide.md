@@ -191,7 +191,7 @@ and the parsing respectively during the test.
 ![sequence diagram](assets/TestSequenceDiagram.png)
 
 To enter into test mode, the user needs to enter `test` in main menu in which the program will
-prompt the user to input a number corresponding to the index of the deck that they want to 
+prompt the user to input a number (done in `startTest()`) corresponding to the index of the deck that they want to 
 be tested on or "all" to test all decks.
 
 ![sequence diagram](assets/getTestDeckSequenceDiagram.png)
