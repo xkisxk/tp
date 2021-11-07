@@ -1,18 +1,52 @@
 # Developer Guide
 ![](assets/logo.png)
-# Introduction
+
+## Content
+1. [Introduction](#1-introduction)<br/>
+2. [Acknowledgements](#2-acknowledgements)<br/>
+3. [Design](#3-design)<br/>
+3.1. [Model Component](#31-model-component)<br/>
+3.2. [UI Component](#32-ui-component)<br/>
+3.3. [Logic Component](#33-logic-component)<br/>
+3.4. [Storage Component](#34-storage-component)<br/>
+4. [Implementation](#4-implementation)<br/>
+4.1. [Edit](#41-edit)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [EditDeckCommand](#411-editdeckcommand)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [EditCardCommand](#412-editcardcommand)<br/>
+4.2. [Move](#42-move)<br/>
+4.3. [Find](#43-find)<br/>
+4.4. [Test Feature](#44-test-feature)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Test Setup](#441-test-setup)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Testing Process](#442-testing-process)<br/>
+4.5. [Storage](#45-storage)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.1. [Writing to JSON files](#451-writing-to-json-files)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.2. [Reading from JSON files](#452-reading-from-json-files)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#4521-readcardsfromfile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#4522-readtestfromfile)<br/>
+5. [Product Scope](#5-product-scope)<br/>
+5.1 [Target User Profile](#51-target-user-profile)<br/>
+5.2 [Value Proposition](#52-value-proposition)<br/>
+6. [User Stories](#6-user-stories)<br/>
+7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
+8. [Glossary](#8-glossary)<br/>
+9. [Instructions for Manual Mesting](#9-instructions-for-manual-testing)
+
+## [1. Introduction](#content)
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
 students keep track of all their flashcards. It also allows students to test their knowledge. All of this in one
 single platform.
 
-## Acknowledgements
+## [2. Acknowledgements](#content)
 
 Third-party libraries used include [Jansi](https://mvnrepository.com/artifact/org.fusesource.jansi/jansi) for creating 
 the countdown timer and [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple) 
 for saving and storing JSON objects.
 
-## Design
+* [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
+* __Jansi:__ For its ANSI escape sequence library, currently used in flashcard testing
+
+## [3. Design](#content)
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
 
 <li> At app launch: initialises the components in the correct sequence, and connects them up with each other</li>
@@ -27,7 +61,7 @@ The rest of the App consists of the following components:
 
 Each component is explained in the sections below.
 
-### Model Component
+### [3.1. Model Component](#content)
 
 ![](assets/modelArchitectureDiagram2.png)
 
@@ -52,10 +86,10 @@ An `AnswerList` contains a private arrayList of `Answers`, which is created by `
 
 The `Countdown` class creates a timer that displays the time left for a question during a Test or Review.
 
-### UI Component
+### [3.2. UI Component](#content)
 The UI component consists of two classes, ```CardLiUi``` and ```TestUi```. It outputs greeting, exit and help messages to the user on command.
 
-### Logic Component
+### [3.3. Logic Component](#content)
 
 ![](assets/logicArchitectureDiagram.png)
 
@@ -80,7 +114,7 @@ How the parsing works:
 `Inner Parser` or `Outer Parser` creates a `XYZCommand` which in turn creates its corresponding `XYZCommandParser` (eg. when `InnerParser` creates a `EditCardCommand`, `EditCardCommand` creates a `EditCardParser`.)</li>
 
 All `XYZCommandParser` classes implement the `CommandArgumentParser` interface.
-### Storage Component
+### [3.4. Storage Component](#content)
 The `Storage` component:
 * Saves all the decks
 * Saves all the flashcards
@@ -89,14 +123,18 @@ The `Storage` component:
 
 All app data is saved as JSON files.
 
-## Implementation
-### Edit
+## [4. Implementation](#content)
+
+> ℹ️  Note: In the sequence diagrams below, the lifeline for objects should end at the destroy marker (X) but due
+> to a limitation of PLANTUML, the lifeline reaches the end of the diagram.
+
+### [4.1. Edit](#content)
 
 This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
 
 The user can only edit the `name` attribute of the `Deck` object, which represents the name of the deck.
 
-### `EditDeckCommand`
+#### [4.1.1. `EditDeckCommand`](#content)
 
 
 Given below is the sequence diagram for `edit` (Deck):
@@ -121,7 +159,7 @@ The `execute()` method will then call the `editDeck()` method of the `DeckManage
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-### `EditCardCommand`
+#### [4.1.2. `EditCardCommand`](#content)
 
 ![](assets/editCardCommandSeqDiagram.png)
 
@@ -144,14 +182,14 @@ The `execute()` method will then call the `editCard()` method of the `Deck` clas
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-### Move
+### [4.2. Move](#content)
 
 ![](assets/moveCardCommandSeqDiagram.png)
 
 This subsection provides details on the implementation of the `moveCardCommand`. This command
 enables moving of a card in a deck the user is currently in to another deck.
 
-By entering the edit command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
+By entering the move command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
 called. This object is returned to `CardLi` class, which then calls the `execute()` method
 of the `MoveCardCommand` object.
 
@@ -171,7 +209,7 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUI` class to print the message to the user.
 
-### Find
+### [4.3. Find](#content)
 
 ![](assets/findSeqDiagram.png)
 
@@ -181,13 +219,14 @@ Currently, `find` is implemented on a Systemwide level. After the `CardLiUi` han
 
 `returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck, and filters them based on whether they contain the search term given. Finally all the `FlashCards` that contain the search term are collected in an arrayList and their console outputs are returned in string format for `CardLiUi` to display to the user.
 
-### Test Feature
+### [4.4. Test Feature](#content)
 
 ![class diagram](assets/testClassDiagram.png)
 
 Currently, test feature is implemented on a systemwide level and is handled by `TestManager`.
 `TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user
 and the parsing respectively during the test.
+#### [4.4.1. Test Setup](#content)
 
 ![sequence diagram](assets/TestSequenceDiagram.png)
 
@@ -209,6 +248,8 @@ of `Answer` as shown in the class diagram above. The `AnswerList` is also tagged
 After constructing the `AnswerList`, the preparation begins. The `Deck` that is attached to
 the `AnswerList` gets duplicated, then shuffled. Afterwards, the `AnswerList` will be populated with
 "NIL" `Answers`.
+
+#### [4.4.2. Testing Process](#content)
 
 ![sequence diagram](assets/testInProgressSeqDiagram.png)
 
@@ -249,7 +290,7 @@ condition of the `FlashCard` getting strictly less than 50% of the total number 
 > when `Command.execute()` is called not really feasible.
 </details>
  
-### Storage
+### [4.5. Storage](#content)
 
 This feature allows users of CardLI to save data on their current decks of flashcards as well as
 the tests that they have completed thus far. This will also allow users to re-access the data
@@ -273,7 +314,10 @@ A `Storage` class was implemented to contain all the methods to execute the save
 relevant JSON files. An instance of this class is created upon first start up the application to handle all the 
 method calls. The respective methods will be explained in more detail in the following paragraphs.
 
-#### Writing to JSON files
+
+#### [4.5.1. Writing to JSON files](#content)
+
+`writeToFile(ArrayList<T> arrayList, String type)`
 
 This method invokes the save function by writing the user's data to the specified JSON files. It takes in two arguments,
 namely an `ArrayList` containing either `Deck` or `AnswerList` Objects, depending on the data that is being saved to
@@ -306,9 +350,8 @@ as that explained under the `writeCardsToFile()` method.
 An example of the format of the `Tests_CardLI.json` where the decks of flashcards are saved is shown
 in the screenshot below.
 
-// TODO insert JSON file example
 
-#### Reading from JSON file
+#### [4.5.2. Reading from JSON files](#content)
 
 The methods for reading from the JSON files are executed once upon each startup of the CardLI application.
 The methods use an instance of the `Scanner` class to parse through the JSON files, before using an instance of the
@@ -324,7 +367,7 @@ sequence diagram in the following sections.
 
 ![](assets/readFromFileSeqDiagram.png)
 
-`readCardsFromFile()`
+##### [4.5.2.1 `readCardsFromFile`](#content)
 
 The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file.
 As per the sequence diagram shown above, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively 
@@ -334,7 +377,8 @@ shown below.
 
 ![](assets/parseDeckSeqDiagram.png)
 
-`readTestsFromFile()`
+
+##### [4.5.2.2 `readTestFromFile`](#content)
 
 The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file.
 As per the sequence diagram shown above, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method 
@@ -344,9 +388,9 @@ is shown below.
 
 ![](assets/parseAnswerListSeqDiagram.png)
 
-## Product scope
+## [5. Product scope](#content)
 
-### Target user profile
+### [5.1. Target user profile](#content)
 
 * Pre-University/University/Polytechnic students
 * Reasonably comfortable using CLI apps
@@ -354,15 +398,14 @@ is shown below.
 * Prefers to store their information online rather than physically
 * Has a lot of flashcards
 
-
-### Value proposition
+### [5.2. Value Proposition](#content)
 
 CardLI provides a:
 <li> User-friendly </li>
 <li> Storage efficient</li>
-<li> Internet connection independent flashcard experience.
+<li> Internet connection independent flashcard experience. </li>
 
-## User Stories
+## [6. User Stories](#content)
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -381,7 +424,7 @@ CardLI provides a:
 | |student with many flashcards and decks|find a flashcard by searching for a term matching it|find the flashcard without looking through all my decks
 | |student with little time|save my flashcards|I do not have to add my flashcards to the app every time I use it
 
-## Non-Functional Requirements
+## [7. Non-Functional Requirements](#content)
 
 <li> The app should be usable by a user who is reasonably comfortable using Command Line Interface.</li>
 <li> The app should be able to handle at least 25 flashcard decks of at least 25 cards each.</li>
@@ -389,10 +432,10 @@ CardLI provides a:
 <li> The app should store data in a format that is readable by humans, and easy for machines to parse and generate.</li>
 
 
-## Glossary
+## [8. Glossary](#content)
 
-* *glossary item* - Definition
+* *CLI* - Command Line Interface
 
-## Instructions for manual testing
+## [9. Instructions for Manual Testing](#content)
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

@@ -40,6 +40,17 @@ public class MoveCardCommand extends Command {
         this.parser = new MoveCardParser();
     }
 
+    /**
+     * Returns the arguments for MoveCardCommand if accepted.
+     *
+     * @return accepted arguments.
+     * @throws FieldEmptyException If arguments or flags are empty.
+     * @throws InvalidCommandFormatException If flags are in the wrong position.
+     * @throws seedu.cardli.exceptions.DeckNotExistException If the deck index given is out of bounds.
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the card or deck index.
+     * @throws CardLiException If flags are used as arguments,if a card is being sent to the deck it is currently in,
+     *      if a non-integer is given as index, if the card index given is out of bounds.
+     */
     public String[] prepareMoveCardCommand() throws CardLiException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing MoveCommand");
@@ -52,13 +63,15 @@ public class MoveCardCommand extends Command {
         if (!arguments.contains("/c") || !arguments.contains("/d")) {
             throw new FieldEmptyException(MISSING_FLAG_MESSAGE);
         }
+
         logger.log(Level.INFO, "Checking if /d and /c are in the right order");
         if (!(arguments.indexOf("/c") < arguments.indexOf("/d"))) {
             throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
         }
+
         logger.log(Level.INFO, "Splitting the input up");
-        // /c, card, /d, deck
         String[] rawParameters = parser.parseArguments(super.arguments);
+
         logger.log(Level.INFO, "Checking if there is enough arguments");
         if (rawParameters.length != 4) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
@@ -99,7 +112,7 @@ public class MoveCardCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() { //move /c <index> /d <index
+    public CommandResult execute() {
         CommandResult result;
         try {
             String[] parameters = prepareMoveCardCommand();

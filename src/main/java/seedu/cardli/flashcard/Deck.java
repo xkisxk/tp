@@ -38,6 +38,12 @@ public class Deck {
     }
 
     //@@author ThaddeusLim99
+    /**
+     * Returns the details of the edit that took place as a message.
+     *
+     * @param parameters string array containing the  card index, side and input.
+     * @return the details of the transfer that took place as a message.
+     */
     public String editCard(String[] parameters) {
         String enteredCardIndex = parameters[0];
         int cardIndex = Integer.parseInt(enteredCardIndex) - 1;

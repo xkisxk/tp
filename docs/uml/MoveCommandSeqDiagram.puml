@@ -1,41 +1,33 @@
 @startuml
-hide footbox
+!include style.puml
 
-participant ":MoveCardCommand" as MoveCardCommand
-participant ":EditCardCommand" as EditCardCommand
-participant ":EditDeckCommand" as EditDeckCommand
-participant ":DeckManager" as DeckManager
-participant ":Deck" as Deck
-participant ":CardLiUI" as CardLiUI
+hide footbox
+autonumber
+
+participant ":CardLI" as CardLI mainCOLOUR
+participant "innerParser:InnerParser" as InnerParser logicCOLOUR
+participant "command:MoveCardCommand" as MoveCardCommand logicCOLOUR
+participant ":DeckManager" as DeckManager modelCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant "ui:CardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
-[-> MoveCardCommand : new
+CardLI -> InnerParser: parseCommand(input)
+activate InnerParser
+
+InnerParser -> MoveCardCommand**: new MoveCardCommand(arguments)
 activate MoveCardCommand
-[<-- MoveCardCommand : command
+MoveCardCommand --> InnerParser: "command:MoveCardCommand
 deactivate MoveCardCommand
+InnerParser --> CardLI: command
+deactivate InnerParser
 
-[->MoveCardCommand : execute()
+CardLI->MoveCardCommand : execute()
 activate MoveCardCommand
 
-MoveCardCommand -> MoveCardCommand : prepareMoveCardCommand()
-activate MoveCardCommand
-
-MoveCardCommand -> EditCardCommand: prepareCardIndex(card, deck)
-activate EditCardCommand
-
-EditCardCommand --> MoveCardCommand: cardIndex
-deactivate EditCardCommand
-destroy EditCardCommand
-
-MoveCardCommand -> EditDeckCommand: prepareDeckIndex(deck, deckManager)
-activate EditDeckCommand
-
-EditDeckCommand --> MoveCardCommand: deckIndex
-deactivate EditDeckCommand
-destroy EditDeckCommand
-
-MoveCardCommand --> MoveCardCommand: preparedArguments
-deactivate MoveCardCommand
+ref over MoveCardCommand
+prepareMoveCardCommand()
+end ref
 
 MoveCardCommand -> DeckManager: moveCard(parameters)
 activate DeckManager
@@ -43,7 +35,7 @@ activate DeckManager
 DeckManager -> Deck: getCard(cardIndex)
 activate Deck
 
-Deck --> DeckManager: card
+Deck --> DeckManager: cardCopy
 deactivate Deck
 
 DeckManager -> Deck: addFlashCard(cardCopy)
@@ -55,21 +47,19 @@ activate Deck
 deactivate Deck
 destroy Deck
 
-
 DeckManager --> MoveCardCommand: message
 deactivate DeckManager
 
 destroy DeckManager
 
-[<-- MoveCardCommand: result
+CardLI<-- MoveCardCommand: result
 deactivate MoveCardCommand
 destroy MoveCardCommand
 
-[-> CardLiUI: printResult(result)
+CardLI-> CardLiUI: printResult(result)
 activate CardLiUI
 
 CardLiUI -> User
 
 deactivate CardLiUI
-destroy CardLiUI
 @enduml
