@@ -172,8 +172,8 @@ object.
 The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
 `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will then return a
-string array, `preparedArguments`, which represents the arguments for the next method call.
+returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will 
+then return a string array, `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the
 `setName()` method of the `Deck` class. Once `editDeck()` is completed, a message of string type is returned to the
@@ -472,4 +472,21 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Edit Deck
+1. Dealing with duplicate flags<br/>
+&nbsp;1. Test case: `edit /d /d /n /n`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command flags
+as part of the command arguments is printed.
+2. Dealing with string input<br/>
+&nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
+integer to indicate the deck to edit is printed.
+3. Changing name of a deck<br/>
+&nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the 
+edited deck
+
+### Move Card
+1. 
+2.
+3.
