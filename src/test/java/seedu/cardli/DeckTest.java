@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeckTest {
 
     /**
-     * Tests toString() and Deck() constructor
+     * Tests toString() and Deck() constructor.
      */
     @Test
     public void testToString() {
@@ -23,7 +23,7 @@ public class DeckTest {
 
     /**
      * Tests toJSONObject(), Deck(deckName) constructor
-     * and all 3 implementations of addFlashCard()
+     * and all 3 implementations of addFlashCard().
      */
     @Test
     public void testToJsonObject() {
