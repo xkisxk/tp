@@ -173,7 +173,7 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 ### Find
 
-![](assets/findFlashcardDiagram.png)
+![](assets/findSeqDiagram.png)
 
 Given above is the sequence diagram of the `find` function. This feature allows users of CardLI to find a `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the user can view specific `FlashCards` matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
 
@@ -192,7 +192,7 @@ and the parsing respectively during the test.
 ![sequence diagram](assets/TestSequenceDiagram.png)
 
 To enter into test mode, the user needs to enter `test` in main menu in which the program will
-prompt the user to input a number corresponding to the index of the deck that they want to 
+prompt the user to input a number (done in `startTest()`) corresponding to the index of the deck that they want to 
 be tested on or "all" to test all decks.
 
 ![sequence diagram](assets/getTestDeckSequenceDiagram.png)

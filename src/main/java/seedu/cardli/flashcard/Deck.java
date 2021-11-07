@@ -8,6 +8,7 @@ import seedu.cardli.exceptions.NoSlashException;
 import seedu.cardli.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -79,6 +80,12 @@ public class Deck {
         return result;
     }
 
+    /**
+     * Adds a new flashcard and returns the message printed after the addition of the flashcard.
+     *
+     * @param input An array containing the content for front of the flashcard and the back of the flashcard
+     * @return Message printed after adding of flashcard
+     */
     public String prepareToAddFlashCard(String[] input) {
         //String[] flashCardWords = trimStrings(input);
         addFlashCard(input[0], input[1]);
@@ -103,7 +110,7 @@ public class Deck {
         if (Parser.isInteger(input)) {
             return deleteFlashCardByIndex(input);
         } else {
-            return deleteFlashCardByIndex(input);
+            throw new CardLiException("Please enter a positive number.");
         }
     }
 
@@ -130,11 +137,20 @@ public class Deck {
         return returnDeletedFlashCardMessage(card.getFront(), card.getBack());
     }
 
-    //TODO: don't allow cards with same front to be entered. no duplicate front across the entire app
-    private boolean hasExactCard(String query, FlashCard card) {
-        return card.getFront().equalsIgnoreCase(query);
+    /**
+     * Checks if there are flashcards within the deck with fronts that match the query term exactly.
+     *
+     * @param query String to be checked.
+     * @return true if there is a card with front that matches the query exactly, false otherwise
+     */
+    public boolean hasCardWithSameName(String query) {
+        for (FlashCard f : cards) {
+            if (f.getFront().equals(query.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
-
 
     public void addFlashCard(String front, String back) {
         cards.add(new FlashCard(front, back));
@@ -148,7 +164,6 @@ public class Deck {
     public void addFlashCard(String front, String back, int userScore, int totalScore) {
         cards.add(new FlashCard(front, back, userScore, totalScore));
     }
-
 
     //@@author astralum
     public String returnAllFlashCards() { // TODO: throw exception if no cards
@@ -171,6 +186,12 @@ public class Deck {
     }
 
     //@@author JWweiyin
+
+    /**
+     * Returns all matching flashcards which fronts or backs match the search terms. Not case sensitive.
+     * @param searchInput The search terms input by the user
+     * @return All matching flashcards, returns an empty string if there are no matching flashcards
+     */
     public String returnMatchingFlashCards(String searchInput) {
         String result = "";
         ArrayList<FlashCard> matchingCards = (ArrayList<FlashCard>) cards.stream()

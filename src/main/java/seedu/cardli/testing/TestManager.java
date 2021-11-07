@@ -26,6 +26,7 @@ import static seedu.cardli.ui.TestUi.TIMES_UP_MESSAGE;
 public class TestManager {
 
     private static final int TIME_PER_QUESTION = 15;
+
     private static final String EMPTY_ANSWER = "";
 
     private final TestUi ui;
@@ -82,7 +83,7 @@ public class TestManager {
             ui.showMessage(e.getMessage());
             logger.log(Level.WARNING, "Empty deck");
         }
-        return "";
+        return EMPTY_ANSWER;
     }
 
     /**
@@ -121,7 +122,7 @@ public class TestManager {
         } catch (EmptyDeckException e) {
             ui.showMessage(NO_CARDS_TO_REVIEW_MESSAGE);
         }
-        return "";
+        return EMPTY_ANSWER;
     }
 
     //@@author ThaddeusLim99

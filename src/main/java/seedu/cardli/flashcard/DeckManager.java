@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 
 public class DeckManager {
+    public static final String DECK_ALREADY_EXISTS_MESSAGE = "The deck you are trying to create already exists.";
     private final ArrayList<Deck> decks;
     private static final Logger logger = Logger.getLogger(Deck.class.getName());
 
@@ -59,7 +60,7 @@ public class DeckManager {
             addDeck(deckName);
             return printNewDeck(deckName);
         } else {
-            return ("The category you are trying to create already exists.");
+            return DECK_ALREADY_EXISTS_MESSAGE;
         }
     }
 
@@ -120,6 +121,16 @@ public class DeckManager {
             result = "There are no cards matching the search term.";
         }
         return result;
+    }
+
+    public String cardHasSameName(String query) {
+        String deckWithSameNameCard = "";
+        for (Deck d : decks) {
+            if (d.hasCardWithSameName(query)) {
+                deckWithSameNameCard = d.getName();
+            }
+        }
+        return deckWithSameNameCard;
     }
 
     public String viewDecks() {
