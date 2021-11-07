@@ -33,4 +33,18 @@ public class AnswerTest {
         assertEquals("testAnswer", answer.getAnswer());
     }
 
+    //@@author xRossKoh
+    @Test
+    public void testToString() {
+        Answer answer = new Answer("testAnswer", 1,true);
+        assertEquals("testAnswer | 1\n", answer.toString());
+    }
+
+    @Test
+    public void testToJsonObject() {
+        Answer answer = new Answer("testAnswer", 1,true);
+        assertEquals("{\"questionIndex\":1,\"answer\":\"testAnswer\"}",
+                answer.toJsonObject().toJSONString());
+    }
+
 }

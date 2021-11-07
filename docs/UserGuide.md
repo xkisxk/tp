@@ -316,17 +316,20 @@ Expected outcome:
 **Q**: How do I transfer my data to another computer? 
 
 **A**: In order to transfer the data on your decks of flashcards to another computer, simply transfer
-the `CardLI.txt` file to your other computer, and download the latest version of CardLI there. 
-Ensure that both the `CardLI.txt` and `CardLI.jar` files are in the **same directory** before running
+the `data` file directory to your other computer, and download the latest version of CardLI there. 
+The `data` file directory should contain both the `Cards_CardLI.json` and `Tests_CardLI.json` files. 
+Ensure that both the `data` file directory and `CardLI.jar` file are in the **same directory** before running
 the CardLI application in the command prompt as instructed under the Quick Start section. 
 
-**Q**: Can I directly edit the `CardLI.txt` file to add, edit or delete decks and flashcards?
+**Q**: Can I directly edit the storage JSON files to make changes to my saved data?
 
-**A**: If you are familiar with the format of how the decks and flashcards are saved within the text
-file, you are free to do so. However, if errors are generated upon the next start up of the CardLI 
-application, you are advised to revert all changes to the text file and make the necessary changes
-from within the application. We will only recommend this method if you are a veteran user and have a
-good grasp of the application.
+**A**: We highly recommend that users who are unfamiliar with the workings of JSON and the
+format of the saved data do not attempt to directly edit the storage JSON files. This is because the CardLI 
+application has been programmed to read a specified format from the JSON files.
+Any inaccuracies arising from the direct editing of the files will likely lead to undesirable consequences such as 
+bugs and possible loss of your saved data if the files cannot be reverted to their original format.
+Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confidant in maintaining
+the format integrity of the files. 
 
 ## [4. Command Summary](#content)
 
