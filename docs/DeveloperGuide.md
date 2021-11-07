@@ -450,7 +450,7 @@ CardLI provides a:
 
 ## [8. Glossary](#content)
 
-* *glossary item* - Definition
+* *CLI* - Command Line Interface
 
 ## [9. Instructions for Manual Testing](#content)
 
