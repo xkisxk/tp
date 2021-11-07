@@ -33,6 +33,7 @@ public class AnswerTest {
         assertEquals("testAnswer", answer.getAnswer());
     }
 
+    //@@author xRossKoh
     @Test
     public void testToString() {
         Answer answer = new Answer("testAnswer", 1,true);
