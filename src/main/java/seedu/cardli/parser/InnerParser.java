@@ -16,22 +16,39 @@ import seedu.cardli.flashcard.DeckManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Implements the OuterParser class, which identifies the command the
+ * user has input at the deck level and returns a Command class with the
+ * given arguments to be executed.
+ */
 public class InnerParser {
 
     private static final Logger logger = Logger.getLogger(InnerParser.class.getName());
 
     private Deck currDeck;
-
     private DeckManager deckManager;
 
+    /**
+     * Constructs a {@code InnerParser} with the specified field.
+     * @param currDeck the current {@code Deck} the {@code InnerParser} should operate in
+     */
     public InnerParser(Deck currDeck) {
         this.currDeck = currDeck;
     }
 
+    /**
+     * Constructs a {@code InnerParser} with an empty currDeck.
+     */
     public InnerParser() {
         this.currDeck = null;
     }
 
+    /**
+     * Parses the user's input, identifies the command and creates a {@code Command}
+     * with the arguments that were input.
+     * @param input the user's raw String input
+     * @return a {@code Command} object
+     */
     public Command parseCommand(String input) {
         logger.setLevel(Level.WARNING);
         String commandType = Parser.getCommandType(input);

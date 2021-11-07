@@ -17,9 +17,8 @@ public class Countdown {
     private boolean isRunning;
 
     /**
-     * Constructor for the class Countdown. Creates a Countdown object
-     * with the given startValue and timesUpMessage to be displayed
-     * when the time elapsed reaches zero.
+     * Constructs a {@code Countdown} object with the given startValue and
+     * timesUpMessage to be displayed when the time elapsed reaches zero.
      * @param startValue Value of the timer to start from
      * @param timesUpMessage Message to be displayed when timer expires
      */
