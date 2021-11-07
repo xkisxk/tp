@@ -61,7 +61,8 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added logo: [\#176](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/176/commits/4a65edacd11031aa9171799af420bb412d415ddb)
         * Added implementation details of the `edit` feature (for both cards and deck): [\#65](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/65/commits/f996afecdada4c5118fba93f1a43893fed89c2ed)
-        * Added implementation details of the `move` feature [\#92](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/92/commits/7580984d8ec14af1bca8d4f213ff4e6b30e79074)
+        * Added implementation details of the `move` feature: [\#92](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/92/commits/7580984d8ec14af1bca8d4f213ff4e6b30e79074)
+        * Added table of content and enabled anchor links: 
 
 * **Community**:
     * Reported bugs and suggestions for other teams' [developer guide](https://github.com/nus-cs2113-AY2122S1/tp/pull/33#pullrequestreview-792605786))

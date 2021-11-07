@@ -40,6 +40,14 @@ public class EditDeckCommand extends Command {
         this.deckManager = deckManager;
     }
 
+    /**
+     * Returns the deck index for prepareEditDeckCommand as a string
+     *
+     * @return deck index
+     * @throws DeckNotExistException If the deck index given is out of bounds
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index
+     * @throws CardLiException If a non-integer is given as index
+     */
     public static String prepareDeckIndex(String deck, DeckManager deckManager) throws CardLiException,
             NumberFormatException {
         logger.setLevel(Level.WARNING);
@@ -59,6 +67,16 @@ public class EditDeckCommand extends Command {
         return deck;
     }
 
+    /**
+     * Returns the checked arguments for EditDeckCommand
+     *
+     * @return checked arguments
+     * @throws FieldEmptyException If arguments or flags are empty.
+     * @throws InvalidCommandFormatException If flags are in the wrong position
+     * @throws DeckNotExistException If the deck index given is out of bounds
+     * @throws NumberFormatException If an integer above 2147483647 is entered by the user as the deck index
+     * @throws CardLiException If flags are used as arguments, if a non-integer is given as index
+     */
     public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditDeckCommand");
