@@ -476,3 +476,8 @@ CardLI provides a:
 ## [9. Instructions for Manual Testing](#content)
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+## Testing
+
+Using the 
+
+## Reviewing

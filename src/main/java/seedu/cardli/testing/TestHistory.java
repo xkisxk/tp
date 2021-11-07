@@ -1,6 +1,5 @@
 package seedu.cardli.testing;
 
-
 import seedu.cardli.exceptions.DeckNotExistException;
 import seedu.cardli.flashcard.Deck;
 import seedu.cardli.flashcard.DeckManager;
@@ -55,6 +54,13 @@ public class TestHistory {
         return result;
     }
 
+    /**
+     * Call on the method corresponding to the input index.
+     *
+     * @param index user's input index
+     * @return      view flashcard message
+     * @throws DeckNotExistException if the test does not exist
+     */
     public String prepareViewTest(int index) throws DeckNotExistException {
         if (index == -1) {
             return viewTests();

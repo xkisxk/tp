@@ -5,6 +5,7 @@ hide footbox
 
 participant ":TestManager" as TestManager modelCOLOUR
 participant ":AnswerList" as AnswerList modelCOLOUR
+participant ":Deck" as Deck modelCOLOUR
 participant ":TestHistory" as TestHistory modelCOLOUR
 participant ":TestUi" as TestUi uiCOLOUR
 
@@ -39,16 +40,35 @@ activate AnswerList
 AnswerList --> TestManager
 deactivate AnswerList
 
+TestManager -> AnswerList : getDeck()
+activate AnswerList
+AnswerList -> Deck : incrementUserScore()
+activate Deck
+Deck --> AnswerList
+deactivate Deck
+AnswerList --> TestManager
+deactivate AnswerList
+
 TestManager -> TestUi : printCorrectAnsMessage()
 activate TestUi
 TestUi --> TestManager
 deactivate TestUi
+
 else answer is wrong
 TestManager -> TestUi : printIncorrectAnsMessage()
 activate TestUi
 TestUi --> TestManager
 deactivate TestUi
 end
+
+TestManager -> AnswerList : getDeck()
+activate AnswerList
+AnswerList -> Deck : incrementTotalScore()
+activate Deck
+Deck --> AnswerList
+deactivate Deck
+AnswerList --> TestManager
+deactivate AnswerList
 
 TestManager --> TestManager
 deactivate TestManager
