@@ -1,0 +1,28 @@
+@startuml
+hide footbox
+autonumber
+
+participant ":Countdown" as Countdown
+participant ":CountdownTimerTask" as CountdownTimerTask
+
+[->Countdown: Countdown(startValue,\n timesUpMessage)
+activate Countdown
+Countdown->CountdownTimerTask: CountdownTimerTask(startValue,\n timesUpMessage)
+activate CountdownTimerTask
+[->Countdown: start()
+Countdown->CountdownTimerTask: scheduleAtFixedRate(timerTask,\n delay, period)
+
+loop until time is up or Countdown is stopped
+[<--CountdownTimerTask: display()
+CountdownTimerTask->CountdownTimerTask: countDown()
+opt
+[->Countdown: stop()
+Countdown->CountdownTimerTask: cancel()
+end
+end
+
+deactivate CountdownTimerTask
+destroy CountdownTimerTask
+deactivate Countdown
+destroy Countdown
+@enduml

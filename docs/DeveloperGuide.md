@@ -31,7 +31,7 @@
 6. [User Stories](#6-user-stories)<br/>
 7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
 8. [Glossary](#8-glossary)<br/>
-9. [Instructions for Manual Mesting](#9-instructions-for-manual-testing)
+9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)
 
 ## [1. Introduction](#content)
 
@@ -255,7 +255,7 @@ method of `DeckManager` that repeatedly calls the `returnMatchingFlashCards()` m
 instance of a `Deck`.
 
 `returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck,
-and filters them based on whether they contain the search term given. This method is not case-sensitive. Finally all
+and filters them based on whether they contain the search term given. This method is not case-sensitive. Finally, all
 the `FlashCards` that contain the search term are collected in an ArrayList and their console outputs are returned in
 string format for `CardLiUi` to display to the user.
 
@@ -292,19 +292,32 @@ and added to `AnswerList`.
 #### [4.4.2. Testing Process](#content)
 
 ![sequence diagram](assets/testInProgressSeqDiagram.png)
-//TODO: change This is where the actual test starts. The test will keep looping until every card in the `Deck` to test
-is answered. And there is another loop within that loops until the `currentQuestion`, which is an `int`
-representing the question number, goes out of bounds. Inside the inner loop, `testCard` is called to test an individual
-card. The resulting `nextQuestionFlag` decides whether to proceed to the next question
-(if it equals to '0') or go back to a previous question (if it equals to '1'). If this results in
-`currentQuestion` going out of bounds and if every question is not answered, currentQuestion will get reset to either
-the lowest or highest question number that is not answered.
+This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all 
+the questions. The test will keep looping until every card in the `Deck` to test is answered, or until the 
+`Countdown` timer expires. And there is another loop within that loops until the 
+`currentQuestion`, which is an `int` representing the question number, goes out of bounds, or until the `Countdown` timer 
+expires. Inside the inner loop, `testCard` is called to test an individual card. The resulting `nextQuestionFlag` 
+decides whether to proceed to the next question (if it equals to '0') or go back to a previous question 
+(if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered, 
+currentQuestion will get reset to either the lowest or highest question number that is not answered.
+
+![sequence diagram](assets/countdownSeqDiagram.png)
+How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a 
+nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the 
+`timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`, 
+every second, the time remaining will be printed, then decremented, and the current printed line will be erased and 
+replaced with the new time remaining. This occurs until the time runs out or `Countdown` has been stopped by calling 
+`stop()`, which will internally call `stop()` in `CountdownTimerTask`.
 
 ![sequence diagram](assets/testCardSeqDiagram.png)
 
-The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`
-. If it is neither, the user's answer is added into `AnswerList`. If it is
-`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1.
+The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`.
+If it is neither, the user's answer is added into `AnswerList`. If it is
+`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1. If the user has not input 
+an answer before the countdown timer runs out, the answer for the current question can still be input. However, the answer 
+stored by the system will be an empty answer and thus will not be counted even if it is correct.
+
+> ! The question will be printed on a new screen. However, if the user scrolls up far enough, the previous inputs can be seen.
 
 ![sequence diagram](assets/markTestSequenceDiagram.png)
 
