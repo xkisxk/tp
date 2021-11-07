@@ -1,8 +1,12 @@
 @startuml
-participant ":TestManager" as TestManager
-participant ":AnswerList" as AnswerList
-participant ":Answer" as Answer
-participant ":TestHistory" as TestHistory
+!include style.puml
+autonumber
+hide footbox
+
+participant ":TestManager" as TestManager modelCOLOUR
+participant ":AnswerList" as AnswerList modelCOLOUR
+participant ":TestHistory" as TestHistory modelCOLOUR
+participant ":TestUi" as TestUi uiCOLOUR
 
 activate TestManager
 

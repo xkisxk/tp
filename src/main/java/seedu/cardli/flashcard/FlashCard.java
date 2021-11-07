@@ -214,6 +214,11 @@ public class FlashCard {
     }
 
     //@@author xRossKoh
+    /**
+     * Converts a FlashCard instance into a JSONObject instance.
+     *
+     * @return      FlashCard instance as a JSONObject instance.
+     */
     public JSONObject toJsonObject() {
         JSONObject jsonCard = new JSONObject();
 

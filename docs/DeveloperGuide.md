@@ -19,8 +19,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Test Setup](#441-test-setup)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Testing Process](#442-testing-process)<br/>
 4.5. [Storage](#45-storage)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.5.1. [Writing to File](#451-writing-to-file)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4.5.2. [Reading from File](#452-reading-from-file)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.1. [Writing to JSON files](#451-writing-to-json-files)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.5.2. [Reading from JSON files](#452-reading-from-json-files)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#4521-readcardsfromfile)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#4522-readtestfromfile)<br/>
 5. [Product Scope](#5-product-scope)<br/>
@@ -39,8 +39,9 @@ single platform.
 
 ## [2. Acknowledgements](#content)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+Third-party libraries used include [Jansi](https://mvnrepository.com/artifact/org.fusesource.jansi/jansi) for creating 
+the countdown timer and [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple) 
+for saving and storing JSON objects.
 
 * [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
 * __Jansi:__ For its ANSI escape sequence library, currently used in flashcard testing
@@ -210,7 +211,7 @@ method of the `Deck` class to delete the card from the deck it was from. Once `m
 
 ### [4.3. Find](#content)
 
-![](assets/findFlashcardDiagram.png)
+![](assets/findSeqDiagram.png)
 
 Given above is the sequence diagram of the `find` function. This feature allows users of CardLI to find a `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the user can view specific `FlashCards` matching the search term from the main menu, instead of entering each **Deck** and manually looking through the list of **FlashCard** for the desired ones.
 
@@ -230,7 +231,7 @@ and the parsing respectively during the test.
 ![sequence diagram](assets/TestSequenceDiagram.png)
 
 To enter into test mode, the user needs to enter `test` in main menu in which the program will
-prompt the user to input a number corresponding to the index of the deck that they want to 
+prompt the user to input a number (done in `startTest()`) corresponding to the index of the deck that they want to 
 be tested on or "all" to test all decks.
 
 ![sequence diagram](assets/getTestDeckSequenceDiagram.png)
@@ -296,113 +297,96 @@ the tests that they have completed thus far. This will also allow users to re-ac
 when they re-enter the application. This way, they will not have to keep re-adding the same flashcards,
 while also being able to review tests that they had previously done on the application. 
 
-This feature is implemented by saving the user’s data into two separate text files, which will be saved into
+This feature is implemented by saving the user’s data into two separate JSON files, which will be saved into
 a new `data` directory created upon first start up of the application if it does not yet exist. 
 This new directory will be created within the current directory from which the `CardLI.jar` file is run in the CLI. 
-The file paths of the two text files are hard coded as `Cards_CardLI.txt` and `Tests_CardLItxt`, which will save data
+The file paths of the two JSON files are hard coded as `Cards_CardLI.json` and `Tests_CardLI.json`, which will save data
 on the user's decks of flashcards and test history respectively. 
-When the user inputs the command `bye`, the application execute the save functions. When the 
-user restarts or re-enters the application, the application will parse the text files and convert them into
-the relevant data. The format of how the data is saved into the text files are specified 
-during the development process in order to reduce the risk of bugs arising when the text files are being parsed, which
+Whenever the user inputs a new command, the application will execute the save functions after the actions corresponding
+to the command are completed. This is done in order to maintain data integrity and accuracy in case of technical 
+malfunctions that may cause the application to terminate prematurely.
+When the user restarts or re-enters the application, the application will parse the JSON 
+files and convert them into the relevant data. The format of how the data is saved into the JSON files are specified 
+during the development process in order to reduce the risk of bugs arising when they are being parsed, which
 will be explained in the following paragraphs.
 
 A `Storage` class was implemented to contain all the methods to execute the save and parse functions to and from the 
-relevant text files. An instance of this class is created upon first start up the application to handle all the 
+relevant JSON files. An instance of this class is created upon first start up the application to handle all the 
 method calls. The respective methods will be explained in more detail in the following paragraphs.
 
-#### [4.5.1. Writing to File](#content)
+
+#### [4.5.1. Writing to JSON files](#content)
 
 `writeToFile(ArrayList<T> arrayList, String type)`
 
-This method invokes the save function by writing the user's data to the specified text files. It takes in two arguments,
-namely an `ArrayList` of a generic type `<T>` as well as a `boolean` value, `saveCards`, that indicates whether the method
-is saving cards or tests to their respective text files.
+This method invokes the save function by writing the user's data to the specified JSON files. It takes in two arguments,
+namely an `ArrayList` containing either `Deck` or `AnswerList` Objects, depending on the data that is being saved to
+the respective JSON files. Since the two methods are effectively similar in their 
+implementation, the sequence diagram below will suffice in depicting their execution. For all labels that include
+a "/", the text before the "/" applies for the `writeCardsToFile()` method while the text after the "/" applies for the
+`writeTestsToFile()` method. 
 
-![](assets/writeToFileSequenceDiagram.png)
+![](assets/writeToFileSeqDiagram.png)
 
-For the saving of the user's decks of flashcards, the method call will expect an `ArrayList` of `Deck` objects along 
-with a `saveCards` argument of true. 
-The `toString()` methods within the `Deck`and `Flashcard` classes have been overridden as per the specified format
-of saving the decks of flashcards to the text file. 
-For a `Flashcard` instance, the `toString()` method outputs a formatted string: `<front> | <back> | <userScore> 
-| <totalScore>`. For a `Deck` instance, the `toString()` method also outputs a formatted string containing information 
-about the deck name, the number of flashcards within the deck, on top of information on each of the flashcards contained
-within the deck. An example of the format of the `Cards_CardLI.txt` where the decks of flashcards are saved is shown 
+`writeCardsToFile(ArrayList<Deck> decks)`
+
+For the saving of the user's decks of flashcards, the method call will expect an `ArrayList` of `Deck` objects.
+The `toJSONObject()` methods within the `Deck`and `Flashcard` classes have been written as per the specified format
+of saving the decks of flashcards to the `json` file. Each of the `toJSONObject()` methods return a formatted JSON
+Object containing information about the attributes in each instance of each class, in the form of a map. A
+combination of `JSONObject` and `JSONArray` instances are used to format each of the individual attributes,
+before they are combined into a single `JSONObject` instance and returned from the method. 
+An example of the format of the `Cards_CardLI.json` where the decks of flashcards are saved is shown 
 in the screenshot below.
 
-![](assets/Cards_CardLI.txt%20Example.png)
+![](assets/Cards_CardLI.txt Example.png)
 
-For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects along
-with a `saveCards` argument of false.
-The `toString()` methods within the `AnswerList`and `Answer` classes have been overridden as per the specified format
-of saving the test history to the text file.
-For a `Answer` instance, the `toString()` method outputs a formatted string: `<answer> | <questionIndex>`. 
-For a `AnswerList` instance, the `toString()` method also outputs a formatted string containing information
-about the test deck and the user's test score, on top of information on each of the user's answers for the test. 
-An example of the format of the `Tests_CardLI.txt` where the decks of flashcards are saved is shown
+`writeTestsToFile(ArrayList<AnswerList> testHistory)`
+
+For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects.
+The `toJSONObject()` methods within the `AnswerList`and `Answer` classes have been written as per the specified format
+of saving the test history to the `json` file. The concept behind the formatting of the returned JSON Object is the same
+as that explained under the `writeCardsToFile()` method. 
+An example of the format of the `Tests_CardLI.json` where the decks of flashcards are saved is shown
 in the screenshot below.
 
-![](assets/Tests_CardLI.txt%20Example.png)
 
-#### [4.5.2. Reading from File](#content)
+#### [4.5.2. Reading from JSON files](#content)
 
-`readCardsFromFile()` and `readTestsFromFile()`
+The methods for reading from the JSON files are executed once upon each startup of the CardLI application.
+The methods use an instance of the `Scanner` class to parse through the JSON files, before using an instance of the
+`JSONParser` class to parse through the scanned `String` instances and convert them into the relevant `JSONObject`
+instances. As per the saving format explained in the "Writing to JSON files" section above, the 
+methods then reverse engineer the process to convert and add the user's stored data
+into the application before any commands are given from the user. Since the implementation of the two methods, namely
+`readCardsFromFile()` and `readTestsFromFile()`, are effectively similar in their implementation, the sequence diagram
+below will suffice in depicting their execution. For all labels that include
+a "/", the text before the "/" applies for the `readCardsFromFile()` method while the text after the "/" applies for the
+`readTestsFromFile()` method. The extension to the "ref" box within the sequence diagram will be shown in a separate 
+sequence diagram in the following sections. 
 
-These two methods are executed every time the CardLI application is opened.
-The methods use an instance of the `Scanner` class to parse through the text files line by line. 
-As per the saving format explained in the `writeToFile()` method above, the 
-`readCardsFromFile()`/`readTestsFromFile()` methods essentially reverse engineer the process to save the user's 
-data into the application before any commands are given from the user. The individual methods
-will be explained in more detail in the following paragraphs.
+![](assets/readFromFileSeqDiagram.png)
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
-![](assets/readCardsFromFileSequenceDiagram.png)
+The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file.
+As per the sequence diagram shown above, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively 
+to convert the saved data into individual `Deck` instances to be added into the application. 
+The sequence diagram depicting the exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is 
+shown below. 
 
-The `readCardsFromFile()` method reads from the `Cards_CardLI.txt` file.
-A generic instance of this method will be explained using the screenshot of the respective file given 
-above.
-Once the method is invoked, a new instance of an `ArrayList`  of `Deck` instances, called `decks`, 
-is created to store the `Deck` instances that are parsed from the text file.
-Line 1 is parsed as the number of `Deck` instances that are expected within the text file.
-Then, Lines 2-5 represent the first `Deck` instance while lines 6-8 represent the second `Deck` instance.
-Since the decks are saved in a pre-determined format within the text files, the `parseDeck(Scanner s)` 
-method has been abstracted to parse decks from the text file and convert them to `Deck` instances
-to be returned from the method. 
-For each of the `Deck` instances, the first line is parsed as the name of the deck.
-The second line is then parsed as the number of flashcards to expect within the deck.
-The remaining lines of each `Deck` instance is parsed as a flashcard each by splitting the parsed line based on the
-regular expression, `" | "`. 
-All the parsed data is converted to the relevant data types and passed as arguments to form a `Deck` 
-instance.
-Lastly, all the individually parsed `Deck` instances are added to the `decks` variable and returned from
-the method. 
+![](assets/parseDeckSeqDiagram.png)
+
 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
-![](assets/readTestsFromFileSequenceDiagram.png)
+The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file.
+As per the sequence diagram shown above, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method 
+iteratively to convert the saved data into individual `AnswerList` instances to be added into the application.
+The sequence diagram depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method 
+is shown below.
 
-The `readTestsFromFile()` method reads from the `Tests_CardLI.txt` file.
-A generic instance of this method will be explained using the screenshot of the respective file given
-above.
-Once the method is invoked, a new instance of an `ArrayList` of `AnswerList` instances, called 
-`testHistory`, is created to store the `AnswerList` instances that are parsed from the text file.
-Line 1 is parsed as the number of `AnswerList` instances that are expected within the text file.
-Lines 2-9 represent the 1 `AnswerList` instance that is expected within this text file.
-Since the answer lists are saved in a pre-determined format within the text files, the 
-`parseAnswerList(Scanner s)` method has been abstracted to parse answer lists from the text file and 
-convert them to `AnswerList` instances to be returned from the method. 
-For each of the `AnswerList` instances, the `parseDeck` method explained in the previous section
-is first called to parse a `Deck` instance from the text file, representing the deck of flashcards
-for which the answers correspond to. This is seen in lines 2-5 in the screenshot provided.
-The next line is parsed as the number of answers that are expected for the answer list.
-Subsequently, 1 line is read for each answer that is expected, where the parsed line is split based on the
-regular expression, `" | "`.
-The last line of each `AnswerList` instance is parsed as the score obtained by the user for the answer list.
-All the parsed data is converted to the relevant data types and passed as arguments to form a `AnswerList` instance.
-Lastly, all the individually parsed `AnswerList` instances are added to the `testHistory` variable and
-returned from the method. 
+![](assets/parseAnswerListSeqDiagram.png)
 
 ## [5. Product scope](#content)
 

@@ -11,7 +11,15 @@ through the use of flashcards, while also reducing the paper waste that goes int
 flashcards. The interfacing within the application is designed to be interactive and functional,
 while the commands are designed to be intuitive to use. 
 
-## How To Use The Guide
+
+## How To Use
+
+This guide is meant to help you to get familiarised with all the features of CardLI. The [Quick Start](#quick-start)
+section will tell you how to download and get CardLI set up. The [Features](#features) section provides an
+in depth description of all available features, which you can refer to if you to know the exact definitions. 
+There is also a [Command Summary](#4-command-summarycontent) section that will give you a brief overview of the format of all
+commands and an example in table format to make it easier for you to navigate. To make it easier for you
+to navigate, the [contents](#content) is linked to their respective sections.
 
 ## Quick Start
 
@@ -34,14 +42,37 @@ menu to work with the flashcards.
 
 
 ### Content
-1. [Main Menu](#main-menu)
-2. [Deck Menu](#deck-menu)
+1. [Main Menu](#1-main-menu)<br/>
+1.1 [Add Deck](#11-adding-a-deck-add)<br/>
+1.2 [Edit Deck](#12-editing-a-deck-edit)<br/>
+1.3 [Delete Deck](#13-deleting-a-deck-delete)<br/>
+1.4 [Enter Deck](#14-entering-a-deck-enter)<br/>
+1.5 [Test](#15-test-flashcards-test)<br/>
+1.6 [Review](#16-review-flashcards-review)<br/>
+1.7 [View Decks](#17-viewing-all-decks-view)<br/>
+1.8 [View Flashcard Stats](#18-view-flashcard-statistics-viewfc)<br/>
+1.9 [View Test Stats](#19-view-test-statistics-viewtest)<br/>
+1.10 [Find Flashcard](#110-finding-a-flashcard-find)<br/>
+1.11 [Help](#111-listing-all-commands-help)<br/>
+1.12 [Exit App](#112-exiting-the-app-bye)<br/>
+2. [Deck Menu](#2-deck-menu)<br/>
+2.1 [Add Flashcard](#21-adding-a-flashcard-add)<br/>
+2.2 [Edit Flashcard](#22-editing-a-flashcard-edit)<br/>
+2.3 [Delete Flashcard](#23-deleting-a-flashcard-delete)<br/>
+2.4 [Move Flashcard](#24-moving-a-flashcard-move)<br/>
+2.5 [View Flashcard](#25-viewing-flashcards-view)<br/>
+2.6 [Help](#26-listing-all-commands-in-deck-mode-help)<br/>
+2.7 [Exit Deck Mode](#27-exiting-deck-mode-exit)<br/>
+3. [FAQ](#3-faqs)<br/>
+4. [Command Summary](#4-command-summary)<br/>
+4.1 [Main Menu](#41-main-menu)<br/>
+4.2 [Deck Menu](#42-deck-menu)<br/>
 
 ---
-## Main Menu
+## [1. Main Menu](#content)
 >💾 Your decks are saved after each command.
 
-### Adding a deck: `add`
+### [1.1 Adding a deck: `add`](#content)
 Creates and adds a new deck with the given name, if it does not already exist.
 
 Format: `add <name of deck>`
@@ -54,9 +85,13 @@ Expected outcome:
 
 ![](assets/ug/adddeck.png)
 
-### Editing a deck: `edit`
 
-If you ever found a better name for your deck, `edit` allows you to modify the name of your deck.
+### [1.2 Editing a deck: `edit`](#content)
+Edits the name of the deck indicated by the index.
+`/d` denotes the index of the deck to be edited and `/n` denotes the new name
+of the deck.
+
+If you ever find a better name for your deck, `edit` allows you to modify the name of your deck.
 A deck can be chosen through its index.
 
 In the command, `/d` denotes the index of the deck to be edited and `/n` denotes the new name
@@ -71,7 +106,7 @@ Example of Usage:
 Expected outcome:
 
 ![](assets/ug/editdeck.png)
-### Deleting a deck: `delete`
+### [1.3 Deleting a deck: `delete`](#content)
 Deletes the deck indicated by the index or the name.
 
 Format: `delete <index of deck>`
@@ -84,7 +119,7 @@ Expected outcome:
 
 ![](assets/ug/deleteDeck.png)
 
-### Entering a deck: `enter`
+### [1.4 Entering a deck: `enter`](#content)
 Enters the deck with the given index.
 
 Format:
@@ -93,8 +128,7 @@ Format:
 Expected outcome: 
 
 ![](assets/ug/enter.png)
-
-### Testing flashcards within a deck: `test`
+### [1.5 Test flashcards: `test`](#content)
 
 Enter test mode. The program will ask you to input the index for the deck that is to be tested.
 The word to be tested will be displayed in the console. 
@@ -116,7 +150,7 @@ Expected outcome:
 
 ![](assets/ug/test.png)
 
-### Review flashcards: `review`
+### [1.6 Review flashcards: `review`](#content)
 Enters review mode, which is the same as test mode except that the cards tested will be the cards
 that the user got wrong on more than 50% of the tests.
 
@@ -126,7 +160,7 @@ Expected outcome:
 
 ![](assets/ug/review.png)
 
-### Viewing all decks: `view`
+### [1.7 Viewing all decks: `view`](#content)
 Displays the names of all decks.
 
 Format: `view`
@@ -135,7 +169,7 @@ Expected outcome:
 
 ![](assets/ug/viewdeck.png)
 
-### View flashcard statistics: `viewfc`
+### [1.8 View flashcard statistics: `viewfc`](#content)
 Prints out all flashcards that have been added up to this point, including the cumulative score of
 all tests done for each of the flashcards.
 
@@ -144,7 +178,7 @@ Format: `viewfc`
 Expected outcome:
 
 ![](assets/ug/viewfc.png)
-### View test statistics: `viewtest`
+### [1.9 View test statistics: `viewtest`](#content)
 Prints the results for a particular test index or for all tests, depending on argument that 
 follows the `viewtest` command.
 
@@ -155,7 +189,7 @@ Expected outcome:
 ![](assets/ug/viewtestIndex.png)
 ![](assets/ug/viewtestAll.png)
 
-### Finding a flashcard: `find`
+### [1.10 Finding a flashcard: `find`](#content)
 Flashcards with descriptions matching the search terms are displayed on the screen.
 
 Format: `find <search terms>`
@@ -164,7 +198,7 @@ Expected outcome:
 
 ![](assets/ug/find.png)
 
-### Listing all commands: `help`
+### [1.11 Listing all commands: `help`](#content)
 Lists all commands within the main menu.
 
 Format: `help`
@@ -174,7 +208,7 @@ Expected outcome:
 ![](assets/ug/help1.png)
 
 ![](assets/ug/help2.png)
-### Exiting the app: `bye`
+### [1.12 Exiting the app: `bye`](#content)
 Exits the CardLI application within the Command Line Interface.
 
 Format: `bye`
@@ -183,10 +217,10 @@ Expected outcome:
 
 ![](assets/ug/bye.png)
 ---
-## Deck Menu
+## [2. Deck Menu](#content)
 > 💾 Your flashcards are saved after each command.
 
-### Adding a flashcard `add`
+### [2.1 Adding a flashcard `add`](#content)
 Adds a flashcard with the given front and back to the current deck.
 
 Format: `add /f <word/phrase on front of flashcard> /b <word/phrase on back of flashcard>`
@@ -199,7 +233,11 @@ Expected outcome:
 
 ![](assets/ug/addflash.png)
 
-### Editing a flashcard: `edit`
+
+### [2.2 Editing a flashcard: `edit`](#content)
+Edits the front or the back of your chosen flashcard to your given input.
+`/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
+`/i` denotes the content you want to change the flashcard to.
 
 Did you accidentally make a mistake in the content of a flashcard? `edit` allows you to modify either the front or 
 back side of a flashcard. This is so that you do not have to resort to deleting and adding a new flashcard.
@@ -217,7 +255,7 @@ Expected outcome:
 
 ![](assets/ug/editcard.png)
 
-### Deleting a flashcard: `delete`
+### [2.3 Deleting a flashcard: `delete`](#content)
 Deletes the flashcard indicated by the index or the flashcard which front matches <word/phrase> if it 
 exists in the current deck of flashcards.
 
@@ -231,7 +269,11 @@ Expected outcome:
 
 ![](assets/ug/deleteindexflash.png)
 
-### Moving a flashcard: `move`
+
+### [2.4 Moving a flashcard: `move`](#content)
+Moves a flashcard from the deck you are currently in to a new deck of your choice.
+`/c` denotes the card index or the front phrase of the card and `/d` denotes the 
+deck index or the name of the deck you want to move the card to.
 
 `move` is useful when you accidentally added a flashcard to the wrong deck and now you want to transfer the card to 
 another deck without going through the hassle of deleting the card and adding the card in another deck.
@@ -255,7 +297,7 @@ Expected outcome:
 * Deck 1 before and after moving; Deck 2 after moving
 ![](assets/ug/move4.png)
 
-### Viewing flashcards: `view`
+### [2.5 Viewing flashcards: `view`](#content)
 Displays all the flashcards in the current deck.
 
 Format: `view`
@@ -264,7 +306,7 @@ Expected outcome:
 
 ![](assets/ug/viewcard.png)
 
-### Listing all commands: `help`
+### [2.6 Listing all commands in deck mode: `help`](#content)
 Lists all commands within Deck Mode.
 
 Format: `help`
@@ -272,7 +314,7 @@ Format: `help`
 Expected outcome:
 
 ![](assets/ug/helpdeck.png)
-### Exiting deck mode: ``exit``
+### [2.7 Exiting deck mode: `exit`](#content)
 Exits deck mode and returns to the main menu.
 
 Format: ``exit``
@@ -280,26 +322,29 @@ Format: ``exit``
 Expected outcome:
 
 ![](assets/ug/exit.png)
-## FAQs
+## [3. FAQs](#content)
 
 **Q**: How do I transfer my data to another computer? 
 
 **A**: In order to transfer the data on your decks of flashcards to another computer, simply transfer
-the `CardLI.txt` file to your other computer, and download the latest version of CardLI there. 
-Ensure that both the `CardLI.txt` and `CardLI.jar` files are in the **same directory** before running
+the `data` file directory to your other computer, and download the latest version of CardLI there. 
+The `data` file directory should contain both the `Cards_CardLI.json` and `Tests_CardLI.json` files. 
+Ensure that both the `data` file directory and `CardLI.jar` file are in the **same directory** before running
 the CardLI application in the command prompt as instructed under the Quick Start section. 
 
-**Q**: Can I directly edit the `CardLI.txt` file to add, edit or delete decks and flashcards?
+**Q**: Can I directly edit the storage JSON files to make changes to my saved data?
 
-**A**: If you are familiar with the format of how the decks and flashcards are saved within the text
-file, you are free to do so. However, if errors are generated upon the next start up of the CardLI 
-application, you are advised to revert all changes to the text file and make the necessary changes
-from within the application. We will only recommend this method if you are a veteran user and have a
-good grasp of the application.
+**A**: We highly recommend that users who are unfamiliar with the workings of JSON and the
+format of the saved data do not attempt to directly edit the storage JSON files. This is because the CardLI 
+application has been programmed to read a specified format from the JSON files.
+Any inaccuracies arising from the direct editing of the files will likely lead to undesirable consequences such as 
+bugs and possible loss of your saved data if the files cannot be reverted to their original format.
+Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confidant in maintaining
+the format integrity of the files. 
 
-## Command Summary
+## [4. Command Summary](#content)
 
-### Main Menu:
+### [4.1 Main Menu:](#content)
 
 |Action|Format|
 |-------|------|
@@ -316,7 +361,7 @@ good grasp of the application.
 |lists all commands in main menu|`help`|
 |exiting program|`bye`|
 
-### Deck Menu:
+### [4.2 Deck Menu:](#content)
 
 |Action|Format|
 |------|------|

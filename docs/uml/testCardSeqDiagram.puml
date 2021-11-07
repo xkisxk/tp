@@ -1,9 +1,13 @@
 @startuml
-participant ":TestManager" as TestManager
-participant ":AnswerList" as AnswerList
-participant "TestParser" as TestParser
-participant ":TestUi" as TestUi
-participant ":Answer" as Answer
+!include style.puml
+autonumber
+hide footbox
+
+participant ":TestManager" as TestManager modelCOLOUR
+participant ":AnswerList" as AnswerList modelCOLOUR
+participant "TestParser" as TestParser modelCOLOUR
+participant ":Answer" as Answer modelCOLOUR
+participant ":TestUi" as TestUi uiCOLOUR
 
 activate TestManager
 TestManager -> TestManager : testCard(userAnswers, card)

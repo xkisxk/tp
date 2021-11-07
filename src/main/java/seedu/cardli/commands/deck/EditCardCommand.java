@@ -10,6 +10,7 @@ import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.FieldEmptyException;
 import seedu.cardli.exceptions.InvalidCommandFormatException;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.parser.Parser;
 import seedu.cardli.parser.deck.EditCardParser;
 import seedu.cardli.testing.TestManager;
@@ -32,12 +33,14 @@ public class EditCardCommand extends Command {
 
     private EditCardParser parser;
     private Deck deck;
+    private DeckManager deckManager;
     private static Logger logger = Logger.getLogger(TestManager.class.getName());
 
-    public EditCardCommand(String arguments, Deck deck) {
+    public EditCardCommand(String arguments, Deck deck, DeckManager deckManager) {
         super("EditCardCommand", arguments);
         this.deck = deck;
         this.parser = new EditCardParser();
+        this.deckManager = deckManager;
     }
 
     /**
@@ -113,6 +116,15 @@ public class EditCardCommand extends Command {
         String card = rawParameters[1].trim();
         String side = rawParameters[3].trim();
         String input = rawParameters[5].trim();
+
+        if (side.equalsIgnoreCase("front")) {
+            String deckWithSameNameCard = deckManager.cardHasSameName(input);
+            if (!deckWithSameNameCard.isEmpty()) {
+                throw new CardLiException("There is already a card with " + input + " on the front in deck "
+                        + deckWithSameNameCard + ".");
+
+            }
+        }
 
         logger.log(Level.INFO, "Checking if any field is empty");
         if (card.isEmpty() || side.isEmpty() || input.isEmpty()) {

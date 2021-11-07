@@ -2,9 +2,10 @@ package seedu.cardli.commands.deck;
 
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
+import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.FieldEmptyException;
-import seedu.cardli.exceptions.InvalidCommandFormatException;
 import seedu.cardli.flashcard.Deck;
+import seedu.cardli.flashcard.DeckManager;
 import seedu.cardli.parser.deck.AddCardParser;
 
 public class AddCardCommand extends Command {
@@ -16,10 +17,12 @@ public class AddCardCommand extends Command {
 
     private AddCardParser parser;
     private Deck deck;
+    private DeckManager deckManager;
 
-    public AddCardCommand(String arguments, Deck deck) {
+    public AddCardCommand(String arguments, Deck deck, DeckManager deckManager) {
         super("AddCardCommand", arguments);
         this.deck = deck;
+        this.deckManager = deckManager;
         this.parser = new AddCardParser();
     }
 
@@ -47,6 +50,12 @@ public class AddCardCommand extends Command {
                 front = rawParameters[2].trim();
             }
 
+            String deckWithSameNameCard = deckManager.cardHasSameName(front);
+            if (!deckWithSameNameCard.isEmpty()) {
+                throw new CardLiException("There is already a card with " + front + " on the front in deck "
+                        + deckWithSameNameCard + ".");
+
+            }
 
             if (front.isEmpty() || back.isEmpty()) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
@@ -54,7 +63,7 @@ public class AddCardCommand extends Command {
 
             String[] parameters = {front, back};
             result = new CommandResult(deck.prepareToAddFlashCard(parameters));
-        } catch (FieldEmptyException e) {
+        } catch (CardLiException e) {
             result = new CommandResult(e.getMessage());
         }
         return result;
