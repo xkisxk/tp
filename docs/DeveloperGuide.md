@@ -45,7 +45,7 @@ original source as well}
 * [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
 * __Jansi:__ For its ANSI escape sequence library, currently used in flashcard testing
 
-## 3. [Design](#content)
+## [3. Design](#content)
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
 
 <li> At app launch: initialises the components in the correct sequence, and connects them up with each other</li>
