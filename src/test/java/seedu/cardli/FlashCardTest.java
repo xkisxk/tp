@@ -18,4 +18,16 @@ public class FlashCardTest {
     public void testGetBack() {
         assertEquals("testBack", flashCard.getBack());
     }
+
+    //@@author xRossKoh
+    @Test
+    public void testToString() {
+        assertEquals("testFront | testBack | 0 | 0\n", flashCard.toString());
+    }
+
+    @Test
+    public void testToJsonObject() {
+        assertEquals("{\"back\":\"testBack\",\"front\":\"testFront\",\"userScore\":0,\"totalScore\":0}",
+                flashCard.toJsonObject().toJSONString());
+    }
 }

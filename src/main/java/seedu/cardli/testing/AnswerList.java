@@ -132,6 +132,11 @@ public class AnswerList {
 
     }
 
+    /**
+     * Converts an AnswerList instance into a JSONObject instance.
+     *
+     * @return      AnswerList instance as a JSONObject instance
+     */
     public JSONObject toJsonObject() {
         JSONObject jsonAnswerList = new JSONObject();
 

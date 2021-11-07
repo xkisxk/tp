@@ -61,6 +61,11 @@ public class Answer {
                 + getQuestionIndex() + '\n';
     }
 
+    /**
+     * Converts an Answer instance into a JSONObject instance.
+     *
+     * @return      Answer instance as a JSONObject instance
+     */
     public JSONObject toJsonObject() {
         JSONObject jsonAnswer = new JSONObject();
 

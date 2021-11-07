@@ -12,7 +12,7 @@ participant ":DeckManager" as Dm modelCOLOUR
 participant ":Deck" as deck modelCOLOUR
 autonumber
 
-
+hide footbox
 
 
         [-> Parser: parseCommand(input)
@@ -53,11 +53,9 @@ autonumber
                 activate deck
                 deck --> Dm: result:String
                 deactivate deck
-                destroy deck
             end
             Dm --> CommandResult: result:String
             deactivate Dm
-            destroy Dm
             CommandResult --> FindCardsCommand: result:CommandResult
             deactivate CommandResult
             destroy CommandResult

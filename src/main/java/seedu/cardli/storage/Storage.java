@@ -19,6 +19,9 @@ import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 
+/**
+ * Class containing methods to save and parse user data.
+ */
 public class Storage {
 
     /**
@@ -48,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves user's current decks of flashcards to JSON file.
+     *
+     * @param decks     User's current decks of flashcards
+     */
     public void writeCardsToFile(ArrayList<Deck> decks) {
         try {
             // instantiate FileWriter object to overwrite specified text file
@@ -55,18 +63,22 @@ public class Storage {
 
             JSONArray jsonDecks = new JSONArray();
 
-            for (Deck deck: decks) {
+            for (Deck deck : decks) {
                 jsonDecks.add(deck.toJsonObject());
             }
 
             fileWriter.write(jsonDecks.toJSONString());
-
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to file...");
+            System.out.println("Something went wrong while saving to data/Cards_CardLI.json...");
         }
     }
 
+    /**
+     * Saves user's current test history to JSON file.
+     *
+     * @param testHistory       User's current test history
+     */
     public void writeTestsToFile(ArrayList<AnswerList> testHistory) {
         try {
             // instantiate FileWriter object to overwrite specified text file
@@ -74,16 +86,21 @@ public class Storage {
 
             JSONArray jsonTestHistory = new JSONArray();
 
-            for (AnswerList answerList: testHistory) {
+            for (AnswerList answerList : testHistory) {
                 jsonTestHistory.add(answerList.toJsonObject());
             }
             fileWriter.write(jsonTestHistory.toJSONString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to file...");
+            System.out.println("Something went wrong while saving to data/Tests_CardLI.json...");
         }
     }
 
+    /**
+     * Reads JSON file to return user's saved decks of flashcards.
+     *
+     * @return  User's saved decks of flashcards
+     */
     public ArrayList<Deck> readCardsFromFile() {
         ArrayList<Deck> decks = new ArrayList<>();
 
@@ -93,15 +110,24 @@ public class Storage {
             JSONParser parser = new JSONParser();
             JSONArray jsonDecks = (JSONArray) parser.parse(s.nextLine());
 
-            for (Object o: jsonDecks) {
+            for (Object o : jsonDecks) {
                 decks.add(parseDeck((JSONObject) o));
             }
-        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
-            System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            System.out.println("Something went wrong parsing data/Cards_CardLI.json...");
+            System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
+        } catch (FileNotFoundException | NoSuchElementException e) {
+            System.out.println("data/Cards_CardLI does not yet exist or is empty.");
+            System.out.println("If this is your first boot of CardLI, you may ignore this warning.");
         }
         return decks;
     }
 
+    /**
+     * Reads JSON file to return user's saved test history.
+     *
+     * @return      User's saved test history
+     */
     public ArrayList<AnswerList> readTestsFromFile() {
         ArrayList<AnswerList> testHistory = new ArrayList<>();
 
@@ -111,22 +137,31 @@ public class Storage {
             JSONParser parser = new JSONParser();
             JSONArray jsonTestHistory = (JSONArray) parser.parse(s.nextLine());
 
-            for (Object o: jsonTestHistory) {
+            for (Object o : jsonTestHistory) {
                 testHistory.add(parseAnswerList((JSONObject) o));
             }
-        } catch (FileNotFoundException | NoSuchElementException | ParseException e) {
-            System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            System.out.println("Something went wrong parsing data/Tests_CardLI.json...");
+            System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
+        } catch (FileNotFoundException | NoSuchElementException e) {
+            System.out.println("data/Tests_CardLI.json does not yet exist or is empty.");
+            System.out.println("If this is your first boot of CardLI, you may ignore this warning.");
         }
         return testHistory;
     }
 
+    /**
+     * Converts an AnswerList as JSONObject instance to an AnswerList instance.
+     *
+     * @param jsonAnswerList    AnswerList as a JSONObject instance
+     * @return                  AnswerList instance
+     */
     private AnswerList parseAnswerList(JSONObject jsonAnswerList) {
         JSONObject jsonDeck = (JSONObject) jsonAnswerList.get("deck");
         AnswerList newAnswerList = new AnswerList(parseDeck(jsonDeck));
-
         JSONArray jsonAnswers = (JSONArray) jsonAnswerList.get("answerList");
 
-        for (Object o: jsonAnswers) {
+        for (Object o : jsonAnswers) {
             JSONObject jsonAnswer = (JSONObject) o;
             newAnswerList.addAnswer((String) jsonAnswer.get("answer"),
                     (int) (long) jsonAnswer.get("questionIndex"));
@@ -135,17 +170,22 @@ public class Storage {
         return newAnswerList;
     }
 
+    /**
+     * Converts a Deck as a JSONObject instance to a Deck instance.
+     *
+     * @param jsonDeck      Deck as a JSONObject instance
+     * @return              Deck instance
+     */
     private Deck parseDeck(JSONObject jsonDeck) {
         Deck newDeck = new Deck((String) jsonDeck.get("deckName"));
         JSONArray jsonCards = (JSONArray) jsonDeck.get("cards");
 
-        for (Object o: jsonCards) {
+        for (Object o : jsonCards) {
             JSONObject jsonCard = (JSONObject) o;
-            FlashCard newFlashCard = new FlashCard((String) jsonCard.get("front"),
+            newDeck.addFlashCard(new FlashCard((String) jsonCard.get("front"),
                     (String) jsonCard.get("back"),
                     (int) (long) jsonCard.get("userScore"),
-                    (int) (long) jsonCard.get("totalScore"));
-            newDeck.addFlashCard(newFlashCard);
+                    (int) (long) jsonCard.get("totalScore")));
         }
         return newDeck;
     }

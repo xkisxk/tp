@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+participant ": Storage" as Store storageCOLOUR
+participant "jsonDeck: JSONObject" as jsonDeck
+participant "newDeck: Deck" as Deck modelCOLOUR
+participant "jsonCard: JSONObject" as jsonCard
+participant "newFlashCard: FlashCard" as Card modelCOLOUR
+autonumber
+hide footbox
+
+mainframe **ref** parseDeck
+activate Store
+
+Store->Store: parseDeck(jsonDeck: JSONObject)
+activate Store
+
+Store->jsonDeck: get("deckName")
+activate jsonDeck
+
+Store<--jsonDeck: deckName: Object
+deactivate jsonDeck
+
+Store->Deck**: new Deck((String) deckName)
+activate Deck
+
+Store<--Deck
+deactivate Deck
+
+Store->jsonDeck: get("cards")
+activate jsonDeck
+
+Store<--jsonDeck: JSONArray jsonCards\n = ((JSONArray) cards:\n Object)
+deactivate jsonDeck
+
+loop (JSONObject) jsonCard in jsonCards
+
+Store->jsonCard: get("front")
+activate jsonCard
+
+Store<--jsonCard: front: Object
+deactivate jsonCard
+
+Store->jsonCard: get("back")
+activate jsonCard
+
+Store<--jsonCard: back: Object
+deactivate jsonCard
+Store->jsonCard: get("userScore")
+activate jsonCard
+
+Store<--jsonCard: userScore: Object
+deactivate jsonCard
+
+Store->jsonCard: get("totalScore")
+activate jsonCard
+
+Store<--jsonCard: totalScore: Object
+deactivate jsonCard
+
+Store->Card**: new FlashCard((String) front, (String) back, (int)(long) userScore, (int)(long) totalScore)
+activate Card
+
+Store<--Card
+deactivate Card
+
+Store->Deck: addFlashCard(newFlashCard)
+activate Deck
+
+Store<--Deck
+deactivate Deck
+
+end
+
+Store-->Store: newDeck
+deactivate Store
+
+@enduml

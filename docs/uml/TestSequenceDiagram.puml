@@ -1,8 +1,12 @@
 @startuml
+!include style.puml
+autonumber
+hide footbox
+
 actor "User" as User
-participant ":Ui" as Ui
-participant ":Logic" as Logic
-participant ":Model" as Model
+participant ":Ui" as Ui uiCOLOUR
+participant ":Logic" as Logic logicCOLOUR
+participant ":Model" as Model modelCOLOUR
 
 User -> Ui : "test"
 activate Ui

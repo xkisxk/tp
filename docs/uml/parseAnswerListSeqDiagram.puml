@@ -1,0 +1,86 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+participant ": Storage" as Store storageCOLOUR
+participant "jsonAnswerList: JSONObject" as jsonAL
+participant "newAnswerList: AnswerList" as AL modelCOLOUR
+participant "jsonAnswer: JSONObject" as jsonAns
+participant "newAnswer: Answer" as Ans modelCOLOUR
+autonumber
+hide footbox
+
+mainframe **ref** parseAnswerList
+activate Store
+
+Store->Store: parseAnswerList(jsonAnswerList: JSONObject)
+activate Store
+
+Store->jsonAL: get("deck")
+activate jsonAL
+
+Store<--jsonAL: jsonDeck: Object
+deactivate jsonAL
+
+Store->Store: parseDeck\n((JSONObject) jsonDeck)
+activate Store
+
+Store-->Store: newDeck: Deck
+deactivate Store
+
+Store->AL**:new AnswerList(newDeck)
+activate AL
+
+Store<--AL
+deactivate AL
+
+Store->jsonAL: get("answerList")
+activate jsonAL
+
+Store<--jsonAL: JSONArray jsonAnswers\n = ((JSONArray) answerList:\n Object)
+deactivate jsonAL
+
+loop (JSONObject) jsonAnswer in jsonAnswers
+
+Store->jsonAns: get("answer")
+activate jsonAns
+
+Store<--jsonAns: answer: Object
+deactivate jsonAns
+
+Store->jsonAns: get("questionIndex")
+activate jsonAns
+
+Store<--jsonAns: questionIndex: Object
+deactivate jsonAns
+
+Store->Ans**: new Answer((String) answer, (int)(long) questionIndex)
+activate Ans
+
+Store<--Ans
+deactivate Ans
+
+Store->AL: add(newAnswer)
+activate AL
+
+Store<--AL
+deactivate AL
+
+end
+
+Store->jsonAL: get("userScore")
+activate jsonAL
+
+Store<--jsonAL: userScore: Object
+deactivate jsonAL
+
+Store->AL: setUserScore((int)(long) userScore)
+activate AL
+
+Store<--AL
+deactivate AL
+
+Store-->Store: newAnswerList
+deactivate Store
+
+@enduml
