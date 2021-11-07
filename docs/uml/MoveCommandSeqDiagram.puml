@@ -7,13 +7,17 @@ autonumber
 participant ":CardLI" as CardLI mainCOLOUR
 participant "innerParser:InnerParser" as InnerParser logicCOLOUR
 participant "command:MoveCardCommand" as MoveCardCommand logicCOLOUR
-participant ":DeckManager" as DeckManager modelCOLOUR
+participant "deckManager:DeckManager" as DeckManager modelCOLOUR
 participant ":Deck" as Deck modelCOLOUR
 participant "ui:CardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
 CardLI -> InnerParser: parseCommand(input)
 activate InnerParser
+
+ref over InnerParser
+getCommandArguments(commandType,input)
+end ref
 
 InnerParser -> MoveCardCommand**: new MoveCardCommand(arguments)
 activate MoveCardCommand
@@ -45,12 +49,9 @@ deactivate Deck
 DeckManager -> Deck: deleteFlashCard(enteredCardIndex)
 activate Deck
 deactivate Deck
-destroy Deck
 
 DeckManager --> MoveCardCommand: message
 deactivate DeckManager
-
-destroy DeckManager
 
 CardLI<-- MoveCardCommand: result
 deactivate MoveCardCommand
