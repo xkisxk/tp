@@ -20,7 +20,8 @@ This guide is meant to help you to get familiarised with all the features of Car
 section will tell you how to download and get CardLI set up. The `Features` section provides an
 in depth description of all available features, which you can refer to if you to know the exact definitions. 
 There is also a `Command Summary` section that will give you a brief overview of the format of all
-commands and an example in table format to make it easier for you to navigate.
+commands and an example in table format to make it easier for you to navigate. To make it easier for you
+to navigate, the content table is linked to their respective sections.
 
 ## Quick Start
 
