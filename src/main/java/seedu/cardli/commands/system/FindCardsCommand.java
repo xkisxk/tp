@@ -8,6 +8,7 @@ import seedu.cardli.parser.system.FindCardsParser;
 
 public class FindCardsCommand extends Command {
 
+    public static final String NO_SEARCH_TERM_ERROR = "You did not input a search term after \"find\".";
     private FindCardsParser parser;
     private DeckManager deckManager;
 
@@ -25,7 +26,7 @@ public class FindCardsCommand extends Command {
             String[] parameters = parser.parseArguments(super.arguments);
             String findInput = parameters[0];
             if (findInput.isEmpty()) {
-                throw new FieldEmptyException("You did not input a search term.");
+                throw new FieldEmptyException(NO_SEARCH_TERM_ERROR);
             }
             result = new CommandResult(deckManager.findCards(findInput));
         } catch (FieldEmptyException e) {
