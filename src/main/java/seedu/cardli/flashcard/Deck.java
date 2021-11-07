@@ -190,6 +190,11 @@ public class Deck {
     }
 
     //@@author xRossKoh
+    /**
+     * Converts a Deck instance into a JSONObject instance.
+     *
+     * @return      Deck instance as a JSONObject instance
+     */
     public JSONObject toJsonObject() {
         JSONObject jsonDeck = new JSONObject();
 

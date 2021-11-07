@@ -19,6 +19,9 @@ import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 
+/**
+ * Class containing methods to save and parse user data.
+ */
 public class Storage {
 
     /**
@@ -48,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves user's current decks of flashcards to JSON file.
+     *
+     * @param decks     User's current decks of flashcards
+     */
     public void writeCardsToFile(ArrayList<Deck> decks) {
         try {
             // instantiate FileWriter object to overwrite specified text file
@@ -66,6 +74,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves user's current test history to JSON file.
+     *
+     * @param testHistory       User's current test history
+     */
     public void writeTestsToFile(ArrayList<AnswerList> testHistory) {
         try {
             // instantiate FileWriter object to overwrite specified text file
@@ -83,6 +96,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads JSON file to return user's saved decks of flashcards.
+     *
+     * @return  User's saved decks of flashcards
+     */
     public ArrayList<Deck> readCardsFromFile() {
         ArrayList<Deck> decks = new ArrayList<>();
 
@@ -105,6 +123,11 @@ public class Storage {
         return decks;
     }
 
+    /**
+     * Reads JSON file to return user's saved test history.
+     *
+     * @return      User's saved test history
+     */
     public ArrayList<AnswerList> readTestsFromFile() {
         ArrayList<AnswerList> testHistory = new ArrayList<>();
 
@@ -127,6 +150,12 @@ public class Storage {
         return testHistory;
     }
 
+    /**
+     * Converts an AnswerList as JSONObject instance to an AnswerList instance.
+     *
+     * @param jsonAnswerList    AnswerList as a JSONObject instance
+     * @return                  AnswerList instance
+     */
     private AnswerList parseAnswerList(JSONObject jsonAnswerList) {
         JSONObject jsonDeck = (JSONObject) jsonAnswerList.get("deck");
         AnswerList newAnswerList = new AnswerList(parseDeck(jsonDeck));
@@ -141,6 +170,12 @@ public class Storage {
         return newAnswerList;
     }
 
+    /**
+     * Converts a Deck as a JSONObject instance to a Deck instance.
+     *
+     * @param jsonDeck      Deck as a JSONObject instance
+     * @return              Deck instance
+     */
     private Deck parseDeck(JSONObject jsonDeck) {
         Deck newDeck = new Deck((String) jsonDeck.get("deckName"));
         JSONArray jsonCards = (JSONArray) jsonDeck.get("cards");
