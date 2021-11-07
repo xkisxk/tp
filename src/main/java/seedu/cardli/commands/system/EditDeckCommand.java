@@ -53,7 +53,6 @@ public class EditDeckCommand extends Command {
                 throw new DeckNotExistException(INVALID_INDEX_ERROR_MESSAGE);
             }
         } else {
-
             throw new CardLiException(ARGUMENT_TYPE_ERROR_MESSAGE);
         }
 
@@ -61,7 +60,6 @@ public class EditDeckCommand extends Command {
     }
 
     public String[] prepareEditDeckCommand() throws CardLiException, NumberFormatException {
-
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "preparing EditDeckCommand");
 
@@ -69,23 +67,24 @@ public class EditDeckCommand extends Command {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
 
-
-        //maybe remove
         logger.log(Level.INFO, "Checking if input contains /d and /n");
         if (!arguments.contains("/d") || !arguments.contains("/n")) {
             throw new FieldEmptyException(MISSING_FLAG_MESSAGE);
         }
+
         logger.log(Level.INFO, "Checking if /d and /n are in the right order");
         if (!(arguments.indexOf("/d") < arguments.indexOf("/n"))) {
             throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
         }
+
         logger.log(Level.INFO, "Splitting the input up");
-        //"", deck, name // /d, deck, /n, name
         String[] parameters = parser.parseArguments(super.arguments);
+
         logger.log(Level.INFO, "Checking if there is enough arguments");
         if (parameters.length != 4) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
         }
+
         logger.log(Level.INFO, "Checking if /d and /n are in the right order");
         if (!(parameters[0].trim().equals("/d") && parameters[2].trim().equals("/n"))) {
             throw new InvalidCommandFormatException(INVALID_ARGUMENTS_MESSAGE);
@@ -93,7 +92,7 @@ public class EditDeckCommand extends Command {
 
         String deck = parameters[1].trim();
         String input = parameters[3].trim();
-        //maybe remove
+
         logger.log(Level.INFO, "Checking if any field is empty");
         if (deck.isEmpty() || input.isEmpty()) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
@@ -101,6 +100,7 @@ public class EditDeckCommand extends Command {
         if (input.equalsIgnoreCase("/d") || input.equalsIgnoreCase("/n")) {
             throw new CardLiException(FLAG_ARGUMENT_ERROR_MESSAGE);
         }
+
         logger.log(Level.INFO, "preparing deckIndex");
         deck = prepareDeckIndex(deck, deckManager);
 

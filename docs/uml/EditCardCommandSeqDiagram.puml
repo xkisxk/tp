@@ -1,63 +1,63 @@
 @startuml
+!include style.puml
 
 hide footbox
+autonumber
 
-participant ":EditCardCommand" as EditCardCommand
-participant ":Deck" as Deck
-participant ":FlashCard" as FlashCard
-participant ":CardLiUI" as CardLiUI
+participant ":CardLI" as CardLI mainCOLOUR
+participant "innerParser:InnerParser" as InnerParser logicCOLOUR
+participant "command:EditCardCommand" as EditCardCommand logicCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant ":FlashCard" as FlashCard modelCOLOUR
+participant "ui:CardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
-[-> EditCardCommand : new
+CardLI -> InnerParser: parseCommand(input)
+activate InnerParser
+
+InnerParser -> EditCardCommand** : new EditCardCommand(arguments)
 activate EditCardCommand
-[<-- EditCardCommand : command
+InnerParser <-- EditCardCommand : command
 deactivate EditCardCommand
+InnerParser --> CardLI: command
+deactivate InnerParser
 
-[->EditCardCommand : execute()
+CardLI -> EditCardCommand : execute()
 activate EditCardCommand
 
-EditCardCommand -> EditCardCommand : prepareEditCardCommand()
-activate EditCardCommand
-
-EditCardCommand -> EditCardCommand: prepareCardIndex(card, deck)
-activate EditCardCommand
-
-EditCardCommand --> EditCardCommand: card
-deactivate EditCardCommand
-
-EditCardCommand --> EditCardCommand: preparedArguments
-deactivate EditCardCommand
+ref over EditCardCommand
+    prepareEditCardCommand()
+end ref
 
 EditCardCommand -> Deck: editCard(parameters)
 activate Deck
-
 
 alt front
     Deck -> FlashCard: setFront(changeTo)
     activate FlashCard
     deactivate FlashCard
+    destroy FlashCard
 else back
     Deck -> FlashCard: setBack(changeTo)
     activate FlashCard
     deactivate FlashCard
+    destroy FlashCard
 end
 
-destroy FlashCard
 
 Deck --> EditCardCommand: message
 deactivate Deck
 
 destroy Deck
 
-[<-- EditCardCommand: result
+CardLI<-- EditCardCommand: result
 deactivate EditCardCommand
 destroy EditCardCommand
 
-[-> CardLiUI: printResult(result)
+CardLI -> CardLiUI: printResult(result)
 activate CardLiUI
 
 CardLiUI -> User
 
 deactivate CardLiUI
-destroy CardLiUI
 @enduml

@@ -52,13 +52,15 @@ public class MoveCardCommand extends Command {
         if (!arguments.contains("/c") || !arguments.contains("/d")) {
             throw new FieldEmptyException(MISSING_FLAG_MESSAGE);
         }
+
         logger.log(Level.INFO, "Checking if /d and /c are in the right order");
         if (!(arguments.indexOf("/c") < arguments.indexOf("/d"))) {
             throw new InvalidCommandFormatException(WRONG_ORDER_ERROR_MESSAGE);
         }
+
         logger.log(Level.INFO, "Splitting the input up");
-        // /c, card, /d, deck
         String[] rawParameters = parser.parseArguments(super.arguments);
+
         logger.log(Level.INFO, "Checking if there is enough arguments");
         if (rawParameters.length != 4) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);

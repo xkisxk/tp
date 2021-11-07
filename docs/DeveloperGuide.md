@@ -1,5 +1,15 @@
 # Developer Guide
 ![](assets/logo.png)
+
+&nbsp;1. Introduction<br/>
+&nbsp;2. Acknowledgements<br/>
+&nbsp;3. Design<br/>
+&nbsp;&nbsp;&nbsp;3.1. Model Component<br/>
+&nbsp;&nbsp;&nbsp;3.2. UI Component<br/>
+&nbsp;&nbsp;&nbsp;3.3. Logic Component<br/>
+&nbsp;&nbsp;&nbsp;3.4. Storage Component<br/>
+&nbsp;4. Implementation<br/>
+
 # Introduction
 
 CardLI is a Command Line Interface (CLI) desktop app designed to help students manage their flashcards. CardLI can help
@@ -10,6 +20,9 @@ single platform.
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
 original source as well}
+
+* [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
+* __Jansi:__ For its ANSI escape sequence library, currently used in flashcard testing
 
 ## Design
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
@@ -89,6 +102,10 @@ The `Storage` component:
 All app data is saved as JSON files.
 
 ## Implementation
+
+> ℹ️  Note: In the sequence diagrams below, the lifeline for objects should end at the destroy marker (X) but due
+> to a limitation of PLANTUML, the lifeline reaches the end of the diagram.
+
 ### Edit
 
 This subsection provides details on the implementation of the commands that enable the editing of the `Deck` object.
@@ -150,7 +167,7 @@ The `execute()` method will then call the `editCard()` method of the `Deck` clas
 This subsection provides details on the implementation of the `moveCardCommand`. This command
 enables moving of a card in a deck the user is currently in to another deck.
 
-By entering the edit command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
+By entering the move command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
 called. This object is returned to `CardLi` class, which then calls the `execute()` method
 of the `MoveCardCommand` object.
 

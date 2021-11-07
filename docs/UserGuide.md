@@ -1,6 +1,4 @@
 # User Guide
-
-
 ![](assets/logo.png)
 ## Introduction
 
@@ -57,12 +55,12 @@ Expected outcome:
 ![](assets/ug/adddeck.png)
 
 ### Editing a deck: `edit`
-Edits the name of the deck indicated by the index.
-`/d` denotes the index of the deck to be edited and `/n` denotes the new name
-of the deck.
 
-This command is for those who want to change the name of the deck to a more
-suitable name.
+If you ever found a better name for your deck, `edit` allows you to modify the name of your deck.
+A deck can be chosen through its index.
+
+In the command, `/d` denotes the index of the deck to be edited and `/n` denotes the new name
+of the deck.
 
 Format: `edit /d <index of deck> /n <name>`
 
@@ -202,12 +200,12 @@ Expected outcome:
 ![](assets/ug/addflash.png)
 
 ### Editing a flashcard: `edit`
-Edits the front or the back of your chosen flashcard to your given input.
-`/c` denotes the card index, `/s` denotes the side of the flashcard to edit and
-`/i` denotes the content you want to change the flashcard to.
 
-This command is for those who have made a mistake in the front or back of the card
-and wish to fix it without having to resort to deleting and adding the card.
+Did you accidentally make a mistake in the content of a flashcard? `edit` allows you to modify either the front or 
+back side of a flashcard. This is so that you do not have to resort to deleting and adding a new flashcard.
+
+In the `edit` command, `/c` denotes the card index, `/s` denotes the side of the flashcard to edit and`/i` denotes 
+the content you want to change the flashcard to.
 
 Format: `edit /c <index of card> /s <front or back> /i <input>`
 
@@ -234,13 +232,14 @@ Expected outcome:
 ![](assets/ug/deleteindexflash.png)
 
 ### Moving a flashcard: `move`
-Moves a flashcard from the deck you are currently in to a new deck of your choice.
-`/c` denotes the card index or the front phrase of the card and `/d` denotes the 
-deck index or the name of the deck you want to move the card to.
 
-This command is for those who have accidentally added a flashcard to a wrong deck
-and now want to transfer the card to another deck without going through the hassle
-of deleting the card and adding the card in another deck.
+`move` is useful when you accidentally added a flashcard to the wrong deck and now you want to transfer the card to 
+another deck without going through the hassle of deleting the card and adding the card in another deck.
+
+`move ` moves a flashcard from the deck you are currently in to a new deck of your choice.
+
+In this command, `/c` denotes the card index or the front phrase of the card and `/d` denotes the deck index or the 
+name of the deck you want to move the card to.
 
 Format: `move /c <index of card> /d <index of deck>`
 
@@ -305,7 +304,7 @@ good grasp of the application.
 |Action|Format|
 |-------|------|
 |add deck|`add <name of deck>`|
-|edit deck|`edit /d <index of deck> /n name`|
+|edit deck|`edit /d <index of deck> /n <name>`|
 |delete deck|`delete <index>`|
 |enter deck|`enter <index of deck>`|
 |test|`test`|
@@ -322,7 +321,7 @@ good grasp of the application.
 |Action|Format|
 |------|------|
 |add flashcard|`add /f <word> /b <definition>`|
-|editing a flashcard|`edit /c <index of card> /s <front or back> /i input`|
+|editing a flashcard|`edit /c <index of card> /s <front or back> /i <input>`|
 |deleting a flashcard|`delete <index of card>`|
 |moving a flashcard| `move /c <index of card> /d <index of deck>`|
 |viewing flashcards|`view`|

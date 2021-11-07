@@ -81,6 +81,7 @@ public class EditCardCommand extends Command {
         logger.log(Level.INFO, "Splitting the input up");
         // "", card, side, input ///c <> /s <> /i <>
         String[] rawParameters = parser.parseArguments(super.arguments);
+
         logger.log(Level.INFO, "Checking if there is enough arguments");
         if (rawParameters.length != 6) {
             throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);

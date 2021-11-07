@@ -1,32 +1,32 @@
 @startuml
+!include style.puml
 
 hide footbox
+autonumber
 
-participant ":EditDeckCommand" as EditDeckCommand
-participant ":DeckManager" as DeckManager
-participant ":Deck" as Deck
-participant ":CardLiUI" as CardLiUI
+participant ":CardLI" as CardLI mainCOLOUR
+participant "outerParser:OuterParser" as OuterParser logicCOLOUR
+participant "command:EditDeckCommand" as EditDeckCommand logicCOLOUR
+participant ":DeckManager" as DeckManager modelCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant "ui:CardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
-[-> EditDeckCommand : new
+CardLI-> OuterParser : parseCommand(input)
+activate OuterParser
+OuterParser -> EditDeckCommand**: new EditDeckCommand(arguments)
 activate EditDeckCommand
-[<-- EditDeckCommand : command
+EditDeckCommand --> OuterParser: command
 deactivate EditDeckCommand
+OuterParser --> CardLI: command
+deactivate OuterParser
 
-[->EditDeckCommand : execute()
+CardLI ->EditDeckCommand : execute()
 activate EditDeckCommand
 
-EditDeckCommand -> EditDeckCommand : prepareEditDeckCommand()
-activate EditDeckCommand
-
-EditDeckCommand -> EditDeckCommand: prepareDeckIndex(deck, deckManager)
-activate EditDeckCommand
-
-EditDeckCommand --> EditDeckCommand: deck
-deactivate EditDeckCommand
-
-EditDeckCommand --> EditDeckCommand: preparedArguments
-deactivate EditDeckCommand
+ref over EditDeckCommand
+prepareEditDeckCommand()
+end ref
 
 EditDeckCommand -> DeckManager: editDeck(parameters)
 activate DeckManager
@@ -42,16 +42,14 @@ deactivate DeckManager
 
 destroy DeckManager
 
-[<-- EditDeckCommand: result
+CardLI<-- EditDeckCommand: result
 deactivate EditDeckCommand
 destroy EditDeckCommand
 
-[-> CardLiUI: printResult(result)
+CardLI-> CardLiUI: printResult(result)
 activate CardLiUI
 
 CardLiUI -> User
 
 deactivate CardLiUI
-destroy CardLiUI
-
 @enduml
