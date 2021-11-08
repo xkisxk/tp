@@ -21,7 +21,7 @@ the order of the flashcards within the deck. It aims to simulate an examination 
 where the user would not know the order of the questions beforehand, making the test feature
 a good gauge of the user's grasp on the concepts tested. 
 
-4. Flashcard storage
+3. Flashcard storage
 
 This feature saves a user's decks of flashcards into an external `json` file after
 each command. It also reads from the `json` file upon each startup of CardLI to
