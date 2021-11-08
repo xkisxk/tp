@@ -348,6 +348,7 @@ reviewed.
 > which means that the feature needs to print out a response message after the user's input. Furthermore, it needs to
 > also update the timer live, which makes storing the entire process as a string
 > when `Command.execute()` is called not really feasible.
+
 </details>
 
 ### [4.5. Storage](#content)
