@@ -15,7 +15,7 @@ autonumber
 hide footbox
 
 
-        [-> Parser: parseCommand(input)
+        [-> Parser: parseCommand\n(input)
             activate Parser
             ref over Parser
             parsing
@@ -36,7 +36,7 @@ hide footbox
                                     deactivate Parser
         [-> FindCardsCommand: execute()
         activate FindCardsCommand
-        FindCardsCommand->FindCardsParser: parseArguments(arguments)
+        FindCardsCommand->FindCardsParser: parseArguments\n(arguments)
         activate FindCardsParser
         FindCardsParser-->FindCardsCommand: parameters:String[]
         deactivate FindCardsParser
@@ -46,10 +46,10 @@ hide footbox
             create CommandResult
             FindCardsCommand -> CommandResult
             activate CommandResult
-            CommandResult -> Dm: findCards(searchInput)
+            CommandResult -> Dm: findCards\n(searchInput)
             activate Dm
             loop all decks
-                Dm -> deck: returnMatchingFlashCards(searchInput)
+                Dm -> deck: returnMatchingFlashCards\n(searchInput)
                 activate deck
                 deck --> Dm: result:String
                 deactivate deck
