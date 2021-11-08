@@ -565,7 +565,7 @@ to indicate the deck to test is printed.
 
 4. Test case: `test` -> `3`
 
-   Expected: Error is thrown. Error message indicating that there are no cards to test.
+   Expected: Error is thrown. Error message indicating that there are no cards to test is printed.
 
 **Taking Test**
 1. Test case: `test` -> `1` -> answer the questions, within the time limit, as per below:
@@ -605,6 +605,14 @@ The questions may appear in a different order. The user is then returned to the 
 
 #### Reviewing
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
+
+1. Test case: `review` -> `2` or `0` or `all`
+   
+   Expected: Only one card is tested.
+
+2. Test case: `review` -> `1`
+
+   Expected: Message indicating that there are no low scoring cards to review is printed.
 
 #### Viewing Test and FlashCard Statistics
 
