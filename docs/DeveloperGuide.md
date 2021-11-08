@@ -490,6 +490,13 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
+> ℹ️ Note: In order to view the JSON files as per the screenshots shown under this section, the respective files
+> should be opened on Mozilla Firefox, since it is the only browser that supports the reading and displaying of JSON
+> files in the format shown by default. Alternatives to using Mozilla Firefox can also be found [here](https://www.javatpoint.com/how-to-open-json-file).
+> It is also possible to open the JSON file using the Notepad application on Windows, or any other Notepad equivalent
+> applications on other Operating Systems. However, doing so may make it difficult to read the contents of the file
+> as the information will be displayed in a single line.
+
 ### Main Menu
 
 #### Adding a deck
@@ -533,13 +540,19 @@ to edit is printed.
 
 1. Test case: `delete`
 
-   Expected: `Deck index must be smaller than 2147483647.`
-2. Test case: `delete ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, indicating that an argument for deck index is 
+expected for this command.
+2. Test case: `delete 10`
 
-   Expected: `Please input a positive integer.`
-3. Test case: `delete 3`
+   Expected: Error is thrown. Error message is printed to system output, informing the user that the specified deck
+index does not exist. 
+3. Test case: `delete ExampleDeck3`/`delete -1`
 
-   Expected: `Deleted deck: ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, prompting the user for a positive integer as 
+a valid argument for this command. 
+4. Test case: `delete 3`
+
+   Expected: Command is executed successfully and deck 3 is deleted from the user's current decks. 
    
    Expected JSON output:
 
