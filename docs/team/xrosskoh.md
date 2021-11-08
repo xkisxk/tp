@@ -62,5 +62,9 @@ Contributed to the `Introduction`, `Quick Start` and `FAQs` sections.
 #### Project Management
 
 1. Managed PRs for milestone v1.0
-2. Managed Github issues for milestone v2.0
+2. Managed GitHub issues for milestone v2.0
+
+### Community
+1. Reviewed and gave suggestions on other team's [Developer Guide](https://github.com/nus-cs2113-AY2122S1/tp/pull/10).
+2. Tested and reported bugs on other team's application in PE-DryRun.
 
