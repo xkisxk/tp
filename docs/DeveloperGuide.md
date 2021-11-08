@@ -498,11 +498,12 @@ CardLI provides a:
    Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
 2. Test case: `add ExampleDeck1`
 
-   Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another deck.
+   Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another
+   deck.
 3. Test case: `add ExampleDeck4`
 
    Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
-   
+
    Expected JSON output:
 
    ![](assets/dg manual testing/addExampleDeck4.jpg)
@@ -535,7 +536,7 @@ CardLI provides a:
 3. Test case: `enter one`
 
    Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
-smaller than 2147483647.
+   smaller than 2147483647.
 4. Test case: `enter 1`
 
    Expected: Deck 1 is entered. Success message is shown.
@@ -591,14 +592,15 @@ smaller than 2147483647.
    Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
 2. Test Case: `find 1`
 
-      Expected: Flashcards should be displayed in the manner shown in the below screenshot.
+   Expected: Flashcards should be displayed in the manner shown in the below screenshot.
 
    ![](assets/dg manual testing/find1.png)
 
 3. Test Case: `find 0`
 
-   Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search term.
-   
+   Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search
+   term.
+
 ### Deck Mode
 
 #### Adding a flashcard
@@ -612,18 +614,17 @@ smaller than 2147483647.
 
    Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
 
-   Expected JSON output: 
+   Expected JSON output:
 
    ![](assets/dg manual testing/addCard4.jpg)
 
 4. Test case: `add /f Card1 /b CardBack1`
 
    Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
-content on its front.
-5.Test case: `add /f card1 /b CardBack1a`
+   content on its front. 5.Test case: `add /f card1 /b CardBack1a`
 
    Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
-   
+
    Expected JSON output:
 
    ![](assets/dg manual testing/addcard1.jpg)
@@ -652,7 +653,7 @@ content on its front.
 3. Test case: `delete one`
 
    Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
-smaller than 2147483647.
+   smaller than 2147483647.
 4. Test case: `delete 2`
 
    Expected: The second card in the deck has been deleted. Success message is shown.
