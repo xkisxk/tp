@@ -4,7 +4,7 @@ autonumber
 hide footbox
 
 participant ":TestManager" as TestManager modelCOLOUR
-participant "countdown:Countdown" as Countdown
+participant "countdown:Countdown" as Countdown modelCOLOUR
 activate TestManager
 
 

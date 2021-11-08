@@ -447,7 +447,7 @@ depicting the exact implementation and execute of the `parseDeck(JSONObject json
 * Pre-University/University/Polytechnic students
 * Reasonably comfortable using CLI apps
 * Types fast
-* Prefers to store their information online rather than physically
+* Prefers to store their information digitally rather than physically
 * Has a lot of flashcards
 
 ### [5.2. Value Proposition](#content)
