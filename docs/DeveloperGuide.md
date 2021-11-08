@@ -528,6 +528,22 @@ to edit is printed.
 
    ![](assets/dg manual testing/editNameOfDeck.jpg)
 
+#### Deleting a deck
+
+1. Test case: `delete`
+
+   Expected: `Deck index must be smaller than 2147483647.`
+2. Test case: `delete ExampleDeck3`
+
+   Expected: `Please input a positive integer.`
+3. Test case: `delete 3`
+
+   Expected: `Deleted deck: ExampleDeck3`
+   
+   Expected JSON output:
+
+   ![](assets/dg manual testing/deleteDeck3.jpg)
+
 #### Entering a deck
 
 1. Test case: `enter`
