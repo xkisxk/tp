@@ -89,7 +89,7 @@ public class OuterParser {
             command = new AddDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "add (deck) command parsed and executed");
             break;
-        case "edit": //edit /d <deck index> /n <name>
+        case "edit":
             arguments = Parser.getCommandArguments(commandType, input);
             command = new EditDeckCommand(arguments, this.deckManager);
             logger.log(Level.INFO, "edit (deck) command parsed and executed");

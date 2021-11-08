@@ -5,21 +5,21 @@ hide footbox
 autonumber
 
 participant ":CardLI" as CardLI mainCOLOUR
-participant "innerParser:InnerParser" as InnerParser logicCOLOUR
-participant "command:EditCardCommand" as EditCardCommand logicCOLOUR
+participant "innerParser:\nInnerParser" as InnerParser logicCOLOUR
+participant "command:\nEditCardCommand" as EditCardCommand logicCOLOUR
 participant ":Deck" as Deck modelCOLOUR
 participant ":FlashCard" as FlashCard modelCOLOUR
-participant "ui:CardLiUI" as CardLiUI uiCOLOUR
+participant "ui:\nCardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
-CardLI -> InnerParser: parseCommand(input)
+CardLI -> InnerParser: parseCommand\n(input)
 activate InnerParser
 
 ref over InnerParser
 getCommandArguments(commandType,input)
 end ref
 
-InnerParser -> EditCardCommand** : new EditCardCommand(arguments)
+InnerParser -> EditCardCommand** : new EditCardCommand\n(arguments)
 activate EditCardCommand
 InnerParser <-- EditCardCommand : command
 deactivate EditCardCommand
@@ -33,15 +33,15 @@ ref over EditCardCommand
     prepareEditCardCommand()
 end ref
 
-EditCardCommand -> Deck: editCard(parameters)
+EditCardCommand -> Deck: editCard\n(parameters)
 activate Deck
 
 alt front
-    Deck -> FlashCard: setFront(changeTo)
+    Deck -> FlashCard: setFront\n(changeTo)
     activate FlashCard
     deactivate FlashCard
 else back
-    Deck -> FlashCard: setBack(changeTo)
+    Deck -> FlashCard: setBack\n(changeTo)
     activate FlashCard
     deactivate FlashCard
 end
