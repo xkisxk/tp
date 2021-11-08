@@ -489,6 +489,13 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
+> ℹ️ Note: In order to view the JSON files as per the screenshots shown under this section, the respective files
+> should be opened on Mozilla Firefox, since it is the only browser that supports the reading and displaying of JSON
+> files in the format shown by default. Alternatives to using Mozilla Firefox can also be found [here](https://www.javatpoint.com/how-to-open-json-file).
+> It is also possible to open the JSON file using the Notepad application on Windows, or any other Notepad equivalent
+> applications on other Operating Systems. However, doing so may make it difficult to read the contents of the file
+> as the information will be displayed in a single line.
+
 ### Main Menu
 
 #### Adding a deck

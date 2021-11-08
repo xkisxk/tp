@@ -30,6 +30,10 @@ This feature allows users to view tests that they had previously done, including
 tests that were completed during an earlier session. This can help them revise 
 better by learning from mistakes made in past tests. 
 
+#### Feature enhancements
+
+1. Added JUnit tests all for `toString()` and `toJSONObject()` methods.
+
 #### Code Contributions
 
 My RepoSense Link can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=xRossKoh&tabRepo=AY2122S1-CS2113T-F12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false).
@@ -42,7 +46,9 @@ Contributed to the `Introduction`, `Quick Start` and `FAQs` sections.
 
 **Developer Guide** 
 
-Contributed to the `Storage` section.
+1. Contributed the implementation details and diagrams under the `Storage` section.
+2. Contributed the `Deleting a deck` subsection under the `Instructions for Manual Testing` section.
+3. Contributed the screenshots of the JSON files.
 
 #### Project Management
 
