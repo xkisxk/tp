@@ -172,8 +172,8 @@ object.
 The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
 `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will then return a
-string array, `preparedArguments`, which represents the arguments for the next method call.
+returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will 
+then return a string array, `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the
 `setName()` method of the `Deck` class. Once `editDeck()` is completed, a message of string type is returned to the
@@ -288,17 +288,9 @@ and added to `AnswerList`.
 
 #### [4.4.2. Testing Process](#content)
 
-<<<<<<< HEAD
+
 ![sequence diagram](assets/dg diagrams/testInProgressSeqDiagram.png)
-//TODO: change This is where the actual test starts. The test will keep looping until every card in the `Deck` to test
-is answered. And there is another loop within that loops until the `currentQuestion`, which is an `int`
-representing the question number, goes out of bounds. Inside the inner loop, `testCard` is called to test an individual
-card. The resulting `nextQuestionFlag` decides whether to proceed to the next question
-(if it equals to '0') or go back to a previous question (if it equals to '1'). If this results in
-`currentQuestion` going out of bounds and if every question is not answered, currentQuestion will get reset to either
-the lowest or highest question number that is not answered.
-=======
-![sequence diagram](assets/testInProgressSeqDiagram.png)
+
 This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all 
 the questions. The test will keep looping until every card in the `Deck` to test is answered, or until the 
 `Countdown` timer expires. And there is another loop within that loops until the 
@@ -317,7 +309,7 @@ replaced with the new time remaining. Note, however, that the displaying of the 
 by 0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has 
 been stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out, 
 `CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
->>>>>>> 26507bca2e4e58789670e77d242c7a987f150029
+
 
 ![sequence diagram](assets/dg diagrams/testCardSeqDiagram.png)
 
@@ -499,7 +491,6 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-<<<<<<< HEAD
 ### Main Menu
 
 #### Adding a deck
@@ -535,6 +526,20 @@ smaller than 2147483647.
 
 Expected: Deck 1 is entered. Success message is shown.
 
+### Edit Deck
+1. Dealing with duplicate flags<br/>
+&nbsp;1. Test case: `edit /d /d /n /n`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flags as part of the command arguments is printed.
+2. Dealing with string input<br/>
+&nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer to indicate the deck to edit is printed.
+3. Changing name of Deck2<br/>
+&nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
+   
 #### View Test and FlashCard Statistics
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
@@ -617,6 +622,19 @@ content on its front.
 
 Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
 
+### Edit Card
+1. Dealing with wrong flags<br/>
+&nbsp;1. Test case: `edit /d 1 /j front /e EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that there are missing flags is printed.
+2. Dealing with invalid side input<br/>
+&nbsp;1. Test case: `edit /c 1 /s middle /i EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only "front" or "back" can be 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entered into the `/s` argument.
+3. Changing front side of Card1<br/>
+&nbsp;1. Test case: `edit /c 1 /s front /i EditedCard1`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited card, the index of the 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited card as well as the side changed
+
 #### Deleting a flashcard
 
 1. Prerequisites: Run the command `enter 1`.
@@ -635,3 +653,15 @@ than 2147483647.
 
 Expected: The second card in the deck has been deleted. Success message is shown.
 
+### Move Card
+1. Dealing with negative integers<br/>
+&nbsp;1. Test case: `move /c 1 /d -2`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is printed.
+2. Dealing with empty arguments<br/>
+&nbsp;1. Test case: `move /c /d `<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
+3. Moving EditedCard1 to Deck2<br/>
+&nbsp;1. Test case: `move /c 1 /d 2`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.

@@ -66,7 +66,7 @@ Given below are my contributions to the project.
         * Added table of content and enabled anchor links: [\#191](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/191) 
 
 * **Community**:
-    * Reported bugs and suggestions for other teams' [developer guide](https://github.com/nus-cs2113-AY2122S1/tp/pull/33#pullrequestreview-792605786))
+    * Reported bugs and suggestions for other teams' [developer guide](https://github.com/nus-cs2113-AY2122S1/tp/pull/33#pullrequestreview-792605786)
     * Tested and reported bugs for other team's program.
       Examples: [1](https://github.com/ThaddeusLim99/ped/issues/1) ,[5](https://github.com/ThaddeusLim99/ped/issues/5)
       , [6](https://github.com/ThaddeusLim99/ped/issues/6)
