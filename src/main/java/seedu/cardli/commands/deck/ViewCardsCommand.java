@@ -4,6 +4,10 @@ import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
 import seedu.cardli.flashcard.Deck;
 
+/**
+ * Implements the ViewCardsCommand class, which returns a formatted list
+ * of all flashcards in the current deck.
+ */
 public class ViewCardsCommand extends Command {
 
     private Deck deck;

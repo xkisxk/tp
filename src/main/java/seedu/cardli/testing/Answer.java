@@ -11,8 +11,7 @@ public class Answer {
     private String answer;
 
     static final String SEPARATOR = " | ";
-
-
+    
     private final int questionIndex;
     private boolean isAnswered;
 

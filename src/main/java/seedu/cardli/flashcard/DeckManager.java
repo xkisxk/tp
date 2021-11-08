@@ -1,6 +1,5 @@
 package seedu.cardli.flashcard;
 
-
 import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.DeckNotExistException;
 import seedu.cardli.exceptions.FieldEmptyException;
@@ -14,7 +13,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Implements the class DeckManager, which contains all Decks and
+ * methods to operate on them, such as add, delete, edit, view, etc.
+ */
 public class DeckManager {
     public static final String DECK_ALREADY_EXISTS_MESSAGE = "The deck you are trying to create already exists.";
     private final ArrayList<Deck> decks;
@@ -67,7 +69,6 @@ public class DeckManager {
         return ("Changed deck " + enteredDeckIndex + " to " + deckName);
     }
 
-
     public String prepareToAddDeck(String deckName) {
         if (!hasDeck(deckName)) {
             addDeck(deckName);
@@ -119,7 +120,6 @@ public class DeckManager {
         return result;
     }
 
-
     public String findCards(String searchInput) {
         String result = "";
         if (decks.size() > 0) {
@@ -161,7 +161,6 @@ public class DeckManager {
         }
         return result;
     }
-
 
     /**
      * Gets all the low scoring cards and put them into a deck.

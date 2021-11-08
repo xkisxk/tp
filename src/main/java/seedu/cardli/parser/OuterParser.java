@@ -22,6 +22,11 @@ import seedu.cardli.testing.TestManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Implements the OuterParser class, which identifies the command the
+ * user has input in the main menu and returns a Command class with the
+ * given arguments to be executed.
+ */
 public class OuterParser {
 
     private static final Logger logger = Logger.getLogger(OuterParser.class.getName());
@@ -31,6 +36,9 @@ public class OuterParser {
     private TestHistory testHistory;
     private TestManager testManager;
 
+    /**
+     * Constructs an {@code OuterParser} with the specified fields.
+     */
     public OuterParser(DeckManager deckManager, InnerParser innerParser,
                        TestHistory testHistory, TestManager testManager) {
         logger.setLevel(Level.WARNING);
@@ -40,10 +48,16 @@ public class OuterParser {
         this.testManager = testManager;
     }
 
+    /**
+     * Parses the user's input, identifies the command and creates a {@code Command}
+     * with the arguments that were input.
+     * @param input the user's raw String input
+     * @return a {@code Command} object
+     */
     public Command parseCommand(String input) {
         // create a new Command that has `type` and `arguments`
         // the command should be of type `AddDeckCommand`, `DeleteDeckCommand`, etc.
-        // anyhow, `Command` can't be instantiated as it is abstract
+        // anyhow, `Command` cannot be instantiated as it is abstract
         logger.setLevel(Level.WARNING);
         String commandType = Parser.getCommandType(input);
         logger.log(Level.INFO, "new user input detected");
@@ -117,6 +131,4 @@ public class OuterParser {
         }
         return command;
     }
-
-
 }

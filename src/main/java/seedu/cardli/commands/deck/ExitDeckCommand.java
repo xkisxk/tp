@@ -3,6 +3,10 @@ package seedu.cardli.commands.deck;
 import seedu.cardli.commands.Command;
 import seedu.cardli.commands.CommandResult;
 
+/**
+ * Implements the ExitDeckCommand class, which exits the deck and
+ * returns the user to the main menu.
+ */
 public class ExitDeckCommand extends Command {
     public ExitDeckCommand(String arguments) {
         super("ExitDeckCommand", arguments);
