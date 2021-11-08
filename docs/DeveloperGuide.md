@@ -26,12 +26,14 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#4521-readcardsfromfile)<br/>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#4522-readtestfromfile)<br/>
 5. [Product Scope](#5-product-scope)<br/>
-   5.1 [Target User Profile](#51-target-user-profile)<br/>
-   5.2 [Value Proposition](#52-value-proposition)<br/>
+   5.1. [Target User Profile](#51-target-user-profile)<br/>
+   5.2. [Value Proposition](#52-value-proposition)<br/>
 6. [User Stories](#6-user-stories)<br/>
 7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
 8. [Glossary](#8-glossary)<br/>
-9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)
+9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)<br/>
+   9.1. [Main Menu](#91-main-menu)<br/>
+   9.2. [Deck Mode](#92-deck-mode)<br/>
 
 ## [1. Introduction](#content)
 
@@ -489,7 +491,7 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-### Main Menu
+### [9.1. Main Menu](#content)
 
 #### Adding a deck
 
@@ -620,7 +622,7 @@ to edit is printed.
    Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search
    term.
 
-### Deck Mode
+### [9.2. Deck Mode](#content)
 
 #### Adding a flashcard
 
