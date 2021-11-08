@@ -301,7 +301,7 @@ decides whether to proceed to the next question (if it equals to '0') or go back
 (if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered,
 currentQuestion will get reset to either the lowest or highest question number that is not answered.
 
-![sequence diagram](assets/countdownSeqDiagram.png)
+![sequence diagram](assets/dg diagrams/countdownSeqDiagram.png)
 How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a
 nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the
 `timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`,
