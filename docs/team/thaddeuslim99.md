@@ -50,7 +50,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Created CardLI logo
-    * Fixed some PED bugs and wrote additional tests for existing features to increase test coverage: [\#173](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/173), [\#176](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/176/commits/4a65edacd11031aa9171799af420bb412d415ddb)
+    * Fixed some PED bugs and wrote additional tests for existing features to increase test coverage: [\#173](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/173), [\#176](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/176/commits/4a65edacd11031aa9171799af420bb412d415ddb), [\#210](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/210)
 
 * **Documentation**:
     * User Guide:
