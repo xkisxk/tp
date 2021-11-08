@@ -15,6 +15,10 @@ actor "User" as User
 CardLI -> InnerParser: parseCommand(input)
 activate InnerParser
 
+ref over InnerParser
+getCommandArguments(commandType,input)
+end ref
+
 InnerParser -> EditCardCommand** : new EditCardCommand(arguments)
 activate EditCardCommand
 InnerParser <-- EditCardCommand : command
@@ -36,19 +40,15 @@ alt front
     Deck -> FlashCard: setFront(changeTo)
     activate FlashCard
     deactivate FlashCard
-    destroy FlashCard
 else back
     Deck -> FlashCard: setBack(changeTo)
     activate FlashCard
     deactivate FlashCard
-    destroy FlashCard
 end
 
 
 Deck --> EditCardCommand: message
 deactivate Deck
-
-destroy Deck
 
 CardLI<-- EditCardCommand: result
 deactivate EditCardCommand

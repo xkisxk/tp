@@ -31,7 +31,7 @@
 6. [User Stories](#6-user-stories)<br/>
 7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
 8. [Glossary](#8-glossary)<br/>
-9. [Instructions for Manual Mesting](#9-instructions-for-manual-testing)
+9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)
 
 ## [1. Introduction](#content)
 
@@ -172,7 +172,7 @@ object.
 The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
 `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the deck to be edited. `prepareEditDeckCommand()` will then return a
+returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will then return a
 string array, `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the
@@ -196,13 +196,13 @@ object.
 The `execute()` method in the `EditCardCommand` class self-invokes the `prepareEditCardCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditCardCommand()` self-invokes the
 `prepareCardIndex` method, which handles the formatting of the card index specified by the user. `prepareCardIndex()`
-returns `card`, of string type, which represents the card to be edited. `prepareEditCardCommand()` will then return a
-string array, `preparedArguments`, which represents the arguments for the next method call.
+returns the index of the card to be edited as a string. `prepareEditCardCommand()` will then return a string array, 
+`preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editCard()` method of the `Deck` class, which in turn calls the
 `setFront()` or `setBack()` method of the `FlashCard` class. Once `editCard()` is completed, a message of string type is
-returned to the
-`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+returned to the `execute()` method. The message is stored in a `CommandResult` class, which is then returned to 
+`CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
 
@@ -210,31 +210,28 @@ returned to the
 
 ![](assets/dg diagrams/moveCardCommandSeqDiagram.png)
 
-This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card
+This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card 
 in a deck the user is currently in to another deck.
 
-By entering the `move` command in the `InnerParser` class, a `MoveCardCommand` object is created and its constructor is
-called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand`
+By entering the move command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
+called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand` 
 object.
 
 The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCardCommand()` method, which helps
-format the method arguments as well as handle edge cases. In turn, `prepareMoveCardCommand()` self-invokes the
-`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After
-this, `prepareMoveCardCommand()`
-self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index specified by the
-user.`prepareCardIndex()`
-returns `card`, of string type, which represents the card to be edited. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the deck to be edited.`prepareMoveCommand()` will then return a string
-array, `preparedArguments`, which represents the arguments for the next method call.
+the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCardCommand()` self-invokes the
+`prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this,
+`prepareMoveCardCommand()` self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index 
+specified by the user.`prepareCardIndex()` returns `card`, of string type, which represents the index of the card to be 
+edited. `prepareDeckIndex()`returns `deck`, of string type, which represents the index of the deck to be edited.
+`prepareMoveCommand()` will then return a string array, `preparedArguments`, which represents the arguments for the next 
+method call.
 
 The `execute()` method will then call the `moveCard()` method of the `DeckManager` class, which in turn calls the
-`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls
-the `addFlashCard()`
-method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls
-the `deleteFlashCard()`
-method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is completed, a message of
-string type is returned to the
-`execute()` method. The message is stored in a `CommandResult` class, which is then returned to `CardLi`.
+`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls the 
+`addFlashCard()` method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls
+the `deleteFlashCard()` method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is 
+completed, a message of string type is returned to the `execute()` method. The message is stored in a `CommandResult` 
+class, which is then returned to `CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
 
@@ -255,7 +252,7 @@ method of `DeckManager` that repeatedly calls the `returnMatchingFlashCards()` m
 instance of a `Deck`.
 
 `returnMatchingFlashCards()` is implemented by creating a stream that consists of all the `FlashCards` from one deck,
-and filters them based on whether they contain the search term given. This method is not case-sensitive. Finally all
+and filters them based on whether they contain the search term given. This method is not case-sensitive. Finally, all
 the `FlashCards` that contain the search term are collected in an ArrayList and their console outputs are returned in
 string format for `CardLiUi` to display to the user.
 
@@ -291,6 +288,7 @@ and added to `AnswerList`.
 
 #### [4.4.2. Testing Process](#content)
 
+<<<<<<< HEAD
 ![sequence diagram](assets/dg diagrams/testInProgressSeqDiagram.png)
 //TODO: change This is where the actual test starts. The test will keep looping until every card in the `Deck` to test
 is answered. And there is another loop within that loops until the `currentQuestion`, which is an `int`
@@ -299,12 +297,37 @@ card. The resulting `nextQuestionFlag` decides whether to proceed to the next qu
 (if it equals to '0') or go back to a previous question (if it equals to '1'). If this results in
 `currentQuestion` going out of bounds and if every question is not answered, currentQuestion will get reset to either
 the lowest or highest question number that is not answered.
+=======
+![sequence diagram](assets/testInProgressSeqDiagram.png)
+This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all 
+the questions. The test will keep looping until every card in the `Deck` to test is answered, or until the 
+`Countdown` timer expires. And there is another loop within that loops until the 
+`currentQuestion`, which is an `int` representing the question number, goes out of bounds, or until the `Countdown` timer 
+expires. Inside the inner loop, `testCard` is called to test an individual card. The resulting `nextQuestionFlag` 
+decides whether to proceed to the next question (if it equals to '0') or go back to a previous question 
+(if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered, 
+currentQuestion will get reset to either the lowest or highest question number that is not answered.
+
+![sequence diagram](assets/countdownSeqDiagram.png)
+How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a 
+nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the 
+`timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`, 
+every second, the time remaining will be printed, then decremented, and the current printed line will be erased and 
+replaced with the new time remaining. Note, however, that the displaying of the first time remaining will be delayed 
+by 0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has 
+been stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out, 
+`CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
+>>>>>>> 26507bca2e4e58789670e77d242c7a987f150029
 
 ![sequence diagram](assets/dg diagrams/testCardSeqDiagram.png)
 
-The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`
-. If it is neither, the user's answer is added into `AnswerList`. If it is
-`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1.
+The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`.
+If it is neither, the user's answer is added into `AnswerList`. If it is
+`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1. If the user has not input 
+an answer before the countdown timer runs out, the answer for the current question can still be input. However, the answer 
+stored by the system will be an empty answer and thus will not be counted even if it is correct.
+
+> ! The question will be printed on a new screen. However, if the user scrolls up far enough, the previous inputs can be seen.
 
 ![sequence diagram](assets/dg diagrams/markTestSequenceDiagram.png)
 
@@ -380,7 +403,7 @@ of `JSONObject` and `JSONArray` instances are used to format each of the individ
 into a single `JSONObject` instance and returned from the method. An example of the format of the `Cards_CardLI.json`
 where the `Decks` of `FlashCards` are saved is shown in the image below.
 
-![](assets/Cards_CardLI.txt Example.png)
+![](assets/Cards_CardLI Example.png)
 
 `writeTestsToFile(ArrayList<AnswerList> testHistory)`
 
@@ -389,6 +412,8 @@ The `toJSONObject()` methods within the `AnswerList`and `Answer` classes have be
 of saving the `TestHistory` to the `json` file. The concept behind the formatting of the returned JSON Object is the
 same as that explained under the `writeCardsToFile()` method. An example of the format of the `Tests_CardLI.json` where
 the test data is saved is shown in the screenshot below.
+
+![](assets/Tests_CardLI Example.png)
 
 #### [4.5.2. Reading from JSON files](#content)
 
@@ -408,19 +433,19 @@ sequence diagram in the following sections.
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
-The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert the saved data into individual `Deck`
-instances to be added into the application. The sequence diagram depicting the exact implementation and execute of
-the `parseDeck(JSONObject jsonDeck)` method is shown below.
+The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram under the 
+"Reading from JSON files" header, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert 
+the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the 
+exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is shown below.
 
 ![](assets/dg diagrams/parseDeckSeqDiagram.png)
 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
-The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively to convert the saved data into
-individual `AnswerList` instances to be added into the application. The sequence diagram depicting the exact
-implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
+The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram under the
+"Reading from JSON files" header, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively 
+to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram 
+depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
 
 ![](assets/dg diagrams/parseAnswerListSeqDiagram.png)
 
@@ -473,8 +498,6 @@ CardLI provides a:
 * *JSON* - JavaScript Object Notation, a lightweight data-interchange format.
 
 ## [9. Instructions for Manual Testing](#content)
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
 ### Main Menu
 
@@ -567,3 +590,5 @@ than 2147483647.
 4. Test case: `delete 2`
 
 Expected: The second card in the deck has been deleted. Success message is shown.
+
+

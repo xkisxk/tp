@@ -8,6 +8,10 @@ import seedu.cardli.flashcard.Deck;
 import seedu.cardli.parser.Parser;
 import seedu.cardli.parser.deck.DeleteCardParser;
 
+/**
+ * Implements the DeleteCard class, which deletes a card with the
+ * specified index from the given deck.
+ */
 public class DeleteCardCommand extends Command {
 
     private static final String FIELD_EMPTY_ERROR_MESSAGE = "You cannot leave any field empty! "

@@ -7,13 +7,18 @@ autonumber
 participant ":CardLI" as CardLI mainCOLOUR
 participant "outerParser:OuterParser" as OuterParser logicCOLOUR
 participant "command:EditDeckCommand" as EditDeckCommand logicCOLOUR
-participant ":DeckManager" as DeckManager modelCOLOUR
+participant "deckManager:DeckManager" as DeckManager modelCOLOUR
 participant ":Deck" as Deck modelCOLOUR
 participant "ui:CardLiUI" as CardLiUI uiCOLOUR
 actor "User" as User
 
 CardLI-> OuterParser : parseCommand(input)
 activate OuterParser
+
+ref over OuterParser
+getCommandArguments(commandType,input)
+end ref
+
 OuterParser -> EditDeckCommand**: new EditDeckCommand(arguments)
 activate EditDeckCommand
 EditDeckCommand --> OuterParser: command
@@ -35,12 +40,8 @@ DeckManager -> Deck: setName(deckName)
 activate Deck
 deactivate Deck
 
-destroy Deck
-
 DeckManager --> EditDeckCommand: message
 deactivate DeckManager
-
-destroy DeckManager
 
 CardLI<-- EditDeckCommand: result
 deactivate EditDeckCommand
