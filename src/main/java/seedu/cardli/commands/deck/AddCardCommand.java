@@ -40,29 +40,21 @@ public class AddCardCommand extends Command {
             }
             String[] rawParameters = parser.parseArguments(super.arguments);
 
-            if (rawParameters.length < 3) {
+            if (rawParameters.length < 2) {
                 throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
-            
-            String front = "";
-            String back = "";
-            if (arguments.indexOf("/f") < arguments.indexOf("/b")) {
-                front = rawParameters[1].trim();
-                back = rawParameters[2].trim();
-            } else if (arguments.indexOf("/b") < arguments.indexOf("/f")) {
-                back = rawParameters[1].trim();
-                front = rawParameters[2].trim();
-            }
 
+            String front = rawParameters[0].trim();
+            String back = rawParameters[1].trim();
+
+            if (front.isEmpty() || back.isEmpty()) {
+                throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
+            }
             String deckWithSameNameCard = deckManager.cardHasSameName(front);
             if (!deckWithSameNameCard.isEmpty()) {
                 throw new CardLiException("There is already a card with " + front + " on the front in deck "
                         + deckWithSameNameCard + ".");
 
-            }
-
-            if (front.isEmpty() || back.isEmpty()) {
-                throw new FieldEmptyException(FIELD_EMPTY_ERROR_MESSAGE);
             }
 
             String[] parameters = {front, back};
