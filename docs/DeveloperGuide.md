@@ -162,7 +162,7 @@ and `FlashCard` objects.
 
 Given below is the sequence diagram for `edit` (Deck):
 
-![](assets/dg diagrams/editDeckCommandSeqDiagram.png)
+![](assets/dg diagrams/EditDeckCommandSeqDiagram2.png)
 
 The `EditDeckCommand` allows the changing of the name of the `Deck`. The user can only edit the `name` attribute of the
 `Deck` object, which represents the name of the deck.
@@ -185,7 +185,7 @@ The `execute()` method will then call the `editDeck()` method of the `DeckManage
 
 #### [4.1.2. `EditCardCommand`](#content)
 
-![](assets/dg diagrams/editCardCommandSeqDiagram.png)
+![](assets/dg diagrams/EditCardCommandSeqDiagram2.png)
 
 The `EditCardCommand` allows the changing of the content of the `FlashCard`. The user can decide to change either
 the `front`
@@ -210,7 +210,7 @@ returned to the `execute()` method. The message is stored in a `CommandResult` c
 
 ### [4.2. Move](#content)
 
-![](assets/dg diagrams/moveCardCommandSeqDiagram.png)
+![](assets/dg diagrams/MoveCommandSeqDiagram2.png)
 
 This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card
 in a deck the user is currently in to another deck.
@@ -239,7 +239,7 @@ class, which is then returned to `CardLi`.
 
 ### [4.3. Find](#content)
 
-![](assets/dg diagrams/findSeqDiagram.png)
+![](assets/dg diagrams/findSeqDiagram2.png)
 
 Given above is the sequence diagram of the `find` function. This feature allows users of CardLI to find a
 `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the
