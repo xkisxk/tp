@@ -495,32 +495,38 @@ CardLI provides a:
 
 1. Test case: `add`
 
-Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
-
+   Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
 2. Test case: `add ExampleDeck1`
 
-Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another deck.
-
+   Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another
+   deck.
 3. Test case: `add ExampleDeck4`
 
-Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
+   Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
+
+   Expected JSON output:
+
+   ![](assets/dg manual testing/addExampleDeck4.jpg)
 
 #### Editing a Deck
 
-1. Dealing with duplicate flags<br/>
-   &nbsp;1. Test case: `edit /d /d /n /n`<br/>
+1. Test case: `edit /d /d /n /n`
 
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flags as part of the command arguments is printed.
+   Expected: Error is thrown. Error message indicating that you should not be using command flags as part of the command 
+arguments is printed.
 
-2. Dealing with string input<br/>
-   &nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer to indicate the deck to edit is printed.
-3. Changing name of Deck2<br/>
-   &nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
+2. Test case: `edit /d two /n ExampleDeck5`
+
+   Expected: Error is thrown. Error message indicating that you should only be using positive integer to indicate the deck 
+to edit is printed.
+
+3. Test case: `edit /d 2 /n ExampleDeck5`
+
+   Expected: Message is printed, stating the new name of the edited deck and the index of the edited deck
+
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/editNameOfDeck.jpg)
 
 #### Deleting a deck
 
@@ -540,22 +546,19 @@ Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
 
 1. Test case: `enter`
 
-Expected: No deck is entered. Error message is shown to prompt user to input the index of the deck after "enter".
-
+   Expected: No deck is entered. Error message is shown to prompt user to input the index of the deck after "enter".
 2. Test case: `enter 7`
 
-Expected: No deck is entered. Error message is shown to inform user that there is no deck with that index.
-
+   Expected: No deck is entered. Error message is shown to inform user that there is no deck with that index.
 3. Test case: `enter one`
 
-Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
-smaller than 2147483647.
-
+   Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
+   smaller than 2147483647.
 4. Test case: `enter 1`
 
-Expected: Deck 1 is entered. Success message is shown.
+   Expected: Deck 1 is entered. Success message is shown.
 
-#### View Test and FlashCard Statistics
+#### Viewing Test and FlashCard Statistics
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
@@ -603,17 +606,17 @@ Expected: Deck 1 is entered. Success message is shown.
 
 1. Test Case: `find`
 
-Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
-
+   Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
 2. Test Case: `find 1`
 
-Expected: Flashcards should be displayed in the manner shown in the below screenshot.
+   Expected: Flashcards should be displayed in the manner shown in the below screenshot.
 
-![](assets/dg manual testing/find1.png)
+   ![](assets/dg manual testing/find1.png)
 
 3. Test Case: `find 0`
 
-Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search term.
+   Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search
+   term.
 
 ### Deck Mode
 
@@ -623,63 +626,80 @@ Expected: No flashcards are displayed. Message is shown to inform user that ther
 
 2. Test case: `add /f /b`
 
-Expected: No card is added. Error message is shown to inform user that fields cannot be left empty.
-
+   Expected: No card is added. Error message is shown to inform user that fields cannot be left empty.
 3. Test case: `add /f Card4 /b CardBack4`
 
-Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
+   Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
+
+   Expected JSON output:
+
+   ![](assets/dg manual testing/addCard4.jpg)
 
 4. Test case: `add /f Card1 /b CardBack1`
 
-Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
-content on its front.
+   Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
+   content on its front. 5.Test case: `add /f card1 /b CardBack1a`
 
-4. Test case: `add /f card1 /b CardBack1a`
+   Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
 
-Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
+   Expected JSON output:
+
+   ![](assets/dg manual testing/addcard1.jpg)
 
 #### Editing a flashcard
 
-1. Dealing with wrong flags<br/>
-   &nbsp;1. Test case: `edit /d 1 /j front /e EditedCard1`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that there are missing flags is printed.
-2. Dealing with invalid side input<br/>
-   &nbsp;1. Test case: `edit /c 1 /s middle /i EditedCard1`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only "front" or "back" can be
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entered into the `/s` argument.
-3. Changing front side of Card1<br/>
-   &nbsp;1. Test case: `edit /c 1 /s front /i EditedCard1`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited card, the index of the
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited card as well as the side changed
+1. Test case: `edit /d 1 /j front /e EditedCard1`
+
+   Expected: Error is thrown. Error message indicating that there are missing flags is printed.
+
+2. Test case: `edit /c 1 /s middle /i EditedCard1`
+
+   Expected: Error is thrown. Error message indicating that only "front" or "back" can be entered into the `/s` 
+argument.
+
+3. Test case: `edit /c 1 /s front /i EditedCard1`
+
+   Expected: Message is printed, stating the new name of the edited card, the index of the edited card as well as the 
+side changed
+
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/editCard1name.jpg)
 
 #### Deleting a flashcard
 
 1. Prerequisites: Run the command `enter 1`.
 
-
 2. Test case: `delete`
 
-Expected: No card is deleted. Error message is shown to inform user that fields cannot be empty.
-
+   Expected: No card is deleted. Error message is shown to inform user that fields cannot be empty.
 3. Test case: `delete one`
 
-Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
-smaller than 2147483647.
-
+   Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
+   smaller than 2147483647.
 4. Test case: `delete 2`
 
-Expected: The second card in the deck has been deleted. Success message is shown.
+   Expected: The second card in the deck has been deleted. Success message is shown.
+
+   Expected JSON output:
+
+   ![](assets/dg manual testing/deleteCard2.jpg)
 
 #### Moving a flashcard
 
-1. Dealing with negative integers<br/>
-   &nbsp;1. Test case: `move /c 1 /d -2`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is printed.
-2. Dealing with empty arguments<br/>
-   &nbsp;1. Test case: `move /c /d `<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
-3. Moving EditedCard1 to Deck2<br/>
-   &nbsp;1. Test case: `move /c 1 /d 2`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.
+1. Test case: `move /c 1 /d -2`
+
+   Expected: Error is thrown. Error message indicating that only positive integers are allowed is printed.
+
+2. Test case: `move /c /d `
+
+   Expected: Error is thrown. Error message indicating that arguments is empty is printed. The command format is printed
+as well.
+> ❗️ JSON output is based on the edit flashcard test
+3. Test case: `move /c 1 /d 2`
+
+   Expected: Message is printed, stating which card was moved to which deck.
+
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/moveEditedCard1.jpg)
