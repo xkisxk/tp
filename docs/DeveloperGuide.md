@@ -541,6 +541,7 @@ to edit is printed.
    Expected: `Deleted deck: ExampleDeck3`
    
    Expected JSON output: 
+4. ![](assets/dg manual testing/deleteDeck3.jpg)
 
 #### Entering a deck
 
