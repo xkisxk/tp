@@ -52,7 +52,7 @@ CardLi has one main component, ```Main```, consisting of one class `CardLi`. It 
 
 <li> At app launch: initializing the components in the correct sequence, and connecting them up with each other</li>
 
-![](assets/overallArchitectureDiagram.png)
+![](assets/dg diagrams/overallArchitectureDiagram.png)
 
 The rest of the App consists of the following components:
 
@@ -65,7 +65,7 @@ Each component is explained in the sections below.
 
 ### [3.1. Model Component](#content)
 
-![](assets/modelArchitectureDiagram2.png)
+![](assets/dg diagrams/modelArchitectureDiagram2.png)
 
 The `Model` component consists of two packages, `flashcard` and `testing`.
 
@@ -101,7 +101,7 @@ implementation section for Test.
 
 ### [3.3. Logic Component](#content)
 
-![](assets/logicArchitectureDiagram.png)
+![](assets/dg diagrams/logicArchitectureDiagram.png)
 
 > ℹ️  `XYZCommand` is a placeholder name for subclasses of the abstract `Command` class (e.g. `AddCardsCommand`, `DeleteDeckCommand`, `TestCommand`, etc.)
 
@@ -123,7 +123,7 @@ How the `Logic` component works:
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned to the `UI`
    from `Logic` to be processed.
 
-![](assets/parserArchitectureDiagram.png)
+![](assets/dg diagrams/parserArchitectureDiagram.png)
 
 The architecture diagram above contains the parser classes in `Logic` that are used for parsing a user command.
 
@@ -160,7 +160,7 @@ and `FlashCard` objects.
 
 Given below is the sequence diagram for `edit` (Deck):
 
-![](assets/editDeckCommandSeqDiagram.png)
+![](assets/dg diagrams/editDeckCommandSeqDiagram.png)
 
 The `EditDeckCommand` allows the changing of the name of the `Deck`. The user can only edit the `name` attribute of the
 `Deck` object, which represents the name of the deck.
@@ -183,7 +183,7 @@ The `execute()` method will then call the `editDeck()` method of the `DeckManage
 
 #### [4.1.2. `EditCardCommand`](#content)
 
-![](assets/editCardCommandSeqDiagram.png)
+![](assets/dg diagrams/editCardCommandSeqDiagram.png)
 
 The `EditCardCommand` allows the changing of the content of the `FlashCard`. The user can decide to change either
 the `front`
@@ -208,7 +208,7 @@ returned to the `execute()` method. The message is stored in a `CommandResult` c
 
 ### [4.2. Move](#content)
 
-![](assets/moveCardCommandSeqDiagram.png)
+![](assets/dg diagrams/moveCardCommandSeqDiagram.png)
 
 This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card 
 in a deck the user is currently in to another deck.
@@ -237,7 +237,7 @@ class, which is then returned to `CardLi`.
 
 ### [4.3. Find](#content)
 
-![](assets/findSeqDiagram.png)
+![](assets/dg diagrams/findSeqDiagram.png)
 
 Given above is the sequence diagram of the `find` function. This feature allows users of CardLI to find a
 `FlashCard` by providing a search term to the input following the command term `find`. By invoking this function the
@@ -258,7 +258,7 @@ string format for `CardLiUi` to display to the user.
 
 ### [4.4. Test Feature](#content)
 
-![class diagram](assets/testClassDiagram.png)
+![class diagram](assets/dg diagrams/testClassDiagram.png)
 
 Currently, test feature is implemented at the systemwide level and is handled by `TestManager`.
 `TestManager` will call on `TestUi` and `TestParser` to handle the inputs and outputs with the user and the parsing
@@ -266,13 +266,13 @@ respectively during the test.
 
 #### [4.4.1. Test Setup](#content)
 
-![sequence diagram](assets/TestSequenceDiagram.png)
+![sequence diagram](assets/dg diagrams/TestSequenceDiagram.png)
 
 As shown in the sequence diagram above, to enter into test mode, the user needs to enter `test` in the main menu from
 which the program will prompt the user to input a number (done in `startTest()`) corresponding to the index of the deck
 that they want to be tested on or "all" to test all decks.
 
-![sequence diagram](assets/getTestDeckSequenceDiagram.png)
+![sequence diagram](assets/dg diagrams/getTestDeckSequenceDiagram.png)
 
 In both cases, `TestManager` will create an `AnswerList` using a `Deck` that it creates or gets from
 `DeckManager` depending on the condition which is shown by the sequence diagram above. If the user decides to test all
@@ -280,7 +280,7 @@ decks, the program will compile all `FlashCards` into a `Deck`. If the user deci
 will get that deck instance from `DeckManager`. The `AnswerList` consists of an ArrayList of `Answers` and is where the
 user's test responses are stored. The `Deck` to be tested is stored within `AnswerList`.
 
-![sequence diagram](assets/prepareTestDeckSeqDiagram.png)
+![sequence diagram](assets/dg diagrams/prepareTestDeckSeqDiagram.png)
 
 After constructing the `AnswerList`, the preparation begins. The `Deck` that is attached to the `AnswerList` gets
 duplicated, then shuffled. Afterwards, for each question in the test, an `Answer` is initialised with an empty string
@@ -288,6 +288,16 @@ and added to `AnswerList`.
 
 #### [4.4.2. Testing Process](#content)
 
+<<<<<<< HEAD
+![sequence diagram](assets/dg diagrams/testInProgressSeqDiagram.png)
+//TODO: change This is where the actual test starts. The test will keep looping until every card in the `Deck` to test
+is answered. And there is another loop within that loops until the `currentQuestion`, which is an `int`
+representing the question number, goes out of bounds. Inside the inner loop, `testCard` is called to test an individual
+card. The resulting `nextQuestionFlag` decides whether to proceed to the next question
+(if it equals to '0') or go back to a previous question (if it equals to '1'). If this results in
+`currentQuestion` going out of bounds and if every question is not answered, currentQuestion will get reset to either
+the lowest or highest question number that is not answered.
+=======
 ![sequence diagram](assets/testInProgressSeqDiagram.png)
 This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all 
 the questions. The test will keep looping until every card in the `Deck` to test is answered, or until the 
@@ -307,8 +317,9 @@ replaced with the new time remaining. Note, however, that the displaying of the 
 by 0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has 
 been stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out, 
 `CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
+>>>>>>> 26507bca2e4e58789670e77d242c7a987f150029
 
-![sequence diagram](assets/testCardSeqDiagram.png)
+![sequence diagram](assets/dg diagrams/testCardSeqDiagram.png)
 
 The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`.
 If it is neither, the user's answer is added into `AnswerList`. If it is
@@ -318,7 +329,7 @@ stored by the system will be an empty answer and thus will not be counted even i
 
 > ! The question will be printed on a new screen. However, if the user scrolls up far enough, the previous inputs can be seen.
 
-![sequence diagram](assets/markTestSequenceDiagram.png)
+![sequence diagram](assets/dg diagrams/markTestSequenceDiagram.png)
 
 After all cards have been tested, the marking process begins as shown by the sequence diagram above. The program prints
 the question, followed by the actual answer, followed by the user's answer.
@@ -344,7 +355,7 @@ reviewed.
 > The other commands return the resulting string of the `execute()` method but ` test` and `review` only return the end
 > test/review message.
 > This is because, unlike the others, `test` and `review` need to constantly interact with the user,
-> which means that the feature needs to print out a response message after the user's input. Furthermore, it needs to 
+> which means that the feature needs to print out a response message after the user's input. Furthermore, it needs to
 > also update the timer live, which makes storing the entire process as a string
 > when `Command.execute()` is called not really feasible.
 </details>
@@ -356,39 +367,38 @@ have completed thus far. This will also allow users to re-access the data when t
 they will not have to keep re-adding the same flashcards, while also being able to review tests that they had previously
 done on the application.
 
-This feature is implemented by saving the user’s data into two separate JSON files, which is saved into a
-new `data` directory created upon first start up of the application if it does not yet exist. This new directory is
-created within the current directory from which the `CardLI.jar` file is run in the CLI. The file paths of the two JSON
-files are hard coded as `Cards_CardLI.json` and `Tests_CardLI.json`, which will save data on the user's decks of
-flashcards and test history respectively. Whenever the user inputs a new command, the application will execute the save
-functions after the actions corresponding to the command are completed. This is done in order to maintain data integrity
-and accuracy in case of technical malfunctions that may cause the application to terminate prematurely. When the user
-restarts or re-enters the application, the application will parse the JSON files and convert them into the relevant
-data. The format of how the data is saved into the JSON files are specified during the development process in order to
-reduce the risk of bugs arising when they are being parsed, which will be explained in the following paragraphs.
+This feature is implemented by saving the user’s data into two separate JSON files, which is saved into a new `data`
+directory created upon first start up of the application if it does not yet exist. This new directory is created within
+the current directory from which the `CardLI.jar` file is run in the CLI. The file paths of the two JSON files are hard
+coded as `Cards_CardLI.json` and `Tests_CardLI.json`, which will save data on the user's decks of flashcards and test
+history respectively. Whenever the user inputs a new command, the application will execute the save functions after the
+actions corresponding to the command are completed. This is done in order to maintain data integrity and accuracy in
+case of technical malfunctions that may cause the application to terminate prematurely. When the user restarts or
+re-enters the application, the application will parse the JSON files and convert them into the relevant data. The format
+of how the data is saved into the JSON files are specified during the development process in order to reduce the risk of
+bugs arising when they are being parsed, which will be explained in the following paragraphs.
 
-The `Storage` class contains all the methods to execute the save and parse functions to and from the
-relevant JSON files. This `Storage` object is created upon first starting up the application to handle all the method
-calls. The respective methods will be explained in more detail in the following paragraphs.
+The `Storage` class contains all the methods to execute the save and parse functions to and from the relevant JSON
+files. This `Storage` object is created upon first starting up the application to handle all the method calls. The
+respective methods will be explained in more detail in the following paragraphs.
 
 #### [4.5.1. Writing to JSON files](#content)
 
-
 Two separate methods are used for this feature, namely the ` writeCardsToFile()` and the `writeTestsToFile()` methods.
-The two methods save the user's `Decks` of `FlashCards` and `TestHistory` to the JSON files respectively.
-Since the two methods are effectively similar in their
-implementation, the sequence diagram below will suffice in depicting their execution. For all labels that include
-a "/", the text before the "/" applies for the `writeCardsToFile()` method while the text after the "/" applies for the
+The two methods save the user's `Decks` of `FlashCards` and `TestHistory` to the JSON files respectively. Since the two
+methods are effectively similar in their implementation, the sequence diagram below will suffice in depicting their
+execution. For all labels that include a "/", the text before the "/" applies for the `writeCardsToFile()` method while
+the text after the "/" applies for the
 `writeTestsToFile()` method.
 
-![](assets/writeToFileSeqDiagram.png)
+![](assets/dg diagrams/writeToFileSeqDiagram.png)
 
 `writeCardsToFile(ArrayList<Deck> decks)`
 
 For the saving of the user's `Decks` of `FlashCards`, the method call will expect an `ArrayList` of `Deck` objects.
 The `toJSONObject()` methods within the `Deck`and `FlashCard` classes have been written as per the specified format of
-saving the `Decks` of `FlashCards` to the `json` file. Each of the `toJSONObject()` methods returns a formatted JSON Object
-containing information about the attributes in each instance of each class, in the form of a map. A combination
+saving the `Decks` of `FlashCards` to the `json` file. Each of the `toJSONObject()` methods returns a formatted JSON
+Object containing information about the attributes in each instance of each class, in the form of a map. A combination
 of `JSONObject` and `JSONArray` instances are used to format each of the individual attributes, before they are combined
 into a single `JSONObject` instance and returned from the method. An example of the format of the `Cards_CardLI.json`
 where the `Decks` of `FlashCards` are saved is shown in the image below.
@@ -399,9 +409,9 @@ where the `Decks` of `FlashCards` are saved is shown in the image below.
 
 For the saving of the user's test history, the method call will expect an `ArrayList` of `AnswerList` objects.
 The `toJSONObject()` methods within the `AnswerList`and `Answer` classes have been written as per the specified format
-of saving the `TestHistory` to the `json` file. The concept behind the formatting of the returned JSON Object is the same
-as that explained under the `writeCardsToFile()` method. An example of the format of the `Tests_CardLI.json` where the
-test data is saved is shown in the screenshot below.
+of saving the `TestHistory` to the `json` file. The concept behind the formatting of the returned JSON Object is the
+same as that explained under the `writeCardsToFile()` method. An example of the format of the `Tests_CardLI.json` where
+the test data is saved is shown in the screenshot below.
 
 ![](assets/Tests_CardLI Example.png)
 
@@ -419,7 +429,7 @@ the `readCardsFromFile()` method while the text after the "/" applies for the
 `readTestsFromFile()` method. The extension to the "ref" box within the sequence diagram will be shown in a separate
 sequence diagram in the following sections.
 
-![](assets/readFromFileSeqDiagram.png)
+![](assets/dg diagrams/readFromFileSeqDiagram.png)
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
@@ -428,7 +438,7 @@ The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per
 the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the 
 exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is shown below.
 
-![](assets/parseDeckSeqDiagram.png)
+![](assets/dg diagrams/parseDeckSeqDiagram.png)
 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
@@ -437,7 +447,7 @@ The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per
 to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram 
 depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
 
-![](assets/parseAnswerListSeqDiagram.png)
+![](assets/dg diagrams/parseAnswerListSeqDiagram.png)
 
 ## [5. Product scope](#content)
 
@@ -489,4 +499,96 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-### Storage testing
+### Main Menu
+
+#### Adding a deck
+
+1. Test case: `add`
+
+Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
+
+2. Test case: `add ExampleDeck1`
+
+Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another deck.
+
+3. Test case: `add ExampleDeck4`
+
+Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
+
+#### Entering a deck
+
+1. Test case: `enter`
+
+Expected: No deck is entered. Error message is shown to prompt user to input the index of the deck after "enter".
+
+2. Test case: `enter 7`
+
+Expected: No deck is entered. Error message is shown to inform user that there is no deck with that index.
+
+3. Test case: `enter one`
+
+Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
+smaller than 2147483647.
+
+4. Test case: `enter 1`
+
+Expected: Deck 1 is entered. Success message is shown.
+
+#### Finding flashcards
+
+1. Test Case: `find`
+
+Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
+
+2. Test Case: `find 1`
+
+Expected: Flashcards should be displayed in the manner shown in the below screenshot.
+
+![](assets/dg manual testing/find1.png)
+
+3. Test Case: `find 0`
+
+Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search term.
+
+### Deck Mode
+
+#### Adding a flashcard
+
+1. Prerequisites: Run the command `enter 1`.
+
+2. Test case: `add /f /b`
+
+Expected: No card is added. Error message is shown to inform user that fields cannot be left empty.
+
+3. Test case: `add /f Card4 /b CardBack4`
+
+Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
+
+4. Test case: `add /f Card1 /b CardBack1`
+
+Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
+content on its front.
+
+4. Test case: `add /f card1 /b CardBack1a`
+
+Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
+
+#### Deleting a flashcard
+
+1. Prerequisites: Run the command `enter 1`.
+
+
+2. Test case: `delete`
+
+Expected: No card is deleted. Error message is shown to inform user that fields cannot be empty.
+
+3. Test case: `delete one`
+
+Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer smaller
+than 2147483647.
+
+4. Test case: `delete 2`
+
+Expected: The second card in the deck has been deleted. Success message is shown.
+
+
