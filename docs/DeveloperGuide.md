@@ -522,6 +522,20 @@ Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
    &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
 
+#### Deleting a deck
+
+1. Test case: `delete`
+
+   Expected: `Deck index must be smaller than 2147483647.`
+2. Test case: `delete ExampleDeck3`
+
+   Expected: `Please input a positive integer.`
+3. Test case: `delete 3`
+
+   Expected: `Deleted deck: ExampleDeck3`
+   
+   Expected JSON output: 
+
 #### Entering a deck
 
 1. Test case: `enter`
