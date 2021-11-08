@@ -172,7 +172,7 @@ object.
 The `execute()` method in the `EditDeckCommand` class self-invokes the `prepareEditDeckCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditDeckCommand()` self-invokes the
 `prepareDeckIndex` method, which handles the formatting of the deck index specified by the user. `prepareDeckIndex()`
-returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will 
+returns `deck`, of string type, which represents the index of the deck to be edited. `prepareEditDeckCommand()` will
 then return a string array, `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editDeck()` method of the `DeckManager` class, which in turn calls the
@@ -196,12 +196,12 @@ object.
 The `execute()` method in the `EditCardCommand` class self-invokes the `prepareEditCardCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareEditCardCommand()` self-invokes the
 `prepareCardIndex` method, which handles the formatting of the card index specified by the user. `prepareCardIndex()`
-returns the index of the card to be edited as a string. `prepareEditCardCommand()` will then return a string array, 
+returns the index of the card to be edited as a string. `prepareEditCardCommand()` will then return a string array,
 `preparedArguments`, which represents the arguments for the next method call.
 
 The `execute()` method will then call the `editCard()` method of the `Deck` class, which in turn calls the
 `setFront()` or `setBack()` method of the `FlashCard` class. Once `editCard()` is completed, a message of string type is
-returned to the `execute()` method. The message is stored in a `CommandResult` class, which is then returned to 
+returned to the `execute()` method. The message is stored in a `CommandResult` class, which is then returned to
 `CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
@@ -210,27 +210,27 @@ returned to the `execute()` method. The message is stored in a `CommandResult` c
 
 ![](assets/dg diagrams/moveCardCommandSeqDiagram.png)
 
-This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card 
+This subsection provides details on the implementation of the `moveCardCommand`. This command enables moving of a card
 in a deck the user is currently in to another deck.
 
 By entering the move command in the `InnerParser` class, an `MoveCardCommand` object is created and its constructor is
-called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand` 
+called. This object is returned to `CardLi` class, which then calls the `execute()` method of the `MoveCardCommand`
 object.
 
 The `execute()` method in the `MoveCardCommand` class self-invokes the `prepareMoveCardCommand()` method, which helps
 the handling of edge cases as well as format the method arguments. In turn, `prepareMoveCardCommand()` self-invokes the
 `prepareCardIndex` method, which handles the formatting of the card index specified by the user. After this,
-`prepareMoveCardCommand()` self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index 
-specified by the user.`prepareCardIndex()` returns `card`, of string type, which represents the index of the card to be 
+`prepareMoveCardCommand()` self invokes the `prepareDeckIndex` method, which handles the formatting of the deck index
+specified by the user.`prepareCardIndex()` returns `card`, of string type, which represents the index of the card to be
 edited. `prepareDeckIndex()`returns `deck`, of string type, which represents the index of the deck to be edited.
-`prepareMoveCommand()` will then return a string array, `preparedArguments`, which represents the arguments for the next 
+`prepareMoveCommand()` will then return a string array, `preparedArguments`, which represents the arguments for the next
 method call.
 
 The `execute()` method will then call the `moveCard()` method of the `DeckManager` class, which in turn calls the
-`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls the 
+`getCard()` method of the `Deck` class to get a copy of the card to be moved. `DeckManager` then calls the
 `addFlashCard()` method of the `Deck` class to add the card to the deck specified by the user. Next, `DeckManager` calls
-the `deleteFlashCard()` method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is 
-completed, a message of string type is returned to the `execute()` method. The message is stored in a `CommandResult` 
+the `deleteFlashCard()` method of the `Deck` class to delete the card from the deck it was from. Once `moveCard()` is
+completed, a message of string type is returned to the `execute()` method. The message is stored in a `CommandResult`
 class, which is then returned to `CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
@@ -288,35 +288,33 @@ and added to `AnswerList`.
 
 #### [4.4.2. Testing Process](#content)
 
-
 ![sequence diagram](assets/dg diagrams/testInProgressSeqDiagram.png)
 
-This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all 
-the questions. The test will keep looping until every card in the `Deck` to test is answered, or until the 
-`Countdown` timer expires. And there is another loop within that loops until the 
-`currentQuestion`, which is an `int` representing the question number, goes out of bounds, or until the `Countdown` timer 
-expires. Inside the inner loop, `testCard` is called to test an individual card. The resulting `nextQuestionFlag` 
-decides whether to proceed to the next question (if it equals to '0') or go back to a previous question 
-(if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered, 
+This is where the actual test starts. The user is given a total time of 15s x number of questions to answer all the
+questions. The test will keep looping until every card in the `Deck` to test is answered, or until the
+`Countdown` timer expires. And there is another loop within that loops until the
+`currentQuestion`, which is an `int` representing the question number, goes out of bounds, or until the `Countdown`
+timer expires. Inside the inner loop, `testCard` is called to test an individual card. The resulting `nextQuestionFlag`
+decides whether to proceed to the next question (if it equals to '0') or go back to a previous question
+(if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered,
 currentQuestion will get reset to either the lowest or highest question number that is not answered.
 
 ![sequence diagram](assets/countdownSeqDiagram.png)
-How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a 
-nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the 
-`timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`, 
-every second, the time remaining will be printed, then decremented, and the current printed line will be erased and 
-replaced with the new time remaining. Note, however, that the displaying of the first time remaining will be delayed 
-by 0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has 
-been stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out, 
+How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a
+nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the
+`timesUpMessage` that will be printed when the time runs out. Once `Countdown` has been started by calling `start()`,
+every second, the time remaining will be printed, then decremented, and the current printed line will be erased and
+replaced with the new time remaining. Note, however, that the displaying of the first time remaining will be delayed by
+0.1s to allow for the question to be printed first. The loop occurs until the time runs out or `Countdown` has been
+stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out,
 `CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
-
 
 ![sequence diagram](assets/dg diagrams/testCardSeqDiagram.png)
 
-The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`.
-If it is neither, the user's answer is added into `AnswerList`. If it is
-`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1. If the user has not input 
-an answer before the countdown timer runs out, the answer for the current question can still be input. However, the answer 
+The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`
+. If it is neither, the user's answer is added into `AnswerList`. If it is
+`/Next`, nextQuestionFlag is set to 0 and if it is `/Back`, nextQuestionFlag is set to 1. If the user has not input an
+answer before the countdown timer runs out, the answer for the current question can still be input. However, the answer
 stored by the system will be an empty answer and thus will not be counted even if it is correct.
 
 > ! The question will be printed on a new screen. However, if the user scrolls up far enough, the previous inputs can be seen.
@@ -425,9 +423,9 @@ sequence diagram in the following sections.
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
-The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram under the 
-"Reading from JSON files" header, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert 
-the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the 
+The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram under the
+"Reading from JSON files" header, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert
+the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the
 exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is shown below.
 
 ![](assets/dg diagrams/parseDeckSeqDiagram.png)
@@ -435,8 +433,8 @@ exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
 The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram under the
-"Reading from JSON files" header, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively 
-to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram 
+"Reading from JSON files" header, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively
+to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram
 depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
 
 ![](assets/dg diagrams/parseAnswerListSeqDiagram.png)
@@ -507,6 +505,23 @@ Expected: No deck is added. Error message is shown to inform user that the deck 
 
 Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
 
+#### Editing a Deck
+
+1. Dealing with duplicate flags<br/>
+   &nbsp;1. Test case: `edit /d /d /n /n`<br/>
+
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flags as part of the command arguments is printed.
+
+2. Dealing with string input<br/>
+   &nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer to indicate the deck to edit is printed.
+3. Changing name of Deck2<br/>
+   &nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
+
 #### Entering a deck
 
 1. Test case: `enter`
@@ -526,21 +541,8 @@ smaller than 2147483647.
 
 Expected: Deck 1 is entered. Success message is shown.
 
-### Edit Deck
-1. Dealing with duplicate flags<br/>
-&nbsp;1. Test case: `edit /d /d /n /n`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should not be using command 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flags as part of the command arguments is printed.
-2. Dealing with string input<br/>
-&nbsp;1. Test case: `edit /d two /n ExampleDeck5`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that you should only be using positive
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer to indicate the deck to edit is printed.
-3. Changing name of Deck2<br/>
-&nbsp;1. Test case: `edit /d 2 /n ExampleDeck5`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited deck and the index of the
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited deck
-   
 #### View Test and FlashCard Statistics
+
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
 1. Test Case: `viewtest invalid`
@@ -582,7 +584,7 @@ Expected: Deck 1 is entered. Success message is shown.
    
    Score: 0 out of 1
    ```
-   
+
 #### Finding flashcards
 
 1. Test Case: `find`
@@ -622,18 +624,19 @@ content on its front.
 
 Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
 
-### Edit Card
+#### Editing a flashcard
+
 1. Dealing with wrong flags<br/>
-&nbsp;1. Test case: `edit /d 1 /j front /e EditedCard1`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that there are missing flags is printed.
+   &nbsp;1. Test case: `edit /d 1 /j front /e EditedCard1`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that there are missing flags is printed.
 2. Dealing with invalid side input<br/>
-&nbsp;1. Test case: `edit /c 1 /s middle /i EditedCard1`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only "front" or "back" can be 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entered into the `/s` argument.
+   &nbsp;1. Test case: `edit /c 1 /s middle /i EditedCard1`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only "front" or "back" can be
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entered into the `/s` argument.
 3. Changing front side of Card1<br/>
-&nbsp;1. Test case: `edit /c 1 /s front /i EditedCard1`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited card, the index of the 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited card as well as the side changed
+   &nbsp;1. Test case: `edit /c 1 /s front /i EditedCard1`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating the new name of the edited card, the index of the
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited card as well as the side changed
 
 #### Deleting a flashcard
 
@@ -646,22 +649,23 @@ Expected: No card is deleted. Error message is shown to inform user that fields 
 
 3. Test case: `delete one`
 
-Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer smaller
-than 2147483647.
+Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
+smaller than 2147483647.
 
 4. Test case: `delete 2`
 
 Expected: The second card in the deck has been deleted. Success message is shown.
 
-### Move Card
+#### Moving a flashcard
+
 1. Dealing with negative integers<br/>
-&nbsp;1. Test case: `move /c 1 /d -2`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is printed.
+   &nbsp;1. Test case: `move /c 1 /d -2`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is printed.
 2. Dealing with empty arguments<br/>
-&nbsp;1. Test case: `move /c /d `<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
+   &nbsp;1. Test case: `move /c /d `<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
 3. Moving EditedCard1 to Deck2<br/>
-&nbsp;1. Test case: `move /c 1 /d 2`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.
+   &nbsp;1. Test case: `move /c 1 /d 2`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.
