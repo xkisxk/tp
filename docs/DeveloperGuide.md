@@ -550,43 +550,25 @@ to edit is printed.
 
 1. Test Case: `viewtest invalid`
 
-   Expected: `Input a positive integer or "all" after viewtest.`
+   Expected: Nothing is displayed. Error message is shown to prompt the user to input a positive integer
+   or "all".
 2. Test Case: `viewtest all`
 
    Expected:
-   ``` 
-   These are your scores:
-   Score for test 1: ExampleDeck1 1/2 50.00%
-   Score for test 2: Test 2/3 66.67%
-   ```
+   ![viewtest_expected](assets/dg manual testing/viewtest_expected.png)
 3. Test Case: `viewtest 5`
 
-   Expected: `There is no test at that index.`
+   Expected: Nothing is displayed. Error message is shown to inform the user that there is no test
+   at that index
 
 4. Test Case: `viewfc all`
 
-   Expected: `There should not be any arguments.`
+   Expected: No flashcards are displayed. Error message is shown to inform the user that the command
+   does not take in any arguments
 5. Test Case: `viewfc`
 
    Expected:
-   ```
-   Listing total scores of flashcards for all tests:
-   *================FRONT================* *================BACK=================*
-                    Card2                                 CardBack2
-   *=====================================* *=====================================*
-   
-   Score: 1 out of 2
-   *================FRONT================* *================BACK=================*
-                    Card1                                 CardBack1
-   *=====================================* *=====================================*
-   
-   Score: 2 out of 2
-   *================FRONT================* *================BACK=================*
-                    Card3                                 CardBack3
-   *=====================================* *=====================================*
-   
-   Score: 0 out of 1
-   ```
+  ![viewfc_expected](assets/dg manual testing/viewfc_expected.png)
 
 #### Finding flashcards
 
