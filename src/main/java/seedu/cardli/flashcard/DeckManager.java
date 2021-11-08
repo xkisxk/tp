@@ -2,8 +2,6 @@ package seedu.cardli.flashcard;
 
 import seedu.cardli.exceptions.CardLiException;
 import seedu.cardli.exceptions.DeckNotExistException;
-import seedu.cardli.exceptions.FieldEmptyException;
-import seedu.cardli.exceptions.InvalidCommandFormatException;
 
 import static seedu.cardli.ui.TestUi.DECK_NOT_EXIST_MESSAGE;
 

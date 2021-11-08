@@ -2,6 +2,7 @@
 
 ![](assets/logo.png)
 
+<!--- @@author ThaddeusLim99 -->
 ## Content
 
 1. [Introduction](#1-introduction)<br/>
@@ -35,11 +36,13 @@
    9.1. [Main Menu](#91-main-menu)<br/>
    9.2. [Deck Mode](#92-deck-mode)<br/>
 
+<!--- @@author JWweiyin -->
 ## [1. Introduction](#content)
 
 CardLI is a Command Line Interface (CLI) desktop app that helps students manage their flashcards. It also allows
 students to test and review their knowledge. All of this in one single platform.
 
+<!--- @@author astralum -->
 ## [2. Acknowledgements](#content)
 
 * [__AB3:__](https://se-education.org/addressbook-level3/) For reference regarding the user guide and developer guide
@@ -48,6 +51,7 @@ students to test and review their knowledge. All of this in one single platform.
 * [__JSON.simple__](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple) For saving and storing
   JSON objects.
 
+<!--- @@author JWweiyin -->
 ## [3. Design](#content)
 
 CardLi has one main component, ```Main```, consisting of one class `CardLi`. It is responsible for:
@@ -148,6 +152,8 @@ The `Storage` component:
 
 All app data is saved as JSON files.
 
+<!--- @@author ThaddeusLim99 -->
+
 ## [4. Implementation](#content)
 
 > ℹ️ Note: In the sequence diagrams below, the lifeline for objects should end at the destroy marker (X) but due
@@ -237,6 +243,7 @@ class, which is then returned to `CardLi`.
 
 `CardLi` then calls upon the `printResult()` method of the `CardLiUi` class to print the message to the user.
 
+<!--- @@author JWweiyin -->
 ### [4.3. Find](#content)
 
 ![](assets/dg diagrams/findSeqDiagram2.png)
@@ -258,6 +265,7 @@ and filters them based on whether they contain the search term given. This metho
 the `FlashCards` that contain the search term are collected in an ArrayList and their console outputs are returned in
 string format for `CardLiUi` to display to the user.
 
+<!--- @@author xkisxk -->
 ### [4.4. Test Feature](#content)
 
 ![class diagram](assets/dg diagrams/testClassDiagram.png)
@@ -301,6 +309,7 @@ decides whether to proceed to the next question (if it equals to '0') or go back
 (if it equals to '1'). If this results in `currentQuestion` going out of bounds and if every question is not answered,
 currentQuestion will get reset to either the lowest or highest question number that is not answered.
 
+<!--- @@author astralum -->
 ![sequence diagram](assets/dg diagrams/countdownSeqDiagram.png)
 How the `Countdown` class works is shown in the diagram above. When the `Countdown` class is created, it will create a
 nested class `CountdownTimerTask` initialised with the `startValue`, or value of time to count down from, and the
@@ -311,6 +320,7 @@ replaced with the new time remaining. Note, however, that the displaying of the 
 stopped by calling `stop()`, which will internally call `cancel()` in `CountdownTimerTask`. If the time runs out,
 `CountdownTimerTask` will call the `stop()` method of `Countdown`, which will likewise terminate it.
 
+<!--- @@author xkisxk -->
 ![sequence diagram](assets/dg diagrams/testCardSeqDiagram.png)
 
 The question is printed for the user to answer. The user's answer is then parsed and checked if it is `/Next` or `/Back`
@@ -353,6 +363,7 @@ reviewed.
 
 </details>
 
+<!--- @@author xRossKoh -->
 ### [4.5. Storage](#content)
 
 This feature allows users of CardLI to save data on their current `Decks` of `FlashCards` as well as the tests that they
@@ -442,6 +453,8 @@ depicting the exact implementation and execute of the `parseDeck(JSONObject json
 
 ![](assets/dg diagrams/parseAnswerListSeqDiagram.png)
 
+<!--- @@author JWweiyin -->
+
 ## [5. Product scope](#content)
 
 ### [5.1. Target user profile](#content)
@@ -485,11 +498,13 @@ CardLI provides a:
 <li> The app should work on a computer that has Java 11 or above installed.</li>
 <li> The app should store data in a format that is readable by humans, and easy for machines to parse and generate.</li>
 
+<!--- @@author ThaddeusLim99 -->
 ## [8. Glossary](#content)
 
 * *CLI* - Command Line Interface
 * *JSON* - JavaScript Object Notation, a lightweight data-interchange format.
 
+<!--- @@author JWweiyin -->
 ## [9. Instructions for Manual Testing](#content)
 
 ### [9.1. Main Menu](#content)
@@ -518,6 +533,7 @@ CardLI provides a:
 
    ![](assets/dg manual testing/addExampleDeck4.jpg)
 
+<!--- @@author ThaddeusLim99 -->
 #### Editing a Deck
 
 1. Test case: `edit /d /d /n /n`
@@ -538,6 +554,7 @@ to edit is printed.
 
    ![](assets/dg manual testing/editNameOfDeck.jpg)
 
+<!--- @@author xRossKoh -->
 #### Deleting a deck
 
 1. Test case: `delete`
@@ -560,6 +577,7 @@ a valid argument for this command.
 
    ![](assets/dg manual testing/deleteDeck3.jpg)
 
+<!--- @@author -->
 #### Entering a deck
 
 1. Test case: `enter`
@@ -576,6 +594,7 @@ a valid argument for this command.
 
    Expected: Deck 1 is entered. Success message is shown.
 
+<!--- @@author astralum -->
 #### Testing
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json after each step.
@@ -649,6 +668,7 @@ The questions may appear in a different order. The user is then returned to the 
 
    Expected: Message indicating that there are no low scoring cards to review is printed.
 
+<!--- @@author xkisxk -->
 #### Viewing Test and FlashCard Statistics
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
@@ -675,6 +695,7 @@ The questions may appear in a different order. The user is then returned to the 
    Expected:
   ![viewfc_expected](assets/dg manual testing/viewfc_expected.png)
 
+<!--- @@author JWweiyin -->
 #### Finding flashcards
 
 1. Test Case: `find`
@@ -719,6 +740,7 @@ The questions may appear in a different order. The user is then returned to the 
 
    ![](assets/dg manual testing/addcard1.jpg)
 
+<!--- @@author ThaddeusLim99 -->
 #### Editing a flashcard
 
 1. Test case: `edit /d 1 /j front /e EditedCard1`
@@ -739,6 +761,7 @@ side changed
 
    ![](assets/dg manual testing/editCard1name.jpg)
 
+<!--- @@author -->
 #### Deleting a flashcard
 
 1. Prerequisites: Run the command `enter 1`.
@@ -758,6 +781,7 @@ side changed
 
    ![](assets/dg manual testing/deleteCard2.jpg)
 
+<!--- @@author ThaddeusLim99 -->
 #### Moving a flashcard
 
 1. Test case: `move /c 1 /d -2`

@@ -46,11 +46,13 @@ Code contribution can be found at the
 - User Guide:
     - Added documentation features for features `viewtest`, `viewfc`, `review`, `delete`
       [#75](https://github.com/AY2122S1-CS2113T-F12-1/tp/commit/a1d5f600678dce14bbf3438fbfbe8e78641ef377)
-    - Added anchor
+    - Added anchor and How To Use section
       links [#188](https://github.com/AY2122S1-CS2113T-F12-1/tp/pull/188/commits/9914206a06c69f1d155fb8045015280d199e1ee7)
 - Developer Guide:
     - Wrote implementation details of `test` feature including the UML diagrams.
       [#89](https://github.com/AY2122S1-CS2113T-F12-1/tp/commit/1c3adf0706446b7a775c1ba744394abfbf5edba8)
+    - Wrote manual user testing for `view test`
+      features. [#207](https://github.com/AY2122S1-CS2113T-F12-1/tp/commit/052ae91db88e401c109b33c6ebee83f14977b0ce)
 
 ### Community:
 

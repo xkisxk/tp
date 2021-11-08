@@ -2,6 +2,7 @@
 
 ![](assets/logo.png)
 
+<!--- @@author xRossKoh  -->
 ## Introduction
 
 CardLI is a desktop app that helps you create, organise, and review flashcards via a Command Line Interface. As students
@@ -11,6 +12,7 @@ help students study better through the use of flashcards, while also reducing th
 physical flashcards. The interfacing within the application is designed to be interactive and functional, while the
 commands are designed to be intuitive to use.
 
+<!--- @@author xkisxk -->
 ## How To Use
 
 This guide helps you to get familiarised with all the features of CardLI. The [Quick Start](#quick-start)
@@ -20,10 +22,12 @@ The [Command Summary](#4-command-summarycontent) section gives you a brief overv
 table format to let you check the format of commands at glance. To make it easier for you to navigate,
 the [contents](#content) is linked to their respective sections.
 
+<!--- @@author xRossKoh  -->
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `CardLI.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-1/tp/releases/tag/v2.1).
+2. Download the latest version of `CardLI.jar`
+   from [here](https://github.com/AY2122S1-CS2113T-F12-1/tp/releases/tag/v2.1).
 3. Take note of the full filepath of directory in which `CardLI.jar` is saved.
 4. Open the command prompt by searching `cmd` in the search bar.
 5. Navigate to the file directory containing `CardLI.jar` using the command `cd <filepath>`.
@@ -35,6 +39,8 @@ the [contents](#content) is linked to their respective sections.
 
 The expected output upon startup of the app is shown below:
 ![](assets/ug/CardLiStartup.png)
+
+<!--- @@author xkisxk -->
 ## Features
 
 The current version of CardLI has two menus: main and deck. In the main menu, you are working with all the decks, so
@@ -70,6 +76,7 @@ commands only apply to the decks and not the individual flashcards. Enter the de
 
 ---
 
+<!--- @@author astralum -->
 ## [1. Main Menu](#content)
 
 > 💾 Your decks are saved after each command.
@@ -89,6 +96,7 @@ Expected outcome:
 
 ![](assets/ug/adddeck.png)
 
+<!--- @@author ThaddeusLim99 -->
 ### [1.2 Editing a deck: `edit`](#content)
 
 If you ever find a better name for your deck, `edit` allows you to modify the name of your deck. A deck can be chosen
@@ -106,6 +114,7 @@ Expected outcome:
 
 ![](assets/ug/editdeck.png)
 
+<!--- @@author xkisxk -->
 ### [1.3 Deleting a deck: `delete`](#content)
 
 If you no longer need a deck, `delete` allows you to delete the deck indicated by the index.
@@ -120,6 +129,7 @@ Expected outcome:
 
 ![](assets/ug/deleteDeck.png)
 
+<!--- @@author -->
 ### [1.4 Entering a deck: `enter`](#content)
 
 If you wish to add, delete, edit or view flashcards, `enter` allows you to select a deck to perform these actions on.
@@ -132,16 +142,16 @@ Expected outcome:
 
 ![](assets/ug/enter.png)
 
+<!--- @@author astralum -->
 ### [1.5 Test flashcards: `test`](#content)
 
 If you wish to test your knowledge on your flashcards, use `test` to enter test mode. The program will ask you to input
-the index for the deck that is to be tested. The word to be tested will be displayed in the console. A timer will start 
-running, which will start from the time 15s * number of flashcards tested. Typing the exact
-character-for-character definition for the word will result in a correct answer. Otherwise, the response will be marked
-as incorrect. Regardless of whether the answer is correct or incorrect, the console will then display the next word to
-be tested. If the time runs out, your answer for the current question will not be saved, and all the other questions 
-will be skipped. When all cards in the deck have been tested or the time has run out, the percentage of correct answers 
-will be displayed in the
+the index for the deck that is to be tested. The word to be tested will be displayed in the console. A timer will start
+running, which will start from the time 15s * number of flashcards tested. Typing the exact character-for-character
+definition for the word will result in a correct answer. Otherwise, the response will be marked as incorrect. Regardless
+of whether the answer is correct or incorrect, the console will then display the next word to be tested. If the time
+runs out, your answer for the current question will not be saved, and all the other questions will be skipped. When all
+cards in the deck have been tested or the time has run out, the percentage of correct answers will be displayed in the
 console, as well as the cards which received incorrect responses.
 
 If you do not know the answer to the current question being tested, and you want to skip to another question, you can do
@@ -156,6 +166,7 @@ Expected outcome:
 
 ![](assets/ug/test.png)
 
+<!--- @@author xkisxk -->
 ### [1.6 Review flashcards: `review`](#content)
 
 If you wish to review the flashcards you are scoring wrongly more often, use `review` to enter review mode, which is the
@@ -167,6 +178,7 @@ Expected outcome:
 
 ![](assets/ug/review.png)
 
+<!--- @@author astralum -->
 ### [1.7 Viewing all decks: `view`](#content)
 
 If you wish to see all your decks at a glance, use `view` to display the names of all decks.
@@ -177,6 +189,7 @@ Expected outcome:
 
 ![](assets/ug/viewdeck.png)
 
+<!--- @@author xkisxk -->
 ### [1.8 View flashcard statistics: `viewfc`](#content)
 
 If you wish to know the overall scores of your flashcards, `viewfc`  displays all flashcards that have been added up to
@@ -200,6 +213,7 @@ Expected outcome:
 ![](assets/ug/viewtestIndex.png)
 ![](assets/ug/viewtestAll.png)
 
+<!--- @@author JWweiyin -->
 ### [1.10 Finding a flashcard: `find`](#content)
 
 If you wish to find a certain flashcard, `find` returns all flashcards with descriptions containing the search terms are
@@ -235,7 +249,7 @@ Expected outcome:
 
 ![](assets/ug/bye.png)
 ---
-
+<!--- @@author -->
 ## [2. Deck Menu](#content)
 
 > 💾 Your flashcards are saved after each command.
@@ -244,8 +258,10 @@ Expected outcome:
 
 Begin your flashcard journey with `add`. Adds a flashcard with the given front and back to the current deck.
 
-> ❗ You cannot add a flashcard if the content on its front matches the front of an existing flashcard anywhere in the app character-for-character.
-
+> ❗ You cannot add a flashcard if the content on its front matches the front of an existing flashcard anywhere in the 
+> app character-for-character.
+> 
+> ❗ Everything between and after the first instance of /f and /b is treated as a string.
 
 Format: `add /f <word/phrase on front of flashcard> /b <word/phrase on back of flashcard>`
 
@@ -256,6 +272,7 @@ Expected outcome:
 
 ![](assets/ug/addflash.png)
 
+<!--- @@author ThaddeusLim99 -->
 ### [2.2 Editing a flashcard: `edit`](#content)
 
 Did you accidentally make a mistake in the content of a flashcard? `edit` allows you to modify either the front or back
@@ -276,6 +293,7 @@ Expected outcome:
 
 ![](assets/ug/editcard.png)
 
+<!--- @@author -->
 ### [2.3 Deleting a flashcard: `delete`](#content)
 
 No longer need a flashcard? `delete` removes the flashcard indicated by the index.
@@ -290,6 +308,7 @@ Expected outcome:
 
 ![](assets/ug/deleteindexflash.png)
 
+<!--- @@author ThaddeusLim99 -->
 ### [2.4 Moving a flashcard: `move`](#content)
 
 `move` is useful when you accidentally added a flashcard to the wrong deck. You can transfer the card to another deck
@@ -314,6 +333,7 @@ Expected outcome:
 * Deck 1 before and after moving; Deck 2 after moving
   ![](assets/ug/move4.png)
 
+<!--- @@author -->
 ### [2.5 Viewing flashcards: `view`](#content)
 
 `view` lets you look at all the flashcards in the current deck at a glance. Displays all the flashcards in the current
@@ -325,6 +345,7 @@ Expected outcome:
 
 ![](assets/ug/viewcard.png)
 
+<!--- @@author JWweiyin -->
 ### [2.6 Listing all commands in deck mode: `help`](#content)
 
 Did you forget the format of a command? `help` lists all commands within Deck Mode.
@@ -335,6 +356,7 @@ Expected outcome:
 
 ![](assets/ug/helpdeck.png)
 
+<!--- @@author -->
 ### [2.7 Exiting deck mode: `exit`](#content)
 
 When you are done taking actions within a deck, `exit` lets you exit deck mode and returns you to the main menu.
@@ -345,6 +367,7 @@ Expected outcome:
 
 ![](assets/ug/exit.png)
 
+<!--- @@author xRossKoh  -->
 ## [3. FAQs](#content)
 
 **Q**: How do I transfer my data to another computer?
@@ -364,6 +387,7 @@ to undesirable consequences such as bugs and possible loss of your saved data if
 original format. Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confident
 in maintaining the format integrity of the files.
 
+<!--- @@author JWweiyin -->
 ## [4. Command Summary](#content)
 
 ### [4.1 Main Menu:](#content)
