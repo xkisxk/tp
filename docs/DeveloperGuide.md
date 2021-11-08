@@ -602,9 +602,12 @@ to indicate the deck to test is printed.
 **Taking Test**
 1. Test case: `test` -> `1` -> answer the questions, within the time limit, as per below:
    * Question: Card1
-   Answer: CardBack1
+   
+      Answer: CardBack1
+   
    * Question: Card2
-   Answer: Wrong answer
+   
+      Answer: Wrong answer
    
    Expected: A timer of 30s starts counting down and runs continuously throughout the duration of the test. 
 Answering a question clears the screen and prints the next question.
