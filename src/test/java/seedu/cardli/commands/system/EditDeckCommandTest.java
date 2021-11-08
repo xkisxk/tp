@@ -1,4 +1,4 @@
-package seedu.cardli;
+package seedu.cardli.commands.system;
 
 import org.junit.jupiter.api.Test;
 import seedu.cardli.commands.Command;
