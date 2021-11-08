@@ -501,13 +501,13 @@ CardLI provides a:
 
 ### Move Card
 1. Dealing with negative integers<br/>
-   &nbsp;1. Test case: `move /c 1 /d -2`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
-   &nbsp;&nbsp;&nbsp;&nbsp; is printed.
+&nbsp;1. Test case: `move /c 1 /d -2`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that only positive integers are allowed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is printed.
 2. Dealing with empty arguments<br/>
-   &nbsp;1. Test case: `move /c /d `<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
+&nbsp;1. Test case: `move /c /d `<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Error is thrown. Error message indicating that arguments is empty is printed. The
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command format is printed as well.
 3. Moving EditedCard1 to Deck2<br/>
-   &nbsp;1. Test case: `move /c 1 /d 2`<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.
+&nbsp;1. Test case: `move /c 1 /d 2`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; Expected: Message is printed, stating which card was moved to which deck.

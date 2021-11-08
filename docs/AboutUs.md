@@ -5,6 +5,6 @@ Display | Name | Github Profile | Portfolio
 
 ![](https://via.placeholder.com/100.png?text=Photo) | Koh Meng Kiat, Kenneth | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Joanne Wong Wei Yin | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Thaddeus Lim | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](assets/thadpic.jpg) | Thaddeus Lim | [Github](https://github.com/ThaddeusLim99) | [Portfolio](docs/team/thaddeuslim99.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Jiang Xing Kai | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Jin Minyue | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
