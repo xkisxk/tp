@@ -378,7 +378,7 @@ of `JSONObject` and `JSONArray` instances are used to format each of the individ
 into a single `JSONObject` instance and returned from the method. An example of the format of the `Cards_CardLI.json`
 where the `Decks` of `FlashCards` are saved is shown in the image below.
 
-![](assets/Cards_CardLI.txt Example.png)
+![](assets/Cards_CardLI Example.png)
 
 `writeTestsToFile(ArrayList<AnswerList> testHistory)`
 
@@ -387,6 +387,8 @@ The `toJSONObject()` methods within the `AnswerList`and `Answer` classes have be
 of saving the `TestHistory` to the `json` file. The concept behind the formatting of the returned JSON Object is the same
 as that explained under the `writeCardsToFile()` method. An example of the format of the `Tests_CardLI.json` where the
 test data is saved is shown in the screenshot below.
+
+![](assets/Tests_CardLI Example.png)
 
 #### [4.5.2. Reading from JSON files](#content)
 
@@ -406,19 +408,19 @@ sequence diagram in the following sections.
 
 ##### [4.5.2.1 `readCardsFromFile`](#content)
 
-The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert the saved data into individual `Deck`
-instances to be added into the application. The sequence diagram depicting the exact implementation and execute of
-the `parseDeck(JSONObject jsonDeck)` method is shown below.
+The `readCardsFromFile()` method reads from the `Cards_CardLI.json` file. As per the sequence diagram under the 
+"Reading from JSON files" header, this method calls the `parseDeck(JSONObject jsonDeck)` method iteratively to convert 
+the saved data into individual `Deck` instances to be added into the application. The sequence diagram depicting the 
+exact implementation and execute of the `parseDeck(JSONObject jsonDeck)` method is shown below.
 
 ![](assets/parseDeckSeqDiagram.png)
 
 ##### [4.5.2.2 `readTestFromFile`](#content)
 
-The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram shown above, this
-method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively to convert the saved data into
-individual `AnswerList` instances to be added into the application. The sequence diagram depicting the exact
-implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
+The `readTestsFromFile()` method reads from the `Tests_CardLI.json` file. As per the sequence diagram under the
+"Reading from JSON files" header, this method calls the `parseAnswerList(JSONObject jsonTestHistory)` method iteratively 
+to convert the saved data into individual `AnswerList` instances to be added into the application. The sequence diagram 
+depicting the exact implementation and execute of the `parseDeck(JSONObject jsonTestHistory)` method is shown below.
 
 ![](assets/parseAnswerListSeqDiagram.png)
 
@@ -472,4 +474,4 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Storage testing
