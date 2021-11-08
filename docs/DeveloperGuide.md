@@ -503,9 +503,9 @@ CardLI provides a:
 
    Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
    
-Expected JSON output:
+   Expected JSON output:
 
-![](assets/dg manual testing/addExampleDeck4.jpg)
+   ![](assets/dg manual testing/addExampleDeck4.jpg)
 
 #### Editing a Deck
 
@@ -591,9 +591,9 @@ smaller than 2147483647.
    Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
 2. Test Case: `find 1`
 
-   Expected: Flashcards should be displayed in the manner shown in the below screenshot.
+      Expected: Flashcards should be displayed in the manner shown in the below screenshot.
 
-![](assets/dg manual testing/find1.png)
+   ![](assets/dg manual testing/find1.png)
 
 3. Test Case: `find 0`
 
@@ -615,6 +615,7 @@ smaller than 2147483647.
    Expected JSON output: 
 
    ![](assets/dg manual testing/addCard4.jpg)
+
 4. Test case: `add /f Card1 /b CardBack1`
 
    Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
@@ -625,7 +626,7 @@ content on its front.
    
    Expected JSON output:
 
-![](assets/dg manual testing/addcard1.jpg)
+   ![](assets/dg manual testing/addcard1.jpg)
 
 #### Editing a flashcard
 
@@ -658,7 +659,7 @@ smaller than 2147483647.
 
    Expected JSON output:
 
-![](assets/dg manual testing/deleteCard2.jpg)
+   ![](assets/dg manual testing/deleteCard2.jpg)
 
 #### Moving a flashcard
 
