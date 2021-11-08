@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewDecksCommandTest {
     @Test
-    public void execute_argument_expectExtraArgumentMessage() {
+    public void executeArgument_expectExtraArgumentMessage() {
         DeckManager deckManager = new DeckManager();
         String input = "view abc";
         String commandType = Parser.getCommandType(input);

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExitProgrammeCommandTest {
     @Test
-    public void execute_argument_expectExtraArgumentMessage() {
+    public void executeArgument_expectExtraArgumentMessage() {
         String input = "bye hello world";
         String commandType = Parser.getCommandType(input);
         String arguments = Parser.getCommandArguments(commandType, input);

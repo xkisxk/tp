@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewFlashCardStatsCommandTest {
     @Test
-    public void execute_argument_expectExtraArgumentMessage() {
+    public void executeArgument_expectExtraArgumentMessage() {
         DeckManager deckManager = new DeckManager();
         TestHistory testHistory = new TestHistory(deckManager);
         String input = "viewfc 100";
