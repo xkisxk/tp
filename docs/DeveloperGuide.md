@@ -391,6 +391,8 @@ of saving the `TestHistory` to the `json` file. The concept behind the formattin
 as that explained under the `writeCardsToFile()` method. An example of the format of the `Tests_CardLI.json` where the
 test data is saved is shown in the screenshot below.
 
+![](assets/Tests_CardLI Example.txt.png)
+
 #### [4.5.2. Reading from JSON files](#content)
 
 The methods for reading from the JSON files are executed once upon each startup of the CardLI application. The methods
