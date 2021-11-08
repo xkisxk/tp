@@ -1,6 +1,6 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
+Display | Name | Github Profile | Portfolio
 --------|:----:|:--------------:|:---------:
 
 ![](https://via.placeholder.com/100.png?text=Photo) | Koh Meng Kiat, Kenneth | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
