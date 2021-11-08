@@ -561,6 +561,76 @@ to edit is printed.
 
    Expected: Deck 1 is entered. Success message is shown.
 
+#### Testing
+
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json after each step.
+> ❗️ An arrow "->" represents a multistep instruction. Progress on to the next step by pressing ENTER on your keyboard.
+> ❗️ You may enter CTRL+C anytime to stop the execution of the program. When a test is running, pressing CTRL+C will not 
+> save your results.
+
+**Entering Test Mode**
+1. Test case: `test` -> `1`
+   
+   Expected: Test mode is entered. All cards in deck 1 are tested.
+2. Test case: `test` -> `0` or `all`
+
+   Expected: Test mode is entered. All cards in all decks are tested.
+3. Test case: `test` -> `-1`
+
+   Expected: Error is thrown. Error message indicating that you should only be using non-negative integers or "all" 
+to indicate the deck to test is printed.
+
+4. Test case: `test` -> `3`
+
+   Expected: Error is thrown. Error message indicating that there are no cards to test is printed.
+
+**Taking Test**
+1. Test case: `test` -> `1` -> answer the questions, within the time limit, as per below:
+   * Question: Card1
+   Answer: CardBack1
+   * Question: Card2
+   Answer: Wrong answer
+   
+   Expected: A timer of 30s starts counting down and runs continuously throughout the duration of the test. 
+Answering a question clears the screen and prints the next question.
+At the end of the test, a screen similar to the one below appears. 
+The questions may appear in a different order. The user is then returned to the main menu.
+
+   ![](assets/dg manual testing/test1.png)
+
+*For the next two steps, enter deck 1 and add a new flashcard by entering `enter 1` -> `add /f Card5 /b CardBack5`.
+Exit deck mode by entering `exit`.*
+
+2. Test case: `test` -> `1` -> `/NEXT` or `/BACK`
+
+   Expected: The test progresses onto the next unanswered question upon entering `/NEXT` and moves to the 
+previous unanswered question upon entering `/BACK`. If at the last question, upon entering `/NEXT`, the test will wrap 
+around to the first unanswered question. If at the first question, upon entering `/BACK`, the test will wrap around to 
+the last unanswered question.
+
+3. Test case: `test` -> `1` -> answer the questions according to the following instructions:
+   1. Answer the first question with any answer that is not blank.
+   2. Input an answer for the second question but do not submit it.
+   3. Wait for the time to run out.
+   4. Once the time has run out, press ENTER.
+
+   Expected: Only the answer to the first question is graded. The third question is skipped and does not display.
+At the end of the test, a screen similar to the one below appears.
+The questions may appear in a different order. The user is then returned to the main menu.
+
+   ![](assets/dg manual testing/test2.png)
+
+#### Reviewing
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
+
+1. Test case: `review` -> `2` or `0` or `all`
+   
+   Expected: Only one card is tested.
+
+2. Test case: `review` -> `1`
+
+   Expected: Message indicating that there are no low scoring cards to review is printed.
+
 #### Viewing Test and FlashCard Statistics
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
