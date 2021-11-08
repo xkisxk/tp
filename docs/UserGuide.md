@@ -23,7 +23,7 @@ the [contents](#content) is linked to their respective sections.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `CardLI.jar` from [here](http://link.to/duke).
+2. Download the latest version of `CardLI.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-1/tp/releases/tag/v2.1).
 3. Take note of the full filepath of directory in which `CardLI.jar` is saved.
 4. Open the command prompt by searching `cmd` in the search bar.
 5. Navigate to the file directory containing `CardLI.jar` using the command `cd <filepath>`.

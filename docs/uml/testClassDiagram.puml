@@ -1,32 +1,38 @@
 @startuml
 hide circle
+!include style.puml
+
+!define modelBoxCOLOUR #a08dc7
+!define parserBoxCOLOUR #86b1db
+!define uiBoxCOLOUR #40fca7
 
 skinparam classAttributeIconSize 0
-package testing {
-    class TestManager
-    class AnswerList
-    class Answer
-    class TestHistory
+package testing modelBoxCOLOUR {
+    class TestManager modelCOLOUR
+    class AnswerList modelCOLOUR
+    class Answer modelCOLOUR
+    class TestHistory modelCOLOUR
+    class Countdown modelCOLOUR
 }
 
-
-package parser {
-    class TestParser
+package parser parserBoxCOLOUR {
+    class TestParser logicCOLOUR
 }
 
-package ui {
-    class TestUi
+package ui uiBoxCOLOUR {
+    class TestUi uiCOLOUR
 }
 
-package flashcard {
-    class Deck
-    class FlashCard
+package flashcard modelBoxCOLOUR {
+    class Deck modelCOLOUR
+    class FlashCard modelCOLOUR
 }
 
 TestManager -left> "1" TestUi
+TestManager -> "1" Countdown
 TestManager .right> "1" TestParser
 TestManager --> "1" AnswerList : creates
-TestManager .left> TestHistory
+TestManager .left> "1" TestHistory
 TestManager .> "1" Deck
 
 TestHistory --> "*" AnswerList : stores
