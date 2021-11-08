@@ -519,6 +519,10 @@ to edit is printed.
 
    Expected: Message is printed, stating the new name of the edited deck and the index of the edited deck
 
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/editNameOfDeck.jpg)
+
 #### Entering a deck
 
 1. Test case: `enter`
@@ -630,6 +634,10 @@ argument.
    Expected: Message is printed, stating the new name of the edited card, the index of the edited card as well as the 
 side changed
 
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/editCard1name.jpg)
+
 #### Deleting a flashcard
 
 1. Prerequisites: Run the command `enter 1`.
@@ -658,7 +666,11 @@ Expected: The second card in the deck has been deleted. Success message is shown
 
    Expected: Error is thrown. Error message indicating that arguments is empty is printed. The command format is printed
 as well.
-
+> ❗️ JSON output is based on the edit flashcard test
 3. Test case: `move /c 1 /d 2`
 
    Expected: Message is printed, stating which card was moved to which deck.
+
+   Expected JSON Output:
+
+   ![](assets/dg manual testing/moveEditedCard1.jpg)
