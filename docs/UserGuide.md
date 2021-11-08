@@ -358,7 +358,7 @@ Start section.
 not attempt to directly edit the storage JSON files. This is because the CardLI application has been programmed to read
 a specified format from the JSON files. Any inaccuracies arising from the direct editing of the files will likely lead
 to undesirable consequences such as bugs and possible loss of your saved data if the files cannot be reverted to their
-original format. Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confidant
+original format. Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confident
 in maintaining the format integrity of the files.
 
 ## [4. Command Summary](#content)
