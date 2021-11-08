@@ -19,10 +19,15 @@ import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Class containing methods to save and parse user data.
  */
 public class Storage {
+
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
 
     /**
      * Specified file path to save task list.
@@ -33,6 +38,7 @@ public class Storage {
     File testsFile;
 
     public Storage() {
+        logger.setLevel(Level.SEVERE);
         try {
             this.cardsFile = new File(CARDS_FILEPATH);
             this.testsFile = new File(TESTS_FILEPATH);
@@ -41,13 +47,16 @@ public class Storage {
             if (!cardsFile.exists()) {
                 cardsFile.getParentFile().mkdirs();
                 cardsFile.createNewFile();
+                logger.log(Level.INFO, "data/Cards_CardLI.json created");
             }
             if (!testsFile.exists()) {
                 testsFile.getParentFile().mkdirs();
                 testsFile.createNewFile();
+                logger.log(Level.INFO, "data/Tests_CardLI.json created");
             }
         } catch (IOException e) {
             System.out.println((e.getMessage()));
+            logger.log(Level.WARNING, "IOException thrown at Storage()");
         }
     }
 
@@ -56,7 +65,9 @@ public class Storage {
      *
      * @param decks     User's current decks of flashcards
      */
+    @SuppressWarnings("unchecked") // placed method-level to allow for unit testing
     public void writeCardsToFile(ArrayList<Deck> decks) {
+        logger.setLevel(Level.SEVERE);
         try {
             // instantiate FileWriter object to overwrite specified text file
             FileWriter fileWriter = new FileWriter(CARDS_FILEPATH, false);
@@ -69,8 +80,10 @@ public class Storage {
 
             fileWriter.write(jsonDecks.toJSONString());
             fileWriter.close();
+            logger.log(Level.INFO, "All decks of flashcards saved to Cards_CardLI.json");
         } catch (IOException e) {
             System.out.println("Something went wrong while saving to data/Cards_CardLI.json...");
+            logger.log(Level.WARNING, "IOException thrown at writeCardsToFile()");
         }
     }
 
@@ -79,7 +92,9 @@ public class Storage {
      *
      * @param testHistory       User's current test history
      */
+    @SuppressWarnings("unchecked") // placed method-level to allow for unit testing
     public void writeTestsToFile(ArrayList<AnswerList> testHistory) {
+        logger.setLevel(Level.SEVERE);
         try {
             // instantiate FileWriter object to overwrite specified text file
             FileWriter fileWriter = new FileWriter(TESTS_FILEPATH, false);
@@ -91,8 +106,10 @@ public class Storage {
             }
             fileWriter.write(jsonTestHistory.toJSONString());
             fileWriter.close();
+            logger.log(Level.INFO, "Test history saved to Cards_CardLI.json");
         } catch (IOException e) {
             System.out.println("Something went wrong while saving to data/Tests_CardLI.json...");
+            logger.log(Level.WARNING, "IOException thrown at writeTestsToFile()");
         }
     }
 
@@ -102,6 +119,7 @@ public class Storage {
      * @return  User's saved decks of flashcards
      */
     public ArrayList<Deck> readCardsFromFile() {
+        logger.setLevel(Level.SEVERE);
         ArrayList<Deck> decks = new ArrayList<>();
 
         try {
@@ -116,9 +134,11 @@ public class Storage {
         } catch (ParseException e) {
             System.out.println("Something went wrong parsing data/Cards_CardLI.json...");
             System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
-        } catch (FileNotFoundException | NoSuchElementException e) {
-            System.out.println("data/Cards_CardLI does not yet exist or is empty.");
-            System.out.println("If this is your first boot of CardLI, you may ignore this warning.");
+            logger.log(Level.WARNING, "ParseException thrown at readCardsFromFile()");
+        } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "NoFileFoundException thrown at readCardsFromFile()");
+        } catch (NoSuchElementException e) {
+            logger.log(Level.WARNING, "NoSuchElementException thrown at readCardsFromFile()");
         }
         return decks;
     }
@@ -129,6 +149,7 @@ public class Storage {
      * @return      User's saved test history
      */
     public ArrayList<AnswerList> readTestsFromFile() {
+        logger.setLevel(Level.SEVERE);
         ArrayList<AnswerList> testHistory = new ArrayList<>();
 
         try {
@@ -143,9 +164,11 @@ public class Storage {
         } catch (ParseException e) {
             System.out.println("Something went wrong parsing data/Tests_CardLI.json...");
             System.out.println("If you directly edited the JSON file, please revert all changes made to it.");
-        } catch (FileNotFoundException | NoSuchElementException e) {
-            System.out.println("data/Tests_CardLI.json does not yet exist or is empty.");
-            System.out.println("If this is your first boot of CardLI, you may ignore this warning.");
+            logger.log(Level.WARNING, "ParseException thrown at readTestsFromFile()");
+        } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "NoFileFoundException thrown at readTestsFromFile()");
+        } catch (NoSuchElementException e) {
+            logger.log(Level.WARNING, "NoSuchElementException thrown at readTestsFromFile()");
         }
         return testHistory;
     }
@@ -157,6 +180,7 @@ public class Storage {
      * @return                  AnswerList instance
      */
     private AnswerList parseAnswerList(JSONObject jsonAnswerList) {
+        logger.setLevel(Level.WARNING);
         JSONObject jsonDeck = (JSONObject) jsonAnswerList.get("deck");
         AnswerList newAnswerList = new AnswerList(parseDeck(jsonDeck));
         JSONArray jsonAnswers = (JSONArray) jsonAnswerList.get("answerList");
@@ -167,6 +191,7 @@ public class Storage {
                     (int) (long) jsonAnswer.get("questionIndex"));
         }
         newAnswerList.setUserScore((int) (long) jsonAnswerList.get("userScore"));
+        logger.log(Level.INFO, "Successfully parsed 1 AnswerList instance");
         return newAnswerList;
     }
 
@@ -177,6 +202,7 @@ public class Storage {
      * @return              Deck instance
      */
     private Deck parseDeck(JSONObject jsonDeck) {
+        logger.setLevel(Level.WARNING);
         Deck newDeck = new Deck((String) jsonDeck.get("deckName"));
         JSONArray jsonCards = (JSONArray) jsonDeck.get("cards");
 
@@ -187,6 +213,7 @@ public class Storage {
                     (int) (long) jsonCard.get("userScore"),
                     (int) (long) jsonCard.get("totalScore")));
         }
+        logger.log(Level.INFO, "Successfully parsed 1 Deck instance");
         return newDeck;
     }
 }

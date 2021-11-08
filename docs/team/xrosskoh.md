@@ -38,11 +38,11 @@ My RepoSense Link can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-d
 
 **User Guide**
 
-Added `Introduction` and `Quick Start` sections.
+Contributed to the `Introduction`, `Quick Start` and `FAQs` sections.
 
 **Developer Guide** 
 
-Added implementation details under `Storage` section.
+Contributed to the `Storage` section.
 
 #### Project Management
 
