@@ -16,7 +16,8 @@ public class TestUi {
     public static final String INCORRECT_INPUT_FORMAT_MESSAGE = "Incorrect input format, "
             + "make sure the description is either a numeric or all.";
     public static final String NO_CARDS_TO_REVIEW_MESSAGE = "Congratulations you don't have any low scoring cards!";
-    public static final String DECK_NOT_EXIST_MESSAGE = "This deck does not exist";
+    public static final String DECK_NOT_EXIST_MESSAGE = "Deck index must be a non-negative "
+            + "integer smaller than 2147483647, or \"all\".";
     public static final String NO_CARDS_TO_TEST_MESSAGE = "There are no cards to test.";
     public static final String END_TEST_MESSAGE = "End of test. Returning to main menu...";
     public static final String END_REVIEW_MESSAGE = "End of review. Returning to main menu...";
