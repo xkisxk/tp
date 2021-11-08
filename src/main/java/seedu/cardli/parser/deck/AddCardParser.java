@@ -17,7 +17,8 @@ public class AddCardParser implements CommandArgumentParser {
 
     @Override
     public String[] parseArguments(String arguments) { //add /f <front> /b <back>
-        String[] parameters = arguments.trim().split("/f |/b ", 3);
+        String[] parameters = arguments.trim().split("/f", 2);
+        parameters = parameters[1].split("/b", 2);
         return parameters;
     }
 }
