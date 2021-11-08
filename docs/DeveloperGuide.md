@@ -26,12 +26,14 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.1. [ReadCardsFromFile](#4521-readcardsfromfile)<br/>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.5.2.2. [ReadTestFromFile](#4522-readtestfromfile)<br/>
 5. [Product Scope](#5-product-scope)<br/>
-   5.1 [Target User Profile](#51-target-user-profile)<br/>
-   5.2 [Value Proposition](#52-value-proposition)<br/>
+   5.1. [Target User Profile](#51-target-user-profile)<br/>
+   5.2. [Value Proposition](#52-value-proposition)<br/>
 6. [User Stories](#6-user-stories)<br/>
 7. [Non-Functional Requirements](#7-non-functional-requirements)<br/>
 8. [Glossary](#8-glossary)<br/>
-9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)
+9. [Instructions for Manual Testing](#9-instructions-for-manual-testing)<br/>
+   9.1. [Main Menu](#91-main-menu)<br/>
+   9.2. [Deck Mode](#92-deck-mode)<br/>
 
 ## [1. Introduction](#content)
 
@@ -490,14 +492,14 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
+### [9.1. Main Menu](#content)
+
 > ℹ️ Note: In order to view the JSON files as per the screenshots shown under this section, the respective files
 > should be opened on Mozilla Firefox, since it is the only browser that supports the reading and displaying of JSON
 > files in the format shown by default. Alternatives to using Mozilla Firefox can also be found [here](https://www.javatpoint.com/how-to-open-json-file).
 > It is also possible to open the JSON file using the Notepad application on Windows, or any other Notepad equivalent
 > applications on other Operating Systems. However, doing so may make it difficult to read the contents of the file
 > as the information will be displayed in a single line.
-
-### Main Menu
 
 #### Adding a deck
 
@@ -686,7 +688,7 @@ The questions may appear in a different order. The user is then returned to the 
    Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search
    term.
 
-### Deck Mode
+### [9.2. Deck Mode](#content)
 
 #### Adding a flashcard
 
