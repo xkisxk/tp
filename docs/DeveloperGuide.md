@@ -532,13 +532,19 @@ to edit is printed.
 
 1. Test case: `delete`
 
-   Expected: `Deck index must be smaller than 2147483647.`
-2. Test case: `delete ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, indicating that an argument for deck index is 
+expected for this command.
+2. Test case: `delete 10`
 
-   Expected: `Please input a positive integer.`
-3. Test case: `delete 3`
+   Expected: Error is thrown. Error message is printed to system output, informing the user that the specified deck
+index does not exist. 
+3. Test case: `delete ExampleDeck3`/`delete -1`
 
-   Expected: `Deleted deck: ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, prompting the user for a positive integer as 
+a valid argument for this command. 
+4. Test case: `delete 3`
+
+   Expected: Command is executed successfully and deck 3 is deleted from the user's current decks. 
    
    Expected JSON output:
 
