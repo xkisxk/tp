@@ -495,15 +495,13 @@ CardLI provides a:
 
 1. Test case: `add`
 
-Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
-
+   Expected: No deck is added. Error message is printed to prompt user to input the name of the deck after "add".
 2. Test case: `add ExampleDeck1`
 
-Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another deck.
-
+   Expected: No deck is added. Error message is shown to inform user that the deck name is already in use by another deck.
 3. Test case: `add ExampleDeck4`
 
-Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
+   Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
 
 #### Editing a Deck
 
@@ -526,22 +524,19 @@ Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
 
 1. Test case: `enter`
 
-Expected: No deck is entered. Error message is shown to prompt user to input the index of the deck after "enter".
-
+   Expected: No deck is entered. Error message is shown to prompt user to input the index of the deck after "enter".
 2. Test case: `enter 7`
 
-Expected: No deck is entered. Error message is shown to inform user that there is no deck with that index.
-
+   Expected: No deck is entered. Error message is shown to inform user that there is no deck with that index.
 3. Test case: `enter one`
 
-Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
+   Expected: No deck is entered. Error message is shown to inform user that the index of deck must be a positive integer
 smaller than 2147483647.
-
 4. Test case: `enter 1`
 
-Expected: Deck 1 is entered. Success message is shown.
+   Expected: Deck 1 is entered. Success message is shown.
 
-#### View Test and FlashCard Statistics
+#### Viewing Test and FlashCard Statistics
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
@@ -589,18 +584,17 @@ Expected: Deck 1 is entered. Success message is shown.
 
 1. Test Case: `find`
 
-Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
-
+   Expected: No flashcards are displayed. Error message is shown to prompt user to input a search term after "find".
 2. Test Case: `find 1`
 
-Expected: Flashcards should be displayed in the manner shown in the below screenshot.
+   Expected: Flashcards should be displayed in the manner shown in the below screenshot.
 
 ![](assets/dg manual testing/find1.png)
 
 3. Test Case: `find 0`
 
-Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search term.
-
+   Expected: No flashcards are displayed. Message is shown to inform user that there are no cards matching the search term.
+   
 ### Deck Mode
 
 #### Adding a flashcard
@@ -609,20 +603,17 @@ Expected: No flashcards are displayed. Message is shown to inform user that ther
 
 2. Test case: `add /f /b`
 
-Expected: No card is added. Error message is shown to inform user that fields cannot be left empty.
-
+   Expected: No card is added. Error message is shown to inform user that fields cannot be left empty.
 3. Test case: `add /f Card4 /b CardBack4`
 
-Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
-
+   Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
 4. Test case: `add /f Card1 /b CardBack1`
 
-Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
+   Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
 content on its front.
+5.Test case: `add /f card1 /b CardBack1a`
 
-4. Test case: `add /f card1 /b CardBack1a`
-
-Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
+   Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
 
 #### Editing a flashcard
 
