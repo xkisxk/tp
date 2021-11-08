@@ -1,9 +1,10 @@
 @startuml
+!include style.puml
 hide footbox
 autonumber
 
-participant ":Countdown" as Countdown
-participant ":CountdownTimerTask" as CountdownTimerTask
+participant ":Countdown" as Countdown modelCOLOUR
+participant ":CountdownTimerTask" as CountdownTimerTask modelCOLOUR
 
 [->Countdown: Countdown(startValue,\n timesUpMessage)
 activate Countdown
@@ -21,7 +22,7 @@ CountdownTimerTask->CountdownTimerTask: countDown()
     end
 end
 
-alt not already stopped
+alt isRunning()
 CountdownTimerTask->Countdown: stop()
 Countdown->CountdownTimerTask: cancel()
 end
