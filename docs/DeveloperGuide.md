@@ -502,6 +502,10 @@ CardLI provides a:
 3. Test case: `add ExampleDeck4`
 
    Expected: Deck is added with the name "ExampleDeck4". Success message is shown.
+   
+Expected JSON output:
+
+![](assets/dg manual testing/addExampleDeck4.jpg)
 
 #### Editing a Deck
 
@@ -607,6 +611,10 @@ smaller than 2147483647.
 3. Test case: `add /f Card4 /b CardBack4`
 
    Expected: Card is added with the front "Card4" and back "CardBack4". Success message is shown.
+
+   Expected JSON output: 
+
+   ![](assets/dg manual testing/addCard4.jpg)
 4. Test case: `add /f Card1 /b CardBack1`
 
    Expected: No card is added. Error message is printed to inform user that there already exists a card with the same
@@ -614,6 +622,10 @@ content on its front.
 5.Test case: `add /f card1 /b CardBack1a`
 
    Expected: Card is added with the front "card1" and back "CardBack1a". Success message is shown.
+   
+   Expected JSON output:
+
+![](assets/dg manual testing/addcard1.jpg)
 
 #### Editing a flashcard
 
@@ -633,19 +645,20 @@ content on its front.
 
 1. Prerequisites: Run the command `enter 1`.
 
-
 2. Test case: `delete`
 
-Expected: No card is deleted. Error message is shown to inform user that fields cannot be empty.
-
+   Expected: No card is deleted. Error message is shown to inform user that fields cannot be empty.
 3. Test case: `delete one`
 
-Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
+   Expected: No card is deleted. Error message is shown to inform user that index of card must be a positive integer
 smaller than 2147483647.
-
 4. Test case: `delete 2`
 
-Expected: The second card in the deck has been deleted. Success message is shown.
+   Expected: The second card in the deck has been deleted. Success message is shown.
+
+   Expected JSON output:
+
+![](assets/dg manual testing/deleteCard2.jpg)
 
 #### Moving a flashcard
 
