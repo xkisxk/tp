@@ -22,7 +22,7 @@ public class TestParser {
     }
 
     /**
-     * Make sure that the user's input is a number or "all"
+     * Make sure that the user's input is a number or "all".
      *
      * @param input                  user's input
      * @return                       user's input as integer
