@@ -499,6 +499,7 @@ CardLI provides a:
 
 ## [9. Instructions for Manual Testing](#content)
 
+<<<<<<< HEAD
 ### Main Menu
 
 #### Adding a deck
@@ -534,6 +535,49 @@ smaller than 2147483647.
 
 Expected: Deck 1 is entered. Success message is shown.
 
+#### View Test and FlashCard Statistics
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
+
+1. Test Case: `viewtest invalid`
+
+   Expected: `Input a positive integer or "all" after viewtest.`
+2. Test Case: `viewtest all`
+
+   Expected:
+   ``` 
+   These are your scores:
+   Score for test 1: ExampleDeck1 1/2 50.00%
+   Score for test 2: Test 2/3 66.67%
+   ```
+3. Test Case: `viewtest 5`
+
+   Expected: `There is no test at that index.`
+
+4. Test Case: `viewfc all`
+
+   Expected: `There should not be any arguments.`
+5. Test Case: `viewfc`
+
+   Expected:
+   ```
+   Listing total scores of flashcards for all tests:
+   *================FRONT================* *================BACK=================*
+                    Card2                                 CardBack2
+   *=====================================* *=====================================*
+   
+   Score: 1 out of 2
+   *================FRONT================* *================BACK=================*
+                    Card1                                 CardBack1
+   *=====================================* *=====================================*
+   
+   Score: 2 out of 2
+   *================FRONT================* *================BACK=================*
+                    Card3                                 CardBack3
+   *=====================================* *=====================================*
+   
+   Score: 0 out of 1
+   ```
+   
 #### Finding flashcards
 
 1. Test Case: `find`
@@ -590,5 +634,4 @@ than 2147483647.
 4. Test case: `delete 2`
 
 Expected: The second card in the deck has been deleted. Success message is shown.
-
 
