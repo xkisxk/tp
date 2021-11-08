@@ -135,10 +135,13 @@ Expected outcome:
 ### [1.5 Test flashcards: `test`](#content)
 
 If you wish to test your knowledge on your flashcards, use `test` to enter test mode. The program will ask you to input
-the index for the deck that is to be tested. The word to be tested will be displayed in the console. Typing the exact
+the index for the deck that is to be tested. The word to be tested will be displayed in the console. A timer will start 
+running, which will start from the time 15s * number of flashcards tested. Typing the exact
 character-for-character definition for the word will result in a correct answer. Otherwise, the response will be marked
 as incorrect. Regardless of whether the answer is correct or incorrect, the console will then display the next word to
-be tested. When all cards in the deck have been tested, the percentage of correct answers will be displayed in the
+be tested. If the time runs out, your answer for the current question will not be saved, and all the other questions 
+will be skipped. When all cards in the deck have been tested or the time has run out, the percentage of correct answers 
+will be displayed in the
 console, as well as the cards which received incorrect responses.
 
 If you do not know the answer to the current question being tested, and you want to skip to another question, you can do
@@ -358,7 +361,7 @@ Start section.
 not attempt to directly edit the storage JSON files. This is because the CardLI application has been programmed to read
 a specified format from the JSON files. Any inaccuracies arising from the direct editing of the files will likely lead
 to undesirable consequences such as bugs and possible loss of your saved data if the files cannot be reverted to their
-original format. Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confidant
+original format. Nonetheless, it is still possible to directly make edits to the storage JSON files if you are confident
 in maintaining the format integrity of the files.
 
 ## [4. Command Summary](#content)

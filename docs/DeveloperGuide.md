@@ -350,6 +350,7 @@ reviewed.
 > which means that the feature needs to print out a response message after the user's input. Furthermore, it needs to
 > also update the timer live, which makes storing the entire process as a string
 > when `Command.execute()` is called not really feasible.
+
 </details>
 
 ### [4.5. Storage](#content)
@@ -493,6 +494,13 @@ CardLI provides a:
 
 ### [9.1. Main Menu](#content)
 
+> ℹ️ Note: In order to view the JSON files as per the screenshots shown under this section, the respective files
+> should be opened on Mozilla Firefox, since it is the only browser that supports the reading and displaying of JSON
+> files in the format shown by default. Alternatives to using Mozilla Firefox can also be found [here](https://www.javatpoint.com/how-to-open-json-file).
+> It is also possible to open the JSON file using the Notepad application on Windows, or any other Notepad equivalent
+> applications on other Operating Systems. However, doing so may make it difficult to read the contents of the file
+> as the information will be displayed in a single line.
+
 #### Adding a deck
 
 1. Test case: `add`
@@ -534,13 +542,19 @@ to edit is printed.
 
 1. Test case: `delete`
 
-   Expected: `Deck index must be smaller than 2147483647.`
-2. Test case: `delete ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, indicating that an argument for deck index is 
+expected for this command.
+2. Test case: `delete 10`
 
-   Expected: `Please input a positive integer.`
-3. Test case: `delete 3`
+   Expected: Error is thrown. Error message is printed to system output, informing the user that the specified deck
+index does not exist. 
+3. Test case: `delete ExampleDeck3`/`delete -1`
 
-   Expected: `Deleted deck: ExampleDeck3`
+   Expected: Error is thrown. Error message is printed to system output, prompting the user for a positive integer as 
+a valid argument for this command. 
+4. Test case: `delete 3`
+
+   Expected: Command is executed successfully and deck 3 is deleted from the user's current decks. 
    
    Expected JSON output:
 
@@ -562,49 +576,101 @@ to edit is printed.
 
    Expected: Deck 1 is entered. Success message is shown.
 
+#### Testing
+
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json after each step.
+> ❗️ An arrow "->" represents a multistep instruction. Progress on to the next step by pressing ENTER on your keyboard.
+> ❗️ You may enter CTRL+C anytime to stop the execution of the program. When a test is running, pressing CTRL+C will not 
+> save your results.
+
+**Entering Test Mode**
+1. Test case: `test` -> `1`
+   
+   Expected: Test mode is entered. All cards in deck 1 are tested.
+2. Test case: `test` -> `0` or `all`
+
+   Expected: Test mode is entered. All cards in all decks are tested.
+3. Test case: `test` -> `-1`
+
+   Expected: Error is thrown. Error message indicating that you should only be using non-negative integers or "all" 
+to indicate the deck to test is printed.
+
+4. Test case: `test` -> `3`
+
+   Expected: Error is thrown. Error message indicating that there are no cards to test is printed.
+
+**Taking Test**
+1. Test case: `test` -> `1` -> answer the questions, within the time limit, as per below:
+   * Question: Card1
+   Answer: CardBack1
+   * Question: Card2
+   Answer: Wrong answer
+   
+   Expected: A timer of 30s starts counting down and runs continuously throughout the duration of the test. 
+Answering a question clears the screen and prints the next question.
+At the end of the test, a screen similar to the one below appears. 
+The questions may appear in a different order. The user is then returned to the main menu.
+
+   ![](assets/dg manual testing/test1.png)
+
+*For the next two steps, enter deck 1 and add a new flashcard by entering `enter 1` -> `add /f Card5 /b CardBack5`.
+Exit deck mode by entering `exit`.*
+
+2. Test case: `test` -> `1` -> `/NEXT` or `/BACK`
+
+   Expected: The test progresses onto the next unanswered question upon entering `/NEXT` and moves to the 
+previous unanswered question upon entering `/BACK`. If at the last question, upon entering `/NEXT`, the test will wrap 
+around to the first unanswered question. If at the first question, upon entering `/BACK`, the test will wrap around to 
+the last unanswered question.
+
+3. Test case: `test` -> `1` -> answer the questions according to the following instructions:
+   1. Answer the first question with any answer that is not blank.
+   2. Input an answer for the second question but do not submit it.
+   3. Wait for the time to run out.
+   4. Once the time has run out, press ENTER.
+
+   Expected: Only the answer to the first question is graded. The third question is skipped and does not display.
+At the end of the test, a screen similar to the one below appears.
+The questions may appear in a different order. The user is then returned to the main menu.
+
+   ![](assets/dg manual testing/test2.png)
+
+#### Reviewing
+> ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
+
+1. Test case: `review` -> `2` or `0` or `all`
+   
+   Expected: Only one card is tested.
+
+2. Test case: `review` -> `1`
+
+   Expected: Message indicating that there are no low scoring cards to review is printed.
+
 #### Viewing Test and FlashCard Statistics
 
 > ❗️ Please delete and reimport Cards_CardLI.json and Tests_CardLI.json.
 
 1. Test Case: `viewtest invalid`
 
-   Expected: `Input a positive integer or "all" after viewtest.`
+   Expected: Nothing is displayed. Error message is shown to prompt the user to input a positive integer
+   or "all".
 2. Test Case: `viewtest all`
 
    Expected:
-   ``` 
-   These are your scores:
-   Score for test 1: ExampleDeck1 1/2 50.00%
-   Score for test 2: Test 2/3 66.67%
-   ```
+   ![viewtest_expected](assets/dg manual testing/viewtest_expected.png)
 3. Test Case: `viewtest 5`
 
-   Expected: `There is no test at that index.`
+   Expected: Nothing is displayed. Error message is shown to inform the user that there is no test
+   at that index
 
 4. Test Case: `viewfc all`
 
-   Expected: `There should not be any arguments.`
+   Expected: No flashcards are displayed. Error message is shown to inform the user that the command
+   does not take in any arguments
 5. Test Case: `viewfc`
 
    Expected:
-   ```
-   Listing total scores of flashcards for all tests:
-   *================FRONT================* *================BACK=================*
-                    Card2                                 CardBack2
-   *=====================================* *=====================================*
-   
-   Score: 1 out of 2
-   *================FRONT================* *================BACK=================*
-                    Card1                                 CardBack1
-   *=====================================* *=====================================*
-   
-   Score: 2 out of 2
-   *================FRONT================* *================BACK=================*
-                    Card3                                 CardBack3
-   *=====================================* *=====================================*
-   
-   Score: 0 out of 1
-   ```
+  ![viewfc_expected](assets/dg manual testing/viewfc_expected.png)
 
 #### Finding flashcards
 
